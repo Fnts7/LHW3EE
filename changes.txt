@@ -1,0 +1,80 @@
+﻿
+- base attributes -
+
+Geralt's base critical hit damage raised from +25% to +35%
+
+
+- skill balances -
+
+Battle Trance perk now does not cancel basic BT effect which is +10% attack power per vigor point, but just adds its
+effect of crit chance per vigor. Lowered that from 8% to 5%.
+
+Hunter Instinct skill boosted to +10% crit damage per level on max vigor. Also the effect is now proportional to the
+vigor percentage.
+
+Metabolism perk raised to +25 toxicity (from 15)
+
+Poisoned Blades rebalanced, so that skill level matters more and oil level less. lvl 3 oil and lvl5 skill will give 40%
+chance of poisonin. 4% per level, x1,x1.5,x2 for oil levels accordingly.
+
+Fast attacks second skill armor piercing boosted to +4% per skill level. Light attack has no armor piercing initially,
+this value should be more significant.
+
+first defensive skill now also reduces the amount of poise lowered due to low HP. by 15% per skill level
+
+
+- alchemy items -
+
+thunderbolt boosted to +10%, 15%, 15% crit chance
+cat lvl 1 a bit stronger, lvl2 a bit weaker
+boosted a bit lvl2, lvl3 swallow
+
+oils rebalanced to:
+lvl1: +10% crit chance, +20% crit dmg
+lvl2: +15%, +30%
+lvl3: +15%, +35%, +10% reses reduction
+
+
+- bug fixes - 
+
+poisoned blades skill not working
+
+fixed ridiculous basic quen power
+
+aard sweep fixed and rebalanced starts with -20% power for knockdown applicator, then -10%, 0% on higher levels.
+higher levels also increase the values of all types of damages done by aard. /6, /4, /3.
+
+
+- mechanics -
+
+Rend is now more armor-piercy, less max damage. Rend with no talent has +15% armor pierce on full load, +7% per skill level.
+Also rend now gains base damage faster (fast rends start from great penalty).
+
+Strong attacks have now base dmg multiplier of 1.25, removed attack power bonus of 20%.
+
+eating food will now also give instant heal of small amount, based on food level: 100, 200, 400 accordingly.
+
+Changed the logic of toxicity damage threshold, now it is not constant 50, but following:
+
+  Min ( Max(25 + maxTox / 4.0f, decoction_offset), halfTox)
+  
+where
+  maxTox - maximum toxicity, halfTox - half of toxicity
+  decoction_offset - total toxicity of active decoctions
+  
+Explanation - toxicity damage threshold is increased at 50% rate with higher max tox. But if only decoctions intoxication
+is present, the damage is not taken by Geralt. However if decoctions alone use more than 50% of maximum toxicity, that
+triggers the damage also. Both 2 toxicity positive bonuses skills are changed so that they are active only if the toxicity
+is above the new current threshold. Means that e.g. having just 1 decoction that is not 50% toxicity will not activate
+those skills.
+  
+- misc -
+
+Samum crit chance bonus (for blinded enemies) changed so that all levels now give some bonus
++15%, +30%, +50%, so lvl is lowered from 100%.
+
+Whirl crit chance is now not 0, but / 2 penalty instead.
+
+Crossbow crit damage 
+
+lowered a bit resist unblockable attacks poise threshold to 100%.
