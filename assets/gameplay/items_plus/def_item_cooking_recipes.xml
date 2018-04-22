@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="UTF-16"?>
+<redxml>
+	<definitions>	
+		<items>
+			<!-- Quest Recipes -->
+			<item
+				name							="recipe_for_yennefers_omelette"
+				category						="cooking_recipe"
+				price 							="10"
+				icon_path						="icons/inventory/scrolls/scroll6.dds"
+				localisation_key_name 			="item_name_recipe_for_yennefers_omelette"
+				localisation_key_description 	="item_desc_recipe_food"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="recipe_for_scrambled_eggs"
+				category						="cooking_recipe"
+				price							="10"
+				icon_path						="icons/inventory/scrolls/scroll6.dds"
+				localisation_key_name	 		="item_name_recipe_for_scrambled_eggs"
+				localisation_key_description 	="item_desc_recipe_food"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+
+			<item
+				name							="Recipe for Baked apple"
+				category						="alchemy_recipe"
+				price							="5"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_baked_apple"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="Recipe for Baked potato"
+				category						="alchemy_recipe"
+				price							="5"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_baked_potato"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="Recipe for Chicken leg"
+				category						="alchemy_recipe"
+				price							="5"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_chicken_leg"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="Recipe for Gutted fish"
+				category						="alchemy_recipe"
+				price							="5"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_gutted_fish"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+	
+			<item
+				name							="Recipe for Roasted chicken"
+				category						="alchemy_recipe"
+				price							="10"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_roasted_chicken"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="Recipe for Roasted chicken leg"
+				category						="alchemy_recipe"
+				price							="10"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_roasted_chicken_leg"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="Recipe for Chicken sandwich"
+				category						="alchemy_recipe"
+				price							="10"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_chicken_sandwich"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+		
+			<item
+				name							="Recipe for Grilled chicken sandwich"
+				category						="alchemy_recipe"
+				price							="10"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_grilled_chicken_sandwich"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+		
+			<item
+				name							="Recipe for Fried fish"
+				category						="alchemy_recipe"
+				price							="10"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_fried_fish"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+		
+			<item
+				name							="Recipe for Fried meat"
+				category						="alchemy_recipe"
+				price							="10"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_fried_meat"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="Recipe for Grilled pork"
+				category						="alchemy_recipe"
+				price							="10"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_grilled_pork"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="Recipe for Ham sandwich"
+				category						="alchemy_recipe"
+				price							="10"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_ham_sandwich"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="Recipe for Apple juice"
+				category						="alchemy_recipe"
+				price							="5"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_apple_juice"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+			<item
+				name							="Recipe for Raspberry juice"
+				category						="alchemy_recipe"
+				price							="5"
+				weight							="0.1"
+				stackable						="100"
+				localisation_key_name			="item_name_raspberry_juice"
+				localisation_key_description	="item_desc_food"
+				icon_path						="icons/inventory/quests/ico_recipe.png"
+			>
+				<tags>							ReadableItem
+				</tags>
+			</item>
+			
+		</items>	
+		
+	</definitions>
+
+	<custom>
+		<cooking_recipes>
+			<!-- Special Recipe -->
+			<recipe
+				name_name						="Voodoo doll Curse"
+				cookedItem_name					="Voodoo doll"
+				cookedItemQuantity				="0"
+			>
+				<ingredients>
+					<ingredient item_name="Voodoo doll" quantity="1" />
+				</ingredients>
+			</recipe>
+			
+			<!-- Quest Recipes -->
+			<recipe
+				name_name						="Recipe For Yennefer's Omelette"
+				cookedItem_name					="Yennefer's Omelette"
+				cookedItemQuantity				="1"
+			>
+				<ingredients>
+					<ingredient item_name="Egg" quantity="3" />
+					<ingredient item_name="Olive" quantity="6" />
+					<ingredient item_name="Onion" quantity="1" />
+					<ingredient item_name="Pepper" quantity="1" />
+				</ingredients>
+			</recipe>
+			
+			<recipe
+				name_name						="Recipe For Scrambled Eggs"
+				cookedItem_name					="Scrambled Eggs"
+				cookedItemQuantity				="1"
+			>
+				<ingredients>
+					<ingredient item_name="Egg" quantity="2" />
+				</ingredients>
+			</recipe>
+		</cooking_recipes>
+		
+		<alchemy_recipes>
+		
+			<recipe
+				name_name						="Recipe for Baked apple"
+				level							="1"
+				cookedItem_name					="Baked apple"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="1"
+				localisation_key_name			="item_name_baked_apple"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Apple"/>
+				</ingredients>
+			</recipe>
+			
+			<recipe
+				name_name						="Recipe for Baked potato"
+				level							="1"
+				cookedItem_name					="Baked potato"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_baked_potato"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Potatoes"/>
+				</ingredients>
+			</recipe>
+			
+			<recipe
+				name_name						="Recipe for Chicken leg"
+				level							="1"
+				cookedItem_name					="Chicken leg"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_chicken_leg"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Chicken"/>
+				</ingredients>
+			</recipe>
+			
+			<recipe
+				name_name						="Recipe for Gutted fish"
+				level							="1"
+				cookedItem_name					="Gutted fish"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_gutted_fish"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Fish"/>
+				</ingredients>
+			</recipe>
+
+			<recipe
+				name_name						="Recipe for Roasted chicken"
+				level							="1"
+				cookedItem_name					="Roasted chicken"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_roasted_chicken"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Chicken"/>
+												<ingredient quantity="1"	item_name="Onion" />
+				</ingredients>
+			</recipe>
+			
+			<recipe
+				name_name						="Recipe for Roasted chicken leg"
+				level							="1"
+				cookedItem_name					="Roasted chicken leg"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_roasted_chicken_leg"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Chicken leg"/>
+												<ingredient quantity="1"	item_name="Onion" />
+				</ingredients>
+			</recipe>
+			
+			<recipe
+				name_name						="Recipe for Chicken sandwich"
+				level							="1"
+				cookedItem_name					="Chicken sandwich"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_chicken_sandwich"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Roasted chicken leg"/>
+												<ingredient quantity="1"	item_name="Bread"/>
+				</ingredients>
+			</recipe>
+
+			<recipe
+				name_name						="Recipe for Grilled chicken sandwich"
+				level							="1"
+				cookedItem_name					="Grilled chicken sandwich"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="6"
+				localisation_key_name			="item_name_grilled_chicken_sandwich"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Roasted chicken"/>
+												<ingredient quantity="2"	item_name="Bread"/>
+				</ingredients>
+			</recipe>
+
+			<recipe
+				name_name						="Recipe for Fried fish"
+				level							="1"
+				cookedItem_name					="Fried fish"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_fried_fish"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Gutted fish"/>
+												<ingredient quantity="1"	item_name="Onion"/>
+				</ingredients>
+			</recipe>
+	
+			<recipe
+				name_name						="Recipe for Fried meat"
+				level							="1"
+				cookedItem_name					="Fried meat"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_fried_meat"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Raw meat"/>
+												<ingredient quantity="1"	item_name="Onion"/>
+				</ingredients>
+			</recipe>
+			
+			<recipe
+				name_name						="Recipe for Grilled pork"
+				level							="1"
+				cookedItem_name					="Grilled pork"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_grilled_pork"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Pork"/>
+												<ingredient quantity="1"	item_name="Onion"/>
+				</ingredients>
+			</recipe>
+		
+			<recipe
+				name_name						="Recipe for Ham sandwich"
+				level							="1"
+				cookedItem_name					="Ham sandwich"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="2"
+				localisation_key_name			="item_name_ham_sandwich"
+			>
+				<ingredients>					<ingredient quantity="1"	item_name="Grilled pork"/>
+												<ingredient quantity="1"	item_name="Bread"/>
+				</ingredients>
+			</recipe>
+
+			<recipe
+				name_name						="Recipe for Apple juice"
+				level							="1"
+				cookedItem_name					="Apple juice"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="1"
+				localisation_key_name			="item_name_apple_juice"
+			>
+				<ingredients>					<ingredient quantity="2"	item_name="Apple"/>
+												<ingredient quantity="1"	item_name="Empty bottle"/>
+				</ingredients>
+			</recipe>
+	
+			<recipe
+				name_name						="Recipe for Raspberry juice"
+				level							="1"
+				cookedItem_name					="Raspberry juice"
+				cookedItemType					="edibles"
+				cookedItemQuantity				="1"
+				localisation_key_name			="item_name_raspberry_juice"
+			>
+				<ingredients>					<ingredient quantity="2"	item_name="Raspberries"/>
+												<ingredient quantity="1"	item_name="Empty bottle"/>
+				</ingredients>
+			</recipe>
+
+		</alchemy_recipes>
+			
+	</custom>
+</redxml>
