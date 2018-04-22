@@ -62,6 +62,7 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 	{
 		var dmg, dmgCurved, toxicity, toxicityPerc, threshold, drainVal, duration, origDuration : float;
 		var currentThreshold, index	: int;
+		var skillAbilityName : name;
 		
 		super.OnUpdate(deltaTime);
 		
@@ -163,6 +164,9 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 		}
 		else
 		{
+			skillAbilityName = SkillEnumToName(S_Alchemy_s17);
+			while(thePlayer.HasAbility(skillAbilityName))
+				thePlayer.RemoveAbility(skillAbilityName);
 			// W3EE - Begin
 			isUnsafe = false;
 			// target.RemoveBuff(EET_IgnorePain);

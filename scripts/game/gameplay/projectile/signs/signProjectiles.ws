@@ -28,6 +28,7 @@ class W3AardProjectile extends W3SignProjectile
 		var sp : SAbilityAttributeValue;
 		var isMutation6 : bool;
 		var victimNPC : CNewNPC;
+		var altLevel : int;
 	
 		
 		if ( hitEntities.FindFirst( collider ) != -1 )
@@ -61,8 +62,22 @@ class W3AardProjectile extends W3SignProjectile
 				dmgVal = owner.GetSkillLevel(S_Magic_s06, GetSignEntity()) * 290.f;
 				dmgVal *= sp.valueMultiplicative;
 				
-				if( signEntity.IsAlternateCast() )
-					dmgVal /= 5;
+				if( signEntity.IsAlternateCast() ) {
+				
+					if ( (W3PlayerWitcher) owner.GetPlayer() )
+						altLevel = owner.GetSkillLevel(S_Magic_s01);
+					else
+						altLevel = 0;
+						
+					if (altLevel == 3)
+						dmgVal /= 3;
+					else if (altLevel == 2)
+						dmgVal /= 4;
+					else if (altLevel == 1)
+						dmgVal /= 6;
+					else
+						dmgVal /= 5;
+				}
 				action.AddDamage( theGame.params.DAMAGE_NAME_FORCE, dmgVal );
 			}
 			// W3EE - End
@@ -104,6 +119,7 @@ class W3AardProjectile extends W3SignProjectile
 		var min, max : SAbilityAttributeValue;
 		var dmgVal : float;
 		var instaKill, hasKnockdown, applySlowdown : bool;
+		var altLevel : int;
 				
 		// W3EE - Begin
 		var sp : SAbilityAttributeValue;
@@ -167,7 +183,23 @@ class W3AardProjectile extends W3SignProjectile
 				{
 					if( owner.GetSkillLevel(S_Magic_s12, GetSignEntity()) > 2 )
 						dmgVal /= 2;
-					dmgVal /= 5;
+					else
+					{
+					
+					if ( (W3PlayerWitcher) owner.GetPlayer() )
+						altLevel = owner.GetSkillLevel(S_Magic_s01);
+					else
+						altLevel = 0;
+						
+					if (altLevel == 3)
+						dmgVal /= 3;
+					else if (altLevel == 2)
+						dmgVal /= 4;
+					else if (altLevel == 1)
+						dmgVal /= 6;
+					else
+						dmgVal /= 5;
+					}
 				}
 				action.AddDamage( theGame.params.DAMAGE_NAME_FORCE, dmgVal );
 			}

@@ -26,13 +26,13 @@
 			
 			<!-- CAT -->
 			<ability name="CatEffect_Level1">
-				<action_speed type="mult" min="0.03" max="0.03"/>
+				<action_speed type="mult" min="0.04" max="0.04"/>
 			</ability>
 			<ability name="CatEffect_Level2">
 				<action_speed type="mult" min="0.06" max="0.06"/>
 			</ability>
 			<ability name="CatEffect_Level3">
-				<action_speed type="mult" min="0.1" max="0.1"/>
+				<action_speed type="mult" min="0.09" max="0.09"/>
 			</ability>
 			
 			<!-- FULL MOON -->
@@ -122,13 +122,13 @@
 			</ability>
 			<ability name="SwallowEffect_Level2">
 				<tags>passive</tags>
-				<vitalityRegen			type="mult" max="0.0065" min="0.0065" always_random="false"/>
-				<vitalityCombatRegen	type="mult" max="0.0065" min="0.0065"/>
+				<vitalityRegen			type="mult" max="0.007" min="0.007" always_random="false"/>
+				<vitalityCombatRegen	type="mult" max="0.007" min="0.007"/>
 			</ability>
 			<ability name="SwallowEffect_Level3">
 				<tags>passive</tags>
-				<vitalityRegen			type="mult" max="0.0075" min="0.0075" always_random="false"/>
-				<vitalityCombatRegen	type="mult" max="0.0075" min="0.0075"/>
+				<vitalityRegen			type="mult" max="0.0085" min="0.0085" always_random="false"/>
+				<vitalityCombatRegen	type="mult" max="0.0085" min="0.0085"/>
 			</ability>
 			
 			<!-- TAWNY OWL -->
@@ -148,15 +148,15 @@
 			<!-- THUNDERBOLT -->
 			<ability name="ThunderboltEffect_Level1">
 				<tags>passive</tags>
-				<critical_hit_chance type="add" min="0.05"/> 
+				<critical_hit_chance type="add" min="0.10"/> 
 			</ability>
 			<ability name="ThunderboltEffect_Level2">
 				<tags>passive</tags>
-				<critical_hit_chance type="add" min="0.10"/> 
+				<critical_hit_chance type="add" min="0.15"/> 
 			</ability>
 			<ability name="ThunderboltEffect_Level3">
 				<tags>passive</tags>
-				<critical_hit_chance type="add" min="0.10"/> 
+				<critical_hit_chance type="add" min="0.15"/> 
 				<critical_frenzy_chance type="add" min="25"/> 
 				<critical_frenzy_duration type="add" min="2"/> 
 				<critical_frenzy_slowdown type="add" min="0.5"/> 

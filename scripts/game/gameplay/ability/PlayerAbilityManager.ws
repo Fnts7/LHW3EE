@@ -2698,7 +2698,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			else if(skill == S_Perk_19 && witcher.HasBuff(EET_BattleTrance))
 			{
 				skillLevel = FloorF(witcher.GetStat(BCS_Focus));
-				witcher.RemoveAbilityMultiple(thePlayer.GetSkillAbilityName(S_Sword_5), skillLevel);
+				// witcher.RemoveAbilityMultiple(thePlayer.GetSkillAbilityName(S_Sword_5), skillLevel);
 				witcher.AddAbilityMultiple(thePlayer.GetSkillAbilityName(S_Perk_19), skillLevel);
 			}		
 			// W3EE - Begin
@@ -2936,7 +2936,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			{
 				skillLevel = FloorF(owner.GetStat(BCS_Focus));
 				owner.RemoveAbilityMultiple(thePlayer.GetSkillAbilityName(S_Perk_19), skillLevel);
-				owner.AddAbilityMultiple(thePlayer.GetSkillAbilityName(S_Sword_5), skillLevel);
+				// owner.AddAbilityMultiple(thePlayer.GetSkillAbilityName(S_Sword_5), skillLevel);
 			}
 			else if(skill == S_Perk_22)
 			{

@@ -35,7 +35,7 @@ class W3Effect_BattleTrance extends CBaseGameplayEffect
 			{
 				if(GetWitcherPlayer().CanUseSkill(S_Perk_19))
 					target.RemoveAbilityMultiple(thePlayer.GetSkillAbilityName(S_Perk_19), Abs(delta));
-				else
+				//else
 					target.RemoveAbilityMultiple(thePlayer.GetSkillAbilityName(S_Sword_5), Abs(delta));
 				
 				// W3EE - Begin
@@ -51,7 +51,7 @@ class W3Effect_BattleTrance extends CBaseGameplayEffect
 			{
 				if(GetWitcherPlayer().CanUseSkill(S_Perk_19))
 					target.AddAbilityMultiple(thePlayer.GetSkillAbilityName(S_Perk_19), delta);
-				else
+				//else
 					target.AddAbilityMultiple(thePlayer.GetSkillAbilityName(S_Sword_5), delta);
 				
 				// W3EE - Begin
@@ -93,7 +93,7 @@ class W3Effect_BattleTrance extends CBaseGameplayEffect
 		
 		if(player.CanUseSkill(S_Perk_19))
 			target.AddAbilityMultiple(thePlayer.GetSkillAbilityName(S_Perk_19), currentFocusLevel);
-		else
+		// else
 			target.AddAbilityMultiple(thePlayer.GetSkillAbilityName(S_Sword_5), currentFocusLevel);
 		
 		// W3EE - Begin
@@ -134,9 +134,9 @@ class W3Effect_BattleTrance extends CBaseGameplayEffect
 	
 	protected function SetEffectValue()
 	{
-		if(GetWitcherPlayer().CanUseSkill(S_Perk_19))
+		/*if(GetWitcherPlayer().CanUseSkill(S_Perk_19))
 			effectValue = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_19, theGame.params.CRITICAL_HIT_CHANCE, false, true);
-		else
+		else */
 			effectValue = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_5, PowerStatEnumToName(CPS_AttackPower), false, true);
 	}
 }

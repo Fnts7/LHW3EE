@@ -33,6 +33,7 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 		var resPrc, rawSP : float;
 		var effectArray : array<EEffectType>;
 		var witcher : W3PlayerWitcher;
+		var penaltyReductionLevel : int; 
 		// W3EE - End
 		
 		if(isOnPlayer)
@@ -58,11 +59,25 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 			if( witcher.GetSignOwner().GetSkillLevel(S_Magic_s12, witcher.GetSignEntity(ST_Aard)) > 2 )
 				aardPower = 0.3f;
 			else
-				aardPower = MaxF(0.4f, 0.4f + sp.valueMultiplicative - 1);
+			{
+				aardPower = 0.2f;
+				
+				penaltyReductionLevel = witcher.GetSignOwner().GetSkillLevel(S_Magic_s01) - 1;				
+				if(penaltyReductionLevel > 0)
+				{
+					if (penaltyReductionLevel > 2) penaltyReductionLevel = 2;
+					aardPower += 0.1f * penaltyReductionLevel;
+				}				
+				
+				aardPower = MaxF(aardPower, aardPower + sp.valueMultiplicative - 1);
+				
+			}
+				
 		}
 		else
-			aardPower = MaxF(0.2f, 0.2f + sp.valueMultiplicative - 1);
-		
+			aardPower = MaxF(0.4f, 0.4f + sp.valueMultiplicative - 1);
+			
+	
 		if( isSignEffect && GetCreator() == witcher && witcher.GetPotionBuffLevel(EET_PetriPhiltre) == 3 )
 		{
 			if( !witcher.GetSignEntity(ST_Aard).IsAlternateCast() || witcher.GetSignOwner().GetSkillLevel(S_Magic_s12, witcher.GetSignEntity(ST_Aard)) <= 2 )

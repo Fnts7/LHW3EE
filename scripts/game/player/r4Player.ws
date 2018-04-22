@@ -11173,6 +11173,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		var i : int;
 		var category : name;
 		var potionToxicity : float;
+		var foodBuffLvl : int;
 		
 		if(!inv.IsIdValid(itemId))
 			return false;
@@ -11194,6 +11195,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 			
 			inv.GetItemBuffs(itemId, buffs);
+			foodBuffLvl = 0;
 			
 			for(i=0; i<buffs.Size(); i+=1)
 			{
@@ -11201,9 +11203,21 @@ statemachine abstract import class CR4Player extends CPlayer
 				params.creator = this;
 				params.sourceName = "edible";
 				params.customAbilityName = buffs[i].effectAbilityName;
+				
+				if (params.customAbilityName == 'WellFedEffect_Level1')
+					foodBuffLvl = 1;
+				else if (params.customAbilityName == 'WellFedEffect_Level2')
+					foodBuffLvl = 2;
+				else if (params.customAbilityName == 'WellFedEffect_Level3')
+					foodBuffLvl = 3;
+				
 				AddEffectCustom(params);
 			}
 			
+			if (foodBuffLvl > 0)
+			{
+				Heal( 100.0f * PowF(2.0f, foodBuffLvl - 1) );				
+			}
 			
 			if ( inv.ItemHasTag(itemId, 'Alcohol') )
 			{

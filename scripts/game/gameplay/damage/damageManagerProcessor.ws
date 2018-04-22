@@ -733,7 +733,7 @@ class W3DamageManagerProcessor extends CObject
 		if( playerAttacker && actorVictim && attackAction && attackAction.IsActionMelee() && playerAttacker.CanUseSkill(S_Alchemy_s12) && playerAttacker.inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) )
 		{
 			
-			monsterBonusType = MonsterCategoryToAttackPowerBonus(victimMonsterCategory);
+			monsterBonusType = MonsterCategoryToCriticalDamageBonus(victimMonsterCategory);
 			monsterBonusVal = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
 		
 			if(monsterBonusVal != null)
@@ -743,7 +743,7 @@ class W3DamageManagerProcessor extends CObject
 				skillLevel = playerAttacker.GetSkillLevel(S_Alchemy_s12);
 				baseChance = CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Alchemy_s12, 'skill_chance', false, true));
 				perOilLevelChance = CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Alchemy_s12, 'oil_level_chance', false, true));						
-				chance = baseChance * skillLevel + perOilLevelChance * oilLevel;
+				chance = baseChance * skillLevel * (1.0f + perOilLevelChance * oilLevel);
 				// W3EE - Begin
 				resistPerc = ((CNewNPC)actorVictim).GetNPCCustomStat(theGame.params.DAMAGE_NAME_POISON);
 				chance = MaxF(0, chance * (1 - resistPerc));
@@ -862,9 +862,15 @@ class W3DamageManagerProcessor extends CObject
 				
 				
 				samum = actorVictim.GetBuff(EET_Blindness, 'petard');
-				if(samum && samum.GetBuffLevel() == 3)
+				if(samum)
 				{
-					critChance += 1.0f;
+					if (samum.GetBuffLevel() == 3)
+						critChance += 0.5f;
+					else if (samum.GetBuffLevel() == 2)
+						critChance += 0.3f;
+					else
+						critChance += 0.15f;
+						
 				}
 			}
 			
@@ -885,12 +891,12 @@ class W3DamageManagerProcessor extends CObject
 			// W3EE - Begin
 			if(playerAttacker && playerAttacker == GetWitcherPlayer() && playerAttacker.GetBehaviorVariable( 'isPerformingSpecialAttack' ) > 0 && playerAttacker.GetBehaviorVariable( 'playerAttackType' ) == (int)PAT_Light)
 			{
-				critChance = 0;
+				critChance /= 2.0f;
 			}
 			
 			if(playerVictim && playerVictim == GetWitcherPlayer() && playerVictim.GetBehaviorVariable( 'isPerformingSpecialAttack' ) > 0 && playerVictim.GetBehaviorVariable( 'playerAttackType' ) == (int)PAT_Light)
 			{
-				critChance = 0;
+				critChance /= 2.0f;
 			}
 			// W3EE - End
 			
@@ -963,7 +969,7 @@ class W3DamageManagerProcessor extends CObject
 		// W3EE - Begin
 		//var hadFrostDamage : bool;
 		var forceDamageIdx : int;
-		var bonusDamagePercents : float;
+		//var bonusDamagePercents : float;
 		//var mpac : CMovingPhysicalAgentComponent;
 		var rendBonusPerPoint, staminaRendBonus, perk20Bonus : SAbilityAttributeValue;
 		var witcherAttacker : W3PlayerWitcher;
@@ -984,9 +990,14 @@ class W3DamageManagerProcessor extends CObject
 		{
 			witcherAttacker = (W3PlayerWitcher)playerAttacker;
 			
-			rendRatio = PowF(witcherAttacker.GetSpecialAttackTimeRatio() + 0.1f, 2);
+			/*rendRatio = PowF(witcherAttacker.GetSpecialAttackTimeRatio() + 0.1f, 2);
 			bonusDamagePercents = 2.40f * rendRatio - 0.90f;
 			damageBonusStack += bonusDamagePercents * Options().RendDamage();
+			*/
+			
+			rendRatio = 1.0f - PowF(1.0f - witcherAttacker.GetSpecialAttackTimeRatio(), 2);
+			damageBonusStack += - 0.7f + rendRatio * 1.1f;
+			
 		}
 		/*
 		if(actorAttacker && !actorAttacker.IgnoresDifficultySettings() && !action.IsDoTDamage())
@@ -1540,16 +1551,16 @@ class W3DamageManagerProcessor extends CObject
 		
 		if ( playerAttacker && (W3AardProjectile)action.causer )
 			powerMod.valueMultiplicative = 1;
-		*/
+		
 		
 		if( playerAttacker && action.IsActionMelee() )
 		{
 			if( playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) )
 				powerMod.valueMultiplicative += 0.25f;
-			/*else
+			else
 			if( playerAttacker.IsLightAttack(attackAction.GetAttackName()) )
-				powerMod.valueMultiplicative += 0.2f;*/
-		}
+				powerMod.valueMultiplicative += 0.2f;
+		} */
 		
 		/*
 		if ( playerAttacker && (W3IgniProjectile)action.causer )
@@ -1571,10 +1582,17 @@ class W3DamageManagerProcessor extends CObject
 				
 				if(attackAction && playerAttacker)
 				{
-					if(playerAttacker.IsLightAttack(attackAction.GetAttackName()))
+					if (attackAction.IsActionRanged())
+					{
+						criticalDamageBonus.valueMultiplicative += 0.15f;
+					}
+					else if(playerAttacker.IsLightAttack(attackAction.GetAttackName()))
 						criticalDamageBonus += actorAttacker.GetAttributeValue('critical_hit_chance_fast_style');
-					if(playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && playerAttacker.CanUseSkill(S_Sword_s08))
-						criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s08);
+					else if(playerAttacker.IsHeavyAttack(attackAction.GetAttackName()))
+					{
+						if (playerAttacker.CanUseSkill(S_Sword_s08))
+							criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s08);
+					}
 					// W3EE - Begin
 					//else if (!playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && playerAttacker.CanUseSkill(S_Sword_s17))
 						//criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s17);
@@ -1606,7 +1624,7 @@ class W3DamageManagerProcessor extends CObject
 		{	
 			witcherAttacker = (W3PlayerWitcher)playerAttacker;
 			
-			rendRatio = witcherAttacker.GetSpecialAttackTimeRatio() + 0.1f;
+			rendRatio = witcherAttacker.GetSpecialAttackTimeRatio() + 0.05f;
 			
 			staminaRendBonus = witcherAttacker.GetSkillAttributeValue(S_Sword_s02, 'stamina_max_dmg_bonus', false, true);
 			staminaRendBonus.valueMultiplicative *= Options().RendDamageStam();
@@ -1894,6 +1912,9 @@ class W3DamageManagerProcessor extends CObject
 		if( playerVictim )
 			resistPercents = MaxF(0.f, resistPercents - armorPiercing);
 			
+		if (playerAttacker && attackAction && playerAttacker.IsHeavyAttack(attackAction.GetAttackName()))
+			finalDamage *= 1.25f;
+			
 		tempDamage = MaxF(finalDamage - resistPoints, finalDamage * armorPiercing) * (1 - resistPercents);
 		if( DamageHitsEssence(  dmgInfo.dmgType ) )		action.originalDamageArmor.essenceDamage  += tempDamage;
 		if( DamageHitsVitality( dmgInfo.dmgType ) )		action.originalDamageArmor.vitalityDamage += tempDamage;
@@ -1906,6 +1927,7 @@ class W3DamageManagerProcessor extends CObject
 			resistPercents = 0;
 			armorPiercing = 1;
 		}
+		
 		
 		finalDamage = MaxF(finalDamage - resistPoints, finalDamage * armorPiercing) * (1 - resistPercents);
 		// resistPoints = resistPoints * (1.f + resistPercents - armorPiercing);

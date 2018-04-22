@@ -2528,17 +2528,23 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var mutagen : CBaseGameplayEffect;
 		var monsterBonusType : name;
 		var aerondightBuff : W3Effect_Aerondight;
+		var oil_bonus, ratio : float;
 		
 		bonus = super.GetCriticalHitDamageBonus(weaponId, victimMonsterCategory, isStrikeAtBack);
 		
 		
-		if( inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) && GetStat( BCS_Focus ) >= Options().MaxFocus() && CanUseSkill( S_Alchemy_s07 ) )
+		if( inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) && GetStat( BCS_Focus ) > 0 && CanUseSkill( S_Alchemy_s07 ) )
 		{
 			monsterBonusType = MonsterCategoryToAttackPowerBonus( victimMonsterCategory );
 			oilBonus = inv.GetItemAttributeValue( weaponId, monsterBonusType );
 			if(oilBonus != null)	
 			{
-				bonus += GetSkillAttributeValue(S_Alchemy_s07, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * GetSkillLevel(S_Alchemy_s07);
+				ratio = GetStat( BCS_Focus ) / Options().MaxFocus();
+				if (ratio > 1.0f)
+					ratio = 1.0f;
+				oil_bonus = CalculateAttributeValue(GetSkillAttributeValue(S_Alchemy_s07, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true)) * GetSkillLevel(S_Alchemy_s07) * ratio;
+				
+				bonus.valueMultiplicative += oil_bonus;
 			}
 		}
 		
@@ -7132,13 +7138,21 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	public function GetToxicityDamageThreshold() : float
 	{
-		var ret : float;
+		var ret, curOffset, halfTox : float;
 		
-		ret = theGame.params.TOXICITY_DAMAGE_THRESHOLD;
+		halfTox = GetStatMax(BCS_Toxicity) / 2.0f;
+		
+		ret = MaxF(theGame.params.TOXICITY_DAMAGE_THRESHOLD / 2.0f + halfTox / 2.0f, theGame.params.TOXICITY_DAMAGE_THRESHOLD);
+	
+		curOffset = GetStat(BCS_Toxicity) - GetStat(BCS_Toxicity, true);
+		if (curOffset > ret)
+		{
+			ret = MinF(halfTox, curOffset);
+		}
 		
 		// W3EE - Begin
 		if( GetCurrentStateName() == 'W3EEMeditation' )
-			ret += GetStatMax(BCS_Toxicity) * 0.2f;
+			ret *= 1.33f;
 		
 		/*
 		if(CanUseSkill(S_Alchemy_s01))
@@ -9277,23 +9291,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function GetSingleSignSpellPower( signSkill : ESkill ) : SAbilityAttributeValue
 	{
 		var sp : SAbilityAttributeValue;
-		var penaltyReduction : float;
-		var penaltyReductionLevel : int; 
 		var quenEntity : W3QuenEntity;
 		var maxFocus, currFocus, penaltyPerc, vigorPenalty : float;
 		
 		if(signSkill == S_Magic_1 || signSkill == S_Magic_s01)
 		{
 			sp = GetAttributeValue('spell_power_aard');
-			if( signSkill == S_Magic_s01 )
-			{
-				penaltyReductionLevel = GetSkillLevel(S_Magic_s01) - 1;
-				if(penaltyReductionLevel > 0)
-				{
-					penaltyReduction = penaltyReductionLevel * CalculateAttributeValue(GetSkillAttributeValue(S_Magic_s01, 'spell_power_penalty_reduction', false, false));
-					sp.valueMultiplicative += penaltyReduction;
-				}
-			}
 		}
 		else if(signSkill == S_Magic_2 || signSkill == S_Magic_s02)
 		{
@@ -9338,23 +9341,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function GetTotalSignSpellPower(signSkill : ESkill) : SAbilityAttributeValue
 	{
 		var sp : SAbilityAttributeValue;
-		var penaltyReduction : float;
-		var penaltyReductionLevel : int; 
 		var quenEntity : W3QuenEntity;
 		var maxFocus, currFocus, penaltyPerc, vigorPenalty : float;
 		
 		sp = GetAttributeValue(PowerStatEnumToName(CPS_SpellPower));
 		if(signSkill == S_Magic_1 || signSkill == S_Magic_s01)
 		{
-			if( signSkill == S_Magic_s01 )
-			{
-				penaltyReductionLevel = GetSkillLevel(S_Magic_s01) - 1;
-				if(penaltyReductionLevel > 0)
-				{
-					penaltyReduction = penaltyReductionLevel * CalculateAttributeValue(GetSkillAttributeValue(S_Magic_s01, 'spell_power_penalty_reduction', false, false));
-					sp.valueMultiplicative += penaltyReduction;
-				}
-			}
 			sp += GetAttributeValue('spell_power_aard');
 		}
 		else if(signSkill == S_Magic_2 || signSkill == S_Magic_s02)
@@ -13070,15 +13062,15 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				finalArmorPiercing += 0.25f;
 				if( IsInCombatAction_SpecialAttackHeavy() )
-					finalArmorPiercing += 0.02f * GetSkillLevel(S_Sword_s02) * (GetSpecialAttackTimeRatio() + 0.15f);
-				
+					finalArmorPiercing += (0.15f + 0.07f * GetSkillLevel(S_Sword_s02)) * (GetSpecialAttackTimeRatio() + 0.05f);
+
 				finalArmorPiercing += GetSkillLevel(S_Sword_s08) * 0.03f + armorPiercing.valueMultiplicative;
 			}
 			else
 			if( IsLightAttack(attackName) )
 			{
 				armorPiercing = GetAttributeValue('armor_reduction_fast_style');
-				finalArmorPiercing += GetSkillLevel(S_Sword_s17) * 0.02f + armorPiercing.valueMultiplicative;
+				finalArmorPiercing += GetSkillLevel(S_Sword_s17) * 0.04f + armorPiercing.valueMultiplicative;
 			}
 		}
 		else

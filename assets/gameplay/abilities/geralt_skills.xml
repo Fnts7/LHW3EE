@@ -524,7 +524,7 @@
       <!-- Application -->
       <ability name="alchemy_s7">
         <tags>alchemy_s7</tags>
-        <critical_hit_damage_bonus type="add" min="0.04" />
+        <critical_hit_damage_bonus type="add" min="0.1" />
       </ability>
 	
       <!-- Efficiency -->
@@ -557,8 +557,8 @@
       <ability name="alchemy_s12">
         <tags>alchemy_s12</tags>
         <PoisonEffect is_ability="true" />
-		<skill_chance type="add" min="0.03" />
-		<oil_level_chance type="add" min="0.1" />
+		<skill_chance type="add" min="0.04" />
+		<oil_level_chance type="add" min="0.5" />
       </ability>
 	
       <!-- Transmutation -->
@@ -659,7 +659,7 @@
 		</ability>
 		<ability name="perk_12">
 			<tags>perk_12, GlobalPassiveBonus</tags>
-			<toxicity type="base" min="15" />
+			<toxicity type="base" min="25" />
 		</ability>
     </abilities>
   </definitions>

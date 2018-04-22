@@ -493,7 +493,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		if( witcher && isSpecialAttack && isLightAttack && skillLevel >= 3 )
 		{
 			armorPieces = witcher.GetArmorCountOrig();
-			poiseThreshold = 1.1f;
+			poiseThreshold = 1.0f;
 			
 			if( witcher.IsHelmetEquipped(EIST_Gothic) || witcher.IsHelmetEquipped(EIST_Meteorite) || witcher.IsHelmetEquipped(EIST_Dimeritium) )
 			{
@@ -605,7 +605,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		}
 		baseSpeed += actionSpeedMult.valueMultiplicative;
 		
-		if( witcher.CanUseSkill(S_Alchemy_s16) )
+		if( witcher.CanUseSkill(S_Alchemy_s16) && witcher.GetStat(BCS_Toxicity, false) > witcher.GetToxicityDamageThreshold() )
 			baseSpeed += (witcher.GetSkillLevel(S_Alchemy_s16) * 0.05f + 0.05f) * PowF(witcher.GetStatPercents(BCS_Toxicity), 2);
 		
 		return baseSpeed;
@@ -1136,7 +1136,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		{
 			playerWitcher = (W3PlayerWitcher)playerVictim;
 			armorPieces = playerWitcher.GetArmorCountOrig();
-			poiseThreshold = 1.1f;
+			poiseThreshold = 1.0f;
 			
 			if( playerWitcher.IsHelmetEquipped(EIST_Gothic) || playerWitcher.IsHelmetEquipped(EIST_Meteorite) || playerWitcher.IsHelmetEquipped(EIST_Dimeritium) )
 			{
@@ -1170,7 +1170,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 			
 			mut15Bonus = playerWitcher.GetMutagen15() * 0.05f;
 			
-			poiseValue = ( BaseStatsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() ) * (1 - PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 2)) * actionPoiseBonus + mut15Bonus;
+			poiseValue = ( BaseStatsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() ) * VitalityPoiseRatio(playerWitcher) * actionPoiseBonus + mut15Bonus;
 			whirlPoise = poiseValue;
 			
 			if( RandRangeF(1,0) <= poiseValue && ( attackAction.CanBeParried() || poiseValue >= poiseThreshold ) && playerWitcher.GetCurrentStateName() != 'W3EEAnimation' )
@@ -1178,6 +1178,20 @@ class W3EECombatHandler extends W3EEOptionHandler
 				act.SetHitAnimationPlayType(EAHA_ForceNo);
 			}
 		}
+	}
+	
+	public final function VitalityPoiseRatio( playerWitcher : W3PlayerWitcher ) : float
+	{
+		var reduct : float;
+		
+		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 2);
+		
+		if (playerWitcher.CanUseSkill(S_Sword_s10))
+		{
+			reduct *= 1.0f - playerWitcher.GetSkillLevel(S_Sword_s10) * 0.15f;
+		}
+		
+		return 1.0f - reduct;		
 	}
 	
 	public final function ApplyNPCStaggerMechanics( playerVictim : CR4Player, attackAction : W3Action_Attack, out act : W3DamageAction )

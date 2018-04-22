@@ -709,10 +709,11 @@ state ShieldActive in W3QuenEntity extends Active
 		
 		
 		damageDifference = damageData.GetDamageDealt() / damageData.GetOriginalDamageDealtWithArmor();
-		shieldDamage = MaxF(damageData.GetOriginalDamageDealt() - 2440.f, damageData.GetOriginalDamageDealt() * 0.07f) * damageDifference / PowF(parent.GetTotalSignIntensityFloat(), 2);
+		//shieldDamage = MaxF(damageData.GetOriginalDamageDealt() - 2440.f, damageData.GetOriginalDamageDealt() * 0.07f) * damageDifference / PowF(parent.GetTotalSignIntensityFloat(), 2);
+		shieldDamage = damageData.GetOriginalDamageDealt() * 0.35f * damageDifference / PowF(parent.GetTotalSignIntensityFloat(), 2);
 		
-		reducedDamage = parent.shieldHealth;
-		reflectedDamage = reducedDamage;
+		reducedDamage = parent.shieldHealth * PowF(parent.GetTotalSignIntensityFloat(), 2);
+		reflectedDamage = parent.shieldHealth * parent.GetTotalSignIntensityFloat();
 		
 		if(!damageData.IsDoTDamage())
 		{
