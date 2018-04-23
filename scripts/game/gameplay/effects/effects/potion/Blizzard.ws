@@ -12,13 +12,15 @@ class W3Potion_Blizzard extends CBaseGameplayEffect
 	private var slowdownFactor : float;
 	private var currentSlowMoDuration : float;
 	private const var SLOW_MO_DURATION : float;
+	private const var SLOW_MO_DURATION_HIGH : float;
 	private const var SLOW_MO_DURATION_EXT : float;
 
 	default effectType = EET_Blizzard;
 	default attributeName = 'slow_motion';
-	default SLOW_MO_DURATION = 3.f;
+	default SLOW_MO_DURATION = 4.f;
 	// W3EE - Begin
-	default SLOW_MO_DURATION_EXT = 4.f;
+	default SLOW_MO_DURATION_HIGH = 5.f;
+	default SLOW_MO_DURATION_EXT = 6.f;
 	// W3EE - End
 	
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
@@ -67,8 +69,10 @@ class W3Potion_Blizzard extends CBaseGameplayEffect
 					RemoveSlowMo();
 			}
 			else
-				if(currentSlowMoDuration > SLOW_MO_DURATION)
+			{
+				if( (GetBuffLevel() == 3 && currentSlowMoDuration > SLOW_MO_DURATION_HIGH) || currentSlowMoDuration > SLOW_MO_DURATION)
 					RemoveSlowMo();
+			}
 			// W3EE - End
 		}
 		else

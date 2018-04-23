@@ -1170,7 +1170,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 			
 			mut15Bonus = playerWitcher.GetMutagen15() * 0.05f;
 			
-			poiseValue = ( BaseStatsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() ) * VitalityPoiseRatio(playerWitcher) * actionPoiseBonus + mut15Bonus;
+			poiseValue = ( BaseStatsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() ) * SensesPoiseRatio(playerWitcher) * actionPoiseBonus + mut15Bonus;
 			whirlPoise = poiseValue;
 			
 			if( RandRangeF(1,0) <= poiseValue && ( attackAction.CanBeParried() || poiseValue >= poiseThreshold ) && playerWitcher.GetCurrentStateName() != 'W3EEAnimation' )
@@ -1180,18 +1180,26 @@ class W3EECombatHandler extends W3EEOptionHandler
 		}
 	}
 	
-	public final function VitalityPoiseRatio( playerWitcher : W3PlayerWitcher ) : float
+	public final function SensesPoiseRatio( playerWitcher : W3PlayerWitcher ) : float
 	{
-		var reduct : float;
+		var reduct, skillMult : float;	
+		var skillLvl : int;
 		
 		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 2);
 		
 		if (playerWitcher.CanUseSkill(S_Sword_s10))
 		{
-			reduct *= 1.0f - playerWitcher.GetSkillLevel(S_Sword_s10) * 0.15f;
+			skillLvl = playerWitcher.GetSkillLevel(S_Sword_s10);
+			reduct *= 1.0f - skillLvl * 0.1f;
+			
+			if (skillLvl > 2)
+				skillLvl = 2;
+			skillMult = 1.0f + skillLvl * 0.05f;
 		}
-		
-		return 1.0f - reduct;		
+		else 
+			skillMult = 1.0f;
+			
+		return (1.0f - reduct) * skillMult;		
 	}
 	
 	public final function ApplyNPCStaggerMechanics( playerVictim : CR4Player, attackAction : W3Action_Attack, out act : W3DamageAction )

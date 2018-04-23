@@ -499,7 +499,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	if( playerWitcher.GetIsRunning() )
 		actionPoiseBonus += 0.18f;
 	
-	poiseVal = ( Combat().BaseStatsPoiseValue(playerWitcher) + Combat().ArmorPoiseValue(armorPieces) + Combat().RedMutagenPoiseValue() ) * (1 - PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 2)) * actionPoiseBonus * 100 + (playerWitcher.GetMutagen15() * 5.f);
+	poiseVal = ( Combat().BaseStatsPoiseValue(playerWitcher) + Combat().ArmorPoiseValue(armorPieces) + Combat().RedMutagenPoiseValue() ) * Combat().SensesPoiseRatio(playerWitcher) * actionPoiseBonus * 100 + (playerWitcher.GetMutagen15() * 5.f);
 
 	if( Options().SkillDependant() )
 	{

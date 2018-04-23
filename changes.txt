@@ -9,7 +9,7 @@ Geralt's base critical hit damage raised from +25% to +35%
 Battle Trance perk now does not cancel basic BT effect which is +10% attack power per vigor point, but just adds its
 effect of crit chance per vigor. Lowered that from 8% to 5%.
 
-Hunter Instinct skill boosted to +10% crit damage per level on max vigor. Also the effect is now proportional to the
+Hunter Instinct skill boosted to +5% crit damage per level on max vigor. Also the effect is now proportional to the
 vigor percentage.
 
 Metabolism perk raised to +25 toxicity (from 15)
@@ -20,7 +20,9 @@ chance of poisonin. 4% per level, x1,x1.5,x2 for oil levels accordingly.
 Fast attacks second skill armor piercing boosted to +4% per skill level. Light attack has no armor piercing initially,
 this value should be more significant.
 
-first defensive skill now also reduces the amount of poise lowered due to low HP. by 15% per skill level
+Heightened Senses skill now has two new effects:
+- increases poise by 5% per level, but not on lvl 3, so 10% max increase
+- reduces the amount of poise lowered due to low HP. by 10% per skill level
 
 
 - alchemy items -
@@ -30,10 +32,11 @@ cat lvl 1 a bit stronger, lvl2 a bit weaker
 boosted a bit lvl2, lvl3 swallow
 
 oils rebalanced to:
-lvl1: +10% crit chance, +20% crit dmg
-lvl2: +15%, +30%
-lvl3: +15%, +35%, +10% reses reduction
+lvl1: +10% crit chance, +15% crit dmg
+lvl2: +15%, +25%
+lvl3: +15%, +30%, +10% reses reduction (exception hangman venom: +15%, +35%, + 5%)
 
+blizzard slow motion duration increased and lvl3 now gives 1s longer duration and again 1s longer if vigor is max
 
 - bug fixes - 
 
@@ -45,7 +48,7 @@ aard sweep fixed and rebalanced starts with -20% power for knockdown applicator,
 higher levels also increase the values of all types of damages done by aard. /6, /4, /3.
 
 
-- mechanics -
+- important mechanics -
 
 Rend is now more armor-piercy, less max damage. Rend with no talent has +15% armor pierce on full load, +7% per skill level.
 Also rend now gains base damage faster (fast rends start from great penalty).
