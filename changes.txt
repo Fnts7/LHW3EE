@@ -20,6 +20,9 @@ chance of poisonin. 4% per level, x1,x1.5,x2 for oil levels accordingly.
 Fast attacks second skill armor piercing boosted to +4% per skill level. Light attack has no armor piercing initially,
 this value should be more significant.
 
+Strong attack second skill small balance shift - armor piercing lowered to +2.5% per level
+Crit damage raised to +5%.
+
 Heightened Senses skill now has two new effects:
 - increases poise by 5% per level, but not on lvl 3, so 10% max increase
 - reduces the amount of poise lowered due to low HP. by 10% per skill level
@@ -50,8 +53,9 @@ higher levels also increase the values of all types of damages done by aard. /6,
 
 - important mechanics -
 
-Rend is now more armor-piercy, less max damage. Rend with no talent has +15% armor pierce on full load, +7% per skill level.
-Also rend now gains base damage faster (fast rends start from great penalty).
+Rend is now more armor-piercy, less max damage. Rend with no talent has +15% armor pierce on full load, +5% per skill level.
+Also rend now gains base damage faster (fast rends start from great penalty). Boosted crit chance bonus to 7%
+per skill level on full load. Rend skill now also raises a bit stamina dmg bonus per level.
 
 Strong attacks have now base dmg multiplier of 1.25, removed attack power bonus of 20%.
 

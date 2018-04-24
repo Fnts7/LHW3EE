@@ -804,7 +804,7 @@ class W3DamageManagerProcessor extends CObject
 					
 					if( SkillEnumToName(S_Sword_s02) == attackAction.GetAttackTypeName() )
 					{			
-						rendLoad = GetWitcherPlayer().GetSpecialAttackTimeRatio() + 0.1f;
+						rendLoad = GetWitcherPlayer().GetSpecialAttackTimeRatio() + 0.05f;
 						critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s02, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * playerAttacker.GetSkillLevel(S_Sword_s02) * rendLoad;
 					}
 					
@@ -1627,6 +1627,7 @@ class W3DamageManagerProcessor extends CObject
 			rendRatio = witcherAttacker.GetSpecialAttackTimeRatio() + 0.05f;
 			
 			staminaRendBonus = witcherAttacker.GetSkillAttributeValue(S_Sword_s02, 'stamina_max_dmg_bonus', false, true);
+			staminaRendBonus.valueMultiplicative += playerAttacker.GetSkillLevel(S_Sword_s02) * 0.04f;
 			staminaRendBonus.valueMultiplicative *= Options().RendDamageStam();
 			
 			powerMod.valueMultiplicative += rendRatio * staminaRendBonus.valueMultiplicative;

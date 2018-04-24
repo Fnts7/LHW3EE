@@ -134,7 +134,7 @@
       <!-- Rend (ult) -->
       <ability name="sword_s2">
         <tags>sword_s2,attack_heavy</tags>
-		<critical_hit_chance type="add" min="0.05" />
+		<critical_hit_chance type="add" min="0.07" />
 		<adrenaline_final_damage_bonus type="mult" min="0.334" />
 		<stamina_max_dmg_bonus type="mult" min="0.5" />
 		
@@ -176,7 +176,7 @@
 	  <!-- Critical hits -->
 	  <ability name="sword_s8">
         <tags>sword_s8</tags>
-		<critical_hit_damage_bonus type="add" min="0.04" />
+		<critical_hit_damage_bonus type="add" min="0.05" />
       </ability>
 	
 	  <!-- Fleet Footed -->

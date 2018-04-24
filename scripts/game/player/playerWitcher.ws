@@ -13062,9 +13062,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				finalArmorPiercing += 0.25f;
 				if( IsInCombatAction_SpecialAttackHeavy() )
-					finalArmorPiercing += (0.15f + 0.07f * GetSkillLevel(S_Sword_s02)) * (GetSpecialAttackTimeRatio() + 0.05f);
+					finalArmorPiercing += (0.15f + 0.05f * GetSkillLevel(S_Sword_s02)) * (GetSpecialAttackTimeRatio() + 0.05f);
 
-				finalArmorPiercing += GetSkillLevel(S_Sword_s08) * 0.03f + armorPiercing.valueMultiplicative;
+				finalArmorPiercing += GetSkillLevel(S_Sword_s08) * 0.025f + armorPiercing.valueMultiplicative;
 			}
 			else
 			if( IsLightAttack(attackName) )
