@@ -1,47 +1,4 @@
-﻿
-- base attributes -
-
-Geralt's base critical hit damage raised from +25% to +35%
-
-
-- skill balances -
-
-Battle Trance perk now does not cancel basic BT effect which is +10% attack power per vigor point, but just adds its
-effect of crit chance per vigor. Lowered that from 8% to 5%.
-
-Hunter Instinct skill boosted to +5% crit damage per level on max vigor. Also the effect is now proportional to the
-vigor percentage.
-
-Metabolism perk raised to +25 toxicity (from 15)
-
-Poisoned Blades rebalanced, so that skill level matters more and oil level less. lvl 3 oil and lvl5 skill will give 40%
-chance of poisonin. 4% per level, x1,x1.5,x2 for oil levels accordingly.
-
-Fast attacks second skill armor piercing boosted to +4% per skill level. Light attack has no armor piercing initially,
-this value should be more significant.
-
-Strong attack second skill small balance shift - armor piercing lowered to +2.5% per level
-Crit damage raised to +5%.
-
-Heightened Senses skill now has two new effects:
-- increases poise by 5% per level, but not on lvl 3, so 10% max increase
-- reduces the amount of poise lowered due to low HP. by 10% per skill level
-
-
-- alchemy items -
-
-thunderbolt boosted to +10%, 15%, 15% crit chance
-cat lvl 1 a bit stronger, lvl2 a bit weaker
-boosted a bit lvl2, lvl3 swallow
-
-oils rebalanced to:
-lvl1: +10% crit chance, +15% crit dmg
-lvl2: +15%, +25%
-lvl3: +15%, +30%, +10% reses reduction (exception hangman venom: +15%, +35%, + 5%)
-
-blizzard slow motion duration increased and lvl3 now gives 1s longer duration and again 1s longer if vigor is max
-
-- bug fixes - 
+﻿- bug fixes - 
 
 poisoned blades skill not working
 
@@ -74,6 +31,50 @@ is present, the damage is not taken by Geralt. However if decoctions alone use m
 triggers the damage also. Both 2 toxicity positive bonuses skills are changed so that they are active only if the toxicity
 is above the new current threshold. Means that e.g. having just 1 decoction that is not 50% toxicity will not activate
 those skills.
+
+
+- skill balances -
+
+Battle Trance perk now does not cancel basic BT effect which is +10% attack power per vigor point, but just adds its
+effect of crit chance per vigor. Lowered that from 8% to 5%.
+
+Hunter Instinct skill boosted to +5% crit damage per level on max vigor. Also the effect is now proportional to the
+vigor percentage.
+
+Metabolism perk raised to +25 toxicity (from 15)
+
+Poisoned Blades rebalanced, so that skill level matters more and oil level less. lvl 3 oil and lvl5 skill will give 40%
+chance of poisonin. 4% per level, x1,x1.5,x2 for oil levels accordingly.
+
+Fast attacks second skill armor piercing boosted to +3% per skill level. Light attack has no armor piercing initially,
+this value should be more significant.
+
+Strong attack second skill small balance shift - armor piercing lowered to +2.5% per level
+Crit damage raised to +5%.
+
+Heightened Senses skill now has two new effects:
+- increases poise by 5% per level, but not on lvl 3, so 10% max increase
+- reduces the amount of poise lowered due to low HP. by 10% per skill level
+
+
+- alchemy items -
+
+thunderbolt boosted to +10%, 15%, 15% crit chance
+cat lvl 1 a bit stronger, lvl2 a bit weaker
+boosted a bit lvl2, lvl3 swallow
+
+oils rebalanced to:
+lvl1: +10% crit chance, +15% crit dmg
+lvl2: +15%, +25%
+lvl3: +15%, +30%, +10% reses reduction (exception hangman venom: +15%, +35%, + 5%)
+
+blizzard slow motion duration increased and lvl3 now gives 1s longer duration and again 1s longer if vigor is max
+
+
+- base attributes -
+
+Geralt's base critical hit damage raised from +25% to +35%
+
   
 - misc -
 
@@ -84,4 +85,84 @@ Whirl crit chance is now not 0, but / 2 penalty instead.
 
 Crossbow crit damage 
 
+lowered a bit resist unblockable attacks poise threshold to 100%.
+
+
+This mod is a publication of my own taste Witcher 3 Enhanced Edition. So obviously credit goes to the god of modding, mighty Reaperzz and all the authors of the mods that he used. The goal is to make W3EE less hardcore and more pleasant to play for not ultra hardcore players. Contains also bugfixes.
+
+Typically most balance changed will be done evening up. So e.g. if I see that skill X is more powerful than Y in my opinion, I will make Y as strong as X. If I see a potion of same tier less powerful/useful than some other I will boost it.
+
+Requirements:
+W3EE﻿
+Script Merger
+﻿
+
+Installation instructions:
+Install original W3EE properly
+Copy the modLHW3EE to [Witcher3_installation]\Mods
+Delete whole folder  [Witcher3_installation]\Mods\modW3EE\content\scripts
+Go through merging process of *.xml files (script merger is only for that! Apart from this exception, the warning of not using script merger from original W3EE stays!)
+For every *.xml file that was modified by this mod, you will be prompted to resolve conflicts. That is simple, because you just have to choose the files from this mod. When solving conflicts in Kdiff, look below the icon bar. You will see: A: [vanilla], B: [mod_1], C: [mod_2] OR A: [mod_1], B: [mod_2]. Go to 'merge' in menu and select 'choose X everywhere', where X is the name of this mod, that is modLHW3EE.
+
+
+Brief changes list:
+- bug fixes - 
+poisoned blades skill not working
+fixed ridiculous basic quen power
+aard sweep fixed and rebalanced starts with -20% power for knockdown applicator, then -10%, 0% on higher levels.
+higher levels also increase the values of all types of damages done by aard. /6, /4, /3.
+
+- important mechanics -
+Rend is now more armor-piercy, less max damage. Rend with no talent has +15% armor pierce on full load, +5% per skill level.
+Also rend now gains base damage faster (fast rends start from great penalty). Boosted crit chance bonus to 7%
+per skill level on full load. Rend skill now also raises a bit stamina dmg bonus per level.
+Strong attacks have now base dmg multiplier of 1.25, removed attack power bonus of 20%.
+eating food will now also give instant heal of small amount, based on food level: 100, 200, 400 accordingly.
+Changed the logic of toxicity damage threshold, now it is not constant 50, but following:
+  Min ( Max(25 + maxTox / 4.0f, decoction_offset), halfTox)
+  
+where
+  maxTox - maximum toxicity, halfTox - half of toxicity
+  decoction_offset - total toxicity of active decoctions
+  
+Explanation - toxicity damage threshold is increased at 50% rate with higher max tox. But if only decoctions intoxication
+is present, the damage is not taken by Geralt. However if decoctions alone use more than 50% of maximum toxicity, that
+triggers the damage also. Both 2 toxicity positive bonuses skills are changed so that they are active only if the toxicity
+is above the new current threshold. Means that e.g. having just 1 decoction that is not 50% toxicity will not activate
+those skills.
+
+- skill balances -
+Battle Trance perk now does not cancel basic BT effect which is +10% attack power per vigor point, but just adds its
+effect of crit chance per vigor. Lowered that from 8% to 5%.
+Hunter Instinct skill boosted to +5% crit damage per level on max vigor. Also the effect is now proportional to the
+vigor percentage.
+Metabolism perk raised to +25 toxicity (from 15)
+Poisoned Blades rebalanced, so that skill level matters more and oil level less. lvl 3 oil and lvl5 skill will give 40%
+chance of poisonin. 4% per level, x1,x1.5,x2 for oil levels accordingly.
+Fast attacks second skill armor piercing boosted to +3% per skill level. Light attack has no armor piercing initially,
+this value should be more significant.
+Strong attack second skill small balance shift - armor piercing lowered to +2.5% per level
+Crit damage raised to +5%.
+Heightened Senses skill now has two new effects:
+- increases poise by 5% per level, but not on lvl 3, so 10% max increase
+- reduces the amount of poise lowered due to low HP. by 10% per skill level
+
+- alchemy items -
+thunderbolt boosted to +10%, 15%, 15% crit chance
+cat lvl 1 a bit stronger, lvl2 a bit weaker
+boosted a bit lvl2, lvl3 swallow
+oils rebalanced to:
+lvl1: +10% crit chance, +15% crit dmg
+lvl2: +15%, +25%
+lvl3: +15%, +30%, +10% reses reduction (exception hangman venom: +15%, +35%, + 5%)
+blizzard slow motion duration increased and lvl3 now gives 1s longer duration and again 1s longer if vigor is max
+
+- base attributes -
+Geralt's base critical hit damage raised from +25% to +35%
+  
+- misc -
+Samum crit chance bonus (for blinded enemies) changed so that all levels now give some bonus
++15%, +30%, +50%, so lvl is lowered from 100%.
+Whirl crit chance is now not 0, but / 2 penalty instead.
+Crossbow crit damage 
 lowered a bit resist unblockable attacks poise threshold to 100%.

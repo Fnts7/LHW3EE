@@ -13070,7 +13070,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			if( IsLightAttack(attackName) )
 			{
 				armorPiercing = GetAttributeValue('armor_reduction_fast_style');
-				finalArmorPiercing += GetSkillLevel(S_Sword_s17) * 0.04f + armorPiercing.valueMultiplicative;
+				finalArmorPiercing += GetSkillLevel(S_Sword_s17) * 0.03f + armorPiercing.valueMultiplicative;
 			}
 		}
 		else
