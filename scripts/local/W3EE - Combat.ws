@@ -703,7 +703,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		
 		fastSpeedBonus = witcher.GetAttributeValue('attack_speed_fast_style');
 		if( SkillDependant() )
-			finalAttackSpeed = BaseActionSpeed(true) + fastSpeedBonus.valueMultiplicative + (FloorF(witcher.GetSkillLevel(S_Sword_s21) * 3.4f) + FloorF(witcher.GetStat(BCS_Focus) * witcher.GetSkillLevel(S_Sword_s20) * 0.2f)) / 100.f;
+			finalAttackSpeed = BaseActionSpeed(true) + fastSpeedBonus.valueMultiplicative + (witcher.GetSkillLevel(S_Sword_s21) * 3.4f + witcher.GetStat(BCS_Focus) * witcher.GetSkillLevel(S_Sword_s20) * 0.2f) / 100.f;
 		else
 			finalAttackSpeed = FAIN();
 		
@@ -721,7 +721,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		
 		strongSpeedBonus = witcher.GetAttributeValue('attack_speed_heavy_style');
 		if( SkillDependant() )
-			finalAttackSpeed = BaseActionSpeed(true) + strongSpeedBonus.valueMultiplicative + (FloorF(witcher.GetSkillLevel(S_Sword_s04) * 5.f) + FloorF(witcher.GetStat(BCS_Focus) * witcher.GetSkillLevel(S_Sword_s20) * 0.4f)) / 100.f;
+			finalAttackSpeed = BaseActionSpeed(true) + strongSpeedBonus.valueMultiplicative + (witcher.GetSkillLevel(S_Sword_s04) * 4.5f + witcher.GetStat(BCS_Focus) * witcher.GetSkillLevel(S_Sword_s20) * 0.4f) / 100.f;
 		else
 			finalAttackSpeed = HAIN();
 		

@@ -241,6 +241,10 @@
             <ability name="Common_CriticalBonus">
                 <critical_hit_damage_bonus      type="add"              min="0.03"      max="0.07"      />
             </ability>
+			
+			<ability name="Common_CriticalChance">
+                <critical_hit_chance            type="add"              min="0.02"     max="0.04"     />
+            </ability>
            
             <ability name="Master_Heft">
                 <attack_power                   type="mult"             min="0.05"      max="0.08"      />
@@ -287,6 +291,11 @@
                 <armor_reduction                 type="mult"                min="-0.07"     max="-0.4"      />
             </ability>
 			
+			<ability name="Master_MoreCrits">
+                <critical_hit_damage_bonus      type="add"              min="-0.08"      max="-0.05"      />
+                <critical_hit_chance            type="add"              min="0.05"     max="0.08"     />
+            </ability>
+			
             <ability name="Magical_Ram">
                 <poise_damage                    type="add"                 min="13"        max="18"        />
                 <shield_disarm_chance            type="mult"                min="0.05"      max="0.1"       />
@@ -302,7 +311,7 @@
             <ability name="Magical_Precision">
                 <attack_speed                   type="mult"             min="0.04"      max="0.07"      />
                 <critical_hit_chance            type="add"              min="0.04"      max="0.07"      />
-                <critical_hit_damage_bonus      type="add"              min="-0.18"     max="-0.12"     />
+                <critical_hit_damage_bonus      type="add"              min="-0.16"     max="-0.11"     />
             </ability>
            
             <ability name="Magical_Sting">
@@ -336,15 +345,22 @@
                 <attack_power                   type="mult"             min="-0.18"     max="-0.13"     />
             </ability>
            
-            <ability name="Magical_StrongCrits">
-                <critical_hit_damage_bonus      type="add"              min="0.11"      max="0.18"      />
-                <critical_hit_chance            type="add"              min="-0.18"     max="-0.10"     />
+            <ability name="Master_StrongCrits">
+                <critical_hit_damage_bonus      type="add"              min="0.10"      max="0.14"      />
+                <critical_hit_chance            type="add"              min="-0.05"     max="-0.039"     />
             </ability>
            
             <ability name="Magical_Cleave">
                 <damage_through_blocks          type="mult"             min="0.04"      max="0.07"      />
                 <shield_disarm_chance           type="mult"             min="0.09"      max="0.12"      />
                 <attack_speed                   type="mult"             min="-0.11"     max="-0.05"     />
+            </ability>
+			
+			<ability name="Magical_StrongOrFast">
+                <attack_power_heavy_style       type="mult"             min="0.08"      max="0.12"      />
+                <attack_speed_heavy_style       type="mult"             min="-0.08"     max="-0.045"     />
+                <attack_power_fast_style        type="mult"             min="-0.08"     max="-0.05"      />
+                <attack_speed_fast_style        type="mult"             min="0.03"      max="0.06"      />
             </ability>
 			
 			

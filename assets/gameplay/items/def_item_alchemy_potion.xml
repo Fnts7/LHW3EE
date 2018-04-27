@@ -328,14 +328,14 @@
 	  
       <!-- Healing Potion-->
       <ability name="WhiteRaffardDecoction_1">
-        <toxicity min="35" max="35" type="add" />
+        <toxicity min="30" max="30" type="add" />
         <ammo type="add" min="2" />
         <WhiteRaffardDecoctionEffect_Level1 is_ability="true" />
 		    <quality type="add" min="2" max="2"/>
 		    <level type="add" min="1" />
       </ability>
       <ability name="WhiteRaffardDecoction_2">
-        <toxicity min="45" max="45" type="add" />
+        <toxicity min="40" max="40" type="add" />
         <ammo type="add" min="2" />
         <WhiteRaffardDecoctionEffect_Level2 is_ability="true" />
         <WhiteRaffardDecoction_3 is_ability="true" />
@@ -343,7 +343,7 @@
 		    <quality type="add" min="3" max="3"/>
       </ability>
       <ability name="WhiteRaffardDecoction_3">
-        <toxicity min="50" max="50" type="add" />
+        <toxicity min="45" max="45" type="add" />
         <ammo type="add" min="3" />
         <WhiteRaffardDecoctionEffect_Level3 is_ability="true" />
         <WhiteRaffardDecoction_2 is_ability="true" />

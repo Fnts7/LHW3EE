@@ -789,6 +789,7 @@ import class W3GameParams extends CObject
 		WEAPON_COMMON_ABILITIES.PushBack('Common_ArmorPen');
 		WEAPON_COMMON_ABILITIES.PushBack('Common_CounterBonus');
 		WEAPON_COMMON_ABILITIES.PushBack('Common_CriticalBonus');
+		WEAPON_COMMON_ABILITIES.PushBack('Common_CriticalChance');
 		
 		WEAPON_MASTERWORK_ABILITIES.PushBack('Master_Heft');
 		WEAPON_MASTERWORK_ABILITIES.PushBack('Master_CrushBlocks');
@@ -796,6 +797,7 @@ import class W3GameParams extends CObject
 		WEAPON_MASTERWORK_ABILITIES.PushBack('Master_Needle');
 		WEAPON_MASTERWORK_ABILITIES.PushBack('Master_Calculated');
 		WEAPON_MASTERWORK_ABILITIES.PushBack('Master_StrongCrits');
+		WEAPON_MASTERWORK_ABILITIES.PushBack('Master_MoreCrits');
 		WEAPON_MASTERWORK_ABILITIES.PushBack('Master_Cavalry');
 		WEAPON_MASTERWORK_ABILITIES.PushBack('Master_Butcher');
 		WEAPON_MASTERWORK_ABILITIES.PushBack('Master_Light');
@@ -809,6 +811,7 @@ import class W3GameParams extends CObject
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Spellslinger');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Cleave');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Ram');
+		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_StrongOrFast');
 		// W3EE - End
 	}
 	

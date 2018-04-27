@@ -1,4 +1,19 @@
-﻿- bug fixes - 
+﻿
+
+Version 2
+
+Lowered toxicity of every level white raffard by 5
+
+Introduced new master and magical crafted sword roll sets:
+- related with critical hit chance and damage
+- new magical one 'StrongOrFast' - gives + str attack power, - str attack speed, - fast attack power, + fast attack speed
+
+Str Training skill heavy attack speed bonus per level slightly lowered to 4.5%
+
+
+Version 1
+
+- bug fixes - 
 
 poisoned blades skill not working
 

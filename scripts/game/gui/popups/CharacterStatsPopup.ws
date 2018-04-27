@@ -729,7 +729,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	}
 	else if ( varKey == 'AtkSpdST' )
 	{
-		valueStr = (string)NoTrailZeros(FloorF(playerWitcher.GetSkillLevel(S_Sword_s04) * 5.f)) + "%";
+		valueStr = (string)NoTrailZeros(FloorF(playerWitcher.GetSkillLevel(S_Sword_s04) * 4.5f)) + "%";
 	}
 	else if ( varKey == 'AtkSpdArmor' )
 	{

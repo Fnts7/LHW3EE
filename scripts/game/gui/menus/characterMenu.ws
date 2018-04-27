@@ -2347,8 +2347,8 @@ class CR4CharacterMenu extends CR4MenuBase
 				/*argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) + "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%";
 				*/
-				argsInt.PushBack(FloorF(skillLevel * 5.f));
-				argsInt.PushBack(FloorF(skillLevel * 5.f));
+				argsInt.PushBack(FloorF(skillLevel * 4.5f));
+				argsInt.PushBack(FloorF(skillLevel * 4.5f));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_StrTrainingSkill", argsInt);
 				// W3EE - End
 				break;
@@ -2389,7 +2389,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				/*arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_CHANCE, false, false)) * skillLevel;
 				argsInt.PushBack(RoundMath(arg*100));*/
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s08, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, false)) * skillLevel;
-				argsInt.PushBack(RoundMath(3.f * skillLevel));
+				argsInt.PushBack(RoundMath(2.5f * skillLevel));
 				argsInt.PushBack(RoundMath(arg * 100));
 				//baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /*+ "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%"*/;
 				baseString = GetLocStringByKeyExtWithParams("W3EE_CrushingBlowSkill", argsInt);
@@ -2492,7 +2492,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, false)) * skillLevel;
 				argsInt.PushBack(RoundMath(arg*100));*/
 				//baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /*+ "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%"*/;
-				argsInt.PushBack(2 * skillLevel);
+				argsInt.PushBack(3 * skillLevel);
 				argsInt.PushBack(10 * skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_PreciseBlowsSkill", argsInt);
 				break;
