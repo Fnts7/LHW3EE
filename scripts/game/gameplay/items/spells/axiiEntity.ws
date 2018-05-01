@@ -347,7 +347,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 			axiiPower = super.GetTotalSignIntensity();
 			
 			prc = npcTarget.GetNPCCustomStat(theGame.params.DAMAGE_NAME_MENTAL);
-			chance = 0.6f * axiiPower.valueMultiplicative * (1 - prc);
+			chance = 0.7f * axiiPower.valueMultiplicative * (1 - prc);
 			dur *= axiiPower.valueMultiplicative;
 			// W3EE - End
 			

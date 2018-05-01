@@ -31,9 +31,10 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 		// W3EE - Begin
 		var sp : SAbilityAttributeValue;
 		var resPrc, rawSP : float;
-		var effectArray : array<EEffectType>;
+		//var effectArray : array<EEffectType>;
 		var witcher : W3PlayerWitcher;
-		var penaltyReductionLevel : int; 
+		var penaltyLevel : int; 
+		var refBlastMod : bool;
 		// W3EE - End
 		
 		if(isOnPlayer)
@@ -54,41 +55,54 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 				sp = creatorPowerStat;
 		}
 		
-		if( witcher.GetSignEntity(ST_Aard).IsAlternateCast() )
+		refBlastMod = false;
+		if (witcher.GetSignEntity(ST_Aard).IsAlternateCast())
 		{
-			if( witcher.GetSignOwner().GetSkillLevel(S_Magic_s12, witcher.GetSignEntity(ST_Aard)) > 2 )
-				aardPower = 0.3f;
-			else
+			penaltyLevel = 3 - witcher.GetSignOwner().GetSkillLevel(S_Magic_s01);				
+			if(penaltyLevel > 0)
 			{
-				aardPower = 0.2f;
-				
-				penaltyReductionLevel = witcher.GetSignOwner().GetSkillLevel(S_Magic_s01) - 1;				
-				if(penaltyReductionLevel > 0)
-				{
-					if (penaltyReductionLevel > 2) penaltyReductionLevel = 2;
-					aardPower += 0.1f * penaltyReductionLevel;
-				}				
-				
-				aardPower = MaxF(aardPower, aardPower + sp.valueMultiplicative - 1);
-				
+				if (penaltyLevel > 2) penaltyLevel = 2;							
+				sp.valueMultiplicative -= 0.15f * penaltyLevel;
 			}
-				
+			
+			if( witcher.GetSignOwner().GetSkillLevel(S_Magic_s12, witcher.GetSignEntity(ST_Aard)) > 2 )
+				refBlastMod = true;			
+		}
+		
+		if (sp.valueMultiplicative >= 1.0f)
+		{
+			aardPower = - 0.6f + sp.valueMultiplicative;
 		}
 		else
-			aardPower = MaxF(0.4f, 0.4f + sp.valueMultiplicative - 1);
-			
-	
+		{
+			aardPower = MaxF(0.0f, 0.4f - 0.4f * (1.0f - sp.valueMultiplicative));
+		}
+		
 		if( isSignEffect && GetCreator() == witcher && witcher.GetPotionBuffLevel(EET_PetriPhiltre) == 3 )
 		{
-			if( !witcher.GetSignEntity(ST_Aard).IsAlternateCast() || witcher.GetSignOwner().GetSkillLevel(S_Magic_s12, witcher.GetSignEntity(ST_Aard)) <= 2 )
-				aardPower = 1;
+			aardPower += 0.2f;
 		}
 		
 		npc = (CNewNPC)target;
 		aardPower *= (1 - npc.GetNPCCustomStat(theGame.params.DAMAGE_NAME_FORCE));
+		
+		if (refBlastMod)
+			aardPower = MinF(0.25f, aardPower);		
+
+
 		if(npc && npc.HasShieldedAbility() )
 		{
-			if( aardPower >= 0.65f )
+			aardPower = MinF(1.2f, aardPower);
+			aardPower += RandF();
+			
+			if( aardPower >= 1.5f )
+				appliedType = EET_Knockdown;
+			else if( aardPower >= 0.85f )
+				appliedType = EET_LongStagger;
+			else
+				appliedType = EET_Stagger;
+			
+			/*if( aardPower >= 0.65f )
 				effectArray.PushBack(EET_Knockdown);
 			if( aardPower >= 0.35f )
 				effectArray.PushBack(EET_LongStagger);
@@ -104,11 +118,19 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 				
 				if( i == effectArray.Size() - 1 )
 					appliedType = effectArray[i];
-			}
+			}*/
 		}
 		else if ( target.HasAbility( 'mon_type_huge' ) )
 		{
-			if( aardPower >= 0.45f )
+			aardPower = MinF(1.0f, aardPower);
+			aardPower += RandF();
+			
+			if( aardPower >= 1.1f )
+				appliedType = EET_LongStagger;
+			else
+				appliedType = EET_Stagger;
+		
+			/*if( aardPower >= 0.45f )
 				effectArray.PushBack(EET_LongStagger);
 			effectArray.PushBack(EET_Stagger);
 			
@@ -122,16 +144,34 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 				
 				if( i == effectArray.Size() - 1 )
 					appliedType = effectArray[i];
-			}
+			}*/
 		}
 		else
 		if ( target.HasAbility( 'WeakToAard' ) )
 		{
-			appliedType = EET_Knockdown;
+			aardPower = MinF(0.8f, aardPower);
+			aardPower += RandF();
+			
+			if( aardPower >= 1.0f )
+				appliedType = EET_HeavyKnockdown;
+			else
+				appliedType = EET_Knockdown;
 		}
 		else
 		{
-			if( aardPower >= 0.5f )
+			aardPower = MinF(1.05f, aardPower);
+			aardPower += RandF();
+			
+			if( aardPower >= 1.3f )
+				appliedType = EET_HeavyKnockdown;
+			else if( aardPower >= 1.0f )
+				appliedType = EET_Knockdown;
+			else if( aardPower >= 0.7f )
+				appliedType = EET_LongStagger;
+			else
+				appliedType = EET_Stagger;
+		
+			/*if( aardPower >= 0.5f )
 				effectArray.PushBack(EET_HeavyKnockdown);
 			if( aardPower >= 0.4f )
 				effectArray.PushBack(EET_Knockdown);
@@ -149,7 +189,7 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 				
 				if( i == effectArray.Size() - 1 )
 					appliedType = effectArray[i];
-			}
+			}*/
 		}
 		// W3EE - End
 		

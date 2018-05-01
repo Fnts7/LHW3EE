@@ -1596,13 +1596,13 @@ class W3EffectManager
 		else
 			res = ((CNewNPC)owner).GetNPCCustomStat(((CNewNPC)owner).ResistStatToName(theGame.effectMgr.GetBuffResistStat(effectType)));
 		
-		rawChance = 0.20f * sp;
+		rawChance = 0.35f * sp;
 		if( signType == ST_Igni && witcher )
 		{
 			if(witcher.GetSignOwner().CanUseSkill(S_Magic_s09, witcher.GetSignEntity(ST_Igni)))
 			{
 				// chanceBonus = witcher.GetSkillAttributeValue(S_Magic_s09, 'chance_bonus', false, true);
-				bonusChance = 0.1f * witcher.GetSignOwner().GetSkillLevel(S_Magic_s09, witcher.GetSignEntity(ST_Igni));
+				bonusChance = 0.06f * witcher.GetSignOwner().GetSkillLevel(S_Magic_s09, witcher.GetSignEntity(ST_Igni));
 			}
 			
 			/*

@@ -995,8 +995,8 @@ class W3DamageManagerProcessor extends CObject
 			damageBonusStack += bonusDamagePercents * Options().RendDamage();
 			*/
 			
-			rendRatio = 1.0f - PowF(1.0f - witcherAttacker.GetSpecialAttackTimeRatio(), 2);
-			damageBonusStack += - 0.7f + rendRatio * 1.1f;
+			rendRatio = 1.0f - PowF(1.0f - witcherAttacker.GetSpecialAttackTimeRatio(), 1.8f);
+			damageBonusStack += - 0.7f + rendRatio * 1.2f;
 			
 		}
 		/*

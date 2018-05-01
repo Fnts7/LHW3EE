@@ -1,4 +1,10 @@
-﻿
+﻿Version 3
+
+- improved aard logic concerning knockdown applicator and force damage calculation - all skills better cowork with each other. scaling is more smooth
+  aard is a bit stronger at base, force effects get weaker with lower sign power and increasing sign power does not boost aard that much.
+- igni has higher base burn chance, but progresses slower with the 4th skill (skills shouldn be that strong)
+- slightly boosted axii base success chance
+
 
 Version 2
 

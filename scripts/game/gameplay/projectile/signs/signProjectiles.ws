@@ -64,6 +64,9 @@ class W3AardProjectile extends W3SignProjectile
 				
 				if( signEntity.IsAlternateCast() ) {
 				
+					if( owner.GetSkillLevel(S_Magic_s12, GetSignEntity()) > 2 )
+						dmgVal *= 1.5f;
+				
 					if ( (W3PlayerWitcher) owner.GetPlayer() )
 						altLevel = owner.GetSkillLevel(S_Magic_s01);
 					else
@@ -182,9 +185,7 @@ class W3AardProjectile extends W3SignProjectile
 				if( signEntity.IsAlternateCast() )
 				{
 					if( owner.GetSkillLevel(S_Magic_s12, GetSignEntity()) > 2 )
-						dmgVal /= 2;
-					else
-					{
+						dmgVal *= 1.5f;
 					
 					if ( (W3PlayerWitcher) owner.GetPlayer() )
 						altLevel = owner.GetSkillLevel(S_Magic_s01);
@@ -199,7 +200,6 @@ class W3AardProjectile extends W3SignProjectile
 						dmgVal /= 6;
 					else
 						dmgVal /= 5;
-					}
 				}
 				action.AddDamage( theGame.params.DAMAGE_NAME_FORCE, dmgVal );
 			}
