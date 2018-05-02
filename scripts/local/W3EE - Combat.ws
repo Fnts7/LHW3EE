@@ -1122,8 +1122,22 @@ class W3EECombatHandler extends W3EEOptionHandler
 	}
 	
 	public final function BaseStatsPoiseValue( witcher : W3PlayerWitcher ) : float
-	{
+	{	
 		return PowF(witcher.GetStatPercents(BCS_Toxicity), 2) * witcher.GetStatMax(BCS_Toxicity) / 500.f;
+	}
+	
+	public final function SkillsPoiseValue( witcher : W3PlayerWitcher ) : float
+	{
+		var skillPoise : int;	
+		
+		skillPoise = 0;		
+		if (witcher.CanUseSkill(S_Sword_s10))
+		{
+			skillPoise = witcher.GetSkillLevel(S_Sword_s10) * 2;
+			if (skillPoise > 5) skillPoise = 5;
+		}
+		
+		return skillPoise / 100.0f;
 	}
 	
 	public final function ApplyPlayerStaggerMechanics( playerVictim : CR4Player, attackAction : W3Action_Attack, out act : W3DamageAction )
@@ -1170,7 +1184,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 			
 			mut15Bonus = playerWitcher.GetMutagen15() * 0.05f;
 			
-			poiseValue = ( BaseStatsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() ) * SensesPoiseRatio(playerWitcher) * actionPoiseBonus + mut15Bonus;
+			poiseValue = ( BaseStatsPoiseValue(playerWitcher) + SkillsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() ) * HPPoiseRatio(playerWitcher) * actionPoiseBonus + mut15Bonus;
 			whirlPoise = poiseValue;
 			
 			if( RandRangeF(1,0) <= poiseValue && ( attackAction.CanBeParried() || poiseValue >= poiseThreshold ) && playerWitcher.GetCurrentStateName() != 'W3EEAnimation' )
@@ -1180,26 +1194,18 @@ class W3EECombatHandler extends W3EEOptionHandler
 		}
 	}
 	
-	public final function SensesPoiseRatio( playerWitcher : W3PlayerWitcher ) : float
+	public final function HPPoiseRatio( playerWitcher : W3PlayerWitcher ) : float
 	{
-		var reduct, skillMult : float;	
-		var skillLvl : int;
+		var reduct : float;	
 		
 		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 2);
 		
 		if (playerWitcher.CanUseSkill(S_Sword_s10))
 		{
-			skillLvl = playerWitcher.GetSkillLevel(S_Sword_s10);
-			reduct *= 1.0f - skillLvl * 0.1f;
-			
-			if (skillLvl > 2)
-				skillLvl = 2;
-			skillMult = 1.0f + skillLvl * 0.05f;
+			reduct *= 1.0f - 0.1f * playerWitcher.GetSkillLevel(S_Sword_s10);
 		}
-		else 
-			skillMult = 1.0f;
 			
-		return (1.0f - reduct) * skillMult;		
+		return (1.0f - reduct);		
 	}
 	
 	public final function ApplyNPCStaggerMechanics( playerVictim : CR4Player, attackAction : W3Action_Attack, out act : W3DamageAction )

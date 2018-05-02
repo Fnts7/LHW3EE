@@ -315,10 +315,11 @@ class W3Action_Attack extends W3DamageAction
 				result += witcherAttacker.GetSkillAttributeValue(S_Sword_s21, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s21);
 						
 			
+			/* LHW3EE - moved to damageManagerProcessor.ProcessDamageIncrease
 			if(witcherAttacker.inv.IsIdValid(crossbowId) && witcherAttacker.CanUseSkill(S_Perk_02))
 			{				
 				result += witcherAttacker.GetSkillAttributeValue(S_Perk_02, PowerStatEnumToName(CPS_AttackPower), false, true);
-			}
+			}*/
 			
 			// W3EE - Begin
 			if( witcherAttacker )

@@ -1,4 +1,20 @@
-﻿Version 3
+﻿Version 4
+
+- reduced ridiculously hight repair prices of high class equipment. The repair price function is not linear,
+but regressive root function. So cheap equipment will still have similar repair prices.
+- heightened senses skill small change. instead of percentage poise increase, the skill now gives base poise
+of +2, +4, +5 depending on level. The effect of reducing poise reduction due to low hp stays the same.
+- updated some ui descriptions
+
+- counter attack skill lvl3 crit chance bonus lowered to +15%
+- deadly precision now gives +7% crit chance on counter attack per level instead of 25% on level 3.
+Those two defensive skills crit chance was OP concerning other changes in this mod
+
+- steady shot skill damage bonus is now applied multiplicatively to base dmg, not attack power which made that
+perk crap. Now it is better in comparison to e.g. Trick Shot
+
+
+Version 3
 
 - improved aard logic concerning knockdown applicator and force damage calculation - all skills better cowork with each other. scaling is more smooth
   aard is a bit stronger at base, force effects get weaker with lower sign power and increasing sign power does not boost aard that much.

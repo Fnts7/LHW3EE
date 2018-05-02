@@ -499,7 +499,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	if( playerWitcher.GetIsRunning() )
 		actionPoiseBonus += 0.18f;
 	
-	poiseVal = ( Combat().BaseStatsPoiseValue(playerWitcher) + Combat().ArmorPoiseValue(armorPieces) + Combat().RedMutagenPoiseValue() ) * Combat().SensesPoiseRatio(playerWitcher) * actionPoiseBonus * 100 + (playerWitcher.GetMutagen15() * 5.f);
+	poiseVal = ( Combat().BaseStatsPoiseValue(playerWitcher) + Combat().SkillsPoiseValue(playerWitcher) + Combat().ArmorPoiseValue(armorPieces) + Combat().RedMutagenPoiseValue() ) * Combat().HPPoiseRatio(playerWitcher) * actionPoiseBonus * 100 + (playerWitcher.GetMutagen15() * 5.f);
 
 	if( Options().SkillDependant() )
 	{
@@ -1452,9 +1452,11 @@ function GetEquippedCrossbowDamage():float
 	}
 	
 	crossbowPower = thePlayer.inv.GetItemAttributeValue(equippedCrossbow, 'attack_power');
+	crossbowStatValueMult = 1;
 	if(thePlayer.CanUseSkill(S_Perk_02))
 	{				
-		crossbowPower += thePlayer.GetSkillAttributeValue(S_Perk_02, PowerStatEnumToName(CPS_AttackPower), false, true);
+		crossbowStatValueMult += 0.25f;
+		//crossbowPower += thePlayer.GetSkillAttributeValue(S_Perk_02, PowerStatEnumToName(CPS_AttackPower), false, true);
 	}
 	if ( thePlayer.HasBuff(EET_Mutagen05) && (thePlayer.GetStat(BCS_Vitality) == thePlayer.GetStatMax(BCS_Vitality)) )
 	{
@@ -1462,11 +1464,7 @@ function GetEquippedCrossbowDamage():float
 	}
 	crossbowPower += thePlayer.GetPowerStatValue(CPS_AttackPower);
 	
-	if (crossbowStatValueMult == 0)
-	{
-		
-		crossbowStatValueMult = 1;
-	}
+
 	GetWitcherPlayer().GetItemEquippedOnSlot(EES_Bolt, equippedBolt);
 	if (thePlayer.inv.IsIdValid(equippedBolt))
 	{
@@ -1496,5 +1494,5 @@ function GetEquippedCrossbowDamage():float
 	primaryStatValue = (primaryStatValue + crossbowPower.valueBase) * crossbowPower.valueMultiplicative + crossbowPower.valueAdditive;
 	silverDamageValue = (silverDamageValue + crossbowPower.valueBase) * crossbowPower.valueMultiplicative + crossbowPower.valueAdditive;
 	
-	return (primaryStatValue + silverDamageValue) / 2;
+	return (primaryStatValue + silverDamageValue) * crossbowStatValueMult / 2;
 }

@@ -2234,7 +2234,7 @@ class CR4CharacterMenu extends CR4MenuBase
 		var min, max	: SAbilityAttributeValue;
 		var dm 			: CDefinitionsManagerAccessor;
 		// W3EE - Begin
-		var store		: float;
+		var store		: int;
 		// W3EE - End
 		
 		dm = theGame.GetDefinitionsManager();
@@ -2331,13 +2331,13 @@ class CR4CharacterMenu extends CR4MenuBase
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt, , argsString) + "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%";*/
 				argsFloat.PushBack(FloorF(33.4f * skillLevel));
 				argsFloat.PushBack(FloorF(15.f * (skillLevel- 1)));
-				argsFloat.PushBack(25.f);
-				if( skillLevel == 1 )
+				argsFloat.PushBack(7.0f * skillLevel);
+				/*if( skillLevel == 1 )
 					baseString = GetLocStringByKeyExtWithParams("W3EE_DeadlyPrecLvl1", , argsFloat);
 				else
 				if( skillLevel == 2 )
 					baseString = GetLocStringByKeyExtWithParams("W3EE_DeadlyPrecLvl2", , argsFloat);
-				else
+				else*/
 					baseString = GetLocStringByKeyExtWithParams("W3EE_DeadlyPrecLvl3", , argsFloat);
 				// W3EE - End
 				break;
@@ -2348,7 +2348,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) + "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%";
 				*/
 				argsInt.PushBack(FloorF(skillLevel * 4.5f));
-				argsInt.PushBack(FloorF(skillLevel * 4.5f));
+				argsInt.PushBack(FloorF(skillLevel * 5.0f));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_StrTrainingSkill", argsInt);
 				// W3EE - End
 				break;
@@ -2415,6 +2415,13 @@ class CR4CharacterMenu extends CR4MenuBase
 				else
 				if( skillLevel == 2 ) 		baseString = GetLocStringByKeyExtWithParams("W3EE_HeightenedSenseLvl2",, argsFloat);
 				else						baseString = GetLocStringByKeyExtWithParams("W3EE_HeightenedSenseLvl1",, argsFloat);
+				
+				if (skillLevel == 3)
+					store = 5;
+				else
+					store = 2 * skillLevel;
+				
+				baseString += "<br>Increases poise by: " + store + ".";
 				// W3EE - End
 				break;
 			case S_Sword_s11:
@@ -2435,7 +2442,7 @@ class CR4CharacterMenu extends CR4MenuBase
 					ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s11, 'attack_power', false, false);
 					argsFloat.PushBack(RoundMath(ability.valueMultiplicative * skillLevel * 100));
 					ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s11, 'critical_hit_chance', false, false);
-					argsFloat.PushBack(RoundMath(ability.valueAdditive * 100));
+					argsFloat.PushBack(RoundMath( /*ability.valueAdditive*/ 0.15f * 100));
 					argsFloat.PushBack(25);
 					argsFloat.PushBack(15.f * skillLevel);
 					argsFloat.PushBack(2.5f);
@@ -2574,9 +2581,10 @@ class CR4CharacterMenu extends CR4MenuBase
 				penalty = GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s01, PowerStatEnumToName(CPS_SpellPower), false, false);
 				arg = -penalty.valueMultiplicative * penaltyReduction;*/
 
-				penalty = GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s01, 'spell_power_aard', false, false);
+				/*penalty = GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s01, 'spell_power_aard', false, false);
 				penaltyReduction = (skillLevel - 1) * CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s01, 'spell_power_penalty_reduction', false, false));
-				arg = (AbsF(penalty.valueMultiplicative) - penaltyReduction)/2;
+				arg = (AbsF(penalty.valueMultiplicative) - penaltyReduction)/2;*/
+				arg = 0.15f * (3 - skillLevel);
 			
 				argsInt.PushBack(RoundMath(arg*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
@@ -2654,7 +2662,7 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Magic_s09:
 			// W3EE - Begin
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s09, 'chance_bonus', false, false) * skillLevel ;
-				argsInt.PushBack(RoundMath(ability.valueAdditive*100));
+				argsInt.PushBack(RoundMath(0.06f*100*skillLevel));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
 				argsInt.Clear();
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s09, 'spell_power_igni', false, false);
@@ -3046,7 +3054,8 @@ class CR4CharacterMenu extends CR4MenuBase
 				break;
 			case S_Perk_02:
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_02, PowerStatEnumToName(CPS_AttackPower), false, true);
-				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
+				//argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
+				argsInt.PushBack(25);
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				break;
 			case S_Perk_04:

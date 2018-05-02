@@ -809,18 +809,19 @@ class W3DamageManagerProcessor extends CObject
 					}
 					
 					// W3EE - Begin
-					if( playerAttacker )
+					if( playerAttacker && GetWitcherPlayer().HasRecentlyCountered() || playerAttacker.IsCounterAttack(attackAction.GetAttackName()) )
 					{
 						if( playerAttacker.GetSkillLevel(S_Sword_s11) > 2 )
 						{
-							if( GetWitcherPlayer().HasRecentlyCountered() || playerAttacker.IsCounterAttack(attackAction.GetAttackName()) )
-								critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s11, theGame.params.CRITICAL_HIT_CHANCE, false, true));
+							critChance += 0.15f;
+								//critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s11, theGame.params.CRITICAL_HIT_CHANCE, false, true));
 						}
-						if( playerAttacker.GetSkillLevel(S_Sword_s03) > 2 )
+						
+						if( playerAttacker.CanUseSkill(S_Sword_s03) )
 						{
-							if( GetWitcherPlayer().HasRecentlyCountered() || playerAttacker.IsCounterAttack(attackAction.GetAttackName()) )
-								critChance += 0.25f;
-						}
+							critChance += 0.07f * playerAttacker.GetSkillLevel(S_Sword_s03);
+						}												
+						
 					}
 					// W3EE - End
 					
@@ -1216,6 +1217,11 @@ class W3DamageManagerProcessor extends CObject
 			
 			damageBonusStack += min.valueMultiplicative;
 		}
+		
+		if (playerAttacker && ((W3BoltProjectile)action.causer) && playerAttacker.CanUseSkill(S_Perk_02))
+		{
+			damageBonusStack += 0.25f;
+		}		
 		
 		if( damageBonusStack )
 		{

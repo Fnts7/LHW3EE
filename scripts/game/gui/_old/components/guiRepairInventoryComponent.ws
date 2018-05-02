@@ -12,19 +12,35 @@ class W3GuiRepairInventoryComponent extends W3GuiBaseInventoryComponent
 	
 	public  function SetInventoryFlashObjectForItem( item : SItemUniqueId, out flashObject : CScriptedFlashObject) : void
 	{
-		var durabilityValue	  : string;
+		//var durabilityValue	  : string;
 		var costOfService	  : int;
-		var costRepairPoint   : int;
+		var costOfServiceFl	  : float;
+		//var costRepairPoint   : int;
 		var isEquipped        : bool;
-		var invItem 	 	  : SInventoryItem;
+		//var invItem 	 	  : SInventoryItem;
 		var targetGridSection : int;
 		
 		super.SetInventoryFlashObjectForItem( item, flashObject );
 		
-		invItem = _inv.GetItem( item );
+		//invItem = _inv.GetItem( item );
 		// W3EE - Begin
-		costOfService = _inv.GetItemPrice( item );
-		costOfService = Max(1, RoundMath( _inv.GetItemScaledPrice(costOfService, item, _inv, true, false, true) * LFEGetRepairMult() * (1 - _inv.GetItemDurability(item) / _inv.GetItemMaxDurability(item)) * 0.8f ));
+		costOfService = _inv.GetItemScaledPrice(_inv.GetItemPrice( item ), item, _inv, true, false, true);
+		
+		if (costOfService > 200)
+		{
+			costOfServiceFl = 83.363f + SqrtF( costOfService - 200 );
+		}
+		else if (costOfService > 50)
+		{
+			costOfServiceFl = 50.0f + PowF( costOfService - 50, 0.7f );
+		}
+		else
+			costOfServiceFl = (float)costOfService;
+			
+		costOfService = Max(1, RoundMath( costOfServiceFl * LFEGetRepairMult() * (1 - _inv.GetItemDurability(item) / _inv.GetItemMaxDurability(item))));
+		
+		//costOfService = Max(1, RoundMath( [price] * LFEGetRepairMult() * (1 - _inv.GetItemDurability(item) / _inv.GetItemMaxDurability(item)) * 0.8f ));
+		
 		// W3EE - Begin
 		isEquipped = GetWitcherPlayer().IsItemEquipped( item );
 		
@@ -51,9 +67,10 @@ class W3GuiRepairInventoryComponent extends W3GuiBaseInventoryComponent
 		var i 			: int;
 		var rawItems 	: array< SItemUniqueId >;
 		var item 		: SItemUniqueId;
-		var invItem		: SInventoryItem;
+		//var invItem		: SInventoryItem;
 		var costOfService	: int;
-		var costRepairPoint : int;
+		var costOfServiceFl	  : float;
+		//var costRepairPoint : int;
 		var totalCost 	: int;
 		
 		_inv.GetAllItems( rawItems );
@@ -65,10 +82,22 @@ class W3GuiRepairInventoryComponent extends W3GuiBaseInventoryComponent
 			
 			if ( ShouldShowItem( item ) && GetWitcherPlayer().IsItemEquipped( item ) )
 			{
-				invItem = _inv.GetItem( item );
+				//invItem = _inv.GetItem( item );
 				// W3EE - Begin
-				costOfService = _inv.GetItemPrice( item );
-				costOfService = Max(1, RoundMath( _inv.GetItemScaledPrice(costOfService, item, _inv, true, false, true) * LFEGetRepairMult() * (1 - _inv.GetItemDurability(item) / _inv.GetItemMaxDurability(item)) * 0.8f ));
+				costOfService = _inv.GetItemScaledPrice(_inv.GetItemPrice( item ), item, _inv, true, false, true);
+		
+				if (costOfService > 200)
+				{
+					costOfServiceFl = 83.363f + SqrtF( costOfService - 200 );
+				}
+				else if (costOfService > 50)
+				{
+					costOfServiceFl = 50.0f + PowF( costOfService - 50, 0.7f );
+				}
+				else
+					costOfServiceFl = (float)costOfService;
+			
+				costOfService = Max(1, RoundMath( costOfServiceFl * LFEGetRepairMult() * (1 - _inv.GetItemDurability(item) / _inv.GetItemMaxDurability(item))));
 				// W3EE - End
 				totalCost += costOfService;
 			}
