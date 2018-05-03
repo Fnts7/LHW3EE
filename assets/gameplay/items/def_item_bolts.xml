@@ -36,17 +36,18 @@
 
 	<ability name="blunt_bolt _Stats">
 		<quality type="add" min="2" max="2"/>
-		<BludgeoningDamage type="add" always_random="false" min="110" max="110" />
-		<SilverDamage type="add" min="160" max="160" />
-		<buff_apply_chance type="add" min="0.3" />	
-		<KnockdownEffect type="add" min="0.3" />
+		<BludgeoningDamage type="add" always_random="false" min="120" max="120" />
+		<SilverDamage type="add" min="175" max="175" />
+		<buff_apply_chance type="add" min="0.35" />	
+		<KnockdownEffect type="add" min="0.35" />
 		<KnockdownEffect is_ability="true" />
 	</ability>
 
 	<ability name="blunt_bolt_legendary _Stats">
 		<quality type="add" min="2" max="2"/>
-		<BludgeoningDamage type="add" always_random="false" min="140" max="140" />
-		<SilverDamage type="add" min="205" max="205" />
+		<BludgeoningDamage type="add" always_random="false" min="150" max="150" />
+		<SilverDamage type="add" min="220" max="220" />
+		<armor_reduction type="mult" min="0.10" max="0.10" />
 		<buff_apply_chance type="add" min="0.5" />	
 		<KnockdownEffect type="add" min="0.5" />
 		<KnockdownEffect is_ability="true" />
@@ -54,9 +55,8 @@
 
 	<ability name="broadhead_bolt _Stats">
 		<quality type="add" min="2" max="2"/>
-		<PiercingDamage type="add" always_random="false" min="135" max="135" />
-		<SilverDamage type="add" min="195" max="195" />
-		<armor_reduction type="mult" min="0.05" max="0.05" />
+		<PiercingDamage type="add" always_random="false" min="120" max="120" />
+		<SilverDamage type="add" min="175" max="175" />
 		<duration type="add" always_random="false" min="10" max="10" />
 		<BleedingEffect_BroadheadBolt is_ability="true" />
 		<desc_bleedingchance_mult type="add" min="1" />
@@ -64,8 +64,8 @@
 
 	<ability name="broadhead_bolt_legendary _Stats">
 		<quality type="add" min="2" max="2"/>
-		<PiercingDamage type="add" always_random="false" min="155" max="155" />
-		<SilverDamage type="add" min="225" max="225" />
+		<PiercingDamage type="add" always_random="false" min="150" max="150" />
+		<SilverDamage type="add" min="220" max="220" />
 		<armor_reduction type="mult" min="0.10" max="0.10" />
 		<duration type="add" always_random="false" min="15" max="15" />
 		<BleedingEffect_BroadheadBolt is_ability="true" />
@@ -74,50 +74,48 @@
 
 	<ability name="target_point_bolt _Stats">
 		<quality type="add" min="2" max="2"/>
-		<PiercingDamage type="add" always_random="false" min="155" max="155" />
-		<SilverDamage type="add" min="225" max="225" />
-		<armor_reduction type="mult" min="0.20" max="0.20" />
+		<PiercingDamage type="add" always_random="false" min="180" max="180" />
+		<SilverDamage type="add" min="265" max="265" />
+		<armor_reduction type="mult" min="0.25" max="0.25" />
 	</ability>
 
 	<ability name="target_point_bolt_legendary _Stats">
 		<quality type="add" min="2" max="2"/>
-		<PiercingDamage type="add" always_random="false" min="160" max="160" />
-		<SilverDamage type="add" min="235" max="235" />
-		<armor_reduction type="mult" min="0.30" max="0.30" />
+		<PiercingDamage type="add" always_random="false" min="210" max="210" />
+		<SilverDamage type="add" min="310" max="310" />
+		<armor_reduction type="mult" min="0.35" max="0.35" />
 	</ability>
 
 	<ability name="split_bolt _Stats">
 		<quality type="add" min="3" max="3"/>
-		<PiercingDamage type="add" always_random="false" min="95" max="95" />
-		<SilverDamage type="add" min="115" max="115" />
-		<armor_reduction type="mult" min="0.10" max="0.10" />
+		<PiercingDamage type="add" always_random="false" min="150" max="150" />
+		<SilverDamage type="add" min="220" max="220" />
 		<split_count type="add" min="2" /> <!-- supports 1,2 or 3 -->
 	</ability>
 
 	<ability name="split_bolt_legendary _Stats">
 		<quality type="add" min="4" max="4"/>
-		<PiercingDamage type="add" always_random="false" min="90" max="90" />
-		<SilverDamage type="add" min="80" max="80" />
-		<armor_reduction type="mult" min="0.10" max="0.10" />
+		<PiercingDamage type="add" always_random="false" min="150" max="150" />
+		<SilverDamage type="add" min="220" max="220" />
 		<split_count type="add" min="3" /> <!-- supports 1,2 or 3 -->
 	</ability>
 
 	<ability name="explosive_bolt _Stats">
 		<quality type="add" min="3" max="3"/>
-		<PiercingDamage type="add" always_random="false" min="90" max="90" />
-		<SilverDamage type="add" min="165" max="165" />
-		<FireDamage type="add" always_random="false" min="110" />
+		<PiercingDamage type="add" always_random="false" min="100" max="100" />
+		<SilverDamage type="add" min="150" max="150" />
+		<FireDamage type="add" always_random="false" min="100" />
 		<BurningEffect is_ability="true" />
-		<buff_apply_chance type="add" min="0.25" />
+		<buff_apply_chance type="add" min="0.30" />
 	</ability>
 
 	<ability name="explosive_bolt_legendary _Stats">
 		<quality type="add" min="4" max="4"/>
-		<PiercingDamage type="add" always_random="false" min="95" max="95" />
-		<SilverDamage type="add" min="175" max="175" />
-		<FireDamage type="add" always_random="false" min="145" />
+		<PiercingDamage type="add" always_random="false" min="130" max="130" />
+		<SilverDamage type="add" min="195" max="195" />
+		<FireDamage type="add" always_random="false" min="130" />
 		<BurningEffect is_ability="true" />
-		<buff_apply_chance type="add" min="0.30" />
+		<buff_apply_chance type="add" min="0.35" />
 	</ability>
 
 
@@ -130,7 +128,7 @@
 	<item
 		name							="Bodkin Bolt"
 		category						="bolt"
-		price							="72"
+		price							="50"
 		weight							="0.1"
 		stackable						="100"
 		grid_size						="2"
@@ -170,7 +168,7 @@
 	<item
 		name							="Bait Bolt"
 		category						="bolt"
-		price							="86"
+		price							="100"
 		weight							="0.1"
 		stackable						="100"
 		grid_size						="2"
@@ -190,7 +188,7 @@
 	<item
 		name							="Tracking Bolt"
 		category						="bolt"
-		price							="86"
+		price							="100"
 		weight							="0.1"
 		stackable						="100"
 		grid_size						="2"
@@ -210,7 +208,7 @@
 	<item
 		name							="Blunt Bolt"
 		category						="bolt"
-		price							="72"
+		price							="50"
 		weight							="0.1"
 		stackable						="100"
 		grid_size						="2"
@@ -230,7 +228,7 @@
 	<item
 		name							="Blunt Bolt Legendary"
 		category						="bolt"
-		price							="92"
+		price							="100"
 		weight							="0.1"
 		stackable						="100"
 		grid_size						="2"
@@ -250,7 +248,7 @@
 	<item
 		name							="Broadhead Bolt"
 		category						="bolt"
-		price							="80"
+		price							="75"
 		weight							="0.1"
 		stackable						="100"
 		grid_size						="2"
@@ -270,7 +268,7 @@
 	<item
 		name							="Broadhead Bolt Legendary"
 		category						="bolt"
-		price							="91"
+		price							="125"
 		weight							="0.2"
 		stackable						="100"
 		grid_size						="2"
@@ -290,7 +288,7 @@
 	<item
 		name							="Target Point Bolt"
 		category						="bolt"
-		price							="104"
+		price							="100"
 		weight							="0.1"
 		stackable						="100"
 		grid_size						="2"
@@ -310,7 +308,7 @@
 	<item
 		name							="Target Point Bolt Legendary"
 		category						="bolt"
-		price							="206"
+		price							="175"
 		weight							="0.25"
 		stackable						="100"
 		grid_size						="2"
@@ -330,7 +328,7 @@
 	<item
 		name							="Split Bolt"
 		category						="bolt"
-		price							="107"
+		price							="125"
 		weight							="0.1"
 		stackable						="100"
 		grid_size						="2"
@@ -346,11 +344,11 @@
 		</base_abilities>
 	</item>
 
-<!-- SPECIAL BOLT - Fires 2 bolts -->
+<!-- SPECIAL BOLT - Fires 3 bolts -->
 	<item
 		name							="Split Bolt Legendary"
 		category						="bolt"
-		price							="162"
+		price							="200"
 		weight							="0.3"
 		stackable						="100"
 		grid_size						="2"
@@ -370,7 +368,7 @@
 	<item
 		name							="Explosive Bolt"
 		category						="bolt"
-		price							="132"
+		price							="200"
 		weight							="0.2"
 		stackable						="100"
 		grid_size						="2"
@@ -390,7 +388,7 @@
 	<item
 		name							="Explosive Bolt Legendary"
 		category						="bolt"
-		price							="218"
+		price							="350"
 		weight							="0.4"
 		stackable						="100"
 		grid_size						="2"

@@ -1588,9 +1588,9 @@ class W3DamageManagerProcessor extends CObject
 				
 				if(attackAction && playerAttacker)
 				{
-					if (attackAction.IsActionRanged())
+					if ((W3BoltProjectile)attackAction.causer)
 					{
-						criticalDamageBonus.valueMultiplicative += 0.15f;
+						criticalDamageBonus.valueAdditive *= 2.0f;
 					}
 					else if(playerAttacker.IsLightAttack(attackAction.GetAttackName()))
 						criticalDamageBonus += actorAttacker.GetAttributeValue('critical_hit_chance_fast_style');

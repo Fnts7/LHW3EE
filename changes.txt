@@ -1,4 +1,18 @@
-﻿Version 4
+﻿Version 5
+
+Bolts and crossbow balance and small overhaul. Bolts now differ better between each other and tried to made
+other bolt types then explosive more useful. Armor piercing of target point bolts is more siginificant and
+at same time precision skill gives less bolt armor piercing bonus. Made crossbow crit damage more significant.
+Reduced overpowered burning effect of explosive bolts (duration was too long due to some weird logic). Bolt
+prices adjusted. Split bolts deal much more damage (same as bodkin bolt, but have 2, or 3 projectiles), but have
+no armor piercing. They are now also great for dealing point blank damage (but not that great on armored).
+
+
+- red mutagens balance shift - reduced poise they give, increased HP
+- green mutagens toxicity bonus boosted a bit
+
+
+Version 4
 
 - reduced ridiculously hight repair prices of high class equipment. The repair price function is not linear,
 but regressive root function. So cheap equipment will still have similar repair prices.

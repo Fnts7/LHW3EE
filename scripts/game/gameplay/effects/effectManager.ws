@@ -1468,6 +1468,10 @@ class W3EffectManager
 		size = action.GetEffects( effectInfos );
 		signProjectile = (W3SignProjectile)action.causer;
 		attackerPowerStatValue = action.GetPowerStatValue();
+		
+		if (action.attacker == thePlayer && ((W3BoltProjectile)action.causer))
+			attackerPowerStatValue.valueMultiplicative -= 1.0f;
+		
 		retB = true;
 		
 		

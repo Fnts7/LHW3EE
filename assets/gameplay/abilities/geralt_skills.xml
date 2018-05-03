@@ -170,7 +170,7 @@
       <!-- Precision -->
       <ability name="sword_s7">
         <tags>sword_s7</tags>
-        <critical_hit_chance type="add" min="0.05" />
+        <critical_hit_chance type="add" min="0.06" />
       </ability>
 	
 	  <!-- Critical hits -->

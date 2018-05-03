@@ -2378,7 +2378,7 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Sword_s07:
 				// W3EE - Begin
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s07, theGame.params.CRITICAL_HIT_CHANCE, false, false)) * skillLevel;
-				argsInt.PushBack(RoundMath(10.f * skillLevel));
+				argsInt.PushBack(RoundMath(6.0f * skillLevel));
 				argsInt.PushBack(RoundMath(arg*100));
 				//baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /*+ "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%"*/;
 				baseString = GetLocStringByKeyExtWithParams("W3EE_AnKnowlSkill", argsInt);

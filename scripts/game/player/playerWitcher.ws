@@ -13076,7 +13076,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		else
 		{
 			armorPiercing = GetBoltArmorPiercingValue();
-			finalArmorPiercing = GetSkillLevel(S_Sword_s07) * 0.1f + armorPiercing.valueMultiplicative;
+			finalArmorPiercing = GetSkillLevel(S_Sword_s07) * 0.06f + armorPiercing.valueMultiplicative;
 		}
 		
 		return MinF(finalArmorPiercing * Damage().pap, 1.f);

@@ -1060,7 +1060,10 @@ import class CInventoryComponent extends CComponent
 		else
 		if( IsItemBolt(item) )
 		{
-			switch( itemRarity )
+			currPrice *= 0.039f;
+			if (itemRarity > 3)
+				currPrice *= 0.5f;
+			/*switch( itemRarity )
 			{
 				case 1:
 				case 2: currPrice *= 0.030f; 	break;
@@ -1068,7 +1071,7 @@ import class CInventoryComponent extends CComponent
 				case 3:
 				case 4:
 				case 5: currPrice *= 0.040f; 	break;
-			}
+			}*/
 		}
 		else
 		if( IsItemUpgrade(item) )

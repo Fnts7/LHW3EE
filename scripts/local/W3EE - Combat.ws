@@ -1087,11 +1087,12 @@ class W3EECombatHandler extends W3EEOptionHandler
 			switch(mutagenName)
 			{
 				case 'Greater mutagen red' :
-					bonus += 0.1f + synergy * 0.025f;
+					// bonus += 0.1f + synergy * 0.025f;
+					bonus += 0.06f + synergy * 0.02f;
 				break;
 				
 				case 'Mutagen red' :
-					bonus += 0.07f + synergy * 0.015f;
+					bonus += 0.045f + synergy * 0.015f;
 				break;
 				
 				case 'Lesser mutagen red' :
@@ -1104,7 +1105,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 				case 'Fogling 2 mutagen' :
 				case 'Werewolf mutagen' :
 				case 'Nekker Warrior mutagen' :
-					bonus += 0.05f + synergy * 0.01f;
+					bonus += 0.03f + synergy * 0.01f;
 				break;
 			}
 		}

@@ -9,47 +9,47 @@
 
 <!-- GREEN -->
 	<ability name="greater_mutagen_color_green" >
-		<toxicity type="base" min="5" max="5" />
+		<toxicity type="base" min="6" max="6" />
 		<greater_mutagen_color_green_synergy_bonus is_ability="true" />
 		<mutation_research_points_green type="add" min="1" />
 	</ability>
 
 	<ability name="greater_mutagen_color_green_synergy_bonus">
 		<tags>alchemy_s19</tags>
-		<toxicity type="base" min="0.25" max="0.25" />
+		<toxicity type="base" min="0.3" max="0.3" />
 	</ability>
 	
 	<ability name="mutagen_color_green" >
-		<toxicity type="base" min="3.75" max="3.75" />
+		<toxicity type="base" min="4.5" max="4.5" />
 		<mutagen_color_green_synergy_bonus is_ability="true" />
 	</ability>
 
 	<ability name="mutagen_color_green_synergy_bonus">
 		<tags>alchemy_s19</tags>
-		<toxicity type="base" min="0.1875" max="0.1875" />
+		<toxicity type="base" min="0.225" max="0.225" />
 	</ability>
 	
 	<ability name="lesser_mutagen_color_green" >
-		<toxicity type="base" min="2.5" max="2.5"/>
+		<toxicity type="base" min="3" max="3"/>
 		<mutagen_color_lesser_green_synergy_bonus is_ability="true" />
 	</ability>
 
 	<ability name="mutagen_color_lesser_green_synergy_bonus">
 		<tags>alchemy_s19</tags>
-		<toxicity type="base" min="0.125" max="0.125"/>
+		<toxicity type="base" min="0.15" max="0.15"/>
 	</ability>
 
 <!-- GREEN X -->
 	<ability name="greater_mutagen_color_green_x" >
-		<toxicity type="base" min="5" max="5" />
+		<toxicity type="base" min="6" max="6" />
 	</ability>
 	
 	<ability name="mutagen_color_green_x" >
-		<toxicity type="base" min="3.75" max="3.75" />
+		<toxicity type="base" min="4.5" max="4.5" />
 	</ability>
 
 	<ability name="lesser_mutagen_color_green_x" >
-		<toxicity type="base" min="2.5" max="2.5"/>
+		<toxicity type="base" min="3" max="3"/>
 	</ability>
 
 <!-- BLUE -->
@@ -99,47 +99,47 @@
 
 <!-- RED -->
 	<ability name="greater_mutagen_color_red" >
-		<vitality type="base" min="75" max="75"/>
+		<vitality type="base" min="100" max="100"/>
 		<greater_mutagen_color_red_synergy_bonus is_ability="true" />
 		<mutation_research_points_red type="add" min="1" />
 	</ability>
 
 	<ability name="greater_mutagen_color_red_synergy_bonus">
 		<tags>alchemy_s19</tags>
-		<vitality type="base" min="3.75" max="3.75"/>
+		<vitality type="base" min="5" max="5"/>
 	</ability>
 
 	<ability name="mutagen_color_red" >
-		<vitality type="base" min="50" max="50"/>
+		<vitality type="base" min="75" max="75"/>
 		<mutagen_color_red_synergy_bonus is_ability="true" />
 	</ability>
 
 	<ability name="mutagen_color_red_synergy_bonus">
 		<tags>alchemy_s19</tags>
-		<vitality type="base" min="2.5" max="2.5"/>
+		<vitality type="base" min="3.75" max="3.75"/>
 	</ability>
 
 	<ability name="lesser_mutagen_color_red" >
-		<vitality type="base" min="25" max="25"/>
+		<vitality type="base" min="50" max="50"/>
 		<mutagen_color_lesser_red_synergy_bonus is_ability="true" />
 	</ability>
 
 	<ability name="mutagen_color_lesser_red_synergy_bonus">
 		<tags>alchemy_s19</tags>
-		<vitality type="base" min="1.25" max="1.25"/>
+		<vitality type="base" min="2.5" max="2.5"/>
 	</ability>
 
 <!-- RED X -->
 	<ability name="greater_mutagen_color_red_x" >
-		<vitality type="base" min="75" max="75"/>
+		<vitality type="base" min="100" max="100"/>
 	</ability>
 	
 	<ability name="mutagen_color_red_x" >
-		<vitality type="base" min="50" max="50"/>
+		<vitality type="base" min="75" max="75"/>
 	</ability>
 
 	<ability name="lesser_mutagen_color_red_x" >
-		<vitality type="base" min="25" max="25"/>
+		<vitality type="base" min="50" max="50"/>
 	</ability>
 
 </abilities>
