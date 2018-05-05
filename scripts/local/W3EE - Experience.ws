@@ -305,20 +305,20 @@ class W3EEExperienceHandler
 			ModPathProgress(ESSP_Perks, 1);
 	}	
 	
-	public function AwardCombatXP( attackAction : W3Action_Attack, playerAttacker, playerVictim : CR4Player )
+	public function AwardCombatXP( action : W3DamageAction, attackAction : W3Action_Attack, playerAttacker, playerVictim : CR4Player )
 	{
 		var attribute : SAbilityAttributeValue;
 		var mult : float;
 		
 		if( playerAttacker && !playerVictim )
 		{
-			if( ((CActor)attackAction.victim).IsHuman() )
+			if( ((CActor)action.victim).IsHuman() )
 				attribute = playerWitcher.GetAttributeValue('human_exp_bonus_when_fatal');
 			else
 				attribute = playerWitcher.GetAttributeValue('nonhuman_exp_bonus_when_fatal');
 			
 			mult = 1 + CalculateAttributeValue(attribute);
-			if( attackAction.DealsAnyDamage() )
+			if( attackAction && action.DealsAnyDamage() )
 			{
 				if( attackAction.IsActionMelee() )
 				{
@@ -332,14 +332,23 @@ class W3EEExperienceHandler
 					}
 				}
 				else
-				if( attackAction.IsActionRanged() || (CThrowable)attackAction.causer )
+				if( (W3BoltProjectile)attackAction.causer )
 				{
-					ModPathProgress(ESSP_Sword_Crossbow, mult);
+					if ( (W3ExplosiveBolt)attackAction.causer )
+						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.5f);
+					else if ( ((W3BoltProjectile)attackAction.causer).GetWasAimedBolt() )
+						ModPathProgress(ESSP_Sword_Crossbow, mult * 1.25f);
+					else						
+						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.75f);
 				}
+			}
+			else if ( (W3Petard)action.causer )
+			{
+				ModPathProgress(ESSP_Alchemy_Bombs, 0.2f);
 			}
 		}
 		else
-		if( playerVictim && !playerAttacker )
+		if( attackAction && playerVictim && !playerAttacker )
 		{
 			if( ((CActor)attackAction.attacker).IsHuman() )
 				attribute = playerWitcher.GetAttributeValue('human_exp_bonus_when_fatal');
@@ -387,7 +396,7 @@ class W3EEExperienceHandler
 		}
 		else
 		{
-			ModPathProgress(ESSP_Sword_Crossbow, 0.5f);
+			ModPathProgress(ESSP_Sword_Crossbow, 0.4f);
 		}
 	}
 	

@@ -99,7 +99,7 @@ class W3ExplosiveBolt extends W3BoltProjectile
 					continue;
 				}
 				
-				if( GetAttitudeBetween( thePlayer, actor ) != AIA_Hostile && !actor.IsAnimal() )
+				if( ents[i] != thePlayer && (GetAttitudeBetween( thePlayer, actor ) != AIA_Hostile && !actor.IsAnimal()) )
 				{
 					continue;
 				}

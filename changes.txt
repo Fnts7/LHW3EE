@@ -1,4 +1,21 @@
-﻿Version 5
+﻿Version 6
+
+Continuation of crossbow overhaul:
+- Manually aimed shots now have +15% dmg bonus, but not split bolts nor explosives.
+- Aimed shots bonus can be further raised with Lightning Reflexes skill: +3.33% per level.
+- Auto shots will now have / 1.5 crit chance penalty
+- Explosive bolts can deal self damage (it was vanilla bug that they didn't), however reduced self burning
+damage greatly
+- Adjusted crossbow experience awarding: manually aimed shots will give more exp than auto ones. Due to nature of 
+explosive bolts, per target hit exp is much lower.
+- mechanics improvement - if Geralt has to reload there are enemies very close, crossbow will force holster instead
+This way you can avoid getting stuck for too long with reload and can defend or combo with sword right after shot.
+- small input fix - if you cancel aiming by pressing e.g. space then release crossbow button, Geralt will not draw
+and shot. That fix doesn't work on horse yet.
+
+Small aard knockdown applicator adjustments.
+
+Version 5
 
 Bolts and crossbow balance and small overhaul. Bolts now differ better between each other and tried to made
 other bolt types then explosive more useful. Armor piercing of target point bolts is more siginificant and

@@ -170,13 +170,37 @@ import statemachine class RangedWeapon extends CItemEntity
 		}
 	}
 	
+	protected function HasMoreAmmo() : bool
+	{
+		return false;
+	}
+
+	
 	event OnWeaponShootEnd()
 	{
+		var hostiles : array<CGameplayEntity>;
+		var range : float;
+		if (isPlayer && !HasMoreAmmo()) {
+		
+			if (ownerPlayer.IsInState('HorseRiding'))
+				range = 12.0f;
+			else
+				range = 6.0f;
+		
+			 FindGameplayEntitiesInSphere(hostiles, ownerPlayer.GetWorldPosition(), range, 1, , FLAG_OnlyAliveActors | FLAG_Attitude_Hostile, ownerPlayer);
+			 
+			 if (hostiles.Size() > 0) 
+			 {
+				OnForceHolster();				
+				return true;
+			 }
+		}
+	
+	
 		if ( !ownerPlayer.bLAxisReleased )
 		{
 			ExitCombatAction();
-		}
-			
+		}			
 		
 	}
 	
@@ -819,6 +843,21 @@ class Crossbow extends RangedWeapon
 		return super.RaiseOwnerGraphEvents( tempEventName, force );
 	}	
 	
+	protected function HasMoreAmmo() : bool
+	{
+		if(ownerPlayerWitcher.CanUseSkill(S_Perk_17) && shotCount >= (1 + shotCountLimit) )
+			return false;
+		else if (!ownerPlayerWitcher.CanUseSkill(S_Perk_17) && shotCount >= shotCountLimit )
+			return false;
+		else if ( previousAmmoItemName != 'Bodkin Bolt' && previousAmmoItemName != 'Harpoon Bolt' && GetSpecialAmmoCount() <= 0 )
+			return false;
+		else if ( previousAmmoItemName == '' )
+			return false;
+		else
+			return true;
+	}
+
+	
 	protected function PlayOwnerReloadAnim() : bool
 	{
 		var shouldPlayAnim : bool;
@@ -1046,9 +1085,9 @@ state State_WeaponWait in RangedWeapon
 
 
 
-		if ( !parent.performedDraw )
+		/*if ( !parent.performedDraw )
 			PerformDraw( false );
-		else if ( wasPressed )
+		else*/ if ( wasPressed )
 		{
 			wasPressed = false;
 			parent.OnRangedWeaponRelease();

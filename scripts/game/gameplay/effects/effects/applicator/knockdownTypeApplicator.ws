@@ -87,12 +87,12 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 		aardPower *= (1 - npc.GetNPCCustomStat(theGame.params.DAMAGE_NAME_FORCE));
 		
 		if (refBlastMod)
-			aardPower = MinF(0.25f, aardPower);		
+			aardPower = MinF(0.31f, aardPower);		
 
 
 		if(npc && npc.HasShieldedAbility() )
 		{
-			aardPower = MinF(1.2f, aardPower);
+			aardPower = MinF(1.25f, aardPower);
 			aardPower += RandF();
 			
 			if( aardPower >= 1.5f )
@@ -122,7 +122,7 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 		}
 		else if ( target.HasAbility( 'mon_type_huge' ) )
 		{
-			aardPower = MinF(1.0f, aardPower);
+			aardPower = MinF(1.1f, aardPower);
 			aardPower += RandF();
 			
 			if( aardPower >= 1.1f )

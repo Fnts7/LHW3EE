@@ -552,7 +552,7 @@ class W3DamageManagerProcessor extends CObject
 			((W3Effect_DimeritiumCharge)playerVictim.GetBuff(EET_DimeritiumCharge, "DimeritiumSetBonus")).IncreaseDimeritiumCharge(action);
 			
 			ModifyHitSeverityReactionFromDamage(action);
-			Experience().AwardCombatXP(attackAction, playerAttacker, playerVictim);
+			Experience().AwardCombatXP(action, attackAction, playerAttacker, playerVictim);
 		}
 		// W3EE - End
 		
@@ -829,6 +829,7 @@ class W3DamageManagerProcessor extends CObject
 					isHeavyAttack = playerAttacker.IsHeavyAttack( attackAction.GetAttackName() );
 					critChance += playerAttacker.GetCriticalHitChance(isLightAttack, isHeavyAttack, actorVictim, victimMonsterCategory, (W3BoltProjectile)action.causer );
 					
+			
 					
 					if(action.GetIsHeadShot())
 					{
@@ -890,6 +891,12 @@ class W3DamageManagerProcessor extends CObject
 			
 			
 			// W3EE - Begin
+			
+			if( playerAttacker && ((W3BoltProjectile)action.causer) && !((W3BoltProjectile)action.causer).GetWasAimedBolt() )
+			{
+				critChance /= 1.5f;
+			}
+			
 			if(playerAttacker && playerAttacker == GetWitcherPlayer() && playerAttacker.GetBehaviorVariable( 'isPerformingSpecialAttack' ) > 0 && playerAttacker.GetBehaviorVariable( 'playerAttackType' ) == (int)PAT_Light)
 			{
 				critChance /= 2.0f;
@@ -1218,10 +1225,22 @@ class W3DamageManagerProcessor extends CObject
 			damageBonusStack += min.valueMultiplicative;
 		}
 		
-		if (playerAttacker && ((W3BoltProjectile)action.causer) && playerAttacker.CanUseSkill(S_Perk_02))
+		if (playerAttacker && ((W3BoltProjectile)action.causer))
 		{
-			damageBonusStack += 0.25f;
-		}		
+			if (playerAttacker.CanUseSkill(S_Perk_02))
+				damageBonusStack += 0.25f;
+			
+			if ( ((W3BoltProjectile)action.causer).GetWasAimedBolt() )
+			{
+				damageBonusStack += 0.15f;
+				
+				if (playerAttacker.CanUseSkill(S_Sword_s13))
+				{
+					damageBonusStack += 0.0334f * playerAttacker.GetSkillLevel(S_Sword_s13);
+				
+				}
+			}
+		}
 		
 		if( damageBonusStack )
 		{

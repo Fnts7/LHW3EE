@@ -2470,6 +2470,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s13, 'slowdown_mod', false, false)) * skillLevel;
 				argsInt.PushBack(RoundMath(arg*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /*+ "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%"*/;
+				baseString += "<br>Increases manually aimed shots damage by extra " + RoundMath(3.34f * skillLevel) + "%.";
 				break;
 			case S_Sword_s15:
 				// W3EE - Begin

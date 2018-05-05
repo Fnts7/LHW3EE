@@ -1470,7 +1470,13 @@ class W3EffectManager
 		attackerPowerStatValue = action.GetPowerStatValue();
 		
 		if (action.attacker == thePlayer && ((W3BoltProjectile)action.causer))
-			attackerPowerStatValue.valueMultiplicative -= 1.0f;
+		{
+			if (action.victim == thePlayer && ((W3ExplosiveBolt)action.causer))
+				attackerPowerStatValue.valueMultiplicative = 1.0f;
+			else
+				attackerPowerStatValue.valueMultiplicative -= 1.0f;
+			
+		}
 		
 		retB = true;
 		
