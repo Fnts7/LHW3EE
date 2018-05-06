@@ -1,4 +1,18 @@
-﻿Version 6
+﻿Version 7
+
+- Greatly increased chances of special mutagens drop. To counter that reduced experience gained from decoctions brewing. Still can be adjusted in skill exp mult settings obviously.
+- Fixed a bug of attack stamina cost bonus and parry stamina cost bonus on weapons not working at all. Now note that positive value of that param reduced stamina cost, while negative increases. Parry stamina cost
+also counts for counter-attacks.
+- Damage through blocks weapon attribute now also increases damage taken by enemy, who dodged
+
+Introduced new witcher's weapons roll sets and small balances of few existing:
+- ultra light
+- light (made a bit less significant, because of introduced ultra light)
+- heavy, ultra heavy
+- 'overwhelm' (shield break, damage through blocks at the great cost of defense)
+
+
+Version 6
 
 Continuation of crossbow overhaul:
 - Manually aimed shots now have +15% dmg bonus, but not split bolts nor explosives.

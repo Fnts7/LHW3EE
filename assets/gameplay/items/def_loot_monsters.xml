@@ -80,7 +80,7 @@
 		<loot_entry name="Chitin scale"								player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="2"	chance="20"		respawn_time="0"	/>
 		<loot_entry name="Monstrous heart"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
-		<loot_entry name="Arachas mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Arachas mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
 	</loot>
 
 	<loot name="_monster__Poison Arachas"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="2"	chance="-1"							>
@@ -89,7 +89,7 @@
 		<loot_entry name="Chitin scale"								player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="2"	chance="20"		respawn_time="0"	/>
 		<loot_entry name="Monstrous heart"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
-		<loot_entry name="Arachas mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Arachas mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
 	</loot>
 
 <!-- CYCLOPS -->
@@ -128,7 +128,7 @@
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="2"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="2"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="2"		respawn_time="0"	/>
-		<loot_entry name="Czart mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Czart mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"		respawn_time="0"	/>
 	</loot>
 
 <!-- DRACONIDE -->
@@ -186,7 +186,7 @@
 		<loot_entry name="Monstrous plate"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
-		<loot_entry name="Cockatrice mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Cockatrice mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="50"		respawn_time="0"	/>
 	</loot>
 
 	<loot name="_monster__Forktail"									player_level_min="0"	player_level_max="0"	quantity_min="2"	quantity_max="3"	chance="-1"							>
@@ -202,7 +202,7 @@
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="3"		respawn_time="0"	/>
-		<loot_entry name="Forktail mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Forktail mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="50"		respawn_time="0"	/>
 	</loot>
 
 	<loot name="_monster__Wyvern"									player_level_min="0"	player_level_max="0"	quantity_min="2"	quantity_max="3"	chance="-1"							>
@@ -219,7 +219,7 @@
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="3"		respawn_time="0"	/>
-		<loot_entry name="Wyvern mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Wyvern mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
 	</loot>
 
 <!-- DROWNER -->
@@ -352,7 +352,7 @@
 		<loot_entry name="Monstrous dust"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="10"		respawn_time="0"	/>
 		<loot_entry name="Monstrous eye"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
 		<loot_entry name="Fifth essence"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
-		<loot_entry name="Dao mutagen"								player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Dao mutagen"								player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"		respawn_time="0"	/>
 	</loot>
 
 <!-- FIEND -->
@@ -373,7 +373,7 @@
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="2"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="2"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="2"	chance="2"		respawn_time="0"	/>
-		<loot_entry name="Fiend mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Fiend mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"		respawn_time="0"	/>
 	</loot>
 
 <!-- FOGLING -->
@@ -390,7 +390,7 @@
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="4"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="4"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="4"		respawn_time="0"	/>
-		<loot_entry name="Fogling 1 mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Fogling 1 mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="20"		respawn_time="0"	/>
 	</loot>
 
 <!-- GARGOYLE -->
@@ -593,7 +593,7 @@
 		<loot_entry name="Monstrous liver"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
-		<loot_entry name="Water Hag mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Water Hag mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
 	</loot>
 
 <!-- GRYPHON -->
@@ -606,7 +606,7 @@
 		<loot_entry name="Monstrous eye"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
 		<loot_entry name="Monstrous heart"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
-		<loot_entry name="Gryphon mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Gryphon mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="50"		respawn_time="0"	/>
 	</loot>
 
 	<loot name="_monster__Volcanic Griffon"							player_level_min="0"	player_level_max="0"	quantity_min="3"	quantity_max="4"	chance="-1"							>
@@ -617,7 +617,7 @@
 		<loot_entry name="Monstrous eye"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
 		<loot_entry name="Monstrous heart"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
-		<loot_entry name="Volcanic Gryphon mutagen"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Volcanic Gryphon mutagen"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="50"		respawn_time="0"	/>
 	</loot>
 
 <!-- HARPY -->
@@ -686,7 +686,7 @@
 		<loot_entry name="Monstrous eye"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
 		<loot_entry name="Monstrous hair"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="5"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
-		<loot_entry name="Ekimma mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Ekimma mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="50"		respawn_time="0"	/>
 	</loot>
 
 	<loot name="_monster__Katakan"									player_level_min="0"	player_level_max="0"	quantity_min="2"	quantity_max="3"	chance="-1"							>
@@ -702,7 +702,7 @@
 		<loot_entry name="Monstrous hide"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous liver"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
-		<loot_entry name="Katakan mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Katakan mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="50"		respawn_time="0"	/>
 	</loot>
 
 <!-- LESHEN -->
@@ -713,7 +713,7 @@
 		<loot_entry name="Monstrous bone"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="25"		respawn_time="0"	/>
 		<loot_entry name="Fiber"									player_level_min="0"	player_level_max="0"	quantity_min="3"	quantity_max="5"	chance="20"		respawn_time="0"	/>
 		<loot_entry name="Timber"									player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="20"		respawn_time="0"	/>
-		<loot_entry name="Leshy mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Leshy mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"		respawn_time="0"	/>
 	</loot>
 
 	<loot name="_monster__Ancient Leshen"							player_level_min="0"	player_level_max="0"	quantity_min="2"	quantity_max="3"	chance="-1"							>
@@ -722,7 +722,7 @@
 		<loot_entry name="Monstrous dust"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="20"		respawn_time="0"	/>
 		<loot_entry name="Monstrous bone"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="20"		respawn_time="0"	/>
 		<loot_entry name="Fiber"									player_level_min="0"	player_level_max="0"	quantity_min="3"	quantity_max="5"	chance="20"		respawn_time="0"	/>
-		<loot_entry name="Ancient Leshy mutagen"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Ancient Leshy mutagen"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"		respawn_time="0"	/>
 	</loot>
 
 <!-- MISCREANT -->
@@ -943,7 +943,7 @@
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="3"		respawn_time="0"	/>
-		<loot_entry name="Lamia mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Lamia mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="20"		respawn_time="0"	/>
 	</loot>
 
 <!-- SUCCUBUS -->
@@ -963,7 +963,7 @@
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="3"		respawn_time="0"	/>
-		<loot_entry name="Succubus mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Succubus mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"		respawn_time="0"	/>
 	</loot>
 
 <!-- TROLL -->
@@ -982,7 +982,7 @@
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Infused shard"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="7"		respawn_time="0"	/>
-		<loot_entry name="Troll mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Troll mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
 	</loot>
 
 	<loot name="_monster__Cave troll"								player_level_min="0"	player_level_max="0"	quantity_min="2"	quantity_max="3"	chance="-1"							>
@@ -999,7 +999,7 @@
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Infused shard"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="5"		respawn_time="0"	/>
-		<loot_entry name="Troll mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Troll mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
 	</loot>
 
 <!-- WEREWOLF -->
@@ -1039,7 +1039,7 @@
 		<loot_entry name="Monstrous liver"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="3"	chance="3"		respawn_time="0"	/>
-		<loot_entry name="Werewolf mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Werewolf mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
 	</loot>
 
 <!-- WITCH -->
@@ -1086,7 +1086,7 @@
 		<loot_entry name="Infused dust"								player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="2"	chance="10"		respawn_time="0"	/>
 		<loot_entry name="Diamond dust"								player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
 		<loot_entry name="Lunar shards"								player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
-		<loot_entry name="Nightwraith mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Nightwraith mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
 	</loot>
 
 	<loot name="_monster__Nightwraith MonsterHunt"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"							>
@@ -1101,7 +1101,7 @@
 		<loot_entry name="Sapphire dust"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
 		<loot_entry name="Amber dust"								player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
 		<loot_entry name="Ruby dust"								player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
-		<loot_entry name="Noonwraith mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="10"		respawn_time="0"	/>
+		<loot_entry name="Noonwraith mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
 	</loot>
 	
 	<loot name="_monster__Noonwraith MonsterHunt"					player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="-1"							>

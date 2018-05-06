@@ -286,9 +286,15 @@
             </ability>
             
             <ability name="Master_Light">
-                <attack_stamina_cost_bonus       type="mult"            	min="0.1"       max="0.14"      />
-                <poise_damage                    type="add"                 min="-11"       max="-7"        />
-                <armor_reduction                 type="mult"                min="-0.07"     max="-0.4"      />
+                <attack_stamina_cost_bonus       type="mult"            	min="0.09"       max="0.12"      />
+                <poise_damage                    type="add"                 min="-10"       max="-6"        />
+                <armor_reduction                 type="mult"                min="-0.06"     max="-0.035"      />
+            </ability>
+			
+			<ability name="Master_Heavy">
+                <attack_stamina_cost_bonus       type="mult"            	min="-0.12"     max="-0.09"      />
+                <poise_damage                    type="add"                 min="6"         max="10"        />
+                <armor_reduction                 type="mult"                min="0.035"     max="0.06"      />
             </ability>
 			
 			<ability name="Master_MoreCrits">
@@ -351,16 +357,39 @@
             </ability>
            
             <ability name="Magical_Cleave">
-                <damage_through_blocks          type="mult"             min="0.04"      max="0.07"      />
+                <damage_through_blocks          type="mult"             min="0.06"      max="0.09"      />
                 <shield_disarm_chance           type="mult"             min="0.09"      max="0.12"      />
-                <attack_speed                   type="mult"             min="-0.11"     max="-0.05"     />
+                <attack_speed                   type="mult"             min="-0.11"     max="-0.06"     />
+            </ability>
+			
+			<ability name="Magical_Overwhelm">
+                <damage_through_blocks          type="mult"             min="0.07"      max="0.1"      />
+                <shield_disarm_chance           type="mult"             min="0.09"      max="0.12"      />
+                <counter_damage_bonus           type="mult"             min="-0.14"     max="-0.1"     />
+                <parry_stamina_cost_bonus       type="mult"             min="-0.12"     max="-0.08"      />
             </ability>
 			
 			<ability name="Magical_StrongOrFast">
                 <attack_power_heavy_style       type="mult"             min="0.08"      max="0.12"      />
                 <attack_speed_heavy_style       type="mult"             min="-0.08"     max="-0.045"     />
-                <attack_power_fast_style        type="mult"             min="-0.08"     max="-0.05"      />
-                <attack_speed_fast_style        type="mult"             min="0.03"      max="0.06"      />
+                <attack_power_fast_style        type="mult"             min="-0.1"      max="-0.07"      />
+                <attack_speed_fast_style        type="mult"             min="0.035"     max="0.06"      />
+            </ability>
+			
+			<ability name="Magical_UltraLight">
+                <attack_stamina_cost_bonus       type="mult"            	min="0.12"      max="0.15"      />
+				<attack_speed                    type="mult"             	min="0.04"      max="0.06"     />
+				<attack_power                    type="mult"                min="-0.09"     max="-0.06"     />
+                <poise_damage                    type="add"                 min="-12"       max="-8"        />
+                <armor_reduction                 type="mult"                min="-0.07"     max="-0.045"    />
+            </ability>
+			
+			<ability name="Magical_UltraHeavy">
+                <attack_stamina_cost_bonus       type="mult"            	min="-0.15"     max="-0.12"     />
+				<attack_speed                    type="mult"             	min="-0.06"     max="-0.04"     />
+				<attack_power                    type="mult"                min="0.06"      max="0.09"     />
+                <poise_damage                    type="add"                 min="8"         max="12"        />
+                <armor_reduction                 type="mult"                min="0.045"     max="0.07"    />
             </ability>
 			
 			

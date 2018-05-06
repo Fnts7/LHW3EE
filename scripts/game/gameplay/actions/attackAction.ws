@@ -330,7 +330,8 @@ class W3Action_Attack extends W3DamageAction
 					if( witcherAttacker.CanUseSkill(S_Sword_s11) )
 						min += witcherAttacker.GetSkillAttributeValue(S_Sword_s11, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s11);
 				}
-				result.valueMultiplicative += MaxF(min.valueMultiplicative, 0.f);
+				//result.valueMultiplicative += MaxF(min.valueMultiplicative, 0.f);
+				result.valueMultiplicative += min.valueMultiplicative;
 			}
 			
 			if( witcherAttacker.IsInState('HorseRiding') )

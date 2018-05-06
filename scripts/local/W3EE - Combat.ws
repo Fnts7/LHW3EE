@@ -176,6 +176,9 @@ class W3EECombatHandler extends W3EEOptionHandler
 					}
 					mult += costMult.valueMultiplicative;
 					
+					costMult = witcher.GetAttributeValue('attack_stamina_cost_bonus');
+					mult -= costMult.valueMultiplicative;
+					
 					regenDelay = StamRegenDelay() * (1.f - delayReduction.valueMultiplicative);
 				return CalcStaminaCost(actionType, mult, dt, abilityName);
 				
@@ -187,6 +190,9 @@ class W3EECombatHandler extends W3EEOptionHandler
 						mult += 0.3f;
 					}
 					mult += costMult.valueMultiplicative;
+					
+					costMult = witcher.GetAttributeValue('attack_stamina_cost_bonus');
+					mult -= costMult.valueMultiplicative;
 					
 					regenDelay = StamRegenDelayHeavy() * (1.f - delayReduction.valueMultiplicative);
 				return CalcStaminaCost(actionType, mult, dt, abilityName);
@@ -202,6 +208,9 @@ class W3EECombatHandler extends W3EEOptionHandler
 					costMult = witcher.GetAttributeValue('parry_stamina_cost');
 					mult += costMult.valueMultiplicative - 1.f;
 					
+					costMult = witcher.GetAttributeValue('parry_stamina_cost_bonus');
+					mult -= costMult.valueMultiplicative;
+					
 					regenDelay = StamRegenDelayBlock() * (1.f - delayReduction.valueMultiplicative);
 				return CalcStaminaCost(actionType, mult, dt, abilityName);
 				
@@ -213,6 +222,9 @@ class W3EECombatHandler extends W3EEOptionHandler
 						delayReduction.valueMultiplicative -= 0.3f;
 						mult += 0.3f;
 					}
+					
+					costMult = witcher.GetAttributeValue('parry_stamina_cost_bonus');
+					mult -= costMult.valueMultiplicative;
 					
 					regenDelay = StamRegenDelayCounter() * (1.f - delayReduction.valueMultiplicative);
 				return CalcStaminaCost(actionType, mult, dt, abilityName);
@@ -254,24 +266,37 @@ class W3EECombatHandler extends W3EEOptionHandler
 	
 	public final function EnemyDodge( out damageData : W3DamageAction, actor : CActor )
 	{
+		var dmgTaken : float;
+		var ignoreReduct : SAbilityAttributeValue;
+	
 		if( actor != thePlayer && actor.IsCurrentlyDodging() && damageData.CanBeDodged() && ( VecDistanceSquared(actor.GetWorldPosition(),damageData.attacker.GetWorldPosition()) > 1.7 || actor.HasAbility( 'IgnoreDodgeMinimumDistance' ) ) && EnemyDodgeNegateDamage() )
 		{
 			damageData.SetHitAnimationPlayType(EAHA_ForceNo);
 			damageData.ClearEffects();
 			
 			// damageData.SetWasDodged();
-			damageData.processedDmg.essenceDamage *= DamagePercentageTaken();
-			damageData.processedDmg.vitalityDamage *= DamagePercentageTaken();
 			
-			return;
+			if (EnemyDodgeNegateDamage())
+			{
+				dmgTaken = DamagePercentageTaken();
+				if (damageData.attacker == thePlayer)
+				{
+					ignoreReduct = thePlayer.GetAttributeValue('damage_through_blocks');
+					dmgTaken += ignoreReduct.valueMultiplicative;
+					dmgTaken = MinF(dmgTaken, 1.0f);
+				}
+			
+				damageData.processedDmg.essenceDamage *= dmgTaken;
+				damageData.processedDmg.vitalityDamage *= dmgTaken;
+			}
 		}
-		else
+		/*else
 		if( actor != thePlayer && actor.IsCurrentlyDodging() && damageData.CanBeDodged() && ( VecDistanceSquared(actor.GetWorldPosition(),damageData.attacker.GetWorldPosition()) > 1.7 || actor.HasAbility( 'IgnoreDodgeMinimumDistance' ) ) )
 		{
 			damageData.SetHitAnimationPlayType(EAHA_ForceNo);
 			damageData.ClearEffects();
 			// damageData.SetWasDodged();
-		}
+		}*/
 	}
 
 	public final function PlayCommonHitEffect( action : W3DamageAction, actorVictim : CActor, hitAnim : bool )
