@@ -735,6 +735,12 @@ class W3DamageManagerProcessor extends CObject
 			
 			monsterBonusType = MonsterCategoryToCriticalDamageBonus(victimMonsterCategory);
 			monsterBonusVal = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
+			
+			if(monsterBonusVal == null)
+			{
+				monsterBonusType = MonsterCategoryToCriticalChanceBonus(victimMonsterCategory);
+				monsterBonusVal = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
+			} 
 		
 			if(monsterBonusVal != null)
 			{

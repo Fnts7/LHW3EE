@@ -165,17 +165,35 @@ statemachine class W3IgniEntity extends W3SignEntity
 				
 		if(false)
 		{
-			PlayEffect( effects[fireMode].upgradedThrowEffect );
+			if( Options().IsIgniIntense() )
+			{
+				PlayEffect( effects[fireMode].upgradedThrowEffect );
+				PlayEffect( effects[fireMode].upgradedThrowEffect );
+				PlayEffect( effects[fireMode].upgradedThrowEffect );
+			}
+			else PlayEffect( effects[fireMode].upgradedThrowEffect );
 		}
 		else
 		{
 			if(!IsAlternateCast() && owner.CanUseSkill(S_Magic_s07, this))
 			{
-				PlayEffect( effects[fireMode].throwEffectSpellPower );
+				if( Options().IsIgniIntense() )
+				{
+					PlayEffect( effects[fireMode].throwEffectSpellPower );
+					PlayEffect( effects[fireMode].throwEffectSpellPower );
+					PlayEffect( effects[fireMode].throwEffectSpellPower );
+				}
+				else PlayEffect( effects[fireMode].throwEffectSpellPower );
 			}
 			else
 			{
-				PlayEffect( effects[fireMode].throwEffect );
+				if( Options().IsIgniIntense() )
+				{
+					PlayEffect( effects[fireMode].throwEffect );
+					PlayEffect( effects[fireMode].throwEffect );
+					PlayEffect( effects[fireMode].throwEffect );
+				}
+				else PlayEffect( effects[fireMode].throwEffect );
 			}
 		}
 			
@@ -184,7 +202,13 @@ statemachine class W3IgniEntity extends W3SignEntity
 		{
 			
 			if(owner.CanUseSkill(S_Magic_s08, this))
-				PlayEffect(effects[0].meltArmorEffect);
+				if( Options().IsIgniIntense() )
+				{
+					PlayEffect(effects[0].meltArmorEffect);
+					PlayEffect(effects[0].meltArmorEffect);
+					PlayEffect(effects[0].meltArmorEffect);
+				}
+				else PlayEffect(effects[0].meltArmorEffect);
 			
 			
 			// W3EE - Begin
