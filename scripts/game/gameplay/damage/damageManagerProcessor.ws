@@ -733,8 +733,14 @@ class W3DamageManagerProcessor extends CObject
 		if( playerAttacker && actorVictim && attackAction && attackAction.IsActionMelee() && playerAttacker.CanUseSkill(S_Alchemy_s12) && playerAttacker.inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) )
 		{
 			
-			monsterBonusType = MonsterCategoryToAttackPowerBonus(victimMonsterCategory);
+			monsterBonusType = MonsterCategoryToCriticalDamageBonus(victimMonsterCategory);
 			monsterBonusVal = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
+			
+			if(monsterBonusVal == null)
+			{
+				monsterBonusType = MonsterCategoryToCriticalChanceBonus(victimMonsterCategory);
+				monsterBonusVal = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
+			} 
 		
 			if(monsterBonusVal != null)
 			{

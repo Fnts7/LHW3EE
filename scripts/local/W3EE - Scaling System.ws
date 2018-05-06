@@ -1594,7 +1594,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.dangerLevel		= 10;
 						opponentStats.canGetCrippled 	= false;
 						opponentStats.poiseValue 		= 0.25f;
-						opponentStats.physicalResist	= 0.45f;
+						opponentStats.physicalResist	= 0.f;
 						opponentStats.forceResist 		= 1.f;
 						opponentStats.frostResist 		= 1.f;
 						opponentStats.fireResist 		= 1.f;
@@ -1624,7 +1624,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.dangerLevel		= 100;
 						opponentStats.canGetCrippled 	= false;
 						opponentStats.poiseValue 		= 0.8f;
-						opponentStats.physicalResist	= 0.45f;
+						opponentStats.physicalResist	= 0.f;
 						opponentStats.forceResist 		= 1.f;
 						opponentStats.frostResist 		= 1.f;
 						opponentStats.fireResist 		= 1.f;
