@@ -2398,7 +2398,7 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Sword_s09:
 				// W3EE - Begin
 				arg = Combat().GetSafeDodgeAngle();
-				argsInt.PushBack((int)(arg + 18 * skillLevel));
+				argsInt.PushBack((int)(arg + 5.0f * skillLevel));
 				argsInt.PushBack(FloorF(3.f * skillLevel));
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s09, 'damage_reduction', false, false)) * skillLevel;
 				argsInt.PushBack(RoundMath(arg*100));

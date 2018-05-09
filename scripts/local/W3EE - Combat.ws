@@ -1223,6 +1223,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 	public final function HPPoiseRatio( playerWitcher : W3PlayerWitcher ) : float
 	{
 		var reduct : float;	
+		var injuryRes : SAbilityAttributeValue;
 		
 		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 2);
 		
@@ -1230,7 +1231,10 @@ class W3EECombatHandler extends W3EEOptionHandler
 		{
 			reduct *= 1.0f - 0.1f * playerWitcher.GetSkillLevel(S_Sword_s10);
 		}
-			
+		
+		injuryRes = playerWitcher.GetAttributeValue('injury_resist');
+		reduct *= 1.0f - injuryRes.valueMultiplicative;		
+
 		return (1.0f - reduct);		
 	}
 	
@@ -3167,13 +3171,13 @@ class W3EECombatHandler extends W3EEOptionHandler
 		}
     }
     
-    public function GetSafeDodgeAngle() : int
+    public function GetSafeDodgeAngle() : float
     {
-		var angle : int;
+		var angle : float;
 		
-		angle = 90 + (int)(CalculateAttributeValue(GetWitcherPlayer().GetAttributeValue('safe_dodge_angle_bonus')));
+		angle = 90.0f + CalculateAttributeValue(GetWitcherPlayer().GetAttributeValue('safe_dodge_angle_bonus'));
 		if( GetWitcherPlayer().IsSetBonusActive(EISB_LightArmor) )
-			angle += 10;
+			angle += 9.0f;
 			
 		return angle;
     }

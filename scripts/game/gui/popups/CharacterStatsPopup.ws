@@ -477,7 +477,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	playerWitcher = GetWitcherPlayer();
 	adrenalineEffect = playerWitcher.GetAdrenalineEffect();
 	armorPieces = playerWitcher.GetArmorCountOrig();		
-	poiseThreshold = 110;
+	poiseThreshold = 100;
 	
 	if( playerWitcher.CanUseSkill(S_Perk_06) )
 		poiseThreshold -= armorPieces[2].all * 7.5f;
@@ -788,6 +788,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	else if ( varKey == 'poiseDecBon' )
 	{
 		valueAbility = GetWitcherPlayer().GetMutagen15() * 0.05 * 100;
+		valueAbility += Combat().SkillsPoiseValue(GetWitcherPlayer()) * 100;
 		valueStr = NoTrailZeros(RoundMath(valueAbility));
 	}
 	else if ( varKey == 'adrenaline' )

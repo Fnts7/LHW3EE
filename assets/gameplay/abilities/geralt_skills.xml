@@ -182,7 +182,7 @@
 	  <!-- Fleet Footed -->
 	  <ability name="sword_s9">
         <tags>sword_s9</tags>
-		<damage_reduction type="add" min="0.10" />
+		<damage_reduction type="add" min="0.06" />
       </ability>
 	
 	  <!-- Arrow Deflection-->

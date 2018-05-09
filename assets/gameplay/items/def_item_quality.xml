@@ -312,6 +312,7 @@
                 <attack_power_fast_style        type="mult"             min="0.06"      max="0.11"       />
                 <attack_speed_fast_style        type="mult"             min="-0.11"     max="-0.09"     />
                 <armor_reduction                type="mult"             min="0.06"      max="0.1"       />
+				<attack_speed_heavy_style       type="mult"             min="-0.06"     max="-0.03"    />
             </ability>
            
             <ability name="Magical_Precision">
@@ -322,7 +323,7 @@
            
             <ability name="Magical_Sting">
                 <attack_power_fast_style        type="mult"             min="0.07"      max="0.12"      />
-                <attack_speed_fast_style        type="mult"             min="0.05"      max="0.08"      />
+                <attack_speed			        type="mult"             min="0.05"      max="0.08"      />
                 <armor_reduction                type="mult"             min="-0.09"     max="-0.05"      />
                 <poise_damage                   type="add"              min="-10"       max="-7"        />
             </ability>
@@ -357,22 +358,30 @@
             </ability>
            
             <ability name="Magical_Cleave">
-                <damage_through_blocks          type="mult"             min="0.06"      max="0.09"      />
+                <damage_through_blocks          type="mult"             min="0.07"      max="0.1"      />
                 <shield_disarm_chance           type="mult"             min="0.09"      max="0.12"      />
                 <attack_speed                   type="mult"             min="-0.11"     max="-0.06"     />
             </ability>
 			
 			<ability name="Magical_Overwhelm">
                 <damage_through_blocks          type="mult"             min="0.07"      max="0.1"      />
-                <shield_disarm_chance           type="mult"             min="0.09"      max="0.12"      />
+                <shield_disarm_chance           type="mult"             min="0.09"      max="0.12"     />
                 <counter_damage_bonus           type="mult"             min="-0.14"     max="-0.1"     />
-                <parry_stamina_cost_bonus       type="mult"             min="-0.12"     max="-0.08"      />
+                <parry_stamina_cost_bonus       type="mult"             min="-0.12"     max="-0.08"    />
+            </ability>
+			
+			<ability name="Magical_Brute">
+			    <critical_hit_damage_bonus      type="add"              min="0.08"      max="0.12"     />
+                <critical_hit_chance            type="add"              min="-0.05"     max="-0.039"   />
+                <damage_through_blocks          type="mult"             min="0.06"      max="0.08"    />
+				<poise_damage                   type="add"              min="4"         max="6"        />
+				<attack_speed                   type="mult"           	min="-0.06"     max="-0.04"    />
             </ability>
 			
 			<ability name="Magical_StrongOrFast">
                 <attack_power_heavy_style       type="mult"             min="0.08"      max="0.12"      />
-                <attack_speed_heavy_style       type="mult"             min="-0.08"     max="-0.045"     />
-                <attack_power_fast_style        type="mult"             min="-0.1"      max="-0.07"      />
+                <attack_speed_heavy_style       type="mult"             min="-0.08"     max="-0.045"    />
+                <attack_power_fast_style        type="mult"             min="-0.1"      max="-0.07"     />
                 <attack_speed_fast_style        type="mult"             min="0.035"     max="0.06"      />
             </ability>
 			

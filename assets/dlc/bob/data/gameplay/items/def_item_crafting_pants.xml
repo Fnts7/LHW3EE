@@ -15,7 +15,8 @@
 				<rending_resistance_perc 		type="base" min="0.07"				/>
 				<elemental_resistance_perc 		type="base" min="0.16"				/>
 				<focus_gain						type="mult"	min="0.1"				/>
-				<safe_dodge_angle_bonus 		type="add"	min="6"					/>
+				<safe_dodge_angle_bonus 		type="add"	min="4"					/>
+				<graze_damage_reduction			type="mult" min="0.04" 				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.10"				/>
 			</ability>
 

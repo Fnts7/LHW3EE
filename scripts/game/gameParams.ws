@@ -814,6 +814,7 @@ import class W3GameParams extends CObject
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Cleave');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Ram');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_StrongOrFast');
+		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Brute');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Overwhelm');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_UltraLight');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_UltraHeavy');

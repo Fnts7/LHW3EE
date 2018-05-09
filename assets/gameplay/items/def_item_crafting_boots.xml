@@ -163,7 +163,8 @@
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 		<elemental_resistance_perc		type="base"	min="0.05"				/>
 		<focus_gain 					type="mult" min="0.04"				/>
-		<safe_dodge_angle_bonus 		type="add"	min="2"					/>
+		<safe_dodge_angle_bonus 		type="add"	min="1.5"				/>
+		<graze_damage_reduction			type="mult" min="0.005"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.03"				/>
 	</ability>
 	
@@ -176,7 +177,8 @@
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 		<elemental_resistance_perc		type="base"	min="0.05"				/>
 		<focus_gain 					type="mult" min="0.06"				/>
-		<safe_dodge_angle_bonus 		type="add"	min="3"					/>
+		<safe_dodge_angle_bonus 		type="add"	min="2"					/>
+		<graze_damage_reduction			type="mult" min="0.01"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.03"				/>
 	</ability>
 	
@@ -189,7 +191,8 @@
 		<rending_resistance_perc		type="base"	min="0.05"				/>
 		<elemental_resistance_perc		type="base"	min="0.05"				/>
 		<focus_gain 					type="mult" min="0.08"				/>
-		<safe_dodge_angle_bonus 		type="add"	min="4"					/>
+		<safe_dodge_angle_bonus 		type="add"	min="2.5"				/>
+		<graze_damage_reduction			type="mult" min="0.015"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.03"				/>
 	</ability>
 

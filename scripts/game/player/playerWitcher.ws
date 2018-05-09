@@ -2071,11 +2071,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var quen : W3QuenEntity;
 		var attackRange : CAIAttackRange;
 		var attackerMovementAdjustor : CMovementAdjustor;
-		var dist, distToAttacker, actionHeading, attackerHeading, currAdrenaline, adrenReducedDmg, focus : float;
+		var dist, distToAttacker, actionHeading, attackerHeading, currAdrenaline, adrenReducedDmg, focus, dmgDodgeMax : float;
 		var attackName : name;
 		// W3EE - Begin
 		//var useQuenForBleeding : bool;
-		var safeDodgeAngle : int;
+		var safeDodgeAngle : float;
 		// W3EE - End
 		var min, max : SAbilityAttributeValue;
 		var skillLevel : int;
@@ -2121,44 +2121,42 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			if( Combat().GetDodgeTimeDiff() >= 0.15f )
 			{
-				skillLevel = GetSkillLevel(S_Sword_s09);
+				if (CanUseSkill(S_Sword_s09))
+					skillLevel = GetSkillLevel(S_Sword_s09);
+				else
+					skillLevel = 0;
 				safeDodgeAngle = Combat().GetSafeDodgeAngle();
+				safeDodgeAngle += 5.0f * skillLevel;
 				
-				if( damageData.CanBeDodged() && ( ( AbsF(dist) < safeDodgeAngle && attackName != 'stomp' && attackName != 'anchor_special_far' && attackName != 'anchor_far' ) || ( ( attackName == 'stomp' || attackName == 'anchor_special_far' || attackName == 'anchor_far' ) && distToAttacker > attackRange.rangeMax * 0.75 ) ) && CanUseSkill( S_Sword_s09 ) )
+				if( damageData.CanBeDodged() && ( ( AbsF(dist) < safeDodgeAngle && attackName != 'stomp' && attackName != 'anchor_special_far' && attackName != 'anchor_far' )
+					|| ( ( attackName == 'stomp' || attackName == 'anchor_special_far' || attackName == 'anchor_far' ) && distToAttacker > attackRange.rangeMax * 0.75 ) ) )
 				{
 					damageData.processedDmg.vitalityDamage *= 0.30;
 					damageData.processedDmg.essenceDamage *= 0.30;
+					dmgDodgeMax = 600.0f / Options().SetHealthPlayer();
+					damageData.processedDmg.vitalityDamage = MinF(dmgDodgeMax, damageData.processedDmg.vitalityDamage);
+					damageData.processedDmg.essenceDamage = MinF(dmgDodgeMax, damageData.processedDmg.essenceDamage);
 					
 					
-					/*if( skillLevel == GetSkillMaxLevel( S_Sword_s09 ) )
+					min = GetAttributeValue('graze_damage_reduction');
+					damageData.processedDmg.vitalityDamage *= 1.0f - min.valueMultiplicative;
+					damageData.processedDmg.essenceDamage *= 1.0f - min.valueMultiplicative;
+					
+					damageData.SetWasPartiallyDodged();
+												
+					if (skillLevel > 0)
 					{
-						damageData.SetAllProcessedDamageAs(0);
-						damageData.SetWasDodged();
+						damageData.processedDmg.vitalityDamage *= 1.0f - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s09, 'damage_reduction', false, true)) * skillLevel;
+						damageData.processedDmg.essenceDamage *= 1.0f - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s09, 'damage_reduction', false, true)) * skillLevel;
 					}
-					else
-					{*/
-						min = GetAttributeValue('graze_damage_reduction');
-						damageData.processedDmg.vitalityDamage *= 1 - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s09, 'damage_reduction', false, true)) * skillLevel;
-						damageData.processedDmg.vitalityDamage *= 1 - min.valueMultiplicative;
-					//}
-					
-					// damageData.SetWasDodged();
+							
 					
 					if ( theGame.CanLog() )
 					{
 						LogDMHits("W3PlayerWitcher.ReduceDamage: skill S_Sword_s09 reduced damage while dodging", damageData );
 					}
 				}
-				else
-				if( damageData.CanBeDodged() && ( ( AbsF(dist) < 90 && attackName != 'stomp' && attackName != 'anchor_special_far' && attackName != 'anchor_far' ) || ( ( attackName == 'stomp' || attackName == 'anchor_special_far' || attackName == 'anchor_far' ) && distToAttacker > attackRange.rangeMax * 0.75 ) ) )
-				{
-					if ( theGame.CanLog() )
-					{
-						LogDMHits("W3PlayerWitcher.ReduceDamage: Attack dodged by player - no damage done", damageData);
-					}
-					damageData.processedDmg.vitalityDamage *= 0.30;
-					damageData.processedDmg.essenceDamage *= 0.30;
-				}
+
 			}
 		}
 		// W3EE - End
@@ -11364,8 +11362,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 			arrString.PushBack( FloatToString( min.valueAdditive * amountOfSetPiecesEquipped[ EIST_Vampire ] ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;*/
+		case EISB_LightArmor:
+			finalString = GetLocStringByKeyExtWithParams( tempString );	
+			finalString += "<br>LHW3EE Override: Set bonus is really 9.";			
+			break;
 		default:
-			finalString = GetLocStringByKeyExtWithParams( tempString );
+			finalString = GetLocStringByKeyExtWithParams( tempString );			
 		}
 		
 		return finalString;

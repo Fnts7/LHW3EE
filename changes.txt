@@ -1,4 +1,24 @@
-﻿Version 7
+﻿Version 9
+
+Made dodging less pain in the ass against huge, monsters - graze damage has now a cap, that is 600 divided
+by player health setting. This is before reduction by skill and armor. Also buffs applied for attacks dodged
+by player (but attacks that do hit), will have / 3 general power.
+
+
+Small evasive action balancing - Cat armor and fleet footed skill graze damage reduction a bit raised.
+
+
+Version 8
+
+Rebalanced evasice bonuses between fleet footed skill and armor. Fleet footed now gives +5 safe angle per level, but graze dmg reduction is lowered to 5% per level.
+Cat (lynx) armor now whole set at lvl 5 gives +16 dodge angle and +12% graze dmg reduction. +9 angle from full light armor.
+
+Added new weapon roll set: 'Magical_Brute' (+crit dmg, - crit chance, -atk speed, + poise dmg, + dmg through blocks)
+
+Injury resist armor attribute now also lowers poise reduction due to low hp (in addition to Heightened Senses skill)
+
+
+Version 7
 
 - Greatly increased chances of special mutagens drop. To counter that reduced experience gained from decoctions brewing. Still can be adjusted in skill exp mult settings obviously.
 - Fixed a bug of attack stamina cost bonus and parry stamina cost bonus on weapons not working at all. Now note that positive value of that param reduced stamina cost, while negative increases. Parry stamina cost

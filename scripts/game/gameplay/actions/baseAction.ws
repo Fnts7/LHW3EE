@@ -62,6 +62,7 @@ class W3DamageAction extends CDamageData
 	protected var swingDirection : EAttackSwingDirection;			
 	protected var signSkill : ESkill;								
 	protected var isDodged : bool;									
+	protected var isPartDodged : bool;
 	protected var shouldProcessBuffsIfNoDamage : bool;				
 	private var ignoreImmortalityMode : bool;						
 	private var dealtFireDamage : bool;								
@@ -101,6 +102,7 @@ class W3DamageAction extends CDamageData
 	default isPointResistIgnored 			= false;
 	default canPlayHitParticle 				= true;
 	default isDodged						= false;
+	default isPartDodged					= false;
 	default isActionMelee					= false;
 	default isActionRanged					= false;
 	default isActionWitcherSign				= false;
@@ -462,6 +464,9 @@ class W3DamageAction extends CDamageData
 	public function SetAppliedBleeding()						{appliedBleeding = true;}
 	public function GetAppliedBleeding() : bool					{return appliedBleeding;}
 	// W3EE - End
+	// LHW3EE
+	public function SetWasPartiallyDodged()								{isPartDodged = true;}
+	public function WasPartiallyDodged() : bool							{return isPartDodged;}	
 	
 	public function SetIsDoTDamage(dt : float)
 	{

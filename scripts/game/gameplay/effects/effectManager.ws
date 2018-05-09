@@ -1474,8 +1474,13 @@ class W3EffectManager
 			if (action.victim == thePlayer && ((W3ExplosiveBolt)action.causer))
 				attackerPowerStatValue.valueMultiplicative = 1.0f;
 			else
-				attackerPowerStatValue.valueMultiplicative -= 1.0f;
-			
+				attackerPowerStatValue.valueMultiplicative -= 1.0f;			
+		}
+		
+		if (action.victim == thePlayer && action.WasPartiallyDodged())
+		{
+			attackerPowerStatValue.valueMultiplicative *= 0.3f;
+			attackerPowerStatValue.valueAdditive *= 0.3f;
 		}
 		
 		retB = true;
