@@ -5015,14 +5015,30 @@ statemachine import class CNewNPC extends CActor
 					}
 				}
 				
-				if(addAbility)
+				attackAction = (W3Action_Attack)action;				
+								
+				if (!attackAction)
+					i = 1;
+				else if (thePlayer.IsLightAttack(attackAction.GetAttackName()))
 				{
-					thePlayer.AddAbility(abilityName, true);
+					if ( thePlayer.IsInCombatAction() && thePlayer.GetCombatAction() == EBAT_SpecialAttack_Light )
+						i = 1;
+					else
+						i = 2;
+				}
+				else if (thePlayer.IsHeavyAttack(attackAction.GetAttackName()))
+					i = 3;
+				else
+					i = 1;
+					
+
+				if (addAbility)
+				{
+					thePlayer.AddAbilityMultiple(abilityName, i);
 				}
 			}
 			
-			attackAction = (W3Action_Attack)action;
-			
+					
 			// W3EE - Begin
 			if (witcher && witcher.HasBuff(EET_Mutagen03))
 				((W3Mutagen03_Effect)thePlayer.GetBuff(EET_Mutagen03)).AdvanceChain();

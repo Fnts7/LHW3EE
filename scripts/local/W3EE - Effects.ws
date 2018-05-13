@@ -47,7 +47,12 @@
 			}
 			else
 			if( attackAction.GetDamageDealt() > 1.f && (!((W3Effect_Toxicity)playerWitcher.GetBuff(EET_Toxicity)).isUnsafe || RandRange(100, 1) > 10 * playerWitcher.GetSkillLevel(S_Alchemy_s20)) )
-				currentAdrenaline = 0;
+			{
+				if (attackAction.WasPartiallyDodged())
+					currentAdrenaline *= 0.667f;
+				else
+					currentAdrenaline = 0;
+			}
 		}
 	}
 	

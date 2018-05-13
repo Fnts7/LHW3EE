@@ -267,6 +267,7 @@ class W3Action_Attack extends W3DamageAction
 		var mutagenBuff : W3Mutagen28_Effect;
 		var playerAttacker : CPlayer;
 		var mutagen25 : W3Mutagen25_Effect;
+		var mutagen17 : W3Mutagen17_Effect;
 		
 
 		result = super.GetPowerStatValue();
@@ -332,6 +333,16 @@ class W3Action_Attack extends W3DamageAction
 				}
 				//result.valueMultiplicative += MaxF(min.valueMultiplicative, 0.f);
 				result.valueMultiplicative += min.valueMultiplicative;
+				
+				
+				if ( witcherAttacker.IsCounterAttack(GetAttackName()) && witcherAttacker.HasBuff(EET_Mutagen17))
+				{
+					mutagen17 = (W3Mutagen17_Effect)witcherAttacker.GetBuff(EET_Mutagen17);
+					if (mutagen17.HasBoost("counter"))
+					{
+						result.valueMultiplicative += 0.8f;
+					}	
+				}	
 			}
 			
 			if( witcherAttacker.IsInState('HorseRiding') )
@@ -342,6 +353,15 @@ class W3Action_Attack extends W3DamageAction
 			
 			if(witcherAttacker.IsLightAttack(attackTypeName))
 			{
+				if (!witcherAttacker.IsCounterAttack(attackTypeName) && witcherAttacker.HasBuff(EET_Mutagen17))
+				{
+					mutagen17 = (W3Mutagen17_Effect)witcherAttacker.GetBuff(EET_Mutagen17);
+					if (mutagen17.HasBoost("light"))
+					{
+						result.valueMultiplicative += 0.75f;
+					}	
+				}								
+
 				result += witcherAttacker.GetAttributeValue('attack_power_fast_style');
 			}
 			

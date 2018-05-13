@@ -16,25 +16,26 @@
 assetFile[0]="/gameplay/abilities/geralt_skills.xml"
 assetFile[1]="/gameplay/abilities/geralt_stats.xml"
 assetFile[2]="/gameplay/abilities/effects_potions.xml"
+assetFile[3]="/gameplay/abilities/effects_mutagens.xml"
 
 
-assetFile[3]="/gameplay/items/def_item_alchemy_oils.xml"
-assetFile[4]="/gameplay/items/def_item_quality.xml"
-assetFile[5]="/gameplay/items/def_item_alchemy_potion.xml"
-assetFile[6]="/gameplay/items/def_item_ingredients.xml"
-assetFile[7]="/gameplay/items/def_item_bolts.xml"
-assetFile[8]="/gameplay/items/def_loot_monsters.xml"
+assetFile[4]="/gameplay/items/def_item_alchemy_oils.xml"
+assetFile[5]="/gameplay/items/def_item_quality.xml"
+assetFile[6]="/gameplay/items/def_item_alchemy_potion.xml"
+assetFile[7]="/gameplay/items/def_item_ingredients.xml"
+assetFile[8]="/gameplay/items/def_item_bolts.xml"
+assetFile[9]="/gameplay/items/def_loot_monsters.xml"
 
-assetFile[9]="/gameplay/items/def_item_crafting_armor.xml"
-assetFile[10]="/gameplay/items/def_item_crafting_boots.xml"
-assetFile[11]="/gameplay/items/def_item_crafting_gloves.xml"
-assetFile[12]="/gameplay/items/def_item_crafting_pants.xml"
+assetFile[10]="/gameplay/items/def_item_crafting_armor.xml"
+assetFile[11]="/gameplay/items/def_item_crafting_boots.xml"
+assetFile[12]="/gameplay/items/def_item_crafting_gloves.xml"
+assetFile[13]="/gameplay/items/def_item_crafting_pants.xml"
 
-assetFile[13]="/dlc/ep1/data/gameplay/abilities/geralt_skills_ep1.xml"
-assetFile[14]="/dlc/bob/data/gameplay/items/def_item_crafting_armor.xml"
-assetFile[15]="/dlc/bob/data/gameplay/items/def_item_crafting_boots.xml"
-assetFile[16]="/dlc/bob/data/gameplay/items/def_item_crafting_gloves.xml"
-assetFile[17]="/dlc/bob/data/gameplay/items/def_item_crafting_pants.xml"
+assetFile[14]="/dlc/ep1/data/gameplay/abilities/geralt_skills_ep1.xml"
+assetFile[15]="/dlc/bob/data/gameplay/items/def_item_crafting_armor.xml"
+assetFile[16]="/dlc/bob/data/gameplay/items/def_item_crafting_boots.xml"
+assetFile[17]="/dlc/bob/data/gameplay/items/def_item_crafting_gloves.xml"
+assetFile[18]="/dlc/bob/data/gameplay/items/def_item_crafting_pants.xml"
 
 
 # ASSET FILES END

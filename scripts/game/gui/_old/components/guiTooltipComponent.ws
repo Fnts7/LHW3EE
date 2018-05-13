@@ -608,7 +608,14 @@ class W3TooltipComponent
 		
 		if (!isArmorOrWeapon)
 		{
-			uniqueDescription += GetLocStringByKeyExt( itemInvComponent.GetItemLocalizedDescriptionByUniqueID(item) );
+			if (itemName == 'Mutagen 2')
+				uniqueDescription = "Reduces every damage taken by 25%.";
+			else
+				uniqueDescription += GetLocStringByKeyExt( itemInvComponent.GetItemLocalizedDescriptionByUniqueID(item) );
+				
+			if (itemName == 'Mutagen 16')
+				uniqueDescription += "<br>Every melee attack has 30% chance to apply random buff: burning, blindness, frost slowdown, bleeding, poison, long stagger, knockdown.";
+				
 		}
 		if ( theGame.GetGuiManager().GetShowItemNames() )
 		{

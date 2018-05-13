@@ -396,6 +396,8 @@ state YrdenCast in W3YrdenEntity extends NormalCast
 			parent.StopEffect( 'yrden_cast' );			
 			parent.GotoState( 'YrdenSlowdown' );
 		}
+		
+		parent.CheckForMutagen17Boost();
 	}
 }
 
@@ -424,6 +426,8 @@ state YrdenChanneled in W3YrdenEntity extends Channeling
 		// W3EE - Begin
 		//caster.GetActor().ResumeStaminaRegen( 'SignCast' );
 		// W3EE - End
+		
+		parent.CheckForMutagen17Boost();
 		
 		parent.GotoState( 'YrdenShock' );
 	}

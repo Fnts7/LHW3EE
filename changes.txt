@@ -1,4 +1,38 @@
-﻿Version 9
+﻿Version 10
+
+Balanced and reworked several decoctions:
+
+- Fiend decoction. Old effect stays the same (very crappy, just encumbrance bonus). Added new effect - every
+melee attack has 30% to apply random buff (burning, blindness, frost slowdown, bleed, poison, long stagger,
+knockdown). This is independent from all other buffs.
+- Wyvern decoction was boosted. Gives more attack power - 2% per light attack, 3% per heavy, 1% if in whirl.
+Also hits will not take away all bonus, but 25% of current bonus + 1%. If attack is partially dodged
+that will be reduced by 2 even.
+- Arachas (crab spider) decoction effect changed - now simply gives flat 25% damage reduction, not applied to quen only.
+- Forktail decoction logic reworked. It now works this way. We have 5 distinct actions: light attack, heavy attack,
+counter attack, sign cast, crossbow shot. After certain amount of actions, a boost for other action(s) may be
+enabled. When a boosted action is performed, the effect is reset plus one action that was just taken is recorded.
+The buffs strength differ between action type and sign type - the tooltip description is just average. Action of
+one type will not count towards activation of boost for that type. Using more variety of actions will activate
+a boost faster. Examples:
+a) Doing 6 times heavy attack will activate boost for every other action (same with other actions, only light
+attack counts as 1/2, so 12 needed)
+b) Doing 2 times heavy attack and 2 times sign cast, will activate boost for every remaining 3 actions
+c) Doing 1 time sign cast, counter and crossbow hit will activate boost for 2 remaining actions
+So more variety means you will trigger the boost more often. This is perfect decoction for universal play style.
+
+If you want to test decoctions here is console command for them: additem('Mutagen X'). 17 for forktail,
+16 for Fiend, 10 for Wyvern, 2 for Arachas.
+
+
+Slightly lowered rend armor piercing bonus per skill level (no skill rend still has the same bonus)
+
+Partially dodged attack (so the one that causes graze damage) will now take away 1/3 of current adrenaline
+instead of making it zero.
+
+
+
+Version 9
 
 Made dodging less pain in the ass against huge, monsters - graze damage has now a cap, that is 600 divided
 by player health setting. This is before reduction by skill and armor. Also buffs applied for attacks dodged

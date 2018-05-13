@@ -3089,9 +3089,9 @@ class CR4CharacterMenu extends CR4MenuBase
 				break;
 			case S_Perk_09:
 				if( GetWitcherPlayer().CanUseSkill(S_Perk_11) )
-					argsInt.PushBack(RoundMath(2.1f * Options().VigIntLost()));
+					argsInt.PushBack(RoundMath(2.0f * Options().VigIntLost()));
 				else
-					argsInt.PushBack(RoundMath(3.15f * Options().VigIntLost()));
+					argsInt.PushBack(RoundMath(3.0f * Options().VigIntLost()));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_RageManageSkill", argsInt);
 				break;
 			// W3EE - End

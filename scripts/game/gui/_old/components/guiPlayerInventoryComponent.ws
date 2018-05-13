@@ -328,6 +328,11 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 		itemName = GetLocStringByKeyExt(_inv.GetItemLocalizedNameByName(craftedItemName));
 		itemDesc = GetLocStringByKeyExt(_inv.GetItemLocalizedDescriptionByName(craftedItemName));
 		
+		if (craftedItemName == 'Mutagen 2')
+			itemDesc = "Reduces every damage taken by 25%.";
+		else if (craftedItemName == 'Mutagen 16')
+			itemDesc += "<br>Every melee attack has 30% chance to apply random buff: burning, blindness, frost slowdown, bleeding, poison, long stagger, knockdown.";
+		
 		rarityId = minQuality;
 		rarity = GetItemRarityDescriptionFromInt(minQuality);
 		type = GetLocStringByKeyExt("item_category_" + dm.GetItemCategory(craftedItemName));

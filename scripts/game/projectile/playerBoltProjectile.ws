@@ -57,7 +57,7 @@ class W3BoltProjectile extends W3ArrowProjectile
 	{
 		var action : W3Action_Attack;
 		var victimTags, attackerTags : array<name>;
-
+		var mutagen17 : W3Mutagen17_Effect;
 		
 		
 		
@@ -101,9 +101,19 @@ class W3BoltProjectile extends W3ArrowProjectile
 		collidedEntities.PushBack(victim);
 		
 		
-		if(caster == thePlayer && (CActor)victim && IsRequiredAttitudeBetween(caster, victim, true))
+		if(caster == thePlayer && (CActor)victim )
 		{
-			FactsAdd("ach_crossbow", 1, 4 );
+			if (thePlayer.HasBuff(EET_Mutagen17))
+			{
+				 mutagen17 = (W3Mutagen17_Effect)thePlayer.GetBuff(EET_Mutagen17);
+				 if (mutagen17.HasBoost("crossbow"))
+					mutagen17.ClearBoost();
+	
+				FactsAdd("mutagen_17_crossbow", 1);
+			}
+		
+			if (IsRequiredAttitudeBetween(caster, victim, true))
+				FactsAdd("ach_crossbow", 1, 4 );
 		}
 		
 		

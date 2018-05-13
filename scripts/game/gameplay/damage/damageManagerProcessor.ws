@@ -730,41 +730,65 @@ class W3DamageManagerProcessor extends CObject
 		var temp, resistPerc : float;
 		// W3EE - End
 		
-		if( playerAttacker && actorVictim && attackAction && attackAction.IsActionMelee() && playerAttacker.CanUseSkill(S_Alchemy_s12) && playerAttacker.inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) )
+		if( playerAttacker && actorVictim && attackAction && attackAction.IsActionMelee())
 		{
-			
-			monsterBonusType = MonsterCategoryToCriticalDamageBonus(victimMonsterCategory);
-			monsterBonusVal = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
-			
-			if(monsterBonusVal == null)
-			{
-				monsterBonusType = MonsterCategoryToCriticalChanceBonus(victimMonsterCategory);
-				monsterBonusVal = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
-			} 
 		
-			if(monsterBonusVal != null)
-			{
+			if (playerAttacker.CanUseSkill(S_Alchemy_s12) && playerAttacker.inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) )
+			{			
+				monsterBonusType = MonsterCategoryToCriticalDamageBonus(victimMonsterCategory);
+				monsterBonusVal = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
 				
-				oilLevel = (int)CalculateAttributeValue(playerAttacker.inv.GetItemAttributeValue(weaponId, 'level')) - 1;				
-				skillLevel = playerAttacker.GetSkillLevel(S_Alchemy_s12);
-				baseChance = CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Alchemy_s12, 'skill_chance', false, true));
-				perOilLevelChance = CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Alchemy_s12, 'oil_level_chance', false, true));						
-				chance = baseChance * skillLevel * (1.0f + perOilLevelChance * oilLevel);
-				// W3EE - Begin
-				resistPerc = ((CNewNPC)actorVictim).GetNPCCustomStat(theGame.params.DAMAGE_NAME_POISON);
-				chance = MaxF(0, chance * (1 - resistPerc));
-				// W3EE - End
-				
-				if(RandF() < chance)
+				if(monsterBonusVal == null)
+				{
+					monsterBonusType = MonsterCategoryToCriticalChanceBonus(victimMonsterCategory);
+					monsterBonusVal = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
+				} 
+			
+				if(monsterBonusVal != null)
 				{
 					
-					dm.GetContainedAbilities(playerAttacker.GetSkillAbilityName(S_Alchemy_s12), buffs);
-					for(i=0; i<buffs.Size(); i+=1)
+					oilLevel = (int)CalculateAttributeValue(playerAttacker.inv.GetItemAttributeValue(weaponId, 'level')) - 1;				
+					skillLevel = playerAttacker.GetSkillLevel(S_Alchemy_s12);
+					baseChance = CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Alchemy_s12, 'skill_chance', false, true));
+					perOilLevelChance = CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Alchemy_s12, 'oil_level_chance', false, true));						
+					chance = baseChance * skillLevel * (1.0f + perOilLevelChance * oilLevel);
+					// W3EE - Begin
+					resistPerc = ((CNewNPC)actorVictim).GetNPCCustomStat(theGame.params.DAMAGE_NAME_POISON);
+					chance = MaxF(0, chance * (1 - resistPerc));
+					// W3EE - End
+					
+					if(RandF() < chance)
 					{
-						EffectNameToType(buffs[i], effectType, effectAbilityName);
-						action.AddEffectInfo(effectType, , , effectAbilityName);
+						
+						dm.GetContainedAbilities(playerAttacker.GetSkillAbilityName(S_Alchemy_s12), buffs);
+						for(i=0; i<buffs.Size(); i+=1)
+						{
+							EffectNameToType(buffs[i], effectType, effectAbilityName);
+							action.AddEffectInfo(effectType, , , effectAbilityName);
+						}
 					}
 				}
+			
+			}
+			
+			if (playerAttacker.HasBuff(EET_Mutagen16) && RandF() < 0.3f)
+			{
+				chance = RandF();
+				
+				if (chance < 0.2f)
+					action.AddEffectInfo(EET_Burning, , , 'BurningEffect');
+				else if (chance < 0.4f)
+					action.AddEffectInfo(EET_Blindness, , , 'BlindnessEffect');
+				else if (chance < 0.6f)
+					action.AddEffectInfo(EET_SlowdownFrost, , , 'SlowdownFrostEffect');
+				else if (chance < 0.7f)
+					action.AddEffectInfo(EET_Bleeding, , , 'BleedingEffect');
+				else if (chance < 0.8f)
+					action.AddEffectInfo(EET_Poison, , , 'PoisonEffect');					
+				else if (chance < 0.9f) 
+					action.AddEffectInfo(EET_LongStagger, , , 'LongStaggerEffect');
+				else
+					action.AddEffectInfo(EET_Knockdown, , , 'KnockdownEffect');	
 			}
 		}
 	}
@@ -995,6 +1019,7 @@ class W3DamageManagerProcessor extends CObject
 		var adrenalineEffect : W3Effect_CombatAdrenaline;
 		var lynxEffect : W3Effect_LynxSetBonus;
 		// var aerondight	: W3Effect_Aerondight;
+		var mutagen17 : W3Mutagen17_Effect;
 		
 		
 		if(playerAttacker && playerAttacker.GetBehaviorVariable( 'isPerformingSpecialAttack' ) > 0 && playerAttacker.GetBehaviorVariable( 'playerAttackType' ) == (int)PAT_Light)
@@ -1244,6 +1269,15 @@ class W3DamageManagerProcessor extends CObject
 				{
 					damageBonusStack += 0.0334f * playerAttacker.GetSkillLevel(S_Sword_s13);
 				
+				}
+			}
+			
+			if (playerAttacker.HasBuff(EET_Mutagen17))
+			{
+				mutagen17 = (W3Mutagen17_Effect)playerAttacker.GetBuff(EET_Mutagen17);
+				if (mutagen17.HasBoost("crossbow"))
+				{
+					damageBonusStack += 0.5f;
 				}
 			}
 		}
@@ -1686,7 +1720,7 @@ class W3DamageManagerProcessor extends CObject
 		// var appliedOilName, vsMonsterResistReduction : name;
 		// var oils : array< W3Effect_Oil >;
 		var i : int;
-		var encumbranceBonus : float;
+		//var encumbranceBonus : float;
 		var mutagen : CBaseGameplayEffect;
 		var min, max : SAbilityAttributeValue;	
 
@@ -1728,14 +1762,14 @@ class W3DamageManagerProcessor extends CObject
 			}
 			
 			// W3EE - Begin
-			if(playerVictim == GetWitcherPlayer() && playerVictim.HasBuff(EET_Mutagen02))
+			/*if(playerVictim == GetWitcherPlayer() && playerVictim.HasBuff(EET_Mutagen02))
 			{
 				encumbranceBonus = 1 - ClampF((GetWitcherPlayer().GetEncumbrance() - 60.0f) / 100.0f, 0.0f, 1.0f);
 				mutagen = playerVictim.GetBuff(EET_Mutagen02);
 				dm.GetAbilityAttributeValue(mutagen.GetAbilityName(), 'resistGainRate', min, max);
 				encumbranceBonus *= CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
 				resistPerc += encumbranceBonus;
-			}			
+			}*/			
 			// W3EE - End			
 			
 			if(playerVictim && actorAttacker && playerVictim.HasBuff(EET_Mutagen28))
@@ -1819,7 +1853,7 @@ class W3DamageManagerProcessor extends CObject
 		var ptsString, percString : string;
 		var mutagen : CBaseGameplayEffect;
 		var min, max : SAbilityAttributeValue;
-		var encumbranceBonus : float;
+		//var encumbranceBonus : float;
 		var temp : bool;
 		var fistfightDamageMult : float;
 		var burning : W3Effect_Burning;

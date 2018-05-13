@@ -86,23 +86,24 @@
 			
 			<!-- Forktail -->
 			<ability name="Mutagen17Effect">
-				<attack_power type="mult" min="0.15" />
-				<spell_power type="mult" min="0.15" />
+				<attack_power type="mult" min="0.6" />
+				<spell_power type="mult" min="0.4" />
 			</ability>
 
 			<ability name="Mutagen17EffectLight">
-				<attack_power_fast_style type="mult" min="1.0" />
+				<attack_power_fast_style type="mult" min="0.75" />
 			</ability>
 
 			<ability name="Mutagen17EffectHeavy">
-				<attack_power_heavy_style type="mult" min="1.0" />
+				<attack_power_heavy_style type="mult" min="0.5" />
 			</ability>
 
 			<ability name="Mutagen17EffectSign">
-				<spell_power_aard type="mult" min="1.0" />
-				<spell_power_igni type="mult" min="1.0" />
-				<spell_power_axii type="mult" min="1.0" />
-				<spell_power_yrden type="mult" min="1.0" />
+				<spell_power_aard type="mult" min="0.35" />
+				<spell_power_igni type="mult" min="0.35" />
+				<spell_power_axii type="mult" min="0.45" />
+				<spell_power_yrden type="mult" min="0.45" />
+				<spell_power_quen type="mult" min="0.35" />
 			</ability>
 			
 			<!-- Grave Hag -->

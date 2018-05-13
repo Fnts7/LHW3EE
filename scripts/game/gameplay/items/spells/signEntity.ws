@@ -20,7 +20,7 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 	// W3EE - Begin
 	public var isFOACast : bool;
 	protected var isFreeCast : bool;
-	protected var isMutagen17Consumed : bool;
+	//protected var isMutagen17Consumed : bool;
 	protected var signIntensity : SAbilityAttributeValue;
 	
 	protected function CheckForMutagen17Boost()
@@ -34,17 +34,14 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			mutagen17 = (W3Mutagen17_Effect)witcher.GetBuff(EET_Mutagen17);
 			if(mutagen17.HasBoost("sign"))
 			{
-				mutagen17.ClearBoost("sign");
-				isMutagen17Consumed = true;
+				mutagen17.ClearBoost();
+				//isMutagen17Consumed = true;
 			}
+			
+			FactsAdd("mutagen_17_sign", 1);
 		}
 	}
 
-	public function IsBoosted() : bool
-	{
-		return isMutagen17Consumed;
-	}
-	
 	public function GetTotalSignIntensity() : SAbilityAttributeValue
 	{
 		return signIntensity;
@@ -297,7 +294,9 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		}
 		
 		// W3EE - Begin
-		CheckForMutagen17Boost();
+		
+		if ( !((W3QuenEntity)this) && !((W3YrdenEntity)this) )
+			CheckForMutagen17Boost();
 		/*
 		witcher = (W3PlayerWitcher)owner.GetActor();
 		if(witcher && witcher.HasBuff(EET_Mutagen17))

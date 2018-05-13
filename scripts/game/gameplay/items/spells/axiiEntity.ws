@@ -445,7 +445,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		
 		casterActor.OnSignCastPerformed(ST_Axii, fireMode);
 		
-		super.OnEnded();
+		//super.OnEnded();
 	}
 	
 	event OnSignAborted( optional force : bool )

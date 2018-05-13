@@ -2170,6 +2170,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 			quen.OnTargetHit( damageData );
 		}	
 		
+		if (HasBuff(EET_Mutagen02))
+		{
+			damageData.processedDmg.vitalityDamage *= 0.75f;
+		}
 		
 		if( HasBuff( EET_GryphonSetBonusYrden ) )
 		{
@@ -2256,7 +2260,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var currVitality, rgnVitality, hpTriggerTreshold : float;
 		var healingFactor : float;
 		var abilityName : name;
-		var abilityCount, maxStack, itemDurability : float;
+		var abilityCount, maxStack, itemDurability, remAbilityCount : float;
 		var addAbility : bool;
 		var min, max : SAbilityAttributeValue;
 		var mutagenQuen : W3SignEntity;
@@ -2342,7 +2346,16 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if(action.DealsAnyDamage() && !((W3Effect_Toxicity)action.causer) )
 		{
 			if(HasBuff(EET_Mutagen10))
-				RemoveAbilityAll( GetBuff(EET_Mutagen10).GetAbilityName() );
+			{
+				abilityCount = GetAbilityCount(GetBuff(EET_Mutagen10).GetAbilityName());				
+				
+				remAbilityCount = 0.25f * abilityCount + 1.0f;
+				
+				if (action.WasPartiallyDodged())
+					remAbilityCount *= 0.5f;
+					
+				RemoveAbilityMultiple( GetBuff(EET_Mutagen10).GetAbilityName(), (int) RoundMath(remAbilityCount));
+			}
 			
 			if(HasBuff(EET_Mutagen15))
 				RemoveAbilityAll( GetBuff(EET_Mutagen15).GetAbilityName() );
@@ -2355,8 +2368,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 				mutagen03.ResetChain();
 			}
 			
-			if( HasBuff(EET_Mutagen17) )
-				((W3Mutagen17_Effect)GetBuff(EET_Mutagen17)).BlockBoost();
+			/*if( HasBuff(EET_Mutagen17) )
+				((W3Mutagen17_Effect)GetBuff(EET_Mutagen17)).BlockBoost();*/
 			// W3EE - End
 		}
 		
@@ -3295,27 +3308,36 @@ statemachine class W3PlayerWitcher extends CR4Player
 	protected function Attack( hitTarget : CGameplayEntity, animData : CPreAttackEventData, weaponId : SItemUniqueId, parried : bool, countered : bool, parriedBy : array<CActor>, attackAnimationName : name, hitTime : float, weaponEntity : CItemEntity)
 	{
 		var mutagen17 : W3Mutagen17_Effect;
-		// W3EE - Begin
-		var isNotCounterAttack, isBuffConsumed : bool;
-		// W3EE - End
 		
 		super.Attack(hitTarget, animData, weaponId, parried, countered, parriedBy, attackAnimationName, hitTime, weaponEntity);
 		
-		isNotCounterAttack = IsLightAttack(animData.attackName) || IsHeavyAttack(animData.attackName);
-		
 		// W3EE - Begin
-		if( (CActor)hitTarget && HasBuff(EET_Mutagen17) && isNotCounterAttack )
+		if ( (CActor)hitTarget && HasBuff(EET_Mutagen17) )
 		{
 			mutagen17 = (W3Mutagen17_Effect)GetBuff(EET_Mutagen17);
-			isBuffConsumed = IsLightAttack(animData.attackName) && mutagen17.HasBoost("light") || IsHeavyAttack(animData.attackName) && mutagen17.HasBoost("heavy");
 			
-			if (isBuffConsumed)
-				mutagen17.ClearBoost("attack");
-			
-			if (IsLightAttack(animData.attackName))
-				FactsAdd("mutagen_17_attack_light", 1, 4);
-			else
-				FactsAdd("mutagen_17_attack_heavy", 1, 4);
+			if (IsCounterAttack(animData.attackName))
+			{
+				if (mutagen17.HasBoost("counter"))
+					mutagen17.ClearBoost();
+
+				FactsAdd("mutagen_17_counter", 1);
+			}
+			else if ( IsLightAttack(animData.attackName) )
+			{
+				if (mutagen17.HasBoost("light"))
+					mutagen17.ClearBoost();
+				
+				FactsAdd("mutagen_17_attack_light", 1);
+			}
+			else if (IsHeavyAttack(animData.attackName))
+			{
+				if (mutagen17.HasBoost("heavy"))
+					mutagen17.ClearBoost();
+				
+				FactsAdd("mutagen_17_attack_heavy", 1);
+			}	
+				
 		}
 		// W3EE - End
 	}
@@ -4003,7 +4025,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		buffs.Remove( EET_Mutagen16 );
+		//buffs.Remove( EET_Mutagen16 );
 		// W3EE - Begin
 		// buffs.Remove( EET_Mutagen24 );
 		// W3EE - End
@@ -9274,7 +9296,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			penaltyPerc = Options().VigIntLost() / 100.f;
 		
 		if( currFocus < 1 && CanUseSkill(S_Perk_09) )
-			vigorPenalty = 3.15f * penaltyPerc;
+			vigorPenalty = 3.0f * penaltyPerc;
 		else
 			vigorPenalty = (maxFocus / Options().MaxFocus()) * (maxFocus - currFocus) * penaltyPerc;
 		
@@ -9289,7 +9311,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function GetSingleSignSpellPower( signSkill : ESkill ) : SAbilityAttributeValue
 	{
 		var sp : SAbilityAttributeValue;
-		var quenEntity : W3QuenEntity;
+		//var quenEntity : W3QuenEntity;
 		var maxFocus, currFocus, penaltyPerc, vigorPenalty : float;
 		
 		if(signSkill == S_Magic_1 || signSkill == S_Magic_s01)
@@ -9307,9 +9329,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		else if(signSkill == S_Magic_4 || signSkill == S_Magic_s04)
 		{
 			sp = GetAttributeValue('spell_power_quen');
-			quenEntity = (W3QuenEntity)GetWitcherPlayer().GetSignEntity(ST_Quen);
+			/*quenEntity = (W3QuenEntity)GetWitcherPlayer().GetSignEntity(ST_Quen);
 			if( quenEntity.IsBoosted() )
-				sp.valueMultiplicative += 0.5f;
+				sp.valueMultiplicative += 0.4f;*/
 		}
 		else if(signSkill == S_Magic_5 || signSkill == S_Magic_s05)
 		{
@@ -9324,7 +9346,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			penaltyPerc = Options().VigIntLost() / 100.f;
 		
 		if( currFocus < 1 && CanUseSkill(S_Perk_09) )
-			vigorPenalty = 3.15f * penaltyPerc;
+			vigorPenalty = 3.0f * penaltyPerc;
 		else
 			vigorPenalty = (maxFocus / Options().MaxFocus()) * (maxFocus - currFocus) * penaltyPerc;
 		
@@ -9339,7 +9361,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function GetTotalSignSpellPower(signSkill : ESkill) : SAbilityAttributeValue
 	{
 		var sp : SAbilityAttributeValue;
-		var quenEntity : W3QuenEntity;
+		//var quenEntity : W3QuenEntity;
 		var maxFocus, currFocus, penaltyPerc, vigorPenalty : float;
 		
 		sp = GetAttributeValue(PowerStatEnumToName(CPS_SpellPower));
@@ -9358,9 +9380,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		else if(signSkill == S_Magic_4 || signSkill == S_Magic_s04)
 		{
 			sp += GetAttributeValue('spell_power_quen');
-			quenEntity = (W3QuenEntity)GetWitcherPlayer().GetSignEntity(ST_Quen);
+			/*quenEntity = (W3QuenEntity)GetWitcherPlayer().GetSignEntity(ST_Quen);
 			if( quenEntity.IsBoosted() )
-				sp.valueMultiplicative += 0.5f;
+				sp.valueMultiplicative += 0.4f;*/
 		}
 		else if(signSkill == S_Magic_5 || signSkill == S_Magic_s05)
 		{
@@ -9375,7 +9397,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			penaltyPerc = Options().VigIntLost() / 100.f;
 		
 		if( currFocus < 1 && CanUseSkill(S_Perk_09) )
-			vigorPenalty = 3.15f * penaltyPerc;
+			vigorPenalty = 3.00f * penaltyPerc;
 		else
 			vigorPenalty = (maxFocus / Options().MaxFocus()) * (maxFocus - currFocus) * penaltyPerc;
 		
@@ -13064,7 +13086,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				finalArmorPiercing += 0.25f;
 				if( IsInCombatAction_SpecialAttackHeavy() )
-					finalArmorPiercing += (0.15f + 0.05f * GetSkillLevel(S_Sword_s02)) * (GetSpecialAttackTimeRatio() + 0.05f);
+					finalArmorPiercing += (0.15f + 0.04f * GetSkillLevel(S_Sword_s02)) * (GetSpecialAttackTimeRatio() + 0.05f);
 
 				finalArmorPiercing += GetSkillLevel(S_Sword_s08) * 0.025f + armorPiercing.valueMultiplicative;
 			}
