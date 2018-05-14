@@ -77,6 +77,38 @@
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
+	  <ability name="BleedingEffect_BroadheadBolt1">
+        <DirectDamage type="mult" min="0.0" max="0.0" />
+        <DirectDamage type="add" min="97" max="97" />
+        <duration type="add" min="8" max="8" />
+        <hp_regen_reduction_strength type="add" min="200" />
+        <hp_regen_reduction_duration type="add" min="5" />
+      </ability>
+	  
+	  <ability name="BleedingEffect_BroadheadBolt2">
+        <DirectDamage type="mult" min="0.0" max="0.0" />
+        <DirectDamage type="add" min="104" max="104" />
+        <duration type="add" min="8" max="8" />
+        <hp_regen_reduction_strength type="add" min="200" />
+        <hp_regen_reduction_duration type="add" min="5" />
+      </ability>
+	  
+	  <ability name="BleedingEffect_BroadheadBolt3">
+        <DirectDamage type="mult" min="0.0" max="0.0" />
+        <DirectDamage type="add" min="111" max="111" />
+        <duration type="add" min="8" max="8" />
+        <hp_regen_reduction_strength type="add" min="200" />
+        <hp_regen_reduction_duration type="add" min="5" />
+      </ability>
+	  
+	  <ability name="BleedingEffect_BroadheadBolt4">
+        <DirectDamage type="mult" min="0.0" max="0.0" />
+        <DirectDamage type="add" min="118" max="118" />
+        <duration type="add" min="8" max="8" />
+        <hp_regen_reduction_strength type="add" min="200" />
+        <hp_regen_reduction_duration type="add" min="5" />
+      </ability>
+	  
       <ability name="BlindnessEffect">
         <duration type="add" min="3" max="3" />
       </ability>

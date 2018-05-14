@@ -1,4 +1,45 @@
-﻿Version 10
+﻿Version 11
+
+Crossbow and bolts:
+- increased armor piercing values of target point bolts a bit
+- Cold Blooded skill boosted - bonus per hit. Max boost remains the same. Also raised to 7s effect reset time.
+- Crippling shots skill improved for broadhead bolts. Since bleeding is not stacking, instead for that type of
+bolts bleeding effect is simply boosted - by about 8% per skill level.
+
+Cooking:
+- Small adjustments in food, so that recipes are more logical and balanced in two ways: multiplying food, 
+upgrading food to better quality.
+
+Big toxicity rework. First of all removed strange rule of greatly increasing potions toxicity when decoctions
+active. I find it nonsense, because there is no point in investing in toxicity (green mutagens, perk, also
+red wolf armor), if you cannot use normal potions with reasonable efficiency in addition to decoctions. So that
+needed some balancing and nerfing some toxicity capabilities.
+- Mutant skill decoctions toxicity per level reduced to 2, but duration is increased to 15% per skill level.
+- Red wolf armor set toxicity gain overall reduced from 30 to 21.
+- Metabolism perk toxicity gain reduced from 25 to 20
+- Reduced the rate at which toxicity safe threshold is increased. Now it is increased by value of 1/6 of max tox
+above 100 (was 1/4), so if you have 200 max tox. Threshold will be 66.667 (with exception of decoctions rule).
+- food instant heal amount is reduced when intoxicated - progressive almost quadratic function, so will be small when
+low tox, up to zero on 100% tox.
+
+Potions adjustments. Two goals - increase toxicity where the gain from higher lvl potion is great and increase
+the differences between potion tiers, where they were insignificant.
+- Maribor forest. Lvl1 duration reduced, Lvl2 duration increased as it is the only gain. Lvl3 even more duration
+and restores 2 vigor points instantly. Toxicity of lvl2, lvl3 raised.
+- Golden oriole lvl1 doesn't give full poison res anymore, but 75% combined with Geralt base res, but toxicity reduced.
+Lvl3 toxicity raised as its effect is very strong - healing with poison.
+- Thunderbolt lvl3 has higher tox, but also longer duration and increased a bit crit frenzy activation chance.
+- Cat was really overpowered in general, so lvl2,3 toxicities raised. all levels have lower duration, but still
+quite high compared to other potions on average.
+
+
+Water Hag decoction bug fix, so now it really works according to descriptions. Gives +20% attack power on full life,
+then reducing proportionaly to 0% at 0 life. Also added small buffer - full effect when curent HP > 90%.
+
+Made small nerf to Negotiator relic silver sword. Very OP in my opinion, so I reduced vigor regen bonus to 5% and shock dmg to 60.
+
+
+Version 10
 
 Balanced and reworked several decoctions:
 

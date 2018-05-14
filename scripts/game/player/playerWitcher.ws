@@ -7162,7 +7162,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		halfTox = GetStatMax(BCS_Toxicity) / 2.0f;
 		
-		ret = MaxF(theGame.params.TOXICITY_DAMAGE_THRESHOLD / 2.0f + halfTox / 2.0f, theGame.params.TOXICITY_DAMAGE_THRESHOLD);
+		ret = MaxF(theGame.params.TOXICITY_DAMAGE_THRESHOLD / 1.5f + halfTox / 3.0f, theGame.params.TOXICITY_DAMAGE_THRESHOLD);
 	
 		curOffset = GetStat(BCS_Toxicity) - GetStat(BCS_Toxicity, true);
 		if (curOffset > ret)
@@ -7307,14 +7307,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( inv.ItemHasTag(item, 'Mutagen') )
 		{
 			if(CanUseSkill(S_Alchemy_s14))
-				toxicityOffset -= 3 * GetSkillLevel(S_Alchemy_s14);
+				toxicityOffset -= 2 * GetSkillLevel(S_Alchemy_s14);
 				
-			toxicityOffset = CeilF(toxicityOffset * (1.f + (GetNumMutagensActive() / 2.f))) + CeilF(GetStat(BCS_Toxicity, true) * ((GetNumMutagensActive() + 1) / 2.f)); 
+			//toxicityOffset = CeilF(toxicityOffset * (1.f + (GetNumMutagensActive() / 2.f))) + CeilF(GetStat(BCS_Toxicity, true) * ((GetNumMutagensActive() + 1) / 2.f)); 
 		}
-		else
+		/*else
 		{
 			finalPotionToxicity = CeilF(finalPotionToxicity * (1.f + (GetNumMutagensActive() / 2.f)));
-		}
+		}*/
 		
 		/*
 		if(CanUseSkill(S_Perk_13))
@@ -7404,9 +7404,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			// W3EE - Begin
 			if( CanUseSkill(S_Alchemy_s14) )
-				mutagenParams.toxicityOffset -= 3 * GetSkillLevel(S_Alchemy_s14);
+				mutagenParams.toxicityOffset -= 2 * GetSkillLevel(S_Alchemy_s14);
 				
-			mutagenParams.toxicityOffset = CeilF(mutagenParams.toxicityOffset * (1.f + (GetNumMutagensActive() / 2.f))) + CeilF(GetStat(BCS_Toxicity, true) * ((GetNumMutagensActive() + 1) / 2.f)); 
+			//mutagenParams.toxicityOffset = CeilF(mutagenParams.toxicityOffset * (1.f + (GetNumMutagensActive() / 2.f))) + CeilF(GetStat(BCS_Toxicity, true) * ((GetNumMutagensActive() + 1) / 2.f)); 
 			// W3EE - End
 			
 			potionParams.buffSpecificParams = mutagenParams;

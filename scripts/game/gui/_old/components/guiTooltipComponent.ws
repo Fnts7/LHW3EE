@@ -1330,9 +1330,9 @@ class W3TooltipComponent
 					
 					// W3EE - Begin
 					if(thePlayer.CanUseSkill(S_Alchemy_s14))
-						currentStat.value -= 3 * thePlayer.GetSkillLevel(S_Alchemy_s14);
+						currentStat.value -= 2 * thePlayer.GetSkillLevel(S_Alchemy_s14);
 						
-					currentStat.value += CeilF(thePlayer.GetStat(BCS_Toxicity, true) * ((thePlayer.GetNumMutagensActive() + 1) / 2.f));
+					// currentStat.value += CeilF(thePlayer.GetStat(BCS_Toxicity, true) * ((thePlayer.GetNumMutagensActive() + 1) / 2.f));
 					// W3EE - End
 				}
 				if (currentStat.originName == 'toxicity')
@@ -1340,7 +1340,7 @@ class W3TooltipComponent
 					if (!isArmorOrWeapon)
 					{
 						// W3EE - Begin
-						currentStat.value = CeilF(currentStat.value * (1.f + (thePlayer.GetNumMutagensActive() / 2.f)));
+						// currentStat.value = CeilF(currentStat.value * (1.f + (thePlayer.GetNumMutagensActive() / 2.f)));
 						// W3EE - End
 						
 						maxToxicity = RoundMath(thePlayer.GetStatMax( BCS_Toxicity ));

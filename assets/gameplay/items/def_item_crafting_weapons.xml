@@ -833,10 +833,10 @@
 		<quality						type="add"	min="4"					/>
 		<SlashingDamage					type="base"	min="1"					/>
 		<SilverDamage					type="base"	min="450"				/>
-		<ShockDamage					type="add"	min="80"				/>
+		<ShockDamage					type="add"	min="60"				/>
 		<armor_reduction				type="mult"	min="0.1"				/>
 		<critical_hit_chance			type="add"	min="0.1"				/>
-		<vigor_regen 					type="mult" min="0.1" 				/>
+		<vigor_regen 					type="mult" min="0.05" 				/>
 		<attack_speed					type="mult" min="0.1"				/>
 		<spell_power					type="mult" min="-0.25"				/>
 	</ability>	

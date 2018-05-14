@@ -11216,7 +11216,7 @@ statemachine abstract import class CR4Player extends CPlayer
 			
 			if (foodBuffLvl > 0)
 			{
-				Heal( 100.0f * PowF(2.0f, foodBuffLvl - 1) );				
+				Heal( 100.0f * PowF(2.0f, foodBuffLvl - 1) * (1.0f - PowF(GetStatPercents(BCS_Toxicity), 1.8f)) );
 			}
 			
 			if ( inv.ItemHasTag(itemId, 'Alcohol') )

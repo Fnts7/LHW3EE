@@ -2478,9 +2478,9 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsFloat.PushBack(arg);
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt, argsFloat) + "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%";
 				*/
-				argsInt.PushBack(Max(2, 1*skillLevel));
+				argsInt.PushBack(2*skillLevel);
 				argsInt.PushBack(10*skillLevel);
-				argsInt.PushBack(6);
+				argsInt.PushBack(7);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_ColdBloodLvl1", argsInt);
 				break;
 			case S_Sword_s16:
@@ -2967,7 +2967,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				*/
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s14, 'duration', false, false) * skillLevel;				
 				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
-				arg = 3 * skillLevel;
+				arg = 2 * skillLevel;
 				argsInt.PushBack(RoundMath(arg));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				// W3EE - End

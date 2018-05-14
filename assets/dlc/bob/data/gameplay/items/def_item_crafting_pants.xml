@@ -69,7 +69,7 @@
 				<rending_resistance_perc 		type="base" min="0.09"				/>
 				<elemental_resistance_perc 		type="base" min="0.25"				/>
 				<injury_resist			 		type="mult"	min="0.05"				/>
-				<toxicity 						type="base" min="10" 				/>
+				<toxicity 						type="base" min="6" 				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.10"				/>
 			</ability>
 

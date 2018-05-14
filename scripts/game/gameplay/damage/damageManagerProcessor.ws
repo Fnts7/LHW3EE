@@ -510,6 +510,7 @@ class W3DamageManagerProcessor extends CObject
 			
 			combatHandler.AdrenalineDrainHits(actorAttacker, actorVictim, attackAction, action, action.GetDamageDealt() / action.GetOriginalDamageDealt());
 			
+			combatHandler.ModifyBoltBuffs(action);
 			combatHandler.CripplingShotEffects(action);
 			
 			combatHandler.DealInfusionDamage(action);
@@ -1674,12 +1675,12 @@ class W3DamageManagerProcessor extends CObject
 		
 		if (actorVictim && playerAttacker)
 		{
-			if ( playerAttacker.HasBuff(EET_Mutagen05) && (playerAttacker.GetStat(BCS_Vitality) == playerAttacker.GetStatMax(BCS_Vitality)) )
+			if ( playerAttacker.HasBuff(EET_Mutagen05) /*&& (playerAttacker.GetStat(BCS_Vitality) == playerAttacker.GetStatMax(BCS_Vitality)) */)
 			{
 				mutagen = playerAttacker.GetBuff(EET_Mutagen05);
 				dm.GetAbilityAttributeValue(mutagen.GetAbilityName(), 'damageIncrease', min, max);
 				// W3EE - Begin
-				powerMod += GetAttributeRandomizedValue(min, max) * playerAttacker.GetStatPercents(BCS_Vitality);
+				powerMod.valueMultiplicative += min.valueMultiplicative * MinF(playerAttacker.GetStatPercents(BCS_Vitality) + 0.1f, 1.0f);
 				// W3EE - End
 			}
 		}

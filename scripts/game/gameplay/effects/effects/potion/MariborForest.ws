@@ -20,7 +20,7 @@ class W3Potion_MariborForest extends CBaseGameplayEffect
 		
 		if(GetBuffLevel() == 3)
 		{
-			target.GainStat(BCS_Focus, 1);
+			target.GainStat(BCS_Focus, 2);
 		}
 		// W3EE - End
 	}

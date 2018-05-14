@@ -2804,7 +2804,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		
 		witcher = (W3PlayerWitcher)action.attacker;
 		skillLevel = witcher.GetSkillLevel(S_Sword_s12);
-		if( witcher && action.IsActionRanged() && action.DealsAnyDamage() && skillLevel )
+		if( witcher && action.IsActionRanged() && !((W3Petard)action.causer) && action.DealsAnyDamage() && skillLevel )
 		{
 			if( RandRange(100, 0) <= RoundMath(7.5f * skillLevel) )
 				action.AddEffectInfo(EET_Bleeding);
@@ -2815,6 +2815,45 @@ class W3EECombatHandler extends W3EEOptionHandler
 					action.AddEffectInfo(EET_Immobilized);
 			}
 		}
+	}
+	
+	public function ModifyBoltBuffs( action : W3DamageAction )
+	{
+		var effects : array< SEffectInfo >;
+		var effectsSize, i, cripplingLevel : int;
+		var ourEffect : SEffectInfo;
+		var witcher : W3PlayerWitcher;
+		
+		witcher = (W3PlayerWitcher)action.attacker;
+		if( !witcher || !action.IsActionRanged() || ((W3Petard)action.causer) || !action.HasBuff(EET_Bleeding))
+			return;
+			
+		cripplingLevel = witcher.GetSkillLevel(S_Sword_s12);
+		if (cripplingLevel < 1)
+			return;
+			
+		effectsSize = action.GetEffects(effects);
+		for ( i=0 ; i < effectsSize ; i+=1 )
+		{
+			if( effects[i].effectType == EET_Bleeding && effects[i].effectAbilityName == 'BleedingEffect_BroadheadBolt')
+			{
+				ourEffect = effects[i];
+				
+				if (cripplingLevel == 4)
+					ourEffect.effectAbilityName = 'BleedingEffect_BroadheadBolt4';
+				else if (cripplingLevel == 3)
+					ourEffect.effectAbilityName = 'BleedingEffect_BroadheadBolt3';
+				else if (cripplingLevel == 2)
+					ourEffect.effectAbilityName = 'BleedingEffect_BroadheadBolt2';
+				else
+					ourEffect.effectAbilityName = 'BleedingEffect_BroadheadBolt1';
+				
+				action.RemoveBuff(i);
+				action.AddEffectInfo(ourEffect.effectType, , , ourEffect.effectAbilityName, ,ourEffect.applyChance);
+				break;
+			}
+		}
+	
 	}
 	
 	private var compatibleDamage : name;
@@ -3175,7 +3214,7 @@ class W3EECombatHandler extends W3EEOptionHandler
     {
 		var angle : float;
 		
-		angle = 90.0f + CalculateAttributeValue(GetWitcherPlayer().GetAttributeValue('safe_dodge_angle_bonus'));
+		angle = 91.0f + CalculateAttributeValue(GetWitcherPlayer().GetAttributeValue('safe_dodge_angle_bonus'));
 		if( GetWitcherPlayer().IsSetBonusActive(EISB_LightArmor) )
 			angle += 9.0f;
 			

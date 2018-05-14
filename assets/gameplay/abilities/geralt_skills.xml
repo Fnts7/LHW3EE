@@ -570,7 +570,7 @@
       <!-- Mutant -->
       <ability name="alchemy_s14">
         <tags>alchemy_s14</tags>
-        <duration type="mult" min="0.1" />
+        <duration type="mult" min="0.15" />
       </ability>
 	
       <!-- Condensation -->
@@ -659,7 +659,7 @@
 		</ability>
 		<ability name="perk_12">
 			<tags>perk_12, GlobalPassiveBonus</tags>
-			<toxicity type="base" min="25" />
+			<toxicity type="base" min="20" />
 		</ability>
     </abilities>
   </definitions>

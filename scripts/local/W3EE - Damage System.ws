@@ -281,12 +281,12 @@ class W3EEDamageHandler
 				{
 					if( Enemy.ColdBloodCharge() > 0 )
 					{
-						damageMult = MinF( 1.f + (MaxF(0.02f, 0.01f * skillLevel) * Enemy.ColdBloodCharge() ), 1.f + 0.1f * skillLevel );
+						damageMult = MinF( 1.f + (0.02f * skillLevel * Enemy.ColdBloodCharge() ), 1.f + 0.1f * skillLevel );
 						damageData.processedDmg.vitalityDamage *= damageMult;
 						damageData.processedDmg.essenceDamage *= damageMult;
 					}
 					Enemy.IncColdBloodCharge();
-					Enemy.AddTimer('ResetCB', 6, false,,,,true);
+					Enemy.AddTimer('ResetCB', 7, false,,,,true);
 				}
 			}
 		}

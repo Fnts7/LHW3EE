@@ -320,7 +320,7 @@
 				level							="1"
 				cookedItem_name					="Roasted chicken"
 				cookedItemType					="edibles"
-				cookedItemQuantity				="2"
+				cookedItemQuantity				="1"
 				localisation_key_name			="item_name_roasted_chicken"
 			>
 				<ingredients>					<ingredient quantity="1"	item_name="Chicken"/>
@@ -333,7 +333,7 @@
 				level							="1"
 				cookedItem_name					="Roasted chicken leg"
 				cookedItemType					="edibles"
-				cookedItemQuantity				="2"
+				cookedItemQuantity				="1"
 				localisation_key_name			="item_name_roasted_chicken_leg"
 			>
 				<ingredients>					<ingredient quantity="1"	item_name="Chicken leg"/>
@@ -359,7 +359,7 @@
 				level							="1"
 				cookedItem_name					="Grilled chicken sandwich"
 				cookedItemType					="edibles"
-				cookedItemQuantity				="6"
+				cookedItemQuantity				="4"
 				localisation_key_name			="item_name_grilled_chicken_sandwich"
 			>
 				<ingredients>					<ingredient quantity="1"	item_name="Roasted chicken"/>
@@ -372,7 +372,7 @@
 				level							="1"
 				cookedItem_name					="Fried fish"
 				cookedItemType					="edibles"
-				cookedItemQuantity				="2"
+				cookedItemQuantity				="1"
 				localisation_key_name			="item_name_fried_fish"
 			>
 				<ingredients>					<ingredient quantity="1"	item_name="Gutted fish"/>
@@ -385,11 +385,11 @@
 				level							="1"
 				cookedItem_name					="Fried meat"
 				cookedItemType					="edibles"
-				cookedItemQuantity				="2"
+				cookedItemQuantity				="1"
 				localisation_key_name			="item_name_fried_meat"
 			>
 				<ingredients>					<ingredient quantity="1"	item_name="Raw meat"/>
-												<ingredient quantity="1"	item_name="Onion"/>
+												<ingredient quantity="1"	item_name="Mushroom"/>
 				</ingredients>
 			</recipe>
 			
@@ -440,7 +440,7 @@
 				cookedItemQuantity				="1"
 				localisation_key_name			="item_name_raspberry_juice"
 			>
-				<ingredients>					<ingredient quantity="2"	item_name="Raspberries"/>
+				<ingredients>					<ingredient quantity="1"	item_name="Raspberries"/>
 												<ingredient quantity="1"	item_name="Empty bottle"/>
 				</ingredients>
 			</recipe>

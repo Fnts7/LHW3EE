@@ -69,7 +69,7 @@
 		<piercing_resistance_perc		type="base"	min="0.13"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.16"				/>
 		<rending_resistance_perc		type="base"	min="0.20"				/>
-		<toxicity 						type="base" min="10" 				/>
+		<toxicity 						type="base" min="9" 				/>
 		<injury_resist			 		type="mult"	min="0.1"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.10"				/>
 	</ability>	
