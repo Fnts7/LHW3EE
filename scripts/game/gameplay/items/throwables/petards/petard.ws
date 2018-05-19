@@ -362,7 +362,7 @@ class W3Petard extends CThrowable
 			collisionGroups.PushBack('Destructible');
 			
 			// W3EE - Begin
-			if( GetOwner() == thePlayer && GetWitcherPlayer().CanUseSkill(S_Perk_16) )
+			if( GetOwner() == thePlayer && GetWitcherPlayer().CanUseSkill(S_Perk_18) )
 				ShootProjectileAtPosition( angleInDegrees, speed, actualTargetPos, theGame.params.MAX_THROW_RANGE * 2, collisionGroups);
 			else
 				ShootProjectileAtPosition( angleInDegrees, speed, actualTargetPos, theGame.params.MAX_THROW_RANGE, collisionGroups);
@@ -371,7 +371,7 @@ class W3Petard extends CThrowable
 		else
 		{
 			// W3EE - Begin
-			if( GetOwner() == thePlayer && GetWitcherPlayer().CanUseSkill(S_Perk_16) )
+			if( GetOwner() == thePlayer && GetWitcherPlayer().CanUseSkill(S_Perk_18) )
 				ShootProjectileAtPosition( angleInDegrees, speed, actualTargetPos, theGame.params.MAX_THROW_RANGE * 2 );
 			else
 				ShootProjectileAtPosition( angleInDegrees, speed, actualTargetPos, theGame.params.MAX_THROW_RANGE );
@@ -653,14 +653,12 @@ class W3Petard extends CThrowable
 		if(collidedTarget && !targets.Contains(collidedTarget))
 			targets.PushBack(collidedTarget);
 			
-		// W3EE - Begin
-		/*
+
 		if( caster == GetWitcherPlayer() && GetWitcherPlayer().CanUseSkill( S_Perk_16 ) )
 		{
 			isPerk16Active = true;
 		}
-		*/
-		// W3EE - End
+
 		
 		for( i=targets.Size() - 1; i >= 0; i -= 1)
 		{		
@@ -698,14 +696,11 @@ class W3Petard extends CThrowable
 				
 			}
 			
-			// W3EE - Begin
-			/*
 			if ( targets[i] == GetWitcherPlayer() && isPerk16Active )
 			{
 				targets.EraseFast( i );
 			}	
-			else*/ if ( targets[ i ] == this )
-			// W3EE - End
+			else if ( targets[ i ] == this )			
 			{
 				targets.EraseFast(i);
 			}
@@ -824,14 +819,10 @@ class W3Petard extends CThrowable
 		
 		targets.Remove(this);
 		
-		// W3EE - Begin
-		/*
 		if( GetOwner() == thePlayer && GetWitcherPlayer().CanUseSkill( S_Perk_16 ) )
 		{
 			targets.Remove( thePlayer );
 		}
-		*/
-		// W3EE - End
 
 		
 		targetsSinceLastCheck.Resize(targets.Size());

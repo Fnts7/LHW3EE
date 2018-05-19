@@ -372,10 +372,10 @@
 				level							="1"
 				cookedItem_name					="Fried fish"
 				cookedItemType					="edibles"
-				cookedItemQuantity				="1"
+				cookedItemQuantity				="2"
 				localisation_key_name			="item_name_fried_fish"
 			>
-				<ingredients>					<ingredient quantity="1"	item_name="Gutted fish"/>
+				<ingredients>					<ingredient quantity="2"	item_name="Gutted fish"/>
 												<ingredient quantity="1"	item_name="Onion"/>
 				</ingredients>
 			</recipe>

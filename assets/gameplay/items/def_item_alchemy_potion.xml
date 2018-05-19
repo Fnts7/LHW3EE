@@ -184,7 +184,7 @@
       </ability>
       <ability name="MariborForest_3">
         <toxicity min="55" max="55" type="add" />
-        <duration min="150" max="150" type="add" />
+        <duration min="160" max="160" type="add" />
         <ammo type="add" min="5" />
         <MariborForestEffect_Level3 is_ability="true" />
         <MariborForest_2 is_ability="true" />
@@ -296,7 +296,7 @@
       </ability>
       <ability name="Thunderbolt_3">
         <toxicity min="60" max="60" type="add" />
-        <duration min="120" max="120" type="add" />
+        <duration min="135" max="135" type="add" />
         <ammo type="add" min="5" />
         <ThunderboltEffect_Level3 is_ability="true" />
         <Thunderbolt_2 is_ability="true" />

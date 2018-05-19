@@ -145,6 +145,11 @@ class W3EEOptionHandler
 			return alchemyYield;
 		}
 		
+		public function GetAlchemyYieldHalved() : float
+		{
+			return Max(alchemyYield, 2) / 2.0f;
+		}
+		
 		public function GetShouldAlchemyFade() : bool
 		{
 			return fadeOutAlch;

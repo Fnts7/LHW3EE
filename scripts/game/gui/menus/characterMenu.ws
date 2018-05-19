@@ -2318,9 +2318,10 @@ class CR4CharacterMenu extends CR4MenuBase
 				
 				//ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s02, 'adrenaline_final_damage_bonus', false, false);
 				//argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
-				argsInt.PushBack(RoundMath(ability.valueMultiplicative));
+				argsInt.PushBack(RoundMath(ability.valueMultiplicative + 4 * skillLevel * Options().RendDamageStam()));
 				argsInt.PushBack(Min(RoundMath(arg*100),100));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_RendSkill", argsInt);
+				baseString += "<br>Extra armor piercing on full load is " + (15 + 4 * skillLevel) + "%.";
 				// W3EE - End
 				break;
 			case S_Sword_s03:
@@ -2911,6 +2912,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s07, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, false)) * skillLevel;				
 				argsInt.PushBack(RoundMath(arg*100));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_HunterInstSkill", argsInt);
+				baseString += "<br>LHW3EE override: with lower vigor, the bonus is decreased proportionally down to 0 on no vigor.";
 				// W3EE - End
 				break;
 			case S_Alchemy_s08:
@@ -2967,7 +2969,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				*/
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s14, 'duration', false, false) * skillLevel;				
 				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
-				arg = 2 * skillLevel;
+				arg = 3 * skillLevel;
 				argsInt.PushBack(RoundMath(arg));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				// W3EE - End
@@ -3001,6 +3003,7 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Alchemy_s18:
 				argsInt.PushBack(skillLevel * 10);
 				baseString = GetLocStringByKeyExtWithParams("primer_descr_tolerance", argsInt);
+				baseString += "<br>LHW3EE override. Toxicity is increased by " + 12 * skillLevel + ".";
 				break;
 			// W3EE - End
 			case S_Alchemy_s19:
@@ -3141,12 +3144,14 @@ class CR4CharacterMenu extends CR4MenuBase
 				baseString = GetLocStringByKeyExtWithParams(locKey, , argsFloat);*/
 				argsInt.PushBack(1);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_AdvPyroSkill", argsInt);
+				baseString += "<br>" + GetLocStringByKeyExt("skill_desc_perk_16");
 				// W3EE - End
 				break;
 			case S_Perk_19:
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_19, 'critical_hit_chance', false, true);
 				argsInt.PushBack(RoundMath(100 * ability.valueAdditive));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
+				baseString += "<br>LHW3EE override: doesn't cancel out basic battle trance effect!";
 				break;
 			case S_Perk_20:
 				// W3EE - Begin
@@ -3177,7 +3182,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsString.PushBack( FloatToString( ability.valueAdditive ) );
 				baseString = GetLocStringByKeyExtWithParams( locKey, , , argsString );
 				*/
-				argsInt.PushBack(10);
+				argsInt.PushBack(8);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_AtkBstDfnsSkill", argsInt);
 				// W3EE - End
 				break;
@@ -3185,6 +3190,9 @@ class CR4CharacterMenu extends CR4MenuBase
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_22, 'encumbrance', false, true);
 				argsInt.PushBack(RoundMath(ability.valueBase));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
+				break;
+			case S_Perk_16:				
+				baseString = "Grants immunity to own bombs and bolts damage and effects.";
 				break;
 			default:
 				if (skillLevel == 2) 		baseString = GetLocStringByKeyExt(targetSkill.localisationDescriptionLevel2Key);

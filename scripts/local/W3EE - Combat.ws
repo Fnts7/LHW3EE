@@ -153,7 +153,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var witcher : W3PlayerWitcher = GetWitcherPlayer();
 		var costMult, delayReduction : SAbilityAttributeValue;
 		
-		if( witcher.CanUseSkill(S_Perk_21) && Perk21Active )
+		if( actionType != ESAT_Parry && witcher.CanUseSkill(S_Perk_21) && Perk21Active )
 		{
 			regenDelay = 0.f;
 			return 0.f;
@@ -248,13 +248,13 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var witcher : W3PlayerWitcher = GetWitcherPlayer();
 		var staminaCost, regenDelay : float;
 		
-		if( witcher.CanUseSkill(S_Perk_21) && Perk21Active )
+		if( actionType != ESAT_Parry && witcher.CanUseSkill(S_Perk_21) && Perk21Active )
 		{
 			SetPerk21State(false);
 			if( !Perk21TimerActive )
 			{
 				SetPerk21TimerState(true);
-				witcher.AddTimer('ReactivatePerk21', 10, false);
+				witcher.AddTimer('ReactivatePerk21', 8, false);
 			}
 		}
 		else

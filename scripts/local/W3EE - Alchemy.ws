@@ -143,13 +143,15 @@ class W3EEAlchemyExtender
 		var min, max : SAbilityAttributeValue;
 		var dm : CDefinitionsManagerAccessor;
 		var i, quantity : int;
+		var quantityYield : float;
 		
 		dm = theGame.GetDefinitionsManager();
 		if( GetIsItemTypeModified(recipe) )
 		{
 			if( recipe.cookedItemType == EACIT_Potion || recipe.cookedItemType == EACIT_Oil )
 			{
-				quantity = recipe.cookedItemQuantity + Options().GetAlchemyYield() - 1;
+				quantityYield = recipe.cookedItemQuantity - 1 + Options().GetAlchemyYieldHalved() + RandF();
+				quantity = FloorF(quantityYield);
 				if( playerWitcher.IsSetBonusActive(EISB_RedWolf_2) && RandRange(100, 0) <= 30 )
 					quantity += 1;
 			}
@@ -530,7 +532,7 @@ class W3EEAlchemyExtender
 	private var maximumToxicity : float;
 	public function OnSkillUpdated( skill : ESkill, skillLevel : int, optional geralt : W3PlayerWitcher ) : void
 	{
-		var skillMult : float;
+		//var skillMult : float;
 		var min, max : SAbilityAttributeValue;
 		var dm : CDefinitionsManagerAccessor;
 		var attributes : array<name>;
@@ -548,13 +550,13 @@ class W3EEAlchemyExtender
 			dm.GetAbilityAttributes('alchemy_s18', attributes);
 			dm.GetAbilityAttributeValue('alchemy_s18', attributes[0], max, min);
 			
-			if (min.valueAdditive && min.valueAdditive != 1.f)
+			/*if (min.valueAdditive && min.valueAdditive != 1.f)
 				skillMult = 0.1f / min.valueAdditive;
 			else
-				skillMult = 0.1f;
-			
+				skillMult = 0.1f;*/
+				
 			playerWitcher.RemoveAbilityAll('alchemy_s18');
-			playerWitcher.AddAbilityMultiple('alchemy_s18', (int)(playerWitcher.GetStatMax(BCS_Toxicity) * skillLevel * skillMult));
+			playerWitcher.AddAbilityMultiple('alchemy_s18', /*(int)(playerWitcher.GetStatMax(BCS_Toxicity) */ skillLevel * 12);
 			maximumToxicity = playerWitcher.GetStatMax(BCS_Toxicity);
 		}
 	}

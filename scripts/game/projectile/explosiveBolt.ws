@@ -104,14 +104,11 @@ class W3ExplosiveBolt extends W3BoltProjectile
 					continue;
 				}
 				
-				// W3EE - Begin
-				/*
 				if( ents[i] == GetWitcherPlayer() && caster == GetWitcherPlayer() && GetWitcherPlayer().CanUseSkill( S_Perk_16 )  )
 				{
 					continue;
 				}
-				*/
-				// W3EE - End
+
 				
 				super.ProcessDamageAction(ents[i], Vector(0,0,0), '');
 			}

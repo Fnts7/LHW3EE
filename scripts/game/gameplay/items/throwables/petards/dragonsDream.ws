@@ -26,14 +26,14 @@ class W3DragonsDream extends W3Petard
 			gasEntity.SetIsFromClusterBomb(isCluster);
 			gasEntity.SetFriendlyFire( friendlyFire );
 
-			// W3EE - Begin
-			/*
 			
 			if( GetWitcherPlayer().CanUseSkill( S_Perk_16 ) )
 			{
 				gasEntity.SetWasPerk16Active( true );
 			}
-			
+
+			// W3EE - Begin
+			/*			
 			if( (W3PlayerWitcher)GetOwner() && GetWitcherPlayer().CanUseSkill(S_Perk_20) )
 			{
 				gasEntity.SetPerk20DamageMultiplierOn();

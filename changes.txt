@@ -1,4 +1,25 @@
-﻿Version 11
+﻿Version 12
+
+Geralt's base HP raised to 6300, but well rested effects now grants just 500 health.
+
+Further toxicity balancing:
+- Acquired tolerance skill toxicity increase changed - instreado of 10% per level, now grants flat 12 toxicity per level
+- Adaptation skill changes reverted
+
+Attack is the Best Defense perk boosted - reactivation after 8sec. Also this perk now does not affect parry, as it is cheapest action.
+
+Battle Trance perk nerfed to 4% crit chance per vigor point.
+
+In Combat's Fires perk effect reverted back to vanilla - Geralt ignores own bombs and bolts damage and effects.
+
+Advanced pyrotechnics perk now additionally has an effect of W3EE "In Combat's Fires" in addition to extra cluster.
+
+Changed how Preparation -> Yield setting works. Now it sets the amount of prepared oil or potion to: yield value / 2.
+Allowing half quantity value. So e.g. if yield is set to 3, then there is 50% chance of preparing 2 items, otherwise 1.
+Similar rule as with bombs optimization skill. Yield setting value 2 or less simply means 1.
+
+
+Version 11
 
 Crossbow and bolts:
 - increased armor piercing values of target point bolts a bit

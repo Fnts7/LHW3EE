@@ -465,6 +465,7 @@ class CR4AlchemyMenu extends CR4ListBaseMenu
 		
 		//---=== modFriendlyHUD ===---
 		var playerItems, horseItems  : int;
+		var alchYield : float;
 		//---=== modFriendlyHUD ===---
 		
 		var expandedAlchemyCategories : array< name >;
@@ -668,7 +669,12 @@ class CR4AlchemyMenu extends CR4ListBaseMenu
 				playerItems = recipe.cookedItemQuantity;
 				if( recipe.cookedItemType == EACIT_Potion || recipe.cookedItemType == EACIT_Oil )
 				{
-					playerItems = recipe.cookedItemQuantity + Options().GetAlchemyYield() - 1;
+					alchYield = Options().GetAlchemyYieldHalved();
+					playerItems += FloorF(alchYield) - 1;
+					
+					if (alchYield - FloorF(alchYield) >= 0.001f)
+						horseItems += 1;
+					
 					if( thePlayer.HasBuff(EET_AlchemyTable) )
 						playerItems += 1;
 						
@@ -1581,7 +1587,7 @@ class CR4AlchemyMenu extends CR4ListBaseMenu
 				return defaultIngredientQuantities[ingredientIndex];
 				
 			if( selectedRecipe.cookedItemType == EACIT_Potion || selectedRecipe.cookedItemType == EACIT_Oil )
-				quantity = Options().GetAlchemyYield() + (int)GetWitcherPlayer().HasBuff(EET_AlchemyTable);
+				quantity = FloorF(Options().GetAlchemyYieldHalved() + RandF()) + (int)GetWitcherPlayer().HasBuff(EET_AlchemyTable);
 			else
 				quantity = 1 + (int)GetWitcherPlayer().HasBuff(EET_AlchemyTable);
 				

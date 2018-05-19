@@ -7307,7 +7307,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( inv.ItemHasTag(item, 'Mutagen') )
 		{
 			if(CanUseSkill(S_Alchemy_s14))
-				toxicityOffset -= 2 * GetSkillLevel(S_Alchemy_s14);
+				toxicityOffset -= 3 * GetSkillLevel(S_Alchemy_s14);
 				
 			//toxicityOffset = CeilF(toxicityOffset * (1.f + (GetNumMutagensActive() / 2.f))) + CeilF(GetStat(BCS_Toxicity, true) * ((GetNumMutagensActive() + 1) / 2.f)); 
 		}
@@ -7404,7 +7404,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			// W3EE - Begin
 			if( CanUseSkill(S_Alchemy_s14) )
-				mutagenParams.toxicityOffset -= 2 * GetSkillLevel(S_Alchemy_s14);
+				mutagenParams.toxicityOffset -= 3 * GetSkillLevel(S_Alchemy_s14);
 				
 			//mutagenParams.toxicityOffset = CeilF(mutagenParams.toxicityOffset * (1.f + (GetNumMutagensActive() / 2.f))) + CeilF(GetStat(BCS_Toxicity, true) * ((GetNumMutagensActive() + 1) / 2.f)); 
 			// W3EE - End

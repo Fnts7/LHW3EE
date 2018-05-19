@@ -697,15 +697,11 @@ state Explosion in CMonsterNestEntity
 		entitiesInRange.Remove( parent );
 		for( i = 0; i < entitiesInRange.Size(); i += 1 )
 		{
-			// W3EE - Begin
-			/*
 			if( entitiesInRange[ i ] == thePlayer && thePlayer.CanUseSkill( S_Perk_16 ) )
 			{
 				continue;
 			}
-			*/
-			// W3EE - End
-			
+				
 			if( (CActor)entitiesInRange[i] )
 			{
 				damage = new W3DamageAction in parent;

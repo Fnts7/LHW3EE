@@ -1330,7 +1330,7 @@ class W3TooltipComponent
 					
 					// W3EE - Begin
 					if(thePlayer.CanUseSkill(S_Alchemy_s14))
-						currentStat.value -= 2 * thePlayer.GetSkillLevel(S_Alchemy_s14);
+						currentStat.value -= 3 * thePlayer.GetSkillLevel(S_Alchemy_s14);
 						
 					// currentStat.value += CeilF(thePlayer.GetStat(BCS_Toxicity, true) * ((thePlayer.GetNumMutagensActive() + 1) / 2.f));
 					// W3EE - End

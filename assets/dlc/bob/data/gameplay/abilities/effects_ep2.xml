@@ -87,7 +87,7 @@
 
     <ability name="WellRestedEffect">
       <duration type="add" min="1800"/>
-      <vitality type="add" min="500"/>
+      <vitality type="add" min="250"/>
     </ability>
 
       <ability name="HorseStableBuff">

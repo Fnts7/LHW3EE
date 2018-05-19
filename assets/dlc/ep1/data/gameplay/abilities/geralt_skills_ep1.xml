@@ -12,7 +12,7 @@
 		</ability>
 		<ability name="perk_19">
 			<tags>perk_19</tags>
-			<critical_hit_chance type="add" min="0.05" />
+			<critical_hit_chance type="add" min="0.04" />
 		</ability>
 		<ability name="perk_22">
 			<tags>perk_22</tags>

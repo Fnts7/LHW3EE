@@ -468,7 +468,7 @@ state Aiming in PlayerAiming
 		
 		// W3EE - Begin
 		// CalculateAimPosition( parent.tracePosFrom, throwPosInitial, parent.throwPos, throwPosNormal, aimEnt );
-		if( parent.owner.CanUseSkill(S_Perk_16) )
+		if( parent.owner.CanUseSkill(S_Perk_18) )
 			maxRangePos = VecNormalize(theCamera.GetCameraDirection()) * theGame.params.MAX_THROW_RANGE * 1.3f;
 		else
 			maxRangePos = VecNormalize(theCamera.GetCameraDirection()) * theGame.params.MAX_THROW_RANGE;

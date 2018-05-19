@@ -353,14 +353,14 @@
             </ability>
            
             <ability name="Master_StrongCrits">
-                <critical_hit_damage_bonus      type="add"              min="0.10"      max="0.14"      />
+                <critical_hit_damage_bonus      type="add"              min="0.09"      max="0.13"      />
                 <critical_hit_chance            type="add"              min="-0.05"     max="-0.039"     />
             </ability>
            
             <ability name="Magical_Cleave">
-                <damage_through_blocks          type="mult"             min="0.07"      max="0.1"      />
+                <damage_through_blocks          type="mult"             min="0.07"      max="0.11"      />
                 <shield_disarm_chance           type="mult"             min="0.09"      max="0.12"      />
-                <attack_speed                   type="mult"             min="-0.11"     max="-0.06"     />
+                <attack_speed                   type="mult"             min="-0.11"     max="-0.065"     />
             </ability>
 			
 			<ability name="Magical_Overwhelm">

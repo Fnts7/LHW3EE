@@ -58,7 +58,7 @@
       <ability name="Lvl47"><tags> "base" </tags><vitality type="base" always_random="false" min="25" max="25" />   </ability>
       <ability name="Lvl48"><tags> "base" </tags><vitality type="base" always_random="false" min="25" max="25" />   </ability>
       <ability name="Lvl49"><tags> "base" </tags><vitality type="base" always_random="false" min="25" max="25" />   </ability>
-      <ability name="Lvl50"><tags> "base" </tags><vitality type="base" always_random="false" min="25" max="25" />   </ability>
+      <ability name="Lvl50"><tags> "base" </tags><vitality type="base" always_random="false" min="400" max="400" />   </ability>
       	  
       <ability name="GeraltMult">
         <tags> "base" </tags>
