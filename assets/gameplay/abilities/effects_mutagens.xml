@@ -59,8 +59,8 @@
 			
 			<!-- Troll -->
 			<ability name="Mutagen12Effect">
-				<vitalityRegen type="mult" min="0.025"/>
-				<vitalityCombatRegen type="mult" min="0.0075"/>
+				<vitalityRegen type="mult" min="0.018"/>
+				<vitalityCombatRegen type="mult" min="0.01"/>
 			</ability>
 			
 			<!-- Noonwraith -->
@@ -108,9 +108,9 @@
 			
 			<!-- Grave Hag -->
 			<ability name="Mutagen18Effect">
-				<vitalityCombatRegen type="mult" min="0.0025"/>
+				<vitalityCombatRegen type="mult" min="0.004"/>
 
-				<mutagen18_max_stack type="add" min="-1"/>
+				<mutagen18_max_stack type="add" min="7"/>
 			</ability>
 			
 			<!-- Wraith -->

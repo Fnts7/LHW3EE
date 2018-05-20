@@ -11172,7 +11172,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		var buffs : array<SEffectInfo>;
 		var i : int;
 		var category : name;
-		var potionToxicity : float;
+		var potionToxicity, foodHeal : float;
 		var foodBuffLvl : int;
 		
 		if(!inv.IsIdValid(itemId))
@@ -11216,7 +11216,10 @@ statemachine abstract import class CR4Player extends CPlayer
 			
 			if (foodBuffLvl > 0)
 			{
-				Heal( 100.0f * PowF(2.0f, foodBuffLvl - 1) * (1.0f - PowF(GetStatPercents(BCS_Toxicity), 1.8f)) );
+				foodHeal = 100.0f * PowF(2.0f, foodBuffLvl - 1) * (1.0f - PowF(GetStatPercents(BCS_Toxicity), 1.8f));
+				if (CanUseSkill(S_Perk_15))
+					foodHeal *= 1.25f;
+				Heal( foodHeal );
 			}
 			
 			if ( inv.ItemHasTag(itemId, 'Alcohol') )

@@ -335,11 +335,11 @@ class W3EEExperienceHandler
 				if( (W3BoltProjectile)attackAction.causer )
 				{
 					if ( (W3ExplosiveBolt)attackAction.causer )
-						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.5f);
+						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.4f);
 					else if ( ((W3BoltProjectile)attackAction.causer).GetWasAimedBolt() )
-						ModPathProgress(ESSP_Sword_Crossbow, mult * 1.25f);
+						ModPathProgress(ESSP_Sword_Crossbow, mult * 1.1f);
 					else						
-						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.75f);
+						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.65f);
 				}
 			}
 			else if ( (W3Petard)action.causer )
@@ -387,16 +387,16 @@ class W3EEExperienceHandler
 		
 		if( playerWitcher.IsLightAttack(attackName) )
 		{
-			ModPathProgress(ESSP_Sword_StyleFast, 0.5f);
+			ModPathProgress(ESSP_Sword_StyleFast, 0.4f);
 		}
 		else
 		if( playerWitcher.IsHeavyAttack(attackName) )
 		{
-			ModPathProgress(ESSP_Sword_StyleStrong, 0.5f);
+			ModPathProgress(ESSP_Sword_StyleStrong, 0.4f);
 		}
 		else
 		{
-			ModPathProgress(ESSP_Sword_Crossbow, 0.4f);
+			ModPathProgress(ESSP_Sword_Crossbow, 0.35f);
 		}
 	}
 	
@@ -452,7 +452,7 @@ class W3EEExperienceHandler
 		if( isDecoction )
 		{
 			ModPathProgress(ESSP_Alchemy_Grasses, 1.3f);
-			ModPathProgress(ESSP_Alchemy_Mutagens, 1.f);
+			ModPathProgress(ESSP_Alchemy_Mutagens, 1.3f);
 		}
 		else
 			ModPathProgress(ESSP_Alchemy_Grasses, 1);

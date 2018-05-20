@@ -2257,7 +2257,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	event OnTakeDamage( action : W3DamageAction)
 	{
-		var currVitality, rgnVitality, hpTriggerTreshold : float;
+		var currVitality, rgnVitality, mut19Percent : float;
 		var healingFactor : float;
 		var abilityName : name;
 		var abilityCount, maxStack, itemDurability, remAbilityCount : float;
@@ -2268,6 +2268,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var i : int;
 		var killSourceName : string;
 		var aerondight	: W3Effect_Aerondight;
+		var mutagen09 : W3Mutagen19_Effect;
 		
 		// W3EE - Begin
 		var mutagen03 : W3Mutagen03_Effect;
@@ -2374,21 +2375,29 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		if(HasBuff(EET_Mutagen19))
+		if(action.DealsAnyDamage() && !((W3Effect_Toxicity)action.causer) && HasBuff(EET_Mutagen19))
 		{
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue(GetBuff(EET_Mutagen19).GetAbilityName(), 'max_hp_perc_trigger', min, max);
-			hpTriggerTreshold = GetStatMax(BCS_Vitality) * CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+			mutagen09 = (W3Mutagen19_Effect) GetBuff(EET_Mutagen19);
 			
-			// W3EE - Begin
-			if(action.GetDamageDealt() >= hpTriggerTreshold)
+			if (mutagen09)
 			{
-				mutagenQuen = (W3QuenEntity)theGame.CreateEntity( signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
-				mutagenQuen.Init( signOwner, signs[ST_Quen].entity, true, false, true );
-				mutagenQuen.OnStarted();
-				mutagenQuen.OnThrowing();
-				mutagenQuen.OnEnded();
+				mut19Percent = (action.GetDamageDealt() / GetStatMax(BCS_Vitality)) * 2.5f;
+				mutagen09.AddPercent(mut19Percent);
+				
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue(GetBuff(EET_Mutagen19).GetAbilityName(), 'max_hp_perc_trigger', min, max);
+				mut19Percent = (action.GetDamageDealt() / GetStatMax(BCS_Vitality)) / CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+			
+				// W3EE - Begin
+				if( mutagen09.TestTrigger(mut19Percent) )
+				{
+					mutagenQuen = (W3QuenEntity)theGame.CreateEntity( signs[ST_Quen].template, GetWorldPosition(), GetWorldRotation() );
+					mutagenQuen.Init( signOwner, signs[ST_Quen].entity, true, false, true );
+					mutagenQuen.OnStarted();
+					mutagenQuen.OnThrowing();
+					mutagenQuen.OnEnded();
+				}
+				// W3EE - End			
 			}
-			// W3EE - End
 		}
 		
 		

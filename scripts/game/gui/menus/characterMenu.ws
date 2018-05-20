@@ -3132,8 +3132,9 @@ class CR4CharacterMenu extends CR4MenuBase
 				ability.valueAdditive = 480;
 				ability.valueAdditive /= 60;
 				argsString.PushBack( FloatToString( ability.valueAdditive ) );*/
-				argsInt.PushBack(50);
+				argsInt.PushBack(25);
 				baseString = GetLocStringByKeyExtWithParams( locKey, argsInt/* , , argsString */);
+				baseString += "<br>Increases food instant healing by 25% and over time healing by 35%.";
 				// W3EE - End
 				break;
 			case S_Perk_18:

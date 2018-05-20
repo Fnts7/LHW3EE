@@ -417,16 +417,19 @@
       <ability name="WellFedEffect_Level1">
         <duration type="add" min="180" max="180" />
         <vitalityRegen type="add" min="5" max="7" />
+		<vitalityCombatRegen type="add" min="4" max="4" />
         <level type="add" min="1" />
       </ability>
       <ability name="WellFedEffect_Level2">
         <duration type="add" min="240" max="240" />
         <vitalityRegen type="add" min="7" max="9" />
+		<vitalityCombatRegen type="add" min="6" max="6" />
         <level type="add" min="2" />
       </ability>
       <ability name="WellFedEffect_Level3">
         <duration type="add" min="300" max="300" />
         <vitalityRegen type="add" min="9" max="11" />
+		<vitalityCombatRegen type="add" min="8" max="8" />
         <level type="add" min="3" />
       </ability>
       <ability name="WellHydratedEffect_Level1">

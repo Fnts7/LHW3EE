@@ -1,4 +1,22 @@
-﻿Version 12
+﻿Version 13
+
+Food regen now also has effect in combat (surprised it didn't as it is such low value).
+
+Made gourmet perk reasonable: +25% instant heal, +35% food regen value, +25% duration.
+
+Troll decoction in combat regen boosted, so it is stronger than lvl3 swallow. Out of combat regen reduced, but still
+stronger than combat one.
+
+Grave Hag mutagen boosted - gives better regen gain per kill, but max stack is 7.
+
+Wraith decoction reworked, so it is usable - any hit can trigger quen, but the chance gets higher with stronger hits
+and more overall damage taken. Received damage increases gradually chance and is not reset between combats, so having
+bad luck long time raises chance of triggering quen greatly.
+
+Lowered a bit ranged combat experience gain rates.
+
+
+Version 12
 
 Geralt's base HP raised to 6300, but well rested effects now grants just 500 health.
 
