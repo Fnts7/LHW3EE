@@ -801,18 +801,18 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	{
 		adrGain = playerWitcher.GetAttributeValue('focus_gain');
 		
-		valueAbility = 0.006f * (adrGain.valueAdditive + adrGain.valueMultiplicative + adrGain.valueBase);
+		valueAbility = 0.006f * (adrGain.valueAdditive + adrGain.valueMultiplicative + adrGain.valueBase + playerWitcher.GetSkillLevel(S_Alchemy_s18) * 0.03f);
 		valueStr = NoTrailZeros(RoundTo(valueAbility * 100, 2));
-		valueAbility = 0.024f * (adrGain.valueAdditive + adrGain.valueMultiplicative + adrGain.valueBase);
+		valueAbility = 0.024f * (adrGain.valueAdditive + adrGain.valueMultiplicative + adrGain.valueBase + playerWitcher.GetSkillLevel(S_Alchemy_s18) * 0.03f);
 		valueStr += " - " + NoTrailZeros(RoundTo(valueAbility * 100, 2));
 	}
 	else if ( varKey == 'adrGainCounter' )
 	{
 		adrGain = playerWitcher.GetAttributeValue('focus_gain');
 		
-		valueAbility = 0.014f * (adrGain.valueAdditive + adrGain.valueMultiplicative + adrGain.valueBase);
+		valueAbility = 0.014f * (adrGain.valueAdditive + adrGain.valueMultiplicative + adrGain.valueBase + playerWitcher.GetSkillLevel(S_Alchemy_s18) * 0.03f);
 		valueStr = NoTrailZeros(RoundTo(valueAbility * 100, 2));
-		valueAbility = 0.05f * (adrGain.valueAdditive + adrGain.valueMultiplicative + adrGain.valueBase);
+		valueAbility = 0.05f * (adrGain.valueAdditive + adrGain.valueMultiplicative + adrGain.valueBase + playerWitcher.GetSkillLevel(S_Alchemy_s18) * 0.03f);
 		valueStr += " - " + NoTrailZeros(RoundTo(valueAbility * 100, 2));
 	}
 	else if ( varKey == 'adrStamReg' )

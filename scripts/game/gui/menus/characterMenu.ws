@@ -3001,15 +3001,16 @@ class CR4CharacterMenu extends CR4MenuBase
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				break;
 			case S_Alchemy_s18:
-				argsInt.PushBack(skillLevel * 10);
-				baseString = GetLocStringByKeyExtWithParams("primer_descr_tolerance", argsInt);
-				baseString += "<br>LHW3EE override. Toxicity is increased by " + 12 * skillLevel + ".";
+				//argsInt.PushBack(skillLevel * 10);
+				//baseString = GetLocStringByKeyExtWithParams("primer_descr_tolerance", argsInt);
+				baseString = "Adrenaline is increased by: " + (skillLevel * 10) + "%, adrenaline gain is increased by: " + (3 * skillLevel) + "%, toxicity is increased by: " + (12 * skillLevel) + ".";
 				break;
 			// W3EE - End
 			case S_Alchemy_s19:
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s19, 'synergy_bonus', false, false)) * skillLevel;
 				argsInt.PushBack(RoundMath(arg*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
+				baseString += "<br>In case of green mutagen synergy bonus is converted from toxicity to adrenaline gain: 1 toxicity becomes 1% adrenaline gain bonus.";
 				break;
 			case S_Alchemy_s20:
 				// W3EE - Begin

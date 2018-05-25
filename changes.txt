@@ -1,4 +1,21 @@
-﻿Version 13
+﻿Version 14
+
+Fixed a bug of overpowered Temerian, Nilfgard and Skellige armor available to buy. They were actually NG+ version
+but it is irrelevant with W3EE, so always the merchants should have base versions.
+
+Boosted Skellige heavy armor rending resistance.
+
+Synergy for green mutagen now gives adrenaline gain bonus instead of toxicity. Conversion is 1 tox to 1% adrenaline
+gain. That is because toxicity should be limited and there are other skills to increase it already. Adrenaline gain
+bonus fits great for high tox builds, because it works together great with the trial of grasses skill that reduces
+your chance of loosing adrenaline when hit. So for example with one greater green mutagen and synergy level 5
+you will get 0.25 * 24 = 6 -> 6% adrenaline gain bonus.
+
+
+Added new magical sword roll set - diligent: +crit chance, + attack stamina cost bonus, + adrenaline gain, - attack power, - crit damage
+
+
+Version 13
 
 Food regen now also has effect in combat (surprised it didn't as it is such low value).
 

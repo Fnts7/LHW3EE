@@ -320,6 +320,14 @@
                 <critical_hit_chance            type="add"              min="0.04"      max="0.07"      />
                 <critical_hit_damage_bonus      type="add"              min="-0.16"     max="-0.11"     />
             </ability>
+			
+			<ability name="Magical_Diligent">
+                <critical_hit_damage_bonus      type="add"            min="-0.1"      max="-0.07"   />
+                <critical_hit_chance            type="add"            min="0.05"      max="0.08"    />
+				<focus_gain						type="mult"			  min="0.07"	  max="0.1"		/>
+				<attack_stamina_cost_bonus      type="mult"           min="0.08"      max="0.11"    />
+				<attack_power                   type="mult"           min="-0.14"     max="-0.11"   />
+            </ability>
            
             <ability name="Magical_Sting">
                 <attack_power_fast_style        type="mult"             min="0.07"      max="0.12"      />

@@ -806,6 +806,7 @@ import class W3GameParams extends CObject
 	
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Needle');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Precision');
+		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Diligent');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Sting');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_Celerity');
 		WEAPON_MAGICAL_ABILITIES.PushBack('Magical_CleanSlice');
