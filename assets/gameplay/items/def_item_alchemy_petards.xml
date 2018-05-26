@@ -80,7 +80,7 @@
 	  
       <ability name="DevilsPuffball_2_impact">
         <tags>PetardImpactParams</tags>
-        <PoisonDamage type="add" min="1000" max="1000" />
+        <PoisonDamage type="add" min="1200" max="1200" />
         <ammo type="add" min="3" />
         <DevilsPuffball_3_impact is_ability="true" />
         <level type="add" min="2" />
@@ -89,12 +89,12 @@
       <ability name="DevilsPuffball_2_loop">
         <tags>PetardLoopParams</tags>
         <PoisonEffect_DevilsPuffball_2 is_ability="true" />
-        <duration type="add" min="30" max="30" />
+        <duration type="add" min="20" max="20" />
       </ability>
 	  
       <ability name="DevilsPuffball_3_impact">
         <tags>PetardImpactParams</tags>
-        <PoisonDamage type="add" min="1100" max="1100" />
+        <PoisonDamage type="add" min="1500" max="1500" />
         <ammo type="add" min="4" />
         <DevilsPuffball_2_impact is_ability="true" />
         <level type="add" min="3" />
@@ -109,8 +109,8 @@
       <!-- DRAGONS DREAM -->
       <ability name="DragonsDream_1">
         <tags>PetardLoopParams</tags>
-        <FireDamage type="add" min="2500" max="2500" />
-        <duration type="add" min="15" max="15" />
+        <FireDamage type="add" min="3000" max="3000" />
+        <duration type="add" min="18" max="18" />
         <ammo type="add" min="2" />
 		<quality type="add" min="2" max="2"/>
 		<level type="add" min="1" />
@@ -118,7 +118,7 @@
 	  
       <ability name="DragonsDream_2">
         <tags>PetardLoopParams</tags>
-        <FireDamage type="add" min="3000" max="3000" />
+        <FireDamage type="add" min="4000" max="4000" />
         <duration type="add" min="30" max="30" />
         <ammo type="add" min="3" />
         <DragonsDream_2 is_ability="true" />
@@ -129,12 +129,12 @@
 	  
       <ability name="DragonsDream_3">
         <tags>PetardLoopParams</tags>
-        <FireDamage type="add" min="3500" max="3500" />
-        <duration type="add" min="30" max="30" />
+        <FireDamage type="add" min="4600" max="4600" />
+        <duration type="add" min="35" max="35" />
         <ammo type="add" min="4" />
         <DragonsDream_3 is_ability="true" />
         <level type="add" min="3" />
-		<burning_chance min="0.5" type="add" />
+		<burning_chance min="0.8" type="add" />
 		<explosionFireDamage type="add" min="20" />
 		<quality type="add" min="4" max="4"/>
       </ability>
@@ -250,8 +250,8 @@
 	  
       <ability name="Grapeshot_2">
         <tags>PetardImpactParams</tags>
-        <PhysicalDamage type="add" min="3100" max="3100" />
-        <SilverDamage type="add" min="3300" max="3300" />
+        <PhysicalDamage type="add" min="3000" max="3000" />
+        <SilverDamage type="add" min="3200" max="3200" />
         <FireDamage type="add" min="10" />
         <StaggerEffect is_ability="true" />
         <ammo type="add" min="3" />
@@ -262,10 +262,10 @@
 	  
       <ability name="Grapeshot_3">
         <tags>PetardImpactParams</tags>
-        <PhysicalDamage type="add" min="2400" max="2400" />
-        <SilverDamage type="add" min="2600" max="2600" />
+        <PhysicalDamage type="add" min="3400" max="3400" />
+        <SilverDamage type="add" min="3600" max="3600" />
         <FireDamage type="add" min="10" />
-        <StaggerEffect is_ability="true" />
+        <LongStaggerEffect is_ability="true" />
         <ammo type="add" min="4" />
         <Grapeshot_2 is_ability="true" />
         <level type="add" min="3" />
@@ -351,11 +351,11 @@
 		<quality type="add" min="2" max="2"/>
 		<level type="add" min="1" />
 		<ability_disable_duration type="add" min="20" max="20" />
-		<FrostDamage type="add" min="1000" max="1000" />
+		<FrostDamage type="add" min="100" max="100" />
       </ability>
       <ability name="WhiteFrost_1_loop">
         <tags>PetardLoopParams</tags>
-        <duration type="add" min="4" max="4" />
+        <duration type="add" min="2" max="2" />
       </ability>
       <ability name="WhiteFrost_2_impact">
         <tags>PetardImpactParams</tags>
@@ -370,11 +370,11 @@
         <level type="add" min="2" />
 		<quality type="add" min="3" max="3"/>
 		<ability_disable_duration type="add" min="20" max="20" />
-		<FrostDamage type="add" min="1200" max="1200" />
+		<FrostDamage type="add" min="150" max="150" />
       </ability>
       <ability name="WhiteFrost_2_loop">
         <tags>PetardLoopParams</tags>
-        <duration type="add" min="4" max="4" />
+        <duration type="add" min="3" max="3" />
       </ability>
       <ability name="WhiteFrost_3_impact">
         <tags>PetardImpactParams</tags>
@@ -389,7 +389,7 @@
         <level type="add" min="3" />
 		<quality type="add" min="4" max="4"/>
 		<ability_disable_duration type="add" min="20" max="20" />
-		<FrostDamage type="add" min="1300" max="1300" />
+		<FrostDamage type="add" min="200" max="200" />
       </ability>
       <ability name="WhiteFrost_3_loop">
         <tags>PetardLoopParams</tags>

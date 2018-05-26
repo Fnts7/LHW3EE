@@ -118,13 +118,13 @@
       </ability>
 	  
 	  <ability name="BlindnessEffect_Samum_1">
-        <duration type="add" min="4" max="4" />
+        <duration type="add" min="5" max="5" />
       </ability>
       <ability name="BlindnessEffect_Samum_2">
-        <duration type="add" min="6" max="6" />
+        <duration type="add" min="7" max="7" />
       </ability>
       <ability name="BlindnessEffect_Samum_3">
-        <duration type="add" min="8" max="8" />
+        <duration type="add" min="9" max="9" />
       </ability>
 	  
       <ability name="BoostedEssenceRegen">
@@ -152,23 +152,23 @@
 	  
       <ability name="BurningEffect_DancingStar_1">
         <FireDamage type="mult" min="0.002" max="0.002" />
-		<FireDamage type="add" min="200" />
-        <duration type="add" min="0.3" />
+		<FireDamage type="add" min="160" />
+        <duration type="add" min="1" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
       <ability name="BurningEffect_DancingStar_2">
         <FireDamage type="mult" min="0.002" max="0.002" />
-		<FireDamage type="add" min="300" />
-        <duration type="add" min="0.3" />
+		<FireDamage type="add" min="240" />
+        <duration type="add" min="2" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
       <ability name="BurningEffect_DancingStar_3">
         <FireDamage type="mult" min="0.002" max="0.002" />
-		<FireDamage type="add" min="400" />
+		<FireDamage type="add" min="320" />
         <duration type="add" min="3" max="3" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
@@ -299,17 +299,17 @@
       </ability>
 	  
       <ability name="PoisonEffect_DevilsPuffball_1">
-        <duration type="add" min="0.3"/>
+        <duration type="add" min="1"/>
         <PoisonDamage type="mult" min="0.0" max="0.0" />
-        <PoisonDamage type="add" min="150" max="150" />
+        <PoisonDamage type="add" min="200" max="200" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
       <ability name="PoisonEffect_DevilsPuffball_2">
-        <duration type="add" min="0.3"/>
+        <duration type="add" min="2"/>
         <PoisonDamage type="mult" min="0.0" max="0.0" />
-        <PoisonDamage type="add" min="250" max="250" />
+        <PoisonDamage type="add" min="300" max="300" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
@@ -317,7 +317,7 @@
       <ability name="PoisonEffect_DevilsPuffball_3">
         <duration type="add" min="3" />
         <PoisonDamage type="mult" min="0.0" max="0.0" />
-        <PoisonDamage type="add" min="300" max="300" />
+        <PoisonDamage type="add" min="400" max="400" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>

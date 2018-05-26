@@ -171,8 +171,8 @@ class W3EEDamageHandler
 			else
 			if( damageData.IsActionRanged() && (W3Petard)damageData.causer )
 			{
-				damageData.processedDmg.vitalityDamage *= pdamb;
-				damageData.processedDmg.essenceDamage *= pdamb;
+				damageData.processedDmg.vitalityDamage *= pdamb * 0.85f;
+				damageData.processedDmg.essenceDamage *= pdamb * 0.85f;
 				return;
 			}
 			else

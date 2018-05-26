@@ -59,7 +59,7 @@ class W3AardProjectile extends W3SignProjectile
 			else if ( owner.CanUseSkill(S_Magic_s06, GetSignEntity()) )		
 			{			
 				sp = GetSignEntity().GetTotalSignIntensity();
-				dmgVal = owner.GetSkillLevel(S_Magic_s06, GetSignEntity()) * 290.f;
+				dmgVal = owner.GetSkillLevel(S_Magic_s06, GetSignEntity()) * 250.f;
 				dmgVal *= sp.valueMultiplicative;
 				
 				if( signEntity.IsAlternateCast() ) {
@@ -179,7 +179,7 @@ class W3AardProjectile extends W3SignProjectile
 			if ( owner.CanUseSkill(S_Magic_s06, GetSignEntity()) )
 			{
 				sp = GetSignEntity().GetTotalSignIntensity();
-				dmgVal = owner.GetSkillLevel(S_Magic_s06, GetSignEntity()) * 290.f;
+				dmgVal = owner.GetSkillLevel(S_Magic_s06, GetSignEntity()) * 250.f;
 				dmgVal *= sp.valueMultiplicative;
 				
 				if( signEntity.IsAlternateCast() )

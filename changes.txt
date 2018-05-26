@@ -1,4 +1,32 @@
-﻿Version 14
+﻿Version 15
+
+Fixed and updated UI descriptions for previous changes - green mutagen value in character menu and wraith decoction.
+
+Small nerf to aard Shock Wave base dmg: 290 to 250 per skill level.
+
+Bombs small general overhaul.
+- Steady Aim skill now also increases explosion radius by 5% per skill level
+- Pyrotechnics skill is boosted to 150 extra dmg per skill level
+- Overall petard impact/explosion damage is nerfed to 85% of original value
+- Reworked cluster Bombs skill. It is now meant to be more pro/con skill. Cluster petards are less reliable, deal
+much less damage per cluster, but cover larger area and on average deal more total damage. So main bomb explosion
+only releases clusters (as vanilla), damage reduction is 50%, with more cluster even a bit more up to 60% at skill
+level 5. Number of clusters is 3 on lvl 1, then +0.5 per level up to 5 on lvl 5. Advanced pyrotechnics perk still
+gives always +1 cluster. E.g. 3.5 clusters means 50% chance for 4 clusters, 3 otherwise. Fixed also a bug - Dragon's
+Dream is affected by cluster dmg reduction now.
+
+Balancing over most bombs:
+- Northern Wind nerfed - it was ultra OP, now has lower loop duration (lvl1,2), and frost damage minimized to very
+small values.
+- Samum has longer effect duration
+- Devil's Puffbal poison damage boosted.
+- small nerf to Dancing Star burning damage
+- Grapeshot lvl3 a bit boosted and causes long stagger effect
+- Dragon's Dream explosion damage boosted - this was too weak, because burning effect from that petard is weaker
+than Dancing Star
+
+
+Version 14
 
 Fixed a bug of overpowered Temerian, Nilfgard and Skellige armor available to buy. They were actually NG+ version
 but it is irrelevant with W3EE, so always the merchants should have base versions.
@@ -10,6 +38,8 @@ gain. That is because toxicity should be limited and there are other skills to i
 bonus fits great for high tox builds, because it works together great with the trial of grasses skill that reduces
 your chance of loosing adrenaline when hit. So for example with one greater green mutagen and synergy level 5
 you will get 0.25 * 24 = 6 -> 6% adrenaline gain bonus.
+
+Acquired tolerance skill now also gives small adrenaline gain - 3% per skill level.
 
 
 Added new magical sword roll set - diligent: +crit chance, + attack stamina cost bonus, + adrenaline gain, - attack power, - crit damage

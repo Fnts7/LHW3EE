@@ -1760,7 +1760,7 @@ class CR4CharacterMenu extends CR4MenuBase
 					attributeValue = mutagenStats[i].value * curColorCount;
 				}
 				
-				if ( GetWitcherPlayer().CanUseSkill ( S_Alchemy_s19 ) )
+				if ( color != SC_Green && GetWitcherPlayer().CanUseSkill ( S_Alchemy_s19 ) )
 				{
 					synergyBonus = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s19, 'synergy_bonus', false, false));
 					synergyBonus *= GetWitcherPlayer().GetSkillLevel(S_Alchemy_s19);
@@ -2631,7 +2631,7 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Magic_s06:
 				// W3EE - Begin
 				ability = GetWitcherPlayer().GetTotalSignSpellPower(S_Magic_1);
-				arg = 290.f * skillLevel;
+				arg = 250.f * skillLevel;
 				argsInt.PushBack(RoundMath(arg*ability.valueMultiplicative));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
 				argsInt.Clear();
@@ -2932,10 +2932,11 @@ class CR4CharacterMenu extends CR4MenuBase
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s09, 'slowdown_mod', false, false)) * skillLevel;
 				argsInt.PushBack(RoundMath(arg*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
+				baseString += "<br>Increases bomb impact radius by: " + (5 * skillLevel) + "%.";
 				break;
 			case S_Alchemy_s10:
 				// W3EE - Begin
-				arg = /*CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s10, 'PhysicalDamage', false, false))*/ 100 * skillLevel;
+				arg = /*CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s10, 'PhysicalDamage', false, false))*/ 150 * skillLevel;
 				// W3EE - End
 				argsInt.PushBack(RoundMath(arg));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
@@ -2943,12 +2944,25 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Alchemy_s11:
 				// W3EE - Begin
 				if( GetWitcherPlayer().CanUseSkill(S_Perk_18) )
-					arg = 2 + skillLevel;
+					arg = 4;
 				else
-					arg = 1 + skillLevel;
+					arg = 3;
 				// W3EE - End
-				argsInt.PushBack(RoundMath(arg));
-				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
+				/*argsInt.PushBack(RoundMath(arg));
+				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);*/
+				
+				if (skillLevel == 5)
+					arg += 2;
+				else if (skillLevel >= 3)
+					arg += 1;
+				
+				baseString = "Upon impact bombs detonate into clusters. Number of clusters: " + RoundMath(arg);
+				
+				if (skillLevel == 4 || skillLevel == 2)
+					baseString += " - " + RoundMath(arg + 1);
+								
+				baseString += ".<br>Clusters deal " + RoundMath(50.0 - 2.5 * (skillLevel - 1)) + "% of original bomb impact damage.";
+				
 				break;
 			case S_Alchemy_s12:			
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s12, 'skill_chance', false, false)) * skillLevel;

@@ -610,6 +610,8 @@ class W3TooltipComponent
 		{
 			if (itemName == 'Mutagen 2')
 				uniqueDescription = "Reduces every damage taken by 25%.";
+			else if (itemName == 'Mutagen 19')
+				uniqueDescription = "Getting damage from hits can trigger quen. The more damage taken or the stronger hit, the higher chance.";
 			else
 				uniqueDescription += GetLocStringByKeyExt( itemInvComponent.GetItemLocalizedDescriptionByUniqueID(item) );
 				

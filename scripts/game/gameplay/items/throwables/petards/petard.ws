@@ -578,7 +578,7 @@ class W3Petard extends CThrowable
 		var targets, additionalTargets : array< CGameplayEntity >;
 		var i : int;
 		var victimTags, attackerTags : array<name>;
-		var dist, camShakeStr, camShakeStrFrac : float;
+		var dist, camShakeStr, camShakeStrFrac, extraRadius : float;
 		var temp, isPerk16Active : bool;
 		var phantom : CPhantomComponent;
 		var meshes : array<CComponent>;
@@ -614,7 +614,7 @@ class W3Petard extends CThrowable
 		{
 			ProcessClusterBombs();
 			// W3EE - Begin
-			//return;
+			return;
 			// W3EE - End
 		}
 		
@@ -623,20 +623,25 @@ class W3Petard extends CThrowable
 			explosionPosition = this.GetWorldPosition();
 		}
 		
+		extraRadius = 1;
+		if ((W3PlayerWitcher)GetOwner() && thePlayer.CanUseSkill(S_Alchemy_s09))
+		{
+			extraRadius += 0.05f * thePlayer.GetSkillLevel(S_Alchemy_s09);
+		}
 		
 		explosionPosition = explosionPosition + Vector( 0.0f, 0.0f, 0.1f );
-		FindGameplayEntitiesInSphere(targets, explosionPosition, impactParams.range, 1000, '', FLAG_TestLineOfSight);	
+		FindGameplayEntitiesInSphere(targets, explosionPosition, impactParams.range * extraRadius, 1000, '', FLAG_TestLineOfSight);	
 		
 		if( targets.Size() == 0 )
 		{
 			explosionPosition = explosionPosition - Vector( 0.0f, 0.0f, 0.2f ); 
-			FindGameplayEntitiesInSphere(targets, explosionPosition, impactParams.range, 1000, '', FLAG_TestLineOfSight);	
+			FindGameplayEntitiesInSphere(targets, explosionPosition, impactParams.range * extraRadius, 1000, '', FLAG_TestLineOfSight);	
 		}
 		
 		
 		if ( itemName == 'Silver Dust Bomb 1' || itemName == 'Silver Dust Bomb 2' || itemName == 'Silver Dust Bomb 3' )
 		{
-			FindGameplayEntitiesInSphere(additionalTargets, explosionPosition, impactParams.range * 1.5, 1000, 'vampire', FLAG_TestLineOfSight);	
+			FindGameplayEntitiesInSphere(additionalTargets, explosionPosition, impactParams.range * 1.5 * extraRadius, 1000, 'vampire', FLAG_TestLineOfSight);	
 		}
 		
 		if ( additionalTargets.Size() > 0 )
@@ -1113,7 +1118,7 @@ class W3Petard extends CThrowable
 							{
 								if( steelBonusAdded )
 									continue;
-								params.damages[j].dmgVal += 100.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
+								params.damages[j].dmgVal += 150.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
 								steelBonusAdded = true;
 							}
 							else
@@ -1121,7 +1126,7 @@ class W3Petard extends CThrowable
 							{
 								if( silverBonusAdded )
 									continue;
-								params.damages[j].dmgVal += 100.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
+								params.damages[j].dmgVal += 150.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
 								silverBonusAdded = true;
 							}
 							else
@@ -1129,7 +1134,7 @@ class W3Petard extends CThrowable
 							{
 								if( steelBonusAdded || silverBonusAdded )
 									continue;
-								params.damages[j].dmgVal += 100.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
+								params.damages[j].dmgVal += 150.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
 								steelBonusAdded = true;
 								silverBonusAdded = true;
 							}
@@ -1138,7 +1143,7 @@ class W3Petard extends CThrowable
 				}
 				else
 				{
-					newDamage.dmgVal = 100.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
+					newDamage.dmgVal = 150.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
 					newDamage.dmgType = theGame.params.DAMAGE_NAME_PHYSICAL;
 					params.damages.PushBack(newDamage);
 					newDamage.dmgType = theGame.params.DAMAGE_NAME_SILVER;
@@ -1188,8 +1193,10 @@ class W3Petard extends CThrowable
 			hitType = EHRT_None;
 		
 		// W3EE - Begin
-		if( (W3PlayerWitcher)GetOwner() && GetWitcherPlayer().CanUseSkill(S_Alchemy_s11) )
-			damageMult = 0.3f;
+		if( (W3PlayerWitcher)GetOwner() && isCluster )
+		{
+			damageMult = 0.5f - (thePlayer.GetSkillLevel(S_Alchemy_s11) - 1) * 0.025f;
+		}
 			
 		/*
 		if( (W3PlayerWitcher)GetOwner() && GetWitcherPlayer().CanUseSkill( S_Perk_20 ) )
@@ -1355,7 +1362,7 @@ class W3Petard extends CThrowable
 		var i, clusterNbr : int;
 		var cluster : W3Petard;
 		var targetPosCluster, clusterInitPos : Vector;
-		var angle, velocity, distLen : float;
+		var angle, velocity, distLen, clusterCalc : float;
 		var clusterTemplate : CEntityTemplate;
 		var dmgRaw : SRawDamage;
 		var cachedDamages : array<SRawDamage>;
@@ -1368,10 +1375,11 @@ class W3Petard extends CThrowable
 		clusterInitPos.Z += radius + 0.15;
 		
 		// W3EE - Begin
+		clusterCalc = 3.0f + (thePlayer.GetSkillLevel(S_Alchemy_s11) - 1) * 0.5f + RandF();
+		clusterNbr = FloorF(clusterCalc);			
+			
 		if( thePlayer.CanUseSkill(S_Perk_18) )
-			clusterNbr = thePlayer.GetSkillLevel(S_Alchemy_s11) + 2;
-		else
-			clusterNbr = thePlayer.GetSkillLevel(S_Alchemy_s11) + 1;
+			clusterNbr += 1;
 		// W3EE - End
 		
 		for(i=0; i<clusterNbr; i+=1)
