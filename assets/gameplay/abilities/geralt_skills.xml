@@ -564,7 +564,7 @@
       <!-- Transmutation -->
       <ability name="alchemy_s13">
         <tags>alchemy_s13</tags>
-        <vitality type="add" min="200" />
+        <vitality type="add" min="250" />
       </ability>
 	
       <!-- Mutant -->

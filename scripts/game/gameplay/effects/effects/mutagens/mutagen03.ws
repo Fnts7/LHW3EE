@@ -17,9 +17,9 @@ class W3Mutagen03_Effect extends W3Mutagen_Effect
 
 	private var slowdownStep, slowdownThreshold, chainDuration, damageAmplification : float;
 	default slowdownStep = 0.02f;
-	default slowdownThreshold = 0.5f;
-	default chainDuration = 3.f;
-	default damageAmplification = 0.05f;
+	default slowdownThreshold = 0.6f;
+	default chainDuration = 4.5f;
+	default damageAmplification = 0.02f;
 
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{	
@@ -46,7 +46,7 @@ class W3Mutagen03_Effect extends W3Mutagen_Effect
 		super.OnEffectRemoved();
 	}
 
-	public function AdvanceChain()
+	public function AdvanceChain(amount : int)
 	{
 		chainTimer = chainDuration;
 		
@@ -54,9 +54,10 @@ class W3Mutagen03_Effect extends W3Mutagen_Effect
 			chainActive = true;
 		
 		if (currentSlowdown > slowdownThreshold)
-			currentSlowdown -= slowdownStep;
-		
-		target.AddAbility(abilityName, true);
+		{
+			currentSlowdown -= slowdownStep * amount;
+			target.AddAbility(abilityName, true);
+		}
 		
 		RemoveSlowdown();
 		

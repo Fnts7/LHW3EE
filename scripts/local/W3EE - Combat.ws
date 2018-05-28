@@ -201,7 +201,13 @@ class W3EECombatHandler extends W3EEOptionHandler
 					if( ((W3Effect_SwordDancing)witcher.GetBuff(EET_SwordDancing)).GetSwordDanceActive() )
 						mult = 0.f;
 						
-					regenDelay = StamRegenDelayDodge() * (1.f - delayReduction.valueMultiplicative);
+					if (witcher.HasBuff(EET_Mutagen24))
+					{
+						mult /= 2;
+						regenDelay = StamRegenDelayDodge() * (1.f - delayReduction.valueMultiplicative) * 0.5f;
+					}
+					else	
+						regenDelay = StamRegenDelayDodge() * (1.f - delayReduction.valueMultiplicative);
 				return CalcStaminaCost(actionType, mult, dt, abilityName);
 				
 				case ESAT_Parry:
@@ -230,11 +236,23 @@ class W3EECombatHandler extends W3EEOptionHandler
 				return CalcStaminaCost(actionType, mult, dt, abilityName);
 				
 				case ESAT_Roll:
-					regenDelay = StamRegenDelayDodge() * (1.3f - delayReduction.valueMultiplicative);
+					if (witcher.HasBuff(EET_Mutagen24))
+					{
+						mult /= 2;
+						regenDelay = StamRegenDelayDodge() * (1.3f - delayReduction.valueMultiplicative) * 0.5f;
+					}
+					else
+						regenDelay = StamRegenDelayDodge() * (1.3f - delayReduction.valueMultiplicative);
 				return CalcStaminaCost(actionType, mult, dt, abilityName);
 				
 				case ESAT_Jump:
-					regenDelay = StamRegenDelayDodge() * (1.2f - delayReduction.valueMultiplicative);
+					if (witcher.HasBuff(EET_Mutagen24))
+					{
+						mult /= 2;
+						regenDelay = StamRegenDelayDodge() * (1.2f - delayReduction.valueMultiplicative) * 0.5f;
+					}
+					else
+						regenDelay = StamRegenDelayDodge() * (1.2f - delayReduction.valueMultiplicative);
 				return CalcStaminaCost(actionType, mult, dt, abilityName);
 				
 				default:
@@ -373,7 +391,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 				if( actorAttacker.IsHuge() || action.IsParryStagger() )
 				{
 					action.MultiplyAllDamageBy(0.0925f);
-					action.MultiplyAllDamageBy(1.f - 0.15f * (playerVictim.GetSkillLevel(S_Sword_s03) - 1));
+					action.MultiplyAllDamageBy(1.f - 0.15f * playerVictim.GetSkillLevel(S_Sword_s03));
 				}
 				else
 				if( !attackAction.CanBeParried() )
@@ -2801,19 +2819,25 @@ class W3EECombatHandler extends W3EEOptionHandler
 	{
 		var witcher : W3PlayerWitcher;
 		var skillLevel : int;
+		var chance : float;
 		
 		witcher = (W3PlayerWitcher)action.attacker;
 		skillLevel = witcher.GetSkillLevel(S_Sword_s12);
 		if( witcher && action.IsActionRanged() && !((W3Petard)action.causer) && action.DealsAnyDamage() && skillLevel )
 		{
-			if( RandRange(100, 0) <= RoundMath(7.5f * skillLevel) )
+			if( RandRange(100, 0) <= RoundMath(9.0f * skillLevel) )
 				action.AddEffectInfo(EET_Bleeding);
+				
+			chance = 0.15f * skillLevel;
 			
-			if( skillLevel > 1 && action.IsCriticalHit() )
-			{
-				if( RandRange(100, 0) <= 33.4f * (skillLevel - 1) && !action.victim.HasTag('NoImmobilize') )
-					action.AddEffectInfo(EET_Immobilized);
-			}
+			if (!action.IsCriticalHit())
+				chance /= 2;
+				
+			if ( ((W3BoltProjectile)action.causer) && !((W3BoltProjectile)action.causer).GetWasAimedBolt() )
+				chance /= 2;
+			
+			if( RandF() < chance && !action.victim.HasTag('NoImmobilize') )
+				action.AddEffectInfo(EET_Immobilized);
 		}
 	}
 	

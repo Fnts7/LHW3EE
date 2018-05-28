@@ -2923,7 +2923,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		if(HasBuff(EET_Mutagen14))
 		{
-			AddTimer('Mutagen14Timer', 6, true);
+			AddTimer('Mutagen14Timer', 5, true);
 		}
 		
 		// W3EE - Begin
@@ -3136,6 +3136,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		/*if(HasBuff(EET_Mutagen14))
 		{*/
 			RemoveAbilityAll( GetBuff(EET_Mutagen14).GetAbilityName() );
+			RemoveTimer('Mutagen14Timer');
 		//}
 		
 		ForceSetMutagen15(0);

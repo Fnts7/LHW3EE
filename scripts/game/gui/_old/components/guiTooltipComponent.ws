@@ -617,6 +617,10 @@ class W3TooltipComponent
 				
 			if (itemName == 'Mutagen 16')
 				uniqueDescription += "<br>Every melee attack has 30% chance to apply random buff: burning, blindness, frost slowdown, bleeding, poison, long stagger, knockdown.";
+			else if (itemName == 'Mutagen 24')
+				uniqueDescription += "<br>Halves stamina cost and regen delay of all movement actions: evasion, jump, sprint.";
+			else if (itemName == 'Mutagen 3')
+				uniqueDescription += "<br>LHW3EE override: reset time is 4.5s.";
 				
 		}
 		if ( theGame.GetGuiManager().GetShowItemNames() )

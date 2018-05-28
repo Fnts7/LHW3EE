@@ -79,7 +79,7 @@
 	  
 	  <ability name="BleedingEffect_BroadheadBolt1">
         <DirectDamage type="mult" min="0.0" max="0.0" />
-        <DirectDamage type="add" min="97" max="97" />
+        <DirectDamage type="add" min="99" max="99" />
         <duration type="add" min="8" max="8" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
@@ -87,7 +87,7 @@
 	  
 	  <ability name="BleedingEffect_BroadheadBolt2">
         <DirectDamage type="mult" min="0.0" max="0.0" />
-        <DirectDamage type="add" min="104" max="104" />
+        <DirectDamage type="add" min="108" max="108" />
         <duration type="add" min="8" max="8" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
@@ -95,7 +95,7 @@
 	  
 	  <ability name="BleedingEffect_BroadheadBolt3">
         <DirectDamage type="mult" min="0.0" max="0.0" />
-        <DirectDamage type="add" min="111" max="111" />
+        <DirectDamage type="add" min="117" max="117" />
         <duration type="add" min="8" max="8" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
@@ -103,7 +103,7 @@
 	  
 	  <ability name="BleedingEffect_BroadheadBolt4">
         <DirectDamage type="mult" min="0.0" max="0.0" />
-        <DirectDamage type="add" min="118" max="118" />
+        <DirectDamage type="add" min="126" max="126" />
         <duration type="add" min="8" max="8" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
@@ -216,11 +216,11 @@
 	  
 	  <ability name="EnhancedArmorEffect">
         <duration type="add" min="900" />
-        <armor type="mult" min="0.2" />
+        <armor type="mult" min="0.1" />
       </ability>
 	  <ability name="EnhancedWeaponEffect">
         <duration type="add" min="900" />
-        <attack_power type="mult" min="0.2" />
+        <attack_power type="mult" min="0.1" />
       </ability>
 	  
 	  <!-- needed for ability inside ability detection of fact potion item's ability -->
@@ -299,7 +299,7 @@
       </ability>
 	  
       <ability name="PoisonEffect_DevilsPuffball_1">
-        <duration type="add" min="1"/>
+        <duration type="add" min="2"/>
         <PoisonDamage type="mult" min="0.0" max="0.0" />
         <PoisonDamage type="add" min="200" max="200" />
         <hp_regen_reduction_strength type="add" min="200" />
@@ -307,17 +307,17 @@
       </ability>
 	  
       <ability name="PoisonEffect_DevilsPuffball_2">
-        <duration type="add" min="2"/>
+        <duration type="add" min="3"/>
         <PoisonDamage type="mult" min="0.0" max="0.0" />
-        <PoisonDamage type="add" min="300" max="300" />
+        <PoisonDamage type="add" min="280" max="280" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
 	  
       <ability name="PoisonEffect_DevilsPuffball_3">
-        <duration type="add" min="3" />
+        <duration type="add" min="4" />
         <PoisonDamage type="mult" min="0.0" max="0.0" />
-        <PoisonDamage type="add" min="400" max="400" />
+        <PoisonDamage type="add" min="360" max="360" />
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>

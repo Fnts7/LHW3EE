@@ -2331,8 +2331,8 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsString.PushBack( NoTrailZeros( theGame.params.INSTANT_KILL_INTERNAL_PLAYER_COOLDOWN ) );
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt, , argsString) + "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%";*/
 				argsFloat.PushBack(FloorF(33.4f * skillLevel));
-				argsFloat.PushBack(FloorF(15.f * (skillLevel- 1)));
-				argsFloat.PushBack(7.0f * skillLevel);
+				argsFloat.PushBack(FloorF(15.f * skillLevel));
+				argsFloat.PushBack(8.0f * skillLevel);
 				/*if( skillLevel == 1 )
 					baseString = GetLocStringByKeyExtWithParams("W3EE_DeadlyPrecLvl1", , argsFloat);
 				else
@@ -2443,7 +2443,7 @@ class CR4CharacterMenu extends CR4MenuBase
 					ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s11, 'attack_power', false, false);
 					argsFloat.PushBack(RoundMath(ability.valueMultiplicative * skillLevel * 100));
 					ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s11, 'critical_hit_chance', false, false);
-					argsFloat.PushBack(RoundMath( /*ability.valueAdditive*/ 0.15f * 100));
+					argsFloat.PushBack(RoundMath( /*ability.valueAdditive*/ 0.05f * 100));
 					argsFloat.PushBack(25);
 					argsFloat.PushBack(15.f * skillLevel);
 					argsFloat.PushBack(2.5f);
@@ -2460,12 +2460,13 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(RoundMath(arg));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /*+ "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%";
 				*/
-				argsInt.PushBack(RoundMath(7.5 * skillLevel));
-				argsInt.PushBack(FloorF(33.4 * (skillLevel - 1)));
-				if( skillLevel < 2 )
+				argsInt.PushBack(RoundMath(9 * skillLevel));
+				argsInt.PushBack(FloorF(15 * skillLevel));
+				/*if( skillLevel < 2 )
 					baseString = GetLocStringByKeyExtWithParams("W3EE_CripplingShot1", argsInt);
-				else
+				else*/
 					baseString = GetLocStringByKeyExtWithParams("W3EE_CripplingShot2", argsInt);
+				baseString += "<br>Non crit shot has / 2 immobilize chance penalty. Same not manually aimed shot.";
 				break;
 			case S_Sword_s13:
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s13, 'slowdown_mod', false, false)) * skillLevel;

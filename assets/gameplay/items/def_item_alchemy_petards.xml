@@ -89,7 +89,7 @@
       <ability name="DevilsPuffball_2_loop">
         <tags>PetardLoopParams</tags>
         <PoisonEffect_DevilsPuffball_2 is_ability="true" />
-        <duration type="add" min="20" max="20" />
+        <duration type="add" min="18" max="18" />
       </ability>
 	  
       <ability name="DevilsPuffball_3_impact">
@@ -103,7 +103,7 @@
       <ability name="DevilsPuffball_3_loop">
         <tags>PetardLoopParams</tags>
         <PoisonEffect_DevilsPuffball_3 is_ability="true" />
-        <duration type="add" min="30" max="30" />
+        <duration type="add" min="26" max="26" />
       </ability>
 	  
       <!-- DRAGONS DREAM -->
@@ -370,7 +370,7 @@
         <level type="add" min="2" />
 		<quality type="add" min="3" max="3"/>
 		<ability_disable_duration type="add" min="20" max="20" />
-		<FrostDamage type="add" min="150" max="150" />
+		<FrostDamage type="add" min="200" max="200" />
       </ability>
       <ability name="WhiteFrost_2_loop">
         <tags>PetardLoopParams</tags>
@@ -389,7 +389,7 @@
         <level type="add" min="3" />
 		<quality type="add" min="4" max="4"/>
 		<ability_disable_duration type="add" min="20" max="20" />
-		<FrostDamage type="add" min="200" max="200" />
+		<FrostDamage type="add" min="300" max="300" />
       </ability>
       <ability name="WhiteFrost_3_loop">
         <tags>PetardLoopParams</tags>

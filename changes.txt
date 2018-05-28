@@ -1,4 +1,30 @@
-﻿Version 15
+﻿Version 16
+
+Devil's puffbal small balancing, a bit longer effect duration, shorter cloud duration.
+
+Crippling shot adjustment - 15% immobilize chance on crit per skill level. /2 if non crit, /2 if non manually
+aimed shot. Both penalties can stack. Raised to 9% strength of bleeding chance and buff to broadhead bolts.
+
+Counter Attack skill lvl crit chance boost lowered to +5%.
+
+Deadly precision crit chance after counter raised to +8% per level. Lvl1 now also gives 15% huge enemies/staggering
+attacks dmg reducion. As this skill has low effect overall, boosting is fine.
+
+Tissue Transmutation skill boosted to 250 HP gain per level.
+
+Werewolf decoction has now additional effect - halves stamina cost of all movement actions: sprint, jumb, doge, roll.
+
+Cockatrice decoction boosted overall (time slowdown and action speed). Timeout raised to 4.5s. However attack power
+lowered to small gain 1% per hit. So that it is not redundant with Wyvern decoction. Its main purpose is reflex
+boost, which must be high, because the effect is reset when getting just one hit or after timeout.
+
+Succubus decoction boosted a bit to +25% attack power after 125 seconds of combat.
+
+Enhanced armor and weapons (sharpener, armorer bench) effects nerfed to +10%.
+
+Lowered chance of receiving earth elemental mutagen (not considered ultra rare, but rare, which is 50% chance).
+
+Version 15
 
 Fixed and updated UI descriptions for previous changes - green mutagen value in character menu and wraith decoction.
 

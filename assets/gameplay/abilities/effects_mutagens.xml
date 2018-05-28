@@ -14,7 +14,7 @@
 
 			<!-- Cockatrice -->
 			<ability name="Mutagen03Effect">
-				<attack_power type="mult" min="0.02" />
+				<attack_power type="mult" min="0.01" />
 			</ability>
 			
 			<!-- Archgriffin -->
@@ -71,7 +71,7 @@
 			<ability name="Mutagen14Effect">
 				<attack_power type="mult" min="0.01" />
 				
-				<mutagen14_max_stack type="add" min="20" />
+				<mutagen14_max_stack type="add" min="25" />
 			</ability>
 			
 			<!-- Alghoul -->

@@ -1217,15 +1217,15 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		else if(action == ESAT_HeavyAttack && CanUseSkill(S_Sword_2) )
 			cost += GetSkillAttributeValue(SkillEnumToName(S_Sword_2), attributeName, false, true);
 		// W3EE - Begin
-		/*
-		else if ((action == ESAT_Sprint || action == ESAT_Jump) && thePlayer.HasBuff(EET_Mutagen24) && !thePlayer.IsInCombat())
+		
+		else if ((action == ESAT_Sprint || action == ESAT_Jump) && thePlayer.HasBuff(EET_Mutagen24) /*&& !thePlayer.IsInCombat()*/)
 		{
-			cost.valueAdditive = 0;
-			cost.valueBase = 0;
-			cost.valueMultiplicative = 0;
+			cost.valueAdditive /= 2;
+			cost.valueBase /= 2;
+			//cost.valueMultiplicative = 0;
 		}
 		
-		if( thePlayer.HasBuff( EET_Blizzard ) && owner == GetWitcherPlayer() && GetWitcherPlayer().GetPotionBuffLevel( EET_Blizzard ) == 3 && thePlayer.HasBuff( EET_BattleTrance ) )
+		/*if( thePlayer.HasBuff( EET_Blizzard ) && owner == GetWitcherPlayer() && GetWitcherPlayer().GetPotionBuffLevel( EET_Blizzard ) == 3 && thePlayer.HasBuff( EET_BattleTrance ) )
 		{
 			blizzard = ( W3Potion_Blizzard )thePlayer.GetBuff( EET_Blizzard );
 			if( blizzard.IsSlowMoActive() )

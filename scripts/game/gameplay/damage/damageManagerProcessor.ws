@@ -844,13 +844,13 @@ class W3DamageManagerProcessor extends CObject
 					{
 						if( playerAttacker.GetSkillLevel(S_Sword_s11) > 2 )
 						{
-							critChance += 0.15f;
+							critChance += 0.05f;
 								//critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s11, theGame.params.CRITICAL_HIT_CHANCE, false, true));
 						}
 						
 						if( playerAttacker.CanUseSkill(S_Sword_s03) )
 						{
-							critChance += 0.07f * playerAttacker.GetSkillLevel(S_Sword_s03);
+							critChance += 0.08f * playerAttacker.GetSkillLevel(S_Sword_s03);
 						}												
 						
 					}
