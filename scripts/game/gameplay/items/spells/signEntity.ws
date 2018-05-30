@@ -629,7 +629,10 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			if( !l_gryphonBuff || l_gryphonBuff.GetWhichSignForFree() != this )
 			{
 				if( l_player.CanUseSkill(S_Sword_s19) && l_player.GetStat(BCS_Focus) >= l_player.GetStatMax(BCS_Focus) )
+				{
 					l_cost += 2.f;
+					Experience().AwardFloodOfAnger();
+				}
 				
 				if( l_player.CanUseSkill( S_Perk_09 ) )
 				{
@@ -870,7 +873,10 @@ state Channeling in W3SignEntity extends BaseCast
 					// W3EE - End
 					{
 						if( player.CanUseSkill(S_Sword_s19) && player.GetStat(BCS_Focus) >= 3 )
+						{
 							player.DrainFocus(2.0f);
+							Experience().AwardFloodOfAnger();
+						}
 						
 						if( player.GetStat(BCS_Focus) >= 1 )
 							player.DrainFocus(1.0f);

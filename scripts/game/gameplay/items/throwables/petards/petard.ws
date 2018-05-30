@@ -1508,6 +1508,7 @@ class W3Petard extends CThrowable
 	public function IsStuck() : bool					{return isStuck;}
 	public function DisableProximity()					{isProximity = false;}
 	public function IsProximity() : bool				{return isProximity;}
+	public function IsCluster() : bool					{ return isCluster; }
 	
 	
 	

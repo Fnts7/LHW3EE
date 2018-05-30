@@ -678,7 +678,7 @@ state AardConeCast in W3AardEntity extends NormalCast
 				caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
 			}
 			// W3EE - Begin
-			Experience().AwardSignXP(parent.GetSignType());
+			Experience().AwardSignXP(parent.GetSignType(), 1.0f);
 			// W3EE - End
 		}
 	}
@@ -706,7 +706,10 @@ state AardCircleCast in W3AardEntity extends NormalCast
 					stamina = player.GetStat(BCS_Stamina, true);*/
 					
 					if( player.CanUseSkill(S_Sword_s19) && player.GetStat(BCS_Focus) >= player.GetStatMax(BCS_Focus) )
+					{
 						cost += 2.0f;
+						Experience().AwardFloodOfAnger();
+					}
 					
 					if( parent.GetActualOwner().GetSkillLevel(S_Magic_s12, parent) > 2 )
 						cost += 1.f;
@@ -731,7 +734,7 @@ state AardCircleCast in W3AardEntity extends NormalCast
 			}
 			
 			player.DrainFocus(cost);
-			Experience().AwardSignXP(parent.GetSignType());
+			Experience().AwardSignXP(parent.GetSignType(), 1.0f);
 			// W3EE - End
 		}
 	}

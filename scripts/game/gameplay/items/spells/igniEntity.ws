@@ -325,7 +325,7 @@ state IgniCast in W3IgniEntity extends NormalCast
 				caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
 			}
 			// W3EE - Begin
-			Experience().AwardSignXP(parent.GetSignType());
+			Experience().AwardSignXP(parent.GetSignType(), 1.0f);
 			// W3EE - End
 		}
 	}
@@ -467,7 +467,7 @@ state IgniChanneled in W3IgniEntity extends Channeling
 			
 			ChannelIgni();
 			// W3EE - Begin
-			Experience().AwardSignXP(parent.GetSignType());
+			Experience().AwardSignXP(parent.GetSignType(), 1.0f);
 			// W3EE - End
 		}
 	}

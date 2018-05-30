@@ -827,7 +827,7 @@ state QuenShield in W3QuenEntity extends NormalCast
 		{
 			parent.CleanUp();	
 			// W3EE - Begin
-			Experience().AwardSignXP(parent.GetSignType());
+			Experience().AwardSignXP(parent.GetSignType(), 1.0f);
 			parent.CheckForMutagen17Boost();
 			// W3EE - End
 			parent.GotoState( 'ShieldActive' );
@@ -1183,7 +1183,7 @@ state QuenChanneled in W3QuenEntity extends Channeling
 			parent.PlayHitEffect('discharge', attackerVictimEuler);				
 		}
 		
-		Experience().AwardSignXP(parent.GetSignType());
+		Experience().AwardSignXP(parent.GetSignType(), 0.25f);
 		parent.SetBlockedAllDamage(true);
 		if( !drainAllVigor )
 		{

@@ -162,9 +162,13 @@ class CAxiiStorySceneChoiceAction extends CStorySceneChoiceLineActionScripted
 	{
 		// W3EE - Begin
 		//GetWitcherPlayer().AddPoints( EExperiencePoint, GetWitcherPlayer().GetAxiiLevel() * 12, true );
-		Experience().AwardSignXP(ST_Axii);
-		Experience().AwardSignXP(ST_Axii);
-		Experience().AwardSignXP(ST_Axii);
+		if (level > 1)
+			Experience().AwardSignXP(ST_Axii, (float) (level - 1));
+		else
+			Experience().AwardSignXP(ST_Axii, 0.5f);
+		
+		//Experience().AwardSignXP(ST_Axii);
+		//Experience().AwardSignXP(ST_Axii);
 		// W3EE - End
 	}
 	

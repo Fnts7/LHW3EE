@@ -492,7 +492,7 @@ state YrdenShock in W3YrdenEntity extends Active
 		parent.NotifyGameplayEntitiesInArea( usedShockAreaName );
 		
 		// W3EE - Begin
-		Experience().AwardSignXP(parent.GetSignType());
+		Experience().AwardSignXP(parent.GetSignType(), 1.0f);
 		// W3EE - End
 	}
 	
@@ -894,7 +894,7 @@ state YrdenSlowdown in W3YrdenEntity extends Active
 				parent.ManagePlayerStamina();
 				parent.ManageGryphonSetBonusBuff();
 				// W3EE - Begin
-				Experience().AwardSignXP(parent.GetSignType());
+				Experience().AwardSignXP(parent.GetSignType(), 1.0f);
 				// W3EE - End
 			}
 			else

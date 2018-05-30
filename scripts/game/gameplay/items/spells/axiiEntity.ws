@@ -542,7 +542,7 @@ state AxiiCast in W3AxiiEntity extends NormalCast
 		if( super.OnThrowing() )
 		{
 			// W3EE - Begin
-			Experience().AwardSignXP(parent.GetSignType());
+			Experience().AwardSignXP(parent.GetSignType(), 1.0f);
 			// W3EE - End
 			caster.GetActor().SetBehaviorVariable( 'bStopSign', 1.f );
 		}
@@ -596,7 +596,7 @@ state AxiiChanneled in W3AxiiEntity extends Channeling
 		// W3EE - Begin
 		{
 			ChannelAxii();	
-			Experience().AwardSignXP(parent.GetSignType());
+			Experience().AwardSignXP(parent.GetSignType(), 1.0f);
 		}
 		// W3EE - End
 	}

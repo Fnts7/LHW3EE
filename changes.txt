@@ -24,6 +24,25 @@ Enhanced armor and weapons (sharpener, armorer bench) effects nerfed to +10%.
 
 Lowered chance of receiving earth elemental mutagen (not considered ultra rare, but rare, which is 50% chance).
 
+Again small nerf to aard Shock Wave base dmg lowered to 220 per skill level.
+
+Experience rates and curves overhaul.
+1) Changed the way of lowering exp gain rate. Previously exp for given path was lowered only based on skill points
+allocated just that path. Now this penalty is reduced, but intead another multiplicative penalty is added - based
+on overall number of skill points. This way it is easier to do more specialized builds - if you skip some skill
+columns on purpose, you will gain more exp in others.
+2) General skill exp gain was lowered and penalty when having more perks is more harsh. That is mostly because
+in this mod, perks are boosted, so one should have less amount of them.
+3) Other base exp rates modifications: signs - lowered on average like 20-30%. Crossbow - lowered about 30% and
+non aimed shots give much less exp. Defense - lowered about 25%. Oils - raised about 25%, bombs lowered a bit, but
+bombs also give exp on hits. mutation - raised like 15%. One decoction brewing has much lower factor, but more
+mutagens available.
+4) Sword battle trance path way of gaining exp reworked totally. Now it works this way - when in combat, a timer
+ticks every short amount of time. In each tick you get an exp amount that is proportional to the current vigor.
+Also being active in combat, hitting enemies increase the gain. So having more vigor and being active makes the
+progress faster. Also there is big one time exp award for each Flood of Anger usage - because it is an active
+skill that drains most vigor, so that needs to be compensated.
+
 Version 15
 
 Fixed and updated UI descriptions for previous changes - green mutagen value in character menu and wraith decoction.

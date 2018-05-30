@@ -2632,7 +2632,7 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Magic_s06:
 				// W3EE - Begin
 				ability = GetWitcherPlayer().GetTotalSignSpellPower(S_Magic_1);
-				arg = 250.f * skillLevel;
+				arg = 220.f * skillLevel;
 				argsInt.PushBack(RoundMath(arg*ability.valueMultiplicative));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
 				argsInt.Clear();

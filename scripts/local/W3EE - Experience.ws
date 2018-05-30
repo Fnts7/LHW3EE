@@ -36,7 +36,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "FastAttackPointsSpent";
 				pathEntry.progressID = "FastAttackProgress";
 				pathEntry.maxPoints = 18;
-				pathEntry.expValue = RoundMath(20 * Options().GetSkillRateFast());
+				// W3EE orig value: 20
+				pathEntry.expValue = RoundMath(18 * Options().GetSkillRateFast());
 			break;
 			
 			case ESSP_Sword_StyleStrong:
@@ -44,7 +45,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "HeavyAttackPointsSpent";
 				pathEntry.progressID = "HeavyAttackProgress";
 				pathEntry.maxPoints = 18;
-				pathEntry.expValue = RoundMath(22 * Options().GetSkillRateStrong());
+				// W3EE orig value: 25
+				pathEntry.expValue = RoundMath(24 * Options().GetSkillRateStrong());
 			break;
 			
 			case ESSP_Sword_Utility:
@@ -52,7 +54,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "DefensePointsSpent";
 				pathEntry.progressID = "DefenseProgress";
 				pathEntry.maxPoints = 14;
-				pathEntry.expValue = RoundMath(15 * Options().GetSkillRateUtility());
+				// W3EE orig value: 15
+				pathEntry.expValue = RoundMath(12 * Options().GetSkillRateUtility());
 			break;
 			
 			case ESSP_Sword_Crossbow:
@@ -60,7 +63,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "RangedPointsSpent";
 				pathEntry.progressID = "RangedProgress";
 				pathEntry.maxPoints = 15;
-				pathEntry.expValue = RoundMath(181 * Options().GetSkillRateCrossbow());
+				// W3EE orig value: 181
+				pathEntry.expValue = RoundMath(150 * Options().GetSkillRateCrossbow());
 			break;
 			
 			case ESSP_Sword_BattleTrance:
@@ -68,7 +72,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "TrancePointsSpent";
 				pathEntry.progressID = "TranceProgress";
 				pathEntry.maxPoints = 20;
-				pathEntry.expValue = RoundMath(114 * Options().GetSkillRateTrance());
+				// W3EE orig value: 114
+				pathEntry.expValue = RoundMath(20 * Options().GetSkillRateTrance());
 			break;
 			
 			case ESSP_Signs_Aard:
@@ -76,7 +81,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "AardPointsSpent";
 				pathEntry.progressID = "AardProgress";
 				pathEntry.maxPoints = 16;
-				pathEntry.expValue = RoundMath(125 * Options().GetSkillRateAard());
+				// W3EE orig value: 125
+				pathEntry.expValue = RoundMath(95 * Options().GetSkillRateAard());
 			break;
 			
 			case ESSP_Signs_Igni:
@@ -84,7 +90,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "IgniPointsSpent";
 				pathEntry.progressID = "IgniProgress";
 				pathEntry.maxPoints = 18;
-				pathEntry.expValue = RoundMath(128 * Options().GetSkillRateIgni());
+				// W3EE orig value: 128
+				pathEntry.expValue = RoundMath(85 * Options().GetSkillRateIgni());
 			break;
 			
 			case ESSP_Signs_Yrden:
@@ -92,7 +99,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "YrdenPointsSpent";
 				pathEntry.progressID = "YrdenProgress";
 				pathEntry.maxPoints = 15;
-				pathEntry.expValue = RoundMath(161 * Options().GetSkillRateYrden());
+				// W3EE orig value: 161
+				pathEntry.expValue = RoundMath(155 * Options().GetSkillRateYrden());
 			break;
 			
 			case ESSP_Signs_Quen:
@@ -100,7 +108,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "QuenPointsSpent";
 				pathEntry.progressID = "QuenProgress";
 				pathEntry.maxPoints = 16;
-				pathEntry.expValue = RoundMath(170 * Options().GetSkillRateQuen());
+				// W3EE orig value: 128
+				pathEntry.expValue = RoundMath(135 * Options().GetSkillRateQuen());
 			break;
 			
 			case ESSP_Signs_Axi:
@@ -108,7 +117,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "AxiiPointsSpent";
 				pathEntry.progressID = "AxiiProgress";
 				pathEntry.maxPoints = 14;
-				pathEntry.expValue = RoundMath(182 * Options().GetSkillRateAxii());
+				// W3EE orig value: 181
+				pathEntry.expValue = RoundMath(150 * Options().GetSkillRateAxii());
 			break;
 			
 			case ESSP_Alchemy_Potions:
@@ -116,7 +126,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "BrewingPointsSpent";
 				pathEntry.progressID = "BrewingProgress";
 				pathEntry.maxPoints = 12;
-				pathEntry.expValue = RoundMath(404 * Options().GetSkillRatePotions());
+				// W3EE orig value: 404
+				pathEntry.expValue = RoundMath(375 * Options().GetSkillRatePotions());
 			break;
 			
 			case ESSP_Alchemy_Oils:
@@ -124,7 +135,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "OilingPointsSpent";
 				pathEntry.progressID = "OilingProgress";
 				pathEntry.maxPoints = 18;
-				pathEntry.expValue = RoundMath(404 * Options().GetSkillRateOils());
+				// W3EE orig value: 404
+				pathEntry.expValue = RoundMath(500 * Options().GetSkillRateOils());
 			break;
 			
 			case ESSP_Alchemy_Bombs:
@@ -132,7 +144,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "BombPointsSpent";
 				pathEntry.progressID = "BombProgress";
 				pathEntry.maxPoints = 16;
-				pathEntry.expValue = RoundMath(576 * Options().GetSkillRateBombs());
+				// W3EE orig value: 576
+				pathEntry.expValue = RoundMath(525 * Options().GetSkillRateBombs());
 			break;
 			
 			case ESSP_Alchemy_Mutagens:
@@ -140,7 +153,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "MutationPointsSpent";
 				pathEntry.progressID = "MutationProgress";
 				pathEntry.maxPoints = 18;
-				pathEntry.expValue = RoundMath(349 * Options().GetSkillRateMutagens());
+				// W3EE orig value: 349
+				pathEntry.expValue = RoundMath(400 * Options().GetSkillRateMutagens());
 			break;
 			
 			case ESSP_Alchemy_Grasses:
@@ -161,7 +175,8 @@ class W3EEExperienceHandler
 				pathEntry.spentID = "GeneralPointsSpent";
 				pathEntry.progressID = "GeneralProgress";
 				pathEntry.maxPoints = 20;
-				pathEntry.expValue = RoundMath(201 * Options().GetSkillRateGeneral());
+				// W3EE orig value: 201
+				pathEntry.expValue = RoundMath(150 * Options().GetSkillRateGeneral());
 			break;
 		}
 		return pathEntry;
@@ -198,10 +213,25 @@ class W3EEExperienceHandler
 	public function ModPathProgress( skillPath : ESkillSubPath, mult : float )
 	{
 		var id, xp, skillValue : int;
+		var xpFloat : float;
 		
 		id = Min((int)skillPath, 16);
 		skillValue = (int)(Options().SkillPointsGained() * 10);
-		xp = FactsQueryLatestValue(skillPathEntries[id].progressID) + FloorF(skillPathEntries[id].expValue * (1.f - (0.6f / skillPathEntries[id].maxPoints * GetTotalPathPoints(skillPath))) * mult);
+		
+		xpFloat = skillPathEntries[id].expValue * mult;
+		
+		// skill path penalty
+		if (skillPath == ESSP_Perks)
+		{
+			xpFloat *= 1.0f - (0.4f * Min(GetTotalPathPoints(skillPath), 6)) / 6;
+		}
+		else
+			xpFloat *= 1.0f - (0.4f * GetTotalPathPoints(skillPath) / skillPathEntries[id].maxPoints);
+			
+		// all skill points penalty
+		xpFloat *= 1.0f - (0.4f * GetTotalSkillPoints() / 254);
+		
+		xp = FactsQueryLatestValue(skillPathEntries[id].progressID) + FloorF(xpFloat);
 		if( xp < 10000 )
 		{
 			FactsSetValue(skillPathEntries[id].progressID, xp);
@@ -218,6 +248,14 @@ class W3EEExperienceHandler
 			FactsSetValue(skillPathEntries[id].progressID, xp);
 			playerWitcher.DisplayHudMessage(GetLocStringByKeyExt(SkillSubPathToLocalisationKey(skillPath)) + " " + GetLocStringByKeyExt("W3EE_SkillGain"));
 		}
+	}
+	
+	public function ResetPathProgress( skillPath : ESkillSubPath )
+	{
+		var id : int;
+
+		id = Min((int)skillPath, 16);		
+		FactsSetValue(skillPathEntries[id].progressID, 0);
 	}
 	
 	public function GetTotalSkillPoints() : int
@@ -320,6 +358,8 @@ class W3EEExperienceHandler
 			mult = 1 + CalculateAttributeValue(attribute);
 			if( attackAction && action.DealsAnyDamage() )
 			{
+				playerWitcher.IncBattleTranceHitCount();
+			
 				if( attackAction.IsActionMelee() )
 				{
 					if( playerWitcher.IsLightAttack(attackAction.GetAttackName()) )
@@ -335,29 +375,40 @@ class W3EEExperienceHandler
 				if( (W3BoltProjectile)attackAction.causer )
 				{
 					if ( (W3ExplosiveBolt)attackAction.causer )
-						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.4f);
+						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.35f);
 					else if ( ((W3BoltProjectile)attackAction.causer).GetWasAimedBolt() )
-						ModPathProgress(ESSP_Sword_Crossbow, mult * 1.1f);
+						ModPathProgress(ESSP_Sword_Crossbow, mult);
 					else						
-						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.65f);
+						ModPathProgress(ESSP_Sword_Crossbow, mult * 0.6f);
 				}
 			}
 			else if ( (W3Petard)action.causer )
 			{
-				ModPathProgress(ESSP_Alchemy_Bombs, 0.2f);
+				if ( ((W3Petard)action.causer).IsCluster() )
+					ModPathProgress(ESSP_Alchemy_Bombs, 0.05f);
+				else
+					ModPathProgress(ESSP_Alchemy_Bombs, 0.2f);
 			}
 		}
 		else
 		if( attackAction && playerVictim && !playerAttacker )
 		{
-			if( ((CActor)attackAction.attacker).IsHuman() )
-				attribute = playerWitcher.GetAttributeValue('human_exp_bonus_when_fatal');
-			else
-				attribute = playerWitcher.GetAttributeValue('nonhuman_exp_bonus_when_fatal');
-			
-			mult = 1 + CalculateAttributeValue(attribute);
 			if( attackAction.IsParried() || attackAction.IsCountered() )
-			{
+			{				
+				if (attackAction.IsCountered())
+				{
+					playerWitcher.IncBattleTranceHitCount();
+				
+					if( ((CActor)attackAction.attacker).IsHuman() )
+						attribute = playerWitcher.GetAttributeValue('human_exp_bonus_when_fatal');
+					else
+						attribute = playerWitcher.GetAttributeValue('nonhuman_exp_bonus_when_fatal');
+						
+					mult = 1 + CalculateAttributeValue(attribute);
+				}
+				else
+					mult = 1;			
+			
 				ModPathProgress(ESSP_Sword_Utility, mult);
 			}
 		}
@@ -366,7 +417,7 @@ class W3EEExperienceHandler
 	public function AwardDodgingXP( witcher : CR4Player )
 	{
 		if( witcher.IsInCombat() )
-			ModPathProgress(ESSP_Sword_Utility, 1.f);
+			ModPathProgress(ESSP_Sword_Utility, 0.8f);
 	}
 	
 	public function AwardCombatAdrenalineXP( witcher : W3PlayerWitcher, kills : int, noHealthLost : bool )
@@ -378,6 +429,21 @@ class W3EEExperienceHandler
 			ModPathProgress(ESSP_Sword_BattleTrance, 1.5f);
 		else
 			ModPathProgress(ESSP_Sword_BattleTrance, 1);
+	}
+	
+	public function AwardCombatBattleTrance(witcher : W3PlayerWitcher)
+	{
+		var mult : float;
+		
+		mult = 0.5f + 0.5f * witcher.GetBattleTranceHitCount() / 5;
+		mult *= witcher.GetStatPercents(BCS_Focus);
+		
+		ModPathProgress(ESSP_Sword_BattleTrance, mult);
+	}
+	
+	public function AwardFloodOfAnger()
+	{
+		ModPathProgress(ESSP_Sword_BattleTrance, 2.5f);
 	}
 	
 	public function AwardNonCombatXP( attackName : name )
@@ -396,32 +462,32 @@ class W3EEExperienceHandler
 		}
 		else
 		{
-			ModPathProgress(ESSP_Sword_Crossbow, 0.35f);
+			ModPathProgress(ESSP_Sword_Crossbow, 0.3f);
 		}
 	}
 	
-	public function AwardSignXP( signType : ESignType )
-	{
+	public function AwardSignXP( signType : ESignType, mult : float)
+	{	
 		switch(signType)
 		{
 			case ST_Aard:
-				ModPathProgress(ESSP_Signs_Aard, 1);
+				ModPathProgress(ESSP_Signs_Aard, mult);
 			break;
 			
 			case ST_Yrden:
-				ModPathProgress(ESSP_Signs_Yrden, 1);
+				ModPathProgress(ESSP_Signs_Yrden, mult);
 			break;
 			
 			case ST_Igni:
-				ModPathProgress(ESSP_Signs_Igni, 1);
+				ModPathProgress(ESSP_Signs_Igni, mult);
 			break;
 			
 			case ST_Quen:
-				ModPathProgress(ESSP_Signs_Quen, 1);
+				ModPathProgress(ESSP_Signs_Quen, mult);
 			break;
 			
 			case ST_Axii:
-				ModPathProgress(ESSP_Signs_Axi, 1);
+				ModPathProgress(ESSP_Signs_Axi, mult);
 			break;
 		}
 	}
@@ -451,7 +517,7 @@ class W3EEExperienceHandler
 	{
 		if( isDecoction )
 		{
-			ModPathProgress(ESSP_Alchemy_Grasses, 1.3f);
+			ModPathProgress(ESSP_Alchemy_Grasses, 1.5f);
 			ModPathProgress(ESSP_Alchemy_Mutagens, 1.3f);
 		}
 		else
@@ -670,6 +736,11 @@ exec function ResetTotalPoints()
 exec function IncreasePathXP( skillPath : ESkillSubPath, mult : float )
 {
 	Experience().ModPathProgress(skillPath, mult);
+}
+
+exec function ResetPathProgress ( skillPath : ESkillSubPath)
+{
+	Experience().ResetPathProgress(skillPath);
 }
 
 exec function fucktest()

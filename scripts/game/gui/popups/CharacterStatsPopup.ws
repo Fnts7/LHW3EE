@@ -993,7 +993,7 @@ function AddCharacterStatSigns(tag : string, varKey:name, locKey:string, iconTag
 		{
 			// W3EE - Begin
 			sp = GetWitcherPlayer().GetTotalSignSpellPower(S_Magic_1);
-			valueAbility = GetWitcherPlayer().GetSkillLevel(S_Magic_s06) * 250.f;
+			valueAbility = GetWitcherPlayer().GetSkillLevel(S_Magic_s06) * 220.f;
 			valueAbility += mutDmgMod.valueBase;
 			valueAbility *= sp.valueMultiplicative;
 			valueStr = (string)RoundMath( valueAbility * Damage().pdams );

@@ -145,7 +145,28 @@ statemachine class W3PlayerWitcher extends CR4Player
 	// W3EE - Begin
 	private var mutagen15Count : int;
 	private var horseFollowTask : CBTTaskHorseSummon;
+	private var battleTranceHitCount : int;
+	default battleTranceHitCount = 0;
 	
+	public function GetBattleTranceHitCount() : int
+	{
+		return battleTranceHitCount;
+	}
+	
+	public function IncBattleTranceHitCount()
+	{
+		if (battleTranceHitCount < 5)
+			battleTranceHitCount += 1;		
+	}
+	
+	timer function BattleTranceXPTimer( dt : float, id : int )
+	{
+		Experience().AwardCombatBattleTrance(this);
+	
+		if (battleTranceHitCount > 0)
+			battleTranceHitCount -= 1;
+	}
+
 	public function SetFollowTask( task : CBTTaskHorseSummon )
 	{
 		horseFollowTask = task;
@@ -2928,6 +2949,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		// W3EE - Begin
 		enemiesKilled = 0;
+		AddTimer('BattleTranceXPTimer', 4, true);
+		
 		startingHealthPerc = GetStatPercents(BCS_Vitality);
 		if( !Options().CombatInv() )
 			BlockAction(EIAB_OpenInventory, 'CombatInventoryBlock');
@@ -3141,7 +3164,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		ForceSetMutagen15(0);
 		
-		Experience().AwardCombatAdrenalineXP(this, enemiesKilled, startingHealthPerc == GetStatPercents(BCS_Vitality));
+		//Experience().AwardCombatAdrenalineXP(this, enemiesKilled, startingHealthPerc == GetStatPercents(BCS_Vitality));
+		
+		RemoveTimer('BattleTranceXPTimer');
+		battleTranceHitCount = 0;
+		
 		UnblockAction(EIAB_OpenInventory, 'CombatInventoryBlock');
 		AddTimer('ResetAdrenalineCombat', 8.f, false,,,,true);
 		adrenalineEffect = NULL;
