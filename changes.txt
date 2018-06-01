@@ -1,4 +1,31 @@
-﻿Version 16
+﻿Version 17
+
+Boosted a bit echidna decoction, 20% more healing rate.
+
+Boosted a bit archgriffin decoction - uses a bit less extra stamina - 25%. And the hit enemy extra hp drain is 3% for
+25 stamina. Scales lineary.
+
+Boosted a bit lvl3 thunderbolt - has now +18% crit chance, crit frenzy duration raised to 2.5s.
+
+Several skills balancing.
+1) Anatomical Knowledge has now max level 4. Same effect per level.
+2) Undying max level was lowered to 4 and boosted overall gain per skill level.
+3) Heightened Tolerance has now max level 4. Gives 9% toxicity damage reduction per level. And took over the vitality
+regen part from Endure Pain skill. Vitality regen reduction on full toxicity is now 50% and reduced by 6% per skill level.
+4) Endure Pain skill doesn't concern vitality regen anymore. Chance of loosing adrenaline when toxicity is above safe
+threshold is now 70% at base and reduced by 7% per skill level up to 35%. Was 100%->50%.
+5) Killing Spree skill has now max level 4 and nerfed to 2.5% extra crit chance per killed enemy per skill level.
+6) Lowered adrenaline gain bonus for Acquired Tolerance to 2% per skill level.
+
+Reworked how Trial of Grasses exp is gained. At base it has lower gain rate, but is boosted by both potion toxicity,
+decoctions are the stronges and current intoxication. Also fixed here a bug - decoction extra xp didn't work.
+Small other exp gain adjustments, battle trance a bit boosted.
+
+Stribog rune boosted to +5% lvl 3. Weles runes adjusted to +2%,+3%,+4% sign power.
+
+Lowered chance of getting fogling, echidna, wraith mutagens - so all those that drop for common monsters.
+
+Version 16
 
 Devil's puffbal small balancing, a bit longer effect duration, shorter cloud duration.
 

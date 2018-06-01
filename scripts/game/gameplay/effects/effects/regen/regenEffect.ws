@@ -91,7 +91,10 @@ abstract class W3RegenEffect extends CBaseGameplayEffect
 			
 			if(isOnPlayer)
 			{
-				regenReduction = 0.6f - 0.06f * playerWitcher.GetSkillLevel(S_Alchemy_s20);
+				if (regenStat == CRS_Vitality) 
+					regenReduction = 0.5f - 0.06f * playerWitcher.GetSkillLevel(S_Alchemy_s01);
+				else
+					regenReduction = 0.6f - 0.06f * playerWitcher.GetSkillLevel(S_Alchemy_s20);
 				regenPoints *= 1 - (regenReduction * playerWitcher.GetStatPercents(BCS_Toxicity));
 			}
 			// W3EE - End

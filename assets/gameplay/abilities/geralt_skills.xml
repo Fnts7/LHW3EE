@@ -231,7 +231,7 @@
 	  <!-- Undying -->
 	  <ability name="sword_s18">
         <tags>sword_s18</tags>
-		<healing_factor type="add" min="0.05" /> <!-- precentage of max health healed by FP -->
+		<healing_factor type="add" min="0.0667" /> <!-- precentage of max health healed by FP -->
 		<healing_bonus type="add" min="0.25" />  <!-- healing bonus per ability level -->
 		<trigger_delay type="add" min="30" /> <!-- activation delay in seconds -->
       </ability>
@@ -589,7 +589,7 @@
       <!-- Killing Spree -->
       <ability name="alchemy_s17">
         <tags>alchemy_s17</tags>
-        <critical_hit_chance type="add" min="0.0334" />
+        <critical_hit_chance type="add" min="0.025" />
       </ability>
 	
       <!-- Taster -->
@@ -762,7 +762,7 @@
 		<!-- Keen Eyed -->
         <skill skill_name="sword_s15" requiredPointsSpent="8" maxLevel="5" priority="6"  guiPositionID="20" localisationName="skill_name_sword_s15" localisationDescription="skill_desc_sword_s15" localisationDescriptionLevel2="skill_desc_sword_s15" localisationDescriptionLevel3="skill_desc_sword_s15" cost="1" pathType_name="Sword" subpathType_name="Sword_Crossbow" iconPath="icons\Skills\Sword\sword_s15.png" linkVertical="yellow" linkLeft="red" linkRight="red" />
 		<!-- Precision -->
-        <skill skill_name="sword_s7"  requiredPointsSpent="20" maxLevel="3" priority="6"  guiPositionID="33" localisationName="skill_name_sword_s7" localisationDescription="skill_desc_sword_s7"  localisationDescriptionLevel2="skill_desc_sword_s7"  localisationDescriptionLevel3="skill_desc_sword_s7"  cost="1" pathType_name="Sword" subpathType_name="Sword_Crossbow" iconPath="icons\Skills\Sword\sword_s12.png"  linkVertical="yellow" linkLeft="red" linkRight="red" />
+        <skill skill_name="sword_s7"  requiredPointsSpent="20" maxLevel="4" priority="6"  guiPositionID="33" localisationName="skill_name_sword_s7" localisationDescription="skill_desc_sword_s7"  localisationDescriptionLevel2="skill_desc_sword_s7"  localisationDescriptionLevel3="skill_desc_sword_s7"  cost="1" pathType_name="Sword" subpathType_name="Sword_Crossbow" iconPath="icons\Skills\Sword\sword_s12.png"  linkVertical="yellow" linkLeft="red" linkRight="red" />
 		<!-- Crippling Shot -->
         <skill skill_name="sword_s12" requiredPointsSpent="30" maxLevel="4" priority="19" guiPositionID="7"  localisationName="skill_name_sword_s12" localisationDescription="skill_desc_sword_s12" localisationDescriptionLevel2="skill_desc_sword_s12" localisationDescriptionLevel3="skill_desc_sword_s12" cost="1" pathType_name="Sword" subpathType_name="Sword_Crossbow" iconPath="icons\Skills\Sword\sword_s7.png" linkVertical="yellow" linkLeft="red" linkRight="red" />
 
@@ -770,7 +770,7 @@
 		<!-- Resolve -->
         <skill skill_name="sword_s16" requiredPointsSpent="0"  maxLevel="5" priority="7"  guiPositionID="18" localisationName="skill_name_sword_s16" localisationDescription="skill_desc_sword_s16" localisationDescriptionLevel2="skill_desc_sword_s16" localisationDescriptionLevel3="skill_desc_sword_s16" cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" iconPath="icons\Skills\Sword\sword_s16.png" linkVertical="red" linkLeft="red" linkRight="red" />
 		<!-- Undying -->
-        <skill skill_name="sword_s18" requiredPointsSpent="8" maxLevel="5" priority="20" guiPositionID="27" localisationName="skill_name_sword_s18" localisationDescription="skill_desc_sword_s18" localisationDescriptionLevel2="skill_desc_sword_s18_2" localisationDescriptionLevel3="skill_desc_sword_s18_3" cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" iconPath="icons\Skills\Sword\sword_s18.png" linkVertical="red" linkLeft="red" linkRight="red" />
+        <skill skill_name="sword_s18" requiredPointsSpent="8" maxLevel="4" priority="20" guiPositionID="27" localisationName="skill_name_sword_s18" localisationDescription="skill_desc_sword_s18" localisationDescriptionLevel2="skill_desc_sword_s18_2" localisationDescriptionLevel3="skill_desc_sword_s18_3" cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" iconPath="icons\Skills\Sword\sword_s18.png" linkVertical="red" linkLeft="red" linkRight="red" />
 		<!-- Still Mind -->
         <skill skill_name="sword_s20" requiredPointsSpent="20" maxLevel="5" priority="20" guiPositionID="28" localisationName="skill_name_sword_s20" localisationDescription="skill_desc_sword_s20" localisationDescriptionLevel2="skill_desc_sword_s20" localisationDescriptionLevel3="skill_desc_sword_s20" cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" iconPath="icons\Skills\Sword\sword_s20.png" linkVertical="red" linkLeft="red" linkRight="red" />
 		<!-- All Out -->
@@ -842,7 +842,7 @@
     <!-- ALCHEMY -->
 		<!-- POTIONS -->
 		<!-- Resistances -->
-        <skill skill_name="alchemy_s1" requiredPointsSpent="0"  maxLevel="3" priority="20" guiPositionID="22" localisationName="skill_name_alchemy_s1" localisationDescription="skill_desc_alchemy_s1" localisationDescriptionLevel2="skill_desc_alchemy_s1" localisationDescriptionLevel3="skill_desc_alchemy_s1" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" iconPath="icons\Skills\Alchemy\alchemy_s1.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s1" requiredPointsSpent="0"  maxLevel="4" priority="20" guiPositionID="22" localisationName="skill_name_alchemy_s1" localisationDescription="skill_desc_alchemy_s1" localisationDescriptionLevel2="skill_desc_alchemy_s1" localisationDescriptionLevel3="skill_desc_alchemy_s1" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" iconPath="icons\Skills\Alchemy\alchemy_s1.png" linkVertical="green" linkLeft="green" linkRight="green" />
 		<!-- Refreshment -->
         <skill skill_name="alchemy_s2" requiredPointsSpent="8" maxLevel="3" priority="20" guiPositionID="12" localisationName="primer_name_refreshment" localisationDescription="skill_desc_alchemy_s2" localisationDescriptionLevel2="skill_desc_alchemy_s2" localisationDescriptionLevel3="skill_desc_alchemy_s2" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" iconPath="icons\Skills\Alchemy\alchemy_s2.png" linkVertical="green" linkLeft="green" linkRight="green" />
 		<!-- Delayed Recovery -->
@@ -888,7 +888,7 @@
 		<!-- Fast Metabolism -->
         <skill skill_name="alchemy_s15" requiredPointsSpent="20" maxLevel="3" priority="37" guiPositionID="27" localisationName="skill_name_alchemy_s15" localisationDescription="skill_desc_alchemy_s15" localisationDescriptionLevel2="skill_desc_alchemy_s15" localisationDescriptionLevel3="skill_desc_alchemy_s15" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s15.png" linkVertical="green" linkLeft="green" linkRight="green" />
         <!-- Killing Spree -->
-        <skill skill_name="alchemy_s17" requiredPointsSpent="28" maxLevel="3" priority="37" guiPositionID="28" localisationName="skill_name_alchemy_s17" localisationDescription="skill_desc_alchemy_s17" localisationDescriptionLevel2="skill_desc_alchemy_s17" localisationDescriptionLevel3="skill_desc_alchemy_s17" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s17.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s17" requiredPointsSpent="28" maxLevel="4" priority="37" guiPositionID="28" localisationName="skill_name_alchemy_s17" localisationDescription="skill_desc_alchemy_s17" localisationDescriptionLevel2="skill_desc_alchemy_s17" localisationDescriptionLevel3="skill_desc_alchemy_s17" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s17.png" linkVertical="green" linkLeft="green" linkRight="green" />
 		
 	<!-- PERKS -->
 		<!-- Sun and Stars -->

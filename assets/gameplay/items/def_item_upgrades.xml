@@ -18,16 +18,16 @@
 	<ability name="Rune stribog _Stats">
 		<tags>							Upgrade, WeaponUpgrade
 		</tags>
-		<buff_apply_chance 				type="add" min="0.02" 		/>
-		<desc_staggerchance_mult 		type="add" min="0.02" 		/>
+		<buff_apply_chance 				type="add" min="0.03" 		/>
+		<desc_staggerchance_mult 		type="add" min="0.03" 		/>
 		<StaggerEffect					is_ability="true" 			/>
 	</ability>
 
 	<ability name="Rune stribog greater _Stats">
 		<tags>							Upgrade, WeaponUpgrade
 		</tags>
-		<buff_apply_chance 				type="add" min="0.03" 		/>
-		<desc_staggerchance_mult 		type="add" min="0.03" 		/>
+		<buff_apply_chance 				type="add" min="0.05" 		/>
+		<desc_staggerchance_mult 		type="add" min="0.05" 		/>
 		<StaggerEffect					is_ability="true" 			/>
 	</ability>
 
@@ -201,7 +201,7 @@
 	<ability name="Rune veles lesser _Stats">
 		<tags>							Upgrade, WeaponUpgrade
 		</tags>
-		<spell_power					type="mult"  min="0.01"		/>
+		<spell_power					type="mult"  min="0.02"		/>
 	</ability>
 
 	<ability name="Rune veles _Stats">
@@ -213,7 +213,7 @@
 	<ability name="Rune veles greater _Stats">
 		<tags>							Upgrade, WeaponUpgrade
 		</tags>
-		<spell_power 					type="mult"  min="0.05"		/>
+		<spell_power 					type="mult"  min="0.04"		/>
 	</ability>
 
 <!-- WEAPON UPGRADE - RUNE - PERUN -->

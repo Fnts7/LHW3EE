@@ -2740,7 +2740,7 @@ import abstract class CActor extends CGameplayEntity
 				if (UsesVitality())
 				{
 					// W3EE - Begin
-					health *= GetStat(BCS_Vitality) * stamina / thePlayer.GetStatMax(BCS_Stamina);
+					health *= MinF(stamina / 25.0f, 1.5f) * GetStat(BCS_Vitality);					
 					// W3EE - End
 					DrainVitality(health);					
 					thePlayer.DrainStamina(ESAT_FixedValue, stamina, 1.5f);
@@ -2748,7 +2748,7 @@ import abstract class CActor extends CGameplayEntity
 				else if (UsesEssence())
 				{
 					// W3EE - Begin
-					health *= GetStat(BCS_Essence) * stamina / thePlayer.GetStatMax(BCS_Stamina);
+					health *= MinF(stamina / 25.0f, 1.5f) * GetStat(BCS_Essence);
 					// W3EE - End
 					DrainEssence(health);					
 					thePlayer.DrainStamina(ESAT_FixedValue, stamina, 1.5f);

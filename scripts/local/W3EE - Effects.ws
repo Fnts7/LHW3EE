@@ -20,7 +20,7 @@
 			if( attackAction.DealsAnyDamage() && (attackAction.IsActionMelee() || attackAction.IsActionRanged()) )
 			{
 				adrenalineGain = playerWitcher.GetAttributeValue('focus_gain');
-				adrenalineGainValue = RandRangeF(0.024f, 0.006f) * (adrenalineGain.valueAdditive + adrenalineGain.valueMultiplicative + adrenalineGain.valueBase + thePlayer.GetSkillLevel(S_Alchemy_s18) * 0.03f);
+				adrenalineGainValue = RandRangeF(0.024f, 0.006f) * (adrenalineGain.valueAdditive + adrenalineGain.valueMultiplicative + adrenalineGain.valueBase + thePlayer.GetSkillLevel(S_Alchemy_s18) * 0.02f);
 				
 				((W3Effect_SwordReachoftheDamned)playerWitcher.GetBuff(EET_SwordReachoftheDamned)).MultiplyAdrenaline(adrenalineGainValue);
 				
@@ -34,7 +34,7 @@
 			if( attackAction.IsCountered() )
 			{
 				adrenalineGain = playerWitcher.GetAttributeValue('focus_gain');
-				adrenalineGainValue = RandRangeF(0.05f, 0.014f) * (adrenalineGain.valueAdditive + adrenalineGain.valueMultiplicative + adrenalineGain.valueBase + thePlayer.GetSkillLevel(S_Alchemy_s18) * 0.03f);
+				adrenalineGainValue = RandRangeF(0.05f, 0.014f) * (adrenalineGain.valueAdditive + adrenalineGain.valueMultiplicative + adrenalineGain.valueBase + thePlayer.GetSkillLevel(S_Alchemy_s18) * 0.02f);
 				
 				currentAdrenaline += adrenalineGainValue;
 				currentAdrenaline = ClampF(currentAdrenaline, 0.f, GetMaximumAdrenaline());
@@ -46,7 +46,7 @@
 					currentAdrenaline = 0;
 			}
 			else
-			if( attackAction.GetDamageDealt() > 1.f && (!((W3Effect_Toxicity)playerWitcher.GetBuff(EET_Toxicity)).isUnsafe || RandRange(100, 1) > 10 * playerWitcher.GetSkillLevel(S_Alchemy_s20)) )
+			if( attackAction.GetDamageDealt() > 1.f && (!((W3Effect_Toxicity)playerWitcher.GetBuff(EET_Toxicity)).isUnsafe || RandRange(100, 1) > (30 + 7 * playerWitcher.GetSkillLevel(S_Alchemy_s20)) ) )
 			{
 				if (attackAction.WasPartiallyDodged())
 					currentAdrenaline *= 0.667f;

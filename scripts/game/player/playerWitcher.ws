@@ -2317,14 +2317,15 @@ statemachine class W3PlayerWitcher extends CR4Player
 				{
 					// W3EE - Begin
 					healingFactor = CalculateAttributeValue( GetSkillAttributeValue(S_Sword_s18, 'healing_factor', false, true) );
-					healingFactor *= GetStat(BCS_Focus);
-					healingFactor *= GetStatMax(BCS_Vitality);
 					healingFactor *= GetSkillLevel(S_Sword_s18);
+					healingFactor += 0.0334f;
+					healingFactor *= GetStat(BCS_Focus);
+					healingFactor *= GetStatMax(BCS_Vitality);					
 					GainStat(BCS_Vitality, healingFactor + action.processedDmg.vitalityDamage); // ForceSetStat(BCS_Vitality, GetStatMax(BCS_Vitality));
 					DrainFocus(GetStat(BCS_Focus),,true);
 					RemoveBuff(EET_BattleTrance);
 					cannotUseUndyingSkill = true;
-					AddTimer('UndyingSkillCooldown', 240 - (GetSkillLevel(S_Sword_s18) - 1) * 15, false, , , true);
+					AddTimer('UndyingSkillCooldown', 240 - (GetSkillLevel(S_Sword_s18) - 1) * 20, false, , , true);
 					// W3EE - End
 				}
 				
@@ -7385,6 +7386,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var atts : array<name>;
 		var i : int;
 		var mutagenParams : W3MutagenBuffCustomParams;
+		var isDecoction : bool;
 		// W3EE - Begin
 		var toxicity : W3Effect_Toxicity;
 		// W3EE - End
@@ -7412,6 +7414,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			return;
 		}
 				
+		isDecoction = inv.ItemHasTag( item, 'Mutagen' );
 		
 		if(effectType == EET_Fact)
 		{
@@ -7433,7 +7436,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			potionParams.buffSpecificParams = factPotionParams;
 		}
 		
-		else if(inv.ItemHasTag( item, 'Mutagen' ))
+		else if(isDecoction)
 		{
 			mutagenParams = new W3MutagenBuffCustomParams in theGame;
 			mutagenParams.toxicityOffset = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity_offset'));
@@ -7460,10 +7463,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			potionParams.buffSpecificParams = potParams;
 		}
-	
 		
-		duration = CalculatePotionDuration(item, inv.ItemHasTag( item, 'Mutagen' ));		
-
+		Experience().AwardAlchemyUsageXP(this, isDecoction, finalPotionToxicity);	
+		
+		duration = CalculatePotionDuration(item, isDecoction);
 		
 		potionParams.effectType = effectType;
 		potionParams.creator = this;
@@ -7490,7 +7493,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				UnequipItem(item);
 			inv.RemoveItem(item, 1);		
 		}
-		Experience().AwardAlchemyUsageXP(inv.IsItemMutagenPotion(item), inv.IsItemPotion(item));
+
 		inv.AddAnItem('Empty bottle', 1);
 		// W3EE - End
 		
@@ -7517,7 +7520,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				PlayEffect('use_potion');
 			}
 			
-			if ( inv.ItemHasTag( item, 'Mutagen' ) )
+			if ( isDecoction )
 			{
 				
 				theGame.GetGamerProfile().CheckTrialOfGrasses();

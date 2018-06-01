@@ -19,8 +19,8 @@
 			
 			<!-- Archgriffin -->
 			<ability name="Mutagen04Effect">
-				<staminaCostPerc type="add" min="0.33"/>
-				<healthReductionPerc type="add" min="0.0606"/>
+				<staminaCostPerc type="add" min="0.25"/>
+				<healthReductionPerc type="add" min="0.03"/>
 			</ability>
 			
 			<!-- Water Hag -->
@@ -128,7 +128,7 @@
 			
 			<!-- Ekhidna -->
 			<ability name="Mutagen21Effect">
-				<healingRatio type="add" min="0.15"/>
+				<healingRatio type="add" min="0.18"/>
 			</ability>
 			
 			<!-- Ancient Leshen -->

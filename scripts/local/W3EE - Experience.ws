@@ -20,6 +20,15 @@ class W3EEExperienceHandler
 	private var skillPathEntries : array<SSkillPathEntry>;
 	private var playerWitcher : W3PlayerWitcher;
 	
+	private const var POTION_TOXICITY_BONUS_MAX : float;																					
+		default POTION_TOXICITY_BONUS_MAX = 0.4f;
+		
+	private const var DECOCTION_BONUS : float;																					
+		default DECOCTION_BONUS = 0.6f;
+		
+	private const var WITCHER_TOXICITY_BONUS_MAX : float;																					
+		default WITCHER_TOXICITY_BONUS_MAX = 0.4f;
+	
 	public function FactsSetValue( ID : string, value : int )
 	{
 		FactsRemove(ID);
@@ -37,7 +46,7 @@ class W3EEExperienceHandler
 				pathEntry.progressID = "FastAttackProgress";
 				pathEntry.maxPoints = 18;
 				// W3EE orig value: 20
-				pathEntry.expValue = RoundMath(18 * Options().GetSkillRateFast());
+				pathEntry.expValue = RoundMath(17 * Options().GetSkillRateFast());
 			break;
 			
 			case ESSP_Sword_StyleStrong:
@@ -46,7 +55,7 @@ class W3EEExperienceHandler
 				pathEntry.progressID = "HeavyAttackProgress";
 				pathEntry.maxPoints = 18;
 				// W3EE orig value: 25
-				pathEntry.expValue = RoundMath(24 * Options().GetSkillRateStrong());
+				pathEntry.expValue = RoundMath(23 * Options().GetSkillRateStrong());
 			break;
 			
 			case ESSP_Sword_Utility:
@@ -62,7 +71,7 @@ class W3EEExperienceHandler
 				pathEntry.totalID = "RangedPoints";
 				pathEntry.spentID = "RangedPointsSpent";
 				pathEntry.progressID = "RangedProgress";
-				pathEntry.maxPoints = 15;
+				pathEntry.maxPoints = 16;
 				// W3EE orig value: 181
 				pathEntry.expValue = RoundMath(150 * Options().GetSkillRateCrossbow());
 			break;
@@ -71,9 +80,9 @@ class W3EEExperienceHandler
 				pathEntry.totalID = "TrancePoints";
 				pathEntry.spentID = "TrancePointsSpent";
 				pathEntry.progressID = "TranceProgress";
-				pathEntry.maxPoints = 20;
+				pathEntry.maxPoints = 19;
 				// W3EE orig value: 114
-				pathEntry.expValue = RoundMath(20 * Options().GetSkillRateTrance());
+				pathEntry.expValue = RoundMath(22 * Options().GetSkillRateTrance());
 			break;
 			
 			case ESSP_Signs_Aard:
@@ -125,9 +134,9 @@ class W3EEExperienceHandler
 				pathEntry.totalID = "BrewingPoints";
 				pathEntry.spentID = "BrewingPointsSpent";
 				pathEntry.progressID = "BrewingProgress";
-				pathEntry.maxPoints = 12;
+				pathEntry.maxPoints = 13;
 				// W3EE orig value: 404
-				pathEntry.expValue = RoundMath(375 * Options().GetSkillRatePotions());
+				pathEntry.expValue = RoundMath(390 * Options().GetSkillRatePotions());
 			break;
 			
 			case ESSP_Alchemy_Oils:
@@ -154,15 +163,15 @@ class W3EEExperienceHandler
 				pathEntry.progressID = "MutationProgress";
 				pathEntry.maxPoints = 18;
 				// W3EE orig value: 349
-				pathEntry.expValue = RoundMath(400 * Options().GetSkillRateMutagens());
+				pathEntry.expValue = RoundMath(380 * Options().GetSkillRateMutagens());
 			break;
 			
 			case ESSP_Alchemy_Grasses:
 				pathEntry.totalID = "TrialPoints";
 				pathEntry.spentID = "TrialPointsSpent";
 				pathEntry.progressID = "TrialProgress";
-				pathEntry.maxPoints = 16;
-				pathEntry.expValue = RoundMath(404 * Options().GetSkillRateGrasses());
+				pathEntry.maxPoints = 17;
+				pathEntry.expValue = RoundMath(300 * Options().GetSkillRateGrasses());
 			break;
 			
 			case ESSP_Perks:
@@ -229,7 +238,7 @@ class W3EEExperienceHandler
 			xpFloat *= 1.0f - (0.4f * GetTotalPathPoints(skillPath) / skillPathEntries[id].maxPoints);
 			
 		// all skill points penalty
-		xpFloat *= 1.0f - (0.4f * GetTotalSkillPoints() / 254);
+		xpFloat *= 1.0f - (0.4f * GetTotalSkillPoints() / 256);
 		
 		xp = FactsQueryLatestValue(skillPathEntries[id].progressID) + FloorF(xpFloat);
 		if( xp < 10000 )
@@ -500,7 +509,7 @@ class W3EEExperienceHandler
 		if( isDecoction )
 		{
 			ModPathProgress(ESSP_Alchemy_Potions, quantity);
-			ModPathProgress(ESSP_Alchemy_Mutagens, quantity * 4.0f);
+			ModPathProgress(ESSP_Alchemy_Mutagens, quantity * 3.5f);
 		}
 		else
 		if( isPotion )
@@ -513,15 +522,34 @@ class W3EEExperienceHandler
 			ModPathProgress(ESSP_Alchemy_Bombs, quantity);
 	}
 	
-	public function AwardAlchemyUsageXP( isDecoction, isPotion : bool )
+	public function AwardAlchemyUsageXP( witcher : W3PlayerWitcher, isDecoction : bool, toxicity : float )
 	{
-		if( isDecoction )
+		var mult, pseudoToxPercent : float;
+		
+		if (isDecoction)
+			mult = 1.0f + DECOCTION_BONUS;
+		else
+		{
+			mult = 1.0f + MinF( (toxicity - 25.0f) / 30.0f , 1.0f ) * POTION_TOXICITY_BONUS_MAX;
+		}
+		
+		// current tox / mean of initial max tox and max tox
+		pseudoToxPercent = 2.0f * witcher.GetStat(BCS_Toxicity) / (witcher.GetStatMax(BCS_Toxicity) + 100.0f);
+		
+		mult += MinF(pseudoToxPercent / 0.8f, 1.0f) * WITCHER_TOXICITY_BONUS_MAX;
+		
+		if ( isDecoction )
+			ModPathProgress(ESSP_Alchemy_Mutagens, 1.2f);
+			
+		ModPathProgress(ESSP_Alchemy_Grasses, mult);
+	
+		/*if( isDecoction )
 		{
 			ModPathProgress(ESSP_Alchemy_Grasses, 1.5f);
 			ModPathProgress(ESSP_Alchemy_Mutagens, 1.3f);
 		}
 		else
-			ModPathProgress(ESSP_Alchemy_Grasses, 1);
+			ModPathProgress(ESSP_Alchemy_Grasses, 1);*/
 	}
 	
 	public function SpendSkillPoints( skill : ESkill, amount : int )

@@ -107,6 +107,26 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			tempSkills.Clear();
 			temporaryTutorialSkills.Clear();
 			
+			for (i=0; i < skills.Size(); i+=1)
+			{
+				switch (skills[i].skillType)
+				{
+				case S_Alchemy_s01:
+				case S_Alchemy_s17:
+				case S_Sword_s07:
+					// All from 3 to 4
+					skills[i].maxLevel = 4;
+					break;
+				case S_Sword_s18:
+					// All from 5 to 4
+					skills[i].maxLevel = 4;
+					break;
+	
+				default:
+					break;
+				}
+			}
+			
 			if ( !ep1SkillsInitialized && theGame.GetDLCManager().IsEP1Available() )
 			{				
 				ep1SkillsInitialized = FixMissingSkills();
@@ -460,7 +480,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		if( prevPoints > points )
 		{
 			if( isUndyingCall )
-				GetWitcherPlayer().StartCustomVigorTimer(Options().AdrGenDelay * (6 - thePlayer.GetSkillLevel(S_Sword_s18)));
+				GetWitcherPlayer().StartCustomVigorTimer(Options().AdrGenDelay * (4.5f - thePlayer.GetSkillLevel(S_Sword_s18) / 2.0f) );
 			else
 				GetWitcherPlayer().StartRegenTimer();
 			if( GetFHUDConfig().enableWolfModuleOnVigorChanged )

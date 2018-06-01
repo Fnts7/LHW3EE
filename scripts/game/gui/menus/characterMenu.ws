@@ -2422,7 +2422,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				else
 					store = 2 * skillLevel;
 				
-				baseString += "<br>Increases poise by: " + store + ".";
+				baseString += "<br>Increases poise by: " + store + ". Reduces poise reduction due to low vitality by: " + (10 * skillLevel) + "%.";
 				// W3EE - End
 				break;
 			case S_Sword_s11:
@@ -2510,9 +2510,9 @@ class CR4CharacterMenu extends CR4MenuBase
 				// W3EE - Begin
 				arg = CalculateAttributeValue( GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s18, 'healing_factor', false, true) );
 				// argsInt.PushBack(RoundMath(arg*100));
-				argsInt.PushBack(RoundMath(arg * skillLevel * 100));
-				argsInt.PushBack(RoundMath(Options().AdrGenDelay * (6 - skillLevel)));
-				argsInt.PushBack(240 - (skillLevel - 1) * 15);
+				argsInt.PushBack(RoundMath(arg * skillLevel * 100 + 3.334f));
+				argsInt.PushBack(RoundMath( Options().AdrGenDelay * (4.5f - skillLevel / 2.0f) ));
+				argsInt.PushBack(240 - (skillLevel - 1) * 20);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_UndyingSkill", argsInt);
 				// W3EE - End
 				break;
@@ -2860,9 +2860,10 @@ class CR4CharacterMenu extends CR4MenuBase
 				
 				baseString = GetLocStringByKeyExtWithParams(locKey, , , argsString);
 				*/
-				arg = 10 * skillLevel;
+				arg = 9 * skillLevel;
 				argsInt.PushBack(RoundMath(arg));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
+				baseString += "<br>Reduces toxicity negative influence on vitality regen from 50% to " + (50 - 6 * skillLevel) +"%.";
 				// W3EE - End
 				break;
 			case S_Alchemy_s02:
@@ -3003,22 +3004,22 @@ class CR4CharacterMenu extends CR4MenuBase
 				baseString = GetLocStringByKeyExtWithParams("W3EE_Frenzy", argsInt);
 				break;
 			case S_Alchemy_s17:
-				//arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s17, 'critical_hit_chance', false, false)) * skillLevel;
-				if( skillLevel == 1 )
+				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s17, 'critical_hit_chance', false, false)) * skillLevel;
+				/*if( skillLevel == 1 )
 					argsInt.PushBack(3);
 				else
 				if( skillLevel == 2 )
 					argsInt.PushBack(6);
 				else
 				if( skillLevel == 3 )
-					argsInt.PushBack(10);
-				//argsInt.PushBack(RoundMath(arg*100));
+					argsInt.PushBack(10);*/
+				argsInt.PushBack(RoundMath(arg*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				break;
 			case S_Alchemy_s18:
 				//argsInt.PushBack(skillLevel * 10);
 				//baseString = GetLocStringByKeyExtWithParams("primer_descr_tolerance", argsInt);
-				baseString = "Adrenaline is increased by: " + (skillLevel * 10) + "%, adrenaline gain is increased by: " + (3 * skillLevel) + "%, toxicity is increased by: " + (12 * skillLevel) + ".";
+				baseString = "Adrenaline is increased by: " + (skillLevel * 10) + "%, adrenaline gain is increased by: " + (2 * skillLevel) + "%, toxicity is increased by: " + (12 * skillLevel) + ".";
 				break;
 			// W3EE - End
 			case S_Alchemy_s19:
@@ -3035,10 +3036,10 @@ class CR4CharacterMenu extends CR4MenuBase
 				arg = ability.valueMultiplicative * skillLevel;				
 				argsInt.PushBack(RoundMath(arg*100));
 				*/
-				argsInt.PushBack(100 - 10 * skillLevel);
+				argsInt.PushBack(70 - 7 * skillLevel);
 				argsInt.PushBack(60);
 				argsInt.PushBack(60 - 6 * skillLevel);
-				baseString = GetLocStringByKeyExtWithParams("W3EE_EndurePain", argsInt);
+				baseString = GetLocStringByKeyExtWithParams("W3EE_EndurePain", argsInt) + " (vigor and stamina)";
 				// W3EE - End
 				break;
 			default:
@@ -3150,7 +3151,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsString.PushBack( FloatToString( ability.valueAdditive ) );*/
 				argsInt.PushBack(25);
 				baseString = GetLocStringByKeyExtWithParams( locKey, argsInt/* , , argsString */);
-				baseString += "<br>Increases food instant healing by 25% and over time healing by 35%.";
+				baseString += "<br>Increases food instant healing by 25% and over time healing by 40%.";
 				// W3EE - End
 				break;
 			case S_Perk_18:

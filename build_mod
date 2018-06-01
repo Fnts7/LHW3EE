@@ -43,10 +43,11 @@ assetFile[22]="/dlc/bob/data/gameplay/items/def_item_crafting_gloves.xml"
 assetFile[23]="/dlc/bob/data/gameplay/items/def_item_crafting_pants.xml"
 
 assetFile[24]="/gameplay/abilities/effects.xml"
-assetFile[25]="/dlc/dlc5/data/gameplay/items/dlc5_shop.xml"
-assetFile[26]="/dlc/dlc1/data/gameplay/items/dlc1_shop.xml"
-assetFile[27]="/dlc/dlc14/data/gameplay/items/dlc14_shop.xml"
-assetFile[28]="/dlc/dlc14/data/gameplay/items/dlc14_items.xml"
+assetFile[25]="/gameplay/items/def_item_upgrades.xml"
+assetFile[26]="/dlc/dlc5/data/gameplay/items/dlc5_shop.xml"
+assetFile[27]="/dlc/dlc1/data/gameplay/items/dlc1_shop.xml"
+assetFile[28]="/dlc/dlc14/data/gameplay/items/dlc14_shop.xml"
+assetFile[29]="/dlc/dlc14/data/gameplay/items/dlc14_items.xml"
 
 
 # ASSET FILES END

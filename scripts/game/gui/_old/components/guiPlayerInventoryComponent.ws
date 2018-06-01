@@ -332,6 +332,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 			itemDesc = "Reduces every damage taken by 25%.";
 		else if (craftedItemName == 'Mutagen 19')
 			itemDesc = "Getting damage from hits can trigger quen. The more damage taken or the stronger hit, the higher chance.";
+		else if (craftedItemName == 'Mutagen 4')
+			itemDesc = "Every heavy attack landed consumes additionally 25% of available stamina. Drains 3% of target health for 25 stamina consumed. Linear scaling.";
 		else if (craftedItemName == 'Mutagen 16')
 			itemDesc += "<br>Every melee attack has 30% chance to apply random buff: burning, blindness, frost slowdown, bleeding, poison, long stagger, knockdown.";
 		else if (craftedItemName == 'Mutagen 24')

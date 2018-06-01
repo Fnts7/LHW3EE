@@ -156,9 +156,9 @@
 			</ability>
 			<ability name="ThunderboltEffect_Level3">
 				<tags>passive</tags>
-				<critical_hit_chance type="add" min="0.15"/> 
+				<critical_hit_chance type="add" min="0.18"/> 
 				<critical_frenzy_chance type="add" min="30"/> 
-				<critical_frenzy_duration type="add" min="2"/> 
+				<critical_frenzy_duration type="add" min="2.5"/> 
 				<critical_frenzy_slowdown type="add" min="0.5"/> 
 			</ability>
 			

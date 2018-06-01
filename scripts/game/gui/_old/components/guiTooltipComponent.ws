@@ -612,6 +612,8 @@ class W3TooltipComponent
 				uniqueDescription = "Reduces every damage taken by 25%.";
 			else if (itemName == 'Mutagen 19')
 				uniqueDescription = "Getting damage from hits can trigger quen. The more damage taken or the stronger hit, the higher chance.";
+			else if (itemName == 'Mutagen 4')
+				uniqueDescription = "Every heavy attack landed consumes additionally 25% of available stamina. Drains 3% of target health for 25 stamina consumed. Linear scaling.";
 			else
 				uniqueDescription += GetLocStringByKeyExt( itemInvComponent.GetItemLocalizedDescriptionByUniqueID(item) );
 				

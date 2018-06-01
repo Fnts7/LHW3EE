@@ -144,7 +144,7 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 			dmg = MaxF(0, dmgCurved * maxStat - effectDuration.Size() * RoundMath(1.66 * thePlayer.GetSkillLevel(S_Alchemy_s03)));
 			
 			if( thePlayer.CanUseSkill(S_Alchemy_s01) )
-				dmg *= (1 - 0.1 * thePlayer.GetSkillLevel(S_Alchemy_s01));
+				dmg *= (1 - 0.09f * thePlayer.GetSkillLevel(S_Alchemy_s01));
 			
 			/*A CDProjekt comment used to dwell here. Let's reminisce about it by contemplating the big chunk of space left in its place.*/
 			
