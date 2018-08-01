@@ -22,6 +22,7 @@ class W3DamageManagerProcessor extends CObject
 	private var attackerMonsterCategory		: EMonsterCategory;
 	private var victimMonsterCategory		: EMonsterCategory;
 	private var victimCanBeHitByFists		: bool;
+	private var tempExtraStagger			: float; default tempExtraStagger = 0.0f;
 	
 	
 	public function ProcessAction(act : W3DamageAction)
@@ -240,7 +241,7 @@ class W3DamageManagerProcessor extends CObject
 			}
 			else
 			{
-				if( RandRange(100, 0) <= playerAttacker.GetSkillLevel(S_Sword_s04) * 5 )
+				if( RandF() <= playerAttacker.GetSkillLevel(S_Sword_s04) * 0.05f + tempExtraStagger )
 				{
 					if( actorVictim.IsImmuneToBuff(EET_Stagger) )
 						attackAction.SetHitAnimationPlayType(EAHA_ForceYes);
@@ -2818,10 +2819,17 @@ class W3DamageManagerProcessor extends CObject
 		{
 			action.SetBuffSourceName( 'Mutation2ExplosionValid' );
 		}
-	
 		
-		if(actorVictim && action.GetEffectsCount() > 0)
-			ret = actorVictim.ApplyActionEffects(action);
+		if (playerAttacker && attackAction && playerAttacker.CanUseSkill(S_Sword_s04) && playerAttacker.IsHeavyAttack( attackAction.GetAttackName() ) && !attackAction.IsCountered() && !attackAction.IsParried())
+		{
+			tempExtraStagger = action.GetStaggerChanceCombined();
+			if (tempExtraStagger != 0)
+				action.RemoveBuffsByType(EET_Stagger);
+		}
+		
+		
+		if(actorVictim && action.GetEffectsCount() > 0)		
+			ret = actorVictim.ApplyActionEffects(action);			
 		else
 			ret = false;
 			

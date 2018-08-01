@@ -2348,7 +2348,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				/*argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) + "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%";
 				*/
-				argsInt.PushBack(FloorF(skillLevel * 4.5f));
+				argsInt.PushBack(FloorF(skillLevel * 4.4f));
 				argsInt.PushBack(FloorF(skillLevel * 5.0f));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_StrTrainingSkill", argsInt);
 				// W3EE - End
@@ -2534,7 +2534,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				*/
 				argsInt.PushBack(20 * skillLevel);
 				argsFloat.PushBack(RoundTo(3.f  / 3.f / 5.f, 2) * skillLevel);
-				argsFloat.PushBack(RoundTo(6.f  / 3.f / 5.f, 2) * skillLevel);
+				argsFloat.PushBack(RoundTo(0.35f, 2) * skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_RazorFocusSkill", argsInt, argsFloat);
 				// W3EE - End
 				break;
@@ -2860,7 +2860,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				
 				baseString = GetLocStringByKeyExtWithParams(locKey, , , argsString);
 				*/
-				arg = 9 * skillLevel;
+				arg = 8 * skillLevel;
 				argsInt.PushBack(RoundMath(arg));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				baseString += "<br>Reduces toxicity negative influence on vitality regen from 50% to " + (50 - 6 * skillLevel) +"%.";
@@ -2878,7 +2878,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				//W3EE - Begin
 				/*arg = 1 - CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s03, 'toxicity_threshold', false, false)) * skillLevel;
 				argsInt.PushBack(Max(0, RoundMath(arg*100)));*/
-				arg= 1.66f * skillLevel;
+				arg= 2.0f * skillLevel;
 				argsInt.PushBack(RoundMath(arg));
 				//W3EE - End
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
@@ -3026,7 +3026,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s19, 'synergy_bonus', false, false)) * skillLevel;
 				argsInt.PushBack(RoundMath(arg*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
-				baseString += "<br>In case of green mutagen synergy bonus is converted from toxicity to adrenaline gain: 1 toxicity becomes 1% adrenaline gain bonus.";
+				baseString += "<br>In case of green mutagen synergy bonus is converted from toxicity to adrenaline gain: 1 toxicity becomes 1.5% adrenaline gain bonus.";
 				break;
 			case S_Alchemy_s20:
 				// W3EE - Begin
@@ -3106,6 +3106,8 @@ class CR4CharacterMenu extends CR4MenuBase
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_07, 'staminaRegen', false, true);
 				argsFloat.PushBack(ability.valueMultiplicative*1000);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_BearSkill",, argsFloat);
+				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_07, 'damage_through_blocks', false, true);
+				baseString += "<br>Each piece gives " + RoundMath(ability.valueMultiplicative*100) + "% damage through blocks and dodges.";
 				break;
 			case S_Perk_09:
 				if( GetWitcherPlayer().CanUseSkill(S_Perk_11) )

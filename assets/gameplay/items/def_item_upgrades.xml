@@ -10,8 +10,8 @@
 	<ability name="Rune stribog lesser _Stats">
 		<tags>							Upgrade, WeaponUpgrade
 		</tags>
-		<buff_apply_chance 				type="add" min="0.01" 		/>
-		<desc_staggerchance_mult 		type="add" min="0.01" 		/>
+		<buff_apply_chance 				type="add" min="0.02" 		/>
+		<desc_staggerchance_mult 		type="add" min="0.02" 		/>
 		<StaggerEffect					is_ability="true" 			/>
 	</ability>
 

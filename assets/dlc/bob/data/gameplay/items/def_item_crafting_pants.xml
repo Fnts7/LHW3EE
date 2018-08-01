@@ -40,10 +40,11 @@
 				<armor 							type="base" min="91" 				/>
 				<slashing_resistance_perc 		type="base" min="0.11" 				/>
 				<piercing_resistance_perc 		type="base" min="0.06" 				/>
-				<rending_resistance_perc 		type="base" min="0.16" 				/>
+				<rending_resistance_perc 		type="base" min="0.15" 				/>
 				<elemental_resistance_perc 		type="base" min="0.25"				/>
 				<focus_gain 					type="mult" min="0.1"				/>
 				<injury_resist			 		type="mult"	min="0.05"				/>
+				<bleeding_resistance_perc 		type="base" min="0.05"				/>
 				<staminaRegen_armor_mod 		type="mult" min="-0.10"				/>
 			</ability>
 
@@ -54,9 +55,11 @@
 				<armor 							type="base"	min="91" 				/>
 				<slashing_resistance_perc 		type="base" min="0.09"				/>
 				<rending_resistance_perc 		type="base" min="0.11"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.06"				/>
 				<elemental_resistance_perc 		type="base" min="0.33"				/>
 				<focus_gain 					type="mult" min="0.1"				/>
 				<injury_resist			 		type="mult"	min="0.05"				/>
+				<bleeding_resistance_perc 		type="base" min="0.05"				/>
 			</ability>
 
 		<!-- PANTS WITCHER RED WOLF  -->
@@ -68,7 +71,8 @@
 				<piercing_resistance_perc 		type="base"	min="0.06"				/>
 				<rending_resistance_perc 		type="base" min="0.09"				/>
 				<elemental_resistance_perc 		type="base" min="0.25"				/>
-				<injury_resist			 		type="mult"	min="0.05"				/>
+				<injury_resist			 		type="mult"	min="0.03"				/>
+				<bleeding_resistance_perc 		type="base" min="0.03"				/>
 				<toxicity 						type="base" min="6" 				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.10"				/>
 			</ability>

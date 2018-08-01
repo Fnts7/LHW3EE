@@ -637,7 +637,7 @@
 			<tags>perk_5</tags>
 			<!--<critical_hit_chance_fast_style type="add" min="0.25" />
 			<attack_power_fast_style type="mult" min="0.05" />-->
-			<delayReduction type="mult" min="0.05"/>
+			<delayReduction type="mult" min="0.06"/>
 		</ability>
 		<ability name="perk_6">
 			<tags>perk_6</tags>
@@ -647,7 +647,8 @@
 		<ability name="perk_7">
 			<tags>perk_7</tags>
 			<encumbrance type="base" min="7.5" />
-			<staminaRegen type="mult" min="0.00375" />
+			<staminaRegen type="mult" min="0.003" />
+			<damage_through_blocks type="mult" min="0.02" />
 		</ability>
 		<ability name="perk_10">
 			<tags>perk_10, GlobalPassiveBonus</tags>

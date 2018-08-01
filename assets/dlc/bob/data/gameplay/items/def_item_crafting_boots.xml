@@ -38,12 +38,13 @@
 				<weight							type="base"	min="3.5"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="91"				/>
-				<slashing_resistance_perc		type="base"	min="0.06"				/>
-				<piercing_resistance_perc		type="base"	min="0.06"				/>
-				<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
-				<rending_resistance_perc		type="base"	min="0.06"				/>
-				<focus_gain 					type="mult" min="0.1"				/>
+				<slashing_resistance_perc		type="base"	min="0.07"				/>
+				<piercing_resistance_perc		type="base"	min="0.07"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.06"				/>
+				<rending_resistance_perc		type="base"	min="0.07"				/>
+				<focus_gain 					type="mult" min="0.07"				/>
 				<injury_resist			 		type="mult"	min="0.05"				/>
+				<bleeding_resistance_perc 		type="base" min="0.05"				/>
 				<staminaRegen_armor_mod			type="mult"	min="-0.03"				/>
 			</ability>
 
@@ -56,8 +57,9 @@
 				<piercing_resistance_perc		type="base"	min="0.05"				/>
 				<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
 				<rending_resistance_perc		type="base"	min="0.06"				/>
-				<focus_gain 					type="mult" min="0.1"				/>
+				<focus_gain 					type="mult" min="0.07"				/>
 				<injury_resist			 		type="mult"	min="0.05"				/>
+				<bleeding_resistance_perc 		type="base" min="0.05"				/>
 			</ability>
 
 		<!-- BOOTS WITCHER RED WOLF -->
@@ -69,6 +71,7 @@
 				<piercing_resistance_perc		type="base"	min="0.05"				/>
 				<rending_resistance_perc		type="base"	min="0.06"				/>
 				<injury_resist			 		type="mult"	min="0.025"				/>
+				<bleeding_resistance_perc 		type="base" min="0.025"				/>
 				<toxicity 						type="base" min="3" 				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.03"				/>
 			</ability>	

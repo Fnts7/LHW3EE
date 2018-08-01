@@ -480,7 +480,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	poiseThreshold = 100;
 	
 	if( playerWitcher.CanUseSkill(S_Perk_06) )
-		poiseThreshold -= armorPieces[2].all * 7.5f;
+		poiseThreshold -= armorPieces[2].exact * 7.5f;
 	
 	actionPoiseBonus = 1.f;
 	
@@ -717,7 +717,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	}
 	else if ( varKey == 'AtkSpdVigH' )
 	{
-		valueStr = (string)NoTrailZeros(FloorF(playerWitcher.GetStat(BCS_Focus) * playerWitcher.GetSkillLevel(S_Sword_s20) * 0.4f)) + "%";
+		valueStr = (string)NoTrailZeros(FloorF(playerWitcher.GetStat(BCS_Focus) * playerWitcher.GetSkillLevel(S_Sword_s20) * 0.35f)) + "%";
 	}
 	else if ( varKey == 'AtkSpdVigL' )
 	{
@@ -729,11 +729,11 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	}
 	else if ( varKey == 'AtkSpdST' )
 	{
-		valueStr = (string)NoTrailZeros(FloorF(playerWitcher.GetSkillLevel(S_Sword_s04) * 4.5f)) + "%";
+		valueStr = (string)NoTrailZeros(FloorF(playerWitcher.GetSkillLevel(S_Sword_s04) * 4.4f)) + "%";
 	}
 	else if ( varKey == 'AtkSpdArmor' )
 	{
-		valueStr = (string)NoTrailZeros(RoundMath(Combat().CalcArmorPenalty(GetWitcherPlayer(), true) * 100)) + "%";
+		valueStr = (string)NoTrailZeros(RoundTo(Combat().CalcArmorPenalty(GetWitcherPlayer(), true) * 100, 2)) + "%";
 	}
 	else if ( varKey == 'AtkSpdOtherL' )
 	{

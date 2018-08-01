@@ -17,7 +17,7 @@
 	<ability name="greater_mutagen_color_green_synergy_bonus">
 		<tags>alchemy_s19</tags>
 		<!--<toxicity type="base" min="0.3" max="0.3" />-->
-		<focus_gain type="mult" min="0.003" max="0.003" />
+		<focus_gain type="mult" min="0.0045" max="0.0045" />
 	</ability>
 	
 	<ability name="mutagen_color_green" >
@@ -28,7 +28,7 @@
 	<ability name="mutagen_color_green_synergy_bonus">
 		<tags>alchemy_s19</tags>
 		<!--<toxicity type="base" min="0.225" max="0.225" /> -->
-		<focus_gain type="mult" min="0.00225" max="0.00225" />
+		<focus_gain type="mult" min="0.003375" max="0.003375" />
 	</ability>
 	
 	<ability name="lesser_mutagen_color_green" >
@@ -39,7 +39,7 @@
 	<ability name="mutagen_color_lesser_green_synergy_bonus">
 		<tags>alchemy_s19</tags>
 		<!--<toxicity type="base" min="0.15" max="0.15"/> -->
-		<focus_gain type="mult" min="0.0015" max="0.0015" />
+		<focus_gain type="mult" min="0.00225" max="0.00225" />
 	</ability>
 
 <!-- GREEN X -->

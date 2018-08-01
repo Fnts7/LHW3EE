@@ -378,6 +378,23 @@ class W3DamageAction extends CDamageData
 		return false;
 	}
 	
+	public function GetStaggerChanceCombined() : float
+	{
+		var i : int;
+		var chance : float;
+		chance = 0;
+		
+		for ( i=0 ; i < effectInfos.Size() ; i+=1 )
+		{
+			if( effectInfos[i].effectType == EET_Stagger )
+			{
+				chance += effectInfos[i].applyChance * (1.0f - chance);
+			}
+		}
+			
+		return chance;
+	}
+	
 	
 	public function GetDTs( out dmgTypes : array< SRawDamage > ) : int
 	{

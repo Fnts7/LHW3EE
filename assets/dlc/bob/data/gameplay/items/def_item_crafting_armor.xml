@@ -41,9 +41,10 @@
 		<slashing_resistance_perc		type="base"	min="0.32"				/>
 		<piercing_resistance_perc		type="base"	min="0.26"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.25"				/>
-		<rending_resistance_perc		type="base"	min="0.46"				/>
-		<focus_gain 					type="mult" min="0.3"				/>
+		<rending_resistance_perc		type="base"	min="0.42"				/>
+		<focus_gain 					type="mult" min="0.24"				/>
 		<injury_resist			 		type="mult"	min="0.15"				/>
+		<bleeding_resistance_perc 		type="base" min="0.15"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.10"				/>	
 	</ability>
 
@@ -56,8 +57,9 @@
 		<piercing_resistance_perc		type="base"	min="0.19"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.17"				/>
 		<rending_resistance_perc		type="base"	min="0.31"				/>
-		<focus_gain 					type="mult" min="0.3"				/>
+		<focus_gain 					type="mult" min="0.24"				/>
 		<injury_resist			 		type="mult"	min="0.15"				/>
+		<bleeding_resistance_perc 		type="base" min="0.15"				/>
 	</ability>	
 
 <!-- ARMOR WITCHER RED WOLF -->
@@ -71,6 +73,7 @@
 		<rending_resistance_perc		type="base"	min="0.20"				/>
 		<toxicity 						type="base" min="9" 				/>
 		<injury_resist			 		type="mult"	min="0.1"				/>
+		<bleeding_resistance_perc 		type="base" min="0.1"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.10"				/>
 	</ability>	
 

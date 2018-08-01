@@ -318,9 +318,10 @@
 		<slashing_resistance_perc		type="base" min="0.15"				/>
 		<piercing_resistance_perc		type="base" min="0.05"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.05"				/>
-		<rending_resistance_perc		type="base" min="0.20"				/>
+		<rending_resistance_perc		type="base" min="0.23"				/>
 		<focus_gain 					type="mult" min="0.1"				/>
 		<injury_resist			 		type="mult"	min="0.05"				/>
+		<bleeding_resistance_perc 		type="base" min="0.05"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.10"				/>			
 	</ability>
 	
@@ -332,8 +333,9 @@
 		<piercing_resistance_perc		type="base"	min="0.10"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.10"				/>
 		<rending_resistance_perc		type="base"	min="0.30"				/>
-		<focus_gain 					type="mult" min="0.15"				/>
+		<focus_gain 					type="mult" min="0.14"				/>
 		<injury_resist			 		type="mult"	min="0.075"				/>
+		<bleeding_resistance_perc 		type="base" min="0.075"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.10"				/>		
 	</ability>
 	
@@ -345,8 +347,9 @@
 		<piercing_resistance_perc		type="base"	min="0.15"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.15"				/>
 		<rending_resistance_perc		type="base"	min="0.35"				/>
-		<focus_gain 					type="mult" min="0.2"				/>
+		<focus_gain 					type="mult" min="0.18"				/>
 		<injury_resist			 		type="mult"	min="0.1"				/>
+		<bleeding_resistance_perc 		type="base" min="0.1"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.10"				/>		
 	</ability>
 	
@@ -357,9 +360,10 @@
 		<slashing_resistance_perc		type="base"	min="0.30"				/>
 		<piercing_resistance_perc		type="base"	min="0.25"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.25"				/>
-		<rending_resistance_perc		type="base"	min="0.45"				/>
-		<focus_gain 					type="mult" min="0.25"				/>
+		<rending_resistance_perc		type="base"	min="0.41"				/>
+		<focus_gain 					type="mult" min="0.21"				/>
 		<injury_resist			 		type="mult"	min="0.125"				/>
+		<bleeding_resistance_perc 		type="base" min="0.125"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.10"				/>	
 	</ability>
 	

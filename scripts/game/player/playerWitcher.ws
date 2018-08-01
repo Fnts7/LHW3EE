@@ -10814,9 +10814,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 			case EISB_Dimeritium2:		return amountOfSetPiecesEquipped[ EIST_Dimeritium ] + IsHelmetEquipped(EIST_Dimeritium) >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
 			case EISB_Meteorite:		return amountOfSetPiecesEquipped[ EIST_Meteorite ] + IsHelmetEquipped(EIST_Meteorite) >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
 			
-			case EISB_LightArmor:		return GetSetPartsEquipped(EIST_LightArmor) >= 4;
-			case EISB_MediumArmor:		return GetSetPartsEquipped(EIST_MediumArmor) >= 4;
-			case EISB_HeavyArmor:		return GetSetPartsEquipped(EIST_HeavyArmor) >= 4;
+			case EISB_LightArmor:		return GetSetPartsEquipped(EIST_LightArmor) >= 2;
+			case EISB_MediumArmor:		return GetSetPartsEquipped(EIST_MediumArmor) >= 2;
+			case EISB_HeavyArmor:		return GetSetPartsEquipped(EIST_HeavyArmor) >= 2;
 			// W3EE - End
 			default:					return false;
 		}
@@ -10826,18 +10826,34 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function GetSetPartsEquipped( setType : EItemSetType ) : int
 	{
 		if( setType == EIST_LightArmor )
-			return armorPiecesOriginal[0].all + armorPiecesOriginal[1].all;
+			return armorPiecesOriginal[0].exact + armorPiecesOriginal[1].exact;
 		else
 		if( setType == EIST_MediumArmor )
-			return armorPiecesOriginal[2].all;
+			return armorPiecesOriginal[2].exact;
 		else
 		if( setType == EIST_HeavyArmor )
-			return armorPiecesOriginal[3].all;
+			return armorPiecesOriginal[3].exact;
 		else
 		if( IsMinorSetType(setType) )
 			return amountOfSetPiecesEquipped[ setType ] + amountOfSetPiecesEquipped[ GetSetTypeMajor(setType) ] + IsHelmetEquipped(setType);
 		else
 			return amountOfSetPiecesEquipped[ setType ] + amountOfSetPiecesEquipped[ GetSetTypeMinor(setType) ] + IsHelmetEquipped(setType);
+	}
+	
+	public function HeavySetStaggerProbability() : int
+	{
+		var count : int;
+		
+		count = GetSetPartsEquipped(EIST_HeavyArmor);
+		
+		if (count >= 4)
+			return 20;
+		else if (count == 3)
+			return 14;
+		else if (count == 2)
+			return 7;
+		else
+			return -1;
 	}
 	
 	public function IsMinorSetType( setType : EItemSetType ) : bool
@@ -12592,59 +12608,72 @@ statemachine class W3PlayerWitcher extends CR4Player
 	private var armorPiecesOriginal, armorPieces : array<SArmorCount>;
 	private function UpdateArmorCount( slot : EEquipmentSlots, item : SItemUniqueId, increment : int )
 	{
+		var weight : float;
+		
 		if( !inv.IsItemAnyArmor(item) )
 			return;
 		
+		switch (slot)
+		{
+		case EES_Armor: weight = 1.8f; break;
+		case EES_Pants: weight = 1.0f; break;
+		case EES_Gloves:
+		case EES_Boots:
+			weight = 0.6f;
+			break;
+		}
+		
+		
 		switch(inv.GetArmorType(item))
 		{
-			case EAT_Light:		armorPieces[1].all += increment;	if( slot != EES_Boots && slot != EES_Pants ) armorPieces[1].upper += increment;	break;
-			case EAT_Medium:	armorPieces[2].all += increment;	if( slot != EES_Boots && slot != EES_Pants ) armorPieces[2].upper += increment;	break;
-			case EAT_Heavy:		armorPieces[3].all += increment;	if( slot != EES_Boots && slot != EES_Pants ) armorPieces[3].upper += increment;	break;
+			case EAT_Light:		armorPieces[1].exact += increment;	armorPieces[1].weighted += increment * weight; break;
+			case EAT_Medium:	armorPieces[2].exact += increment;	armorPieces[2].weighted += increment * weight; break;
+			case EAT_Heavy:		armorPieces[3].exact += increment;	armorPieces[3].weighted += increment * weight; break;
 			default : break;
 		}
 		
 		switch(inv.GetArmorTypeOriginal(item))
 		{
-			case EAT_Light:		armorPiecesOriginal[1].all += increment;	if( slot != EES_Boots && slot != EES_Pants ) armorPiecesOriginal[1].upper += increment;	break;
-			case EAT_Medium:	armorPiecesOriginal[2].all += increment;	if( slot != EES_Boots && slot != EES_Pants ) armorPiecesOriginal[2].upper += increment;	break;
-			case EAT_Heavy:		armorPiecesOriginal[3].all += increment;	if( slot != EES_Boots && slot != EES_Pants ) armorPiecesOriginal[3].upper += increment;	break;
+			case EAT_Light:		armorPiecesOriginal[1].exact += increment;	armorPiecesOriginal[1].weighted += increment * weight; break;
+			case EAT_Medium:	armorPiecesOriginal[2].exact += increment;	armorPiecesOriginal[2].weighted += increment * weight; break;
+			case EAT_Heavy:		armorPiecesOriginal[3].exact += increment;	armorPiecesOriginal[3].weighted += increment * weight; break;
 			default : break;
 		}
 		
-		armorPieces[0].all = 4 - armorPieces[1].all - armorPieces[2].all - armorPieces[3].all;
-		armorPieces[0].upper = 2 - armorPieces[1].upper - armorPieces[2].upper - armorPieces[3].upper;
-		armorPiecesOriginal[0].all = 4 - armorPiecesOriginal[1].all - armorPiecesOriginal[2].all - armorPiecesOriginal[3].all;
-		armorPiecesOriginal[0].upper = 2 - armorPiecesOriginal[1].upper - armorPiecesOriginal[2].upper - armorPiecesOriginal[3].upper;
+		armorPieces[0].exact = 4 - armorPieces[1].exact - armorPieces[2].exact - armorPieces[3].exact;
+		armorPieces[0].weighted = 4.0f - armorPieces[1].weighted - armorPieces[2].weighted - armorPieces[3].weighted;
+		armorPiecesOriginal[0].exact = 4 - armorPiecesOriginal[1].exact - armorPiecesOriginal[2].exact - armorPiecesOriginal[3].exact;
+		armorPiecesOriginal[0].weighted = 4.0f - armorPiecesOriginal[1].weighted - armorPiecesOriginal[2].weighted - armorPiecesOriginal[3].weighted;
 	}
 	
 	private function CountPiecesOnSpawn()
 	{
 		var item : SItemUniqueId;
 		
-		armorPieces[0].all = 0; armorPieces[0].upper = 0;
-		armorPieces[1].all = 0; armorPieces[1].upper = 0;
-		armorPieces[2].all = 0; armorPieces[2].upper = 0;
-		armorPieces[3].all = 0; armorPieces[3].upper = 0;
-		armorPiecesOriginal[0].all = 0; armorPiecesOriginal[0].upper = 0;
-		armorPiecesOriginal[1].all = 0; armorPiecesOriginal[1].upper = 0;
-		armorPiecesOriginal[2].all = 0; armorPiecesOriginal[2].upper = 0;
-		armorPiecesOriginal[3].all = 0; armorPiecesOriginal[3].upper = 0;
+		armorPieces[0].exact = 0; armorPieces[0].weighted = 0;
+		armorPieces[1].exact = 0; armorPieces[1].weighted = 0;
+		armorPieces[2].exact = 0; armorPieces[2].weighted = 0;
+		armorPieces[3].exact = 0; armorPieces[3].weighted = 0;
+		armorPiecesOriginal[0].exact = 0; armorPiecesOriginal[0].weighted = 0;
+		armorPiecesOriginal[1].exact = 0; armorPiecesOriginal[1].weighted = 0;
+		armorPiecesOriginal[2].exact = 0; armorPiecesOriginal[2].weighted = 0;
+		armorPiecesOriginal[3].exact = 0; armorPiecesOriginal[3].weighted = 0;
 		
 		if( inv.GetItemEquippedOnSlot(EES_Armor, item) )
 		{
 			switch(inv.GetArmorType(item))
 			{
-				case EAT_Light:		armorPieces[1].all += 1; armorPieces[1].upper += 1;	break;
-				case EAT_Medium:	armorPieces[2].all += 1; armorPieces[2].upper += 1;	break;
-				case EAT_Heavy:		armorPieces[3].all += 1; armorPieces[3].upper += 1;	break;
+				case EAT_Light:		armorPieces[1].exact += 1; armorPieces[1].weighted += 1.8f; break;
+				case EAT_Medium:	armorPieces[2].exact += 1; armorPieces[2].weighted += 1.8f; break;
+				case EAT_Heavy:		armorPieces[3].exact += 1; armorPieces[3].weighted += 1.8f; break;
 				default : break;
 			}
 			
 			switch(inv.GetArmorTypeOriginal(item))
 			{
-				case EAT_Light:		armorPiecesOriginal[1].all += 1; armorPiecesOriginal[1].upper += 1;	break;
-				case EAT_Medium:	armorPiecesOriginal[2].all += 1; armorPiecesOriginal[2].upper += 1;	break;
-				case EAT_Heavy:		armorPiecesOriginal[3].all += 1; armorPiecesOriginal[3].upper += 1;	break;
+				case EAT_Light:		armorPiecesOriginal[1].exact += 1; armorPiecesOriginal[1].weighted += 1.8f;	break;
+				case EAT_Medium:	armorPiecesOriginal[2].exact += 1; armorPiecesOriginal[2].weighted += 1.8f;	break;
+				case EAT_Heavy:		armorPiecesOriginal[3].exact += 1; armorPiecesOriginal[3].weighted += 1.8f;	break;
 				default : break;
 			}
 		}
@@ -12653,17 +12682,17 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			switch(inv.GetArmorType(item))
 			{
-				case EAT_Light:		armorPieces[1].all += 1; break;
-				case EAT_Medium:	armorPieces[2].all += 1; break;
-				case EAT_Heavy:		armorPieces[3].all += 1; break;
+				case EAT_Light:		armorPieces[1].exact += 1; armorPieces[1].weighted += 0.6f; break;
+				case EAT_Medium:	armorPieces[2].exact += 1; armorPieces[2].weighted += 0.6f; break;
+				case EAT_Heavy:		armorPieces[3].exact += 1; armorPieces[3].weighted += 0.6f; break;
 				default : break;
 			}
 			
 			switch(inv.GetArmorTypeOriginal(item))
 			{
-				case EAT_Light:		armorPiecesOriginal[1].all += 1; break;
-				case EAT_Medium:	armorPiecesOriginal[2].all += 1; break;
-				case EAT_Heavy:		armorPiecesOriginal[3].all += 1; break;
+				case EAT_Light:		armorPiecesOriginal[1].exact += 1; armorPiecesOriginal[1].weighted += 0.6f; break;
+				case EAT_Medium:	armorPiecesOriginal[2].exact += 1; armorPiecesOriginal[2].weighted += 0.6f; break;
+				case EAT_Heavy:		armorPiecesOriginal[3].exact += 1; armorPiecesOriginal[3].weighted += 0.6f; break;
 				default : break;
 			}
 		}
@@ -12672,17 +12701,17 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			switch(inv.GetArmorType(item))
 			{
-				case EAT_Light:		armorPieces[1].all += 1; break;
-				case EAT_Medium:	armorPieces[2].all += 1; break;
-				case EAT_Heavy:		armorPieces[3].all += 1; break;
+				case EAT_Light:		armorPieces[1].exact += 1; armorPieces[1].weighted += 1.0f; break;
+				case EAT_Medium:	armorPieces[2].exact += 1; armorPieces[2].weighted += 1.0f; break;
+				case EAT_Heavy:		armorPieces[3].exact += 1; armorPieces[3].weighted += 1.0f; break;
 				default : break;
 			}
 			
 			switch(inv.GetArmorTypeOriginal(item))
 			{
-				case EAT_Light:		armorPiecesOriginal[1].all += 1; break;
-				case EAT_Medium:	armorPiecesOriginal[2].all += 1; break;
-				case EAT_Heavy:		armorPiecesOriginal[3].all += 1; break;
+				case EAT_Light:		armorPiecesOriginal[1].exact += 1; armorPiecesOriginal[1].weighted += 1.0f; break;
+				case EAT_Medium:	armorPiecesOriginal[2].exact += 1; armorPiecesOriginal[2].weighted += 1.0f; break;
+				case EAT_Heavy:		armorPiecesOriginal[3].exact += 1; armorPiecesOriginal[3].weighted += 1.0f; break;
 				default : break;
 			}
 		}
@@ -12691,25 +12720,25 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			switch(inv.GetArmorType(item))
 			{
-				case EAT_Light:		armorPieces[1].all += 1; armorPieces[1].upper += 1;	break;
-				case EAT_Medium:	armorPieces[2].all += 1; armorPieces[2].upper += 1;	break;
-				case EAT_Heavy:		armorPieces[3].all += 1; armorPieces[3].upper += 1;	break;
+				case EAT_Light:		armorPieces[1].exact += 1; armorPieces[1].weighted += 0.6f; break;
+				case EAT_Medium:	armorPieces[2].exact += 1; armorPieces[2].weighted += 0.6f; break;
+				case EAT_Heavy:		armorPieces[3].exact += 1; armorPieces[3].weighted += 0.6f; break;
 				default : break;
 			}
 			
 			switch(inv.GetArmorTypeOriginal(item))
 			{
-				case EAT_Light:		armorPiecesOriginal[1].all += 1; armorPiecesOriginal[1].upper += 1;	break;
-				case EAT_Medium:	armorPiecesOriginal[2].all += 1; armorPiecesOriginal[2].upper += 1;	break;
-				case EAT_Heavy:		armorPiecesOriginal[3].all += 1; armorPiecesOriginal[3].upper += 1;	break;
+				case EAT_Light:		armorPiecesOriginal[1].exact += 1; armorPiecesOriginal[1].weighted += 0.6f; break;
+				case EAT_Medium:	armorPiecesOriginal[2].exact += 1; armorPiecesOriginal[2].weighted += 0.6f; break;
+				case EAT_Heavy:		armorPiecesOriginal[3].exact += 1; armorPiecesOriginal[3].weighted += 0.6f; break;
 				default : break;
 			}
 		}
 		
-		armorPieces[0].all = 4 - armorPieces[1].all - armorPieces[2].all - armorPieces[3].all;
-		armorPieces[0].upper = 2 - armorPieces[1].upper - armorPieces[2].upper - armorPieces[3].upper;
-		armorPiecesOriginal[0].all = 4 - armorPiecesOriginal[1].all - armorPiecesOriginal[2].all - armorPiecesOriginal[3].all;
-		armorPiecesOriginal[0].upper = 2 - armorPiecesOriginal[1].upper - armorPiecesOriginal[2].upper - armorPiecesOriginal[3].upper;
+		armorPieces[0].exact = 4 - armorPieces[1].exact - armorPieces[2].exact - armorPieces[3].exact;
+		armorPieces[0].weighted = 4.0f - armorPieces[1].weighted - armorPieces[2].weighted - armorPieces[3].weighted;
+		armorPiecesOriginal[0].exact = 4 - armorPiecesOriginal[1].exact - armorPiecesOriginal[2].exact - armorPiecesOriginal[3].exact;
+		armorPiecesOriginal[0].weighted = 4.0f - armorPiecesOriginal[1].weighted - armorPiecesOriginal[2].weighted - armorPiecesOriginal[3].weighted;
 	}
 	
 	public function GetArmorCount() : array<SArmorCount>

@@ -139,12 +139,12 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 				else
 					maxStat = target.GetStatMax(BCS_Essence);
 			}
-			dmgCurved = PowF(toxicityPerc, 2) * (1.3f + toxicity / 100) / 100;
+			dmgCurved = PowF(toxicityPerc, 2) * (1.3f + 0.008f * toxicity) / 100;
 			/*dmg = MaxF(0, dmgCurved * maxStat);*/
-			dmg = MaxF(0, dmgCurved * maxStat - effectDuration.Size() * RoundMath(1.66 * thePlayer.GetSkillLevel(S_Alchemy_s03)));
+			dmg = MaxF(0, dmgCurved * maxStat - effectDuration.Size() * RoundMath(2.0f * thePlayer.GetSkillLevel(S_Alchemy_s03)));
 			
 			if( thePlayer.CanUseSkill(S_Alchemy_s01) )
-				dmg *= (1 - 0.09f * thePlayer.GetSkillLevel(S_Alchemy_s01));
+				dmg *= (1 - 0.08f * thePlayer.GetSkillLevel(S_Alchemy_s01));
 			
 			/*A CDProjekt comment used to dwell here. Let's reminisce about it by contemplating the big chunk of space left in its place.*/
 			

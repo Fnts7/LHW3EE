@@ -16,8 +16,8 @@ enum EHairType
 
 struct SArmorCount
 {
-	var all : int;
-	var upper : int;
+	var exact : int;
+	var weighted : float;
 };
 
 class W3EEEquipmentHandler extends W3EEOptionHandler
@@ -810,13 +810,13 @@ class W3EEEquipmentHandler extends W3EEOptionHandler
 		
 		armorCount = GetWitcherPlayer().GetArmorCountOrig();
 		if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Light )
-			return armorCount[0].all + armorCount[1].all > 3;
+			return armorCount[0].exact + armorCount[1].exact > 1;
 		else
 		if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Medium )
-			return armorCount[2].all > 3;
+			return armorCount[2].exact > 1;
 		else
 		if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Heavy )
-			return armorCount[3].all > 3;
+			return armorCount[3].exact > 1;
 		else
 			return 0;
 	}

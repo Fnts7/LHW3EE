@@ -92,38 +92,49 @@ class W3EECombatHandler extends W3EEOptionHandler
 		if( witcher.IsHelmetEquipped(EIST_Gothic) || witcher.IsHelmetEquipped(EIST_Meteorite) || witcher.IsHelmetEquipped(EIST_Dimeritium) )
 		{
 			if( witcher.HasAbility('Glyphword 9 _Stats', true) )
-				armorPieces[2].all += 1;
-			else
-				armorPieces[3].all += 1;
+			{
+				armorPieces[2].exact += 1;
+				armorPieces[2].weighted += 1.0f;
+			}
+			else {
+				armorPieces[3].exact += 1;
+				armorPieces[3].weighted += 1.0f;
+			}
 		}
 		
 		if( thePlayer.GetInjuryManager().HasInjury(EFI_Arms) || thePlayer.GetInjuryManager().HasInjury(EPI_Arms) )
 			mult += 0.1f;
 		if( thePlayer.GetInjuryManager().HasInjury(EFI_Legs) || thePlayer.GetInjuryManager().HasInjury(EPI_Legs) )
 			mult += 0.2f;
-		if( armorPieces[2].all > 3 )
+			
+		if( armorPieces[2].exact > 3 )
 			mult -= 0.1f;
+		else if ( armorPieces[2].exact == 3 )
+			mult -= 0.0667f;
+		else if ( armorPieces[2].exact == 2 )
+			mult -= 0.0333f;
+		
 		
 		switch(action)
 		{
 			case ESAT_Roll:
-				return StamCostEvade() * (1.f + (armorPieces[3].all * 0.05f + armorPieces[2].all * 0.02f - armorPieces[0].all * 0.05f)) * mult * dt;
+				return StamCostEvade() * (1.f + (armorPieces[3].weighted * 0.04f + armorPieces[2].weighted * 0.016f - armorPieces[0].weighted * 0.04f)) * mult * dt;
 			case ESAT_Jump:
-				return StamCostEvade() * (1.f + (armorPieces[3].all * 0.05f + armorPieces[2].all * 0.02f - armorPieces[0].all * 0.05f)) * mult * dt;
+				return StamCostEvade() * (1.f + (armorPieces[3].weighted * 0.04f + armorPieces[2].weighted * 0.016f - armorPieces[0].weighted * 0.04f)) * mult * dt;
 			case ESAT_Dodge:
-				return StamCostEvade() * (1.f + (armorPieces[3].all * 0.05f + armorPieces[2].all * 0.02f - armorPieces[0].all * 0.05f)) * mult * dt;
+				return StamCostEvade() * (1.f + (armorPieces[3].weighted * 0.04f + armorPieces[2].weighted * 0.016f - armorPieces[0].weighted * 0.04f)) * mult * dt;				
 			case ESAT_LightAttack:
-				return StamCostFast() * (1.f + (armorPieces[3].upper * 0.05f + armorPieces[2].upper * 0.02f - armorPieces[0].upper * 0.05f)) * mult * dt;
+				return StamCostFast() * (1.f + (armorPieces[3].weighted * 0.03f + armorPieces[2].weighted * 0.012f - armorPieces[0].weighted * 0.03f)) * mult * dt;
 			case ESAT_HeavyAttack:
-				return StamCostHeavy() * (1.f + (armorPieces[3].upper * 0.05f + armorPieces[2].upper * 0.02f - armorPieces[0].upper * 0.05f)) * mult * dt;
+				return StamCostHeavy() * (1.f + (armorPieces[3].weighted * 0.03f + armorPieces[2].weighted * 0.012f - armorPieces[0].weighted * 0.03f)) * mult * dt;
 			case ESAT_Parry:
-				return StamCostBlock() * (1.f + (armorPieces[3].upper * 0.05f + armorPieces[2].upper * 0.02f - armorPieces[0].upper * 0.05f)) * mult * dt;
+				return StamCostBlock() * (1.f + (armorPieces[3].weighted * 0.03f + armorPieces[2].weighted * 0.012f - armorPieces[0].weighted * 0.03f)) * mult * dt;
 			case ESAT_Counterattack:
-				return StamCostCounter() * (1.f + (armorPieces[3].upper * 0.05f + armorPieces[2].upper * 0.02f - armorPieces[0].upper * 0.05f)) * mult * dt;
+				return StamCostCounter() * (1.f + (armorPieces[3].weighted * 0.03f + armorPieces[2].weighted * 0.012f - armorPieces[0].weighted * 0.03f)) * mult * dt;
 			case ESAT_SpecialAttackLight:
-				return StamCostFast() * (1.f + (armorPieces[3].upper * 0.05f + armorPieces[2].upper * 0.02f - armorPieces[0].upper * 0.05f)) * mult * dt;
+				return StamCostFast() * (1.f + (armorPieces[3].weighted * 0.03f + armorPieces[2].weighted * 0.012f - armorPieces[0].weighted * 0.03f)) * mult * dt;
 			case ESAT_SpecialAttackHeavy:
-				return StamCostHeavy() * (1.f + (armorPieces[3].upper * 0.05f + armorPieces[2].upper * 0.02f - armorPieces[0].upper * 0.05f)) * mult * dt;
+				return StamCostHeavy() * (1.f + (armorPieces[3].weighted * 0.03f + armorPieces[2].weighted * 0.012f - armorPieces[0].weighted * 0.03f)) * mult * dt;
 			default : return mult * thePlayer.GetStaminaActionCost(action, abilityName, dt);
 		}
 		
@@ -137,15 +148,15 @@ class W3EECombatHandler extends W3EEOptionHandler
 		if( witcher.IsHelmetEquipped(EIST_Gothic) || witcher.IsHelmetEquipped(EIST_Meteorite) || witcher.IsHelmetEquipped(EIST_Dimeritium) )
 		{
 			if( witcher.HasAbility('Glyphword 9 _Stats', true) )
-				armorPieces[2].all += 1;
+				armorPieces[2].weighted += 1.0f;
 			else
-				armorPieces[3].all += 1;
+				armorPieces[3].weighted += 1.0f;
 		}
 		
 		if( isAttack )
-			return ( armorPieces[0].upper * 0.02f + armorPieces[1].upper * 0.01f - armorPieces[3].upper * 0.02f );
+			return ( armorPieces[0].weighted * 0.012f + armorPieces[1].weighted * 0.006f - armorPieces[3].weighted * 0.012f );
 		else
-			return ( armorPieces[0].all * 0.02f + armorPieces[1].all * 0.01f - armorPieces[3].all * 0.02f );
+			return ( armorPieces[0].weighted * 0.018f + armorPieces[1].weighted * 0.009f - armorPieces[3].weighted * 0.018f );
 	}	
 	
 	public function GetActionStaminaCost( actionType : EStaminaActionType, out regenDelay : float, optional mult : float, optional dt : float, optional abilityName : name ) : float
@@ -423,7 +434,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 						{
 							action.ClearEffects();
 							action.MultiplyAllDamageBy(0.1f);
-							if( ((W3PlayerWitcher)playerVictim).IsSetBonusActive(EISB_HeavyArmor) && RandRange(100, 0) <= 20 )
+							if( RandRange(100, 0) <= ((W3PlayerWitcher)playerVictim).HeavySetStaggerProbability() )
 								actorAttacker.AddEffectDefault(EET_Stagger, action.victim, "ParryStagger");
 						}
 						else
@@ -454,7 +465,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 								action.ClearEffects();
 								action.MultiplyAllDamageBy(0.1f);
 								action.SetHitAnimationPlayType(EAHA_ForceNo);
-								if( ((W3PlayerWitcher)playerVictim).IsSetBonusActive(EISB_HeavyArmor) && RandRange(100, 0) <= 20 )
+								if( RandRange(100, 0) <= ((W3PlayerWitcher)playerVictim).HeavySetStaggerProbability() )
 									actorAttacker.AddEffectDefault(EET_Stagger, action.victim, "ParryStagger");
 							}
 							else
@@ -490,7 +501,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 								action.MultiplyAllDamageBy(0.1f);
 							}
 							
-							if( ((W3PlayerWitcher)playerVictim).IsSetBonusActive(EISB_HeavyArmor) && RandRange(100, 0) <= 20 )
+							if( RandRange(100, 0) <= ((W3PlayerWitcher)playerVictim).HeavySetStaggerProbability() )
 								actorAttacker.AddEffectDefault(EET_Stagger, action.victim, "ParryStagger");
 								
 							StaminaLoss(ESAT_Parry);
@@ -504,7 +515,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 					else
 						StaminaLoss(ESAT_Parry);
 					
-					if( ((W3PlayerWitcher)playerVictim).IsSetBonusActive(EISB_HeavyArmor) && RandRange(100, 0) <= 20 )
+					if( RandRange(100, 0) <= ((W3PlayerWitcher)playerVictim).HeavySetStaggerProbability() )
 						((CActor)action.attacker).AddEffectDefault(EET_Stagger, action.victim, "ParryStagger");
 					
 					action.SetCanPlayHitParticle(false);
@@ -541,13 +552,13 @@ class W3EECombatHandler extends W3EEOptionHandler
 			if( witcher.IsHelmetEquipped(EIST_Gothic) || witcher.IsHelmetEquipped(EIST_Meteorite) || witcher.IsHelmetEquipped(EIST_Dimeritium) )
 			{
 				if( witcher.HasAbility('Glyphword 9 _Stats', true) )
-					armorPieces[2].all += 1;
+					armorPieces[2].exact += 1;
 				else
-					armorPieces[3].all += 1;
+					armorPieces[3].exact += 1;
 			}
 			
 			if( playerVictim.CanUseSkill(S_Perk_06) )
-				poiseThreshold -= armorPieces[2].all * 0.075f;
+				poiseThreshold -= armorPieces[2].exact * 0.075f;
 			
 			if( attackAction.CanBeDodged() && attackAction.CanBeParried() && !((W3ArrowProjectile)act.causer) )
 			{
@@ -764,7 +775,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		
 		strongSpeedBonus = witcher.GetAttributeValue('attack_speed_heavy_style');
 		if( SkillDependant() )
-			finalAttackSpeed = BaseActionSpeed(true) + strongSpeedBonus.valueMultiplicative + (witcher.GetSkillLevel(S_Sword_s04) * 4.5f + witcher.GetStat(BCS_Focus) * witcher.GetSkillLevel(S_Sword_s20) * 0.4f) / 100.f;
+			finalAttackSpeed = BaseActionSpeed(true) + strongSpeedBonus.valueMultiplicative + (witcher.GetSkillLevel(S_Sword_s04) * 4.4f + witcher.GetStat(BCS_Focus) * witcher.GetSkillLevel(S_Sword_s20) * 0.35f) / 100.f;
 		else
 			finalAttackSpeed = HAIN();
 		
@@ -1160,9 +1171,9 @@ class W3EECombatHandler extends W3EEOptionHandler
 	public final function ArmorPoiseValue( armorPieces : array<SArmorCount> ) : float
 	{
 		if( GetWitcherPlayer().IsSetBonusActive(EISB_Gothic2) )
-			return ( armorPieces[1].all * 0.03f + armorPieces[2].all * 0.06f + armorPieces[3].all * 0.1f ) + 0.3f;
+			return ( armorPieces[1].weighted * 0.03f + armorPieces[2].weighted * 0.06f + armorPieces[3].weighted * 0.1f ) + 0.3f;
 		else
-			return ( armorPieces[1].all * 0.03f + armorPieces[2].all * 0.06f + armorPieces[3].all * 0.1f );
+			return ( armorPieces[1].weighted * 0.03f + armorPieces[2].weighted * 0.06f + armorPieces[3].weighted * 0.1f );
 	}
 	
 	public final function BaseStatsPoiseValue( witcher : W3PlayerWitcher ) : float
@@ -1199,13 +1210,13 @@ class W3EECombatHandler extends W3EEOptionHandler
 			if( playerWitcher.IsHelmetEquipped(EIST_Gothic) || playerWitcher.IsHelmetEquipped(EIST_Meteorite) || playerWitcher.IsHelmetEquipped(EIST_Dimeritium) )
 			{
 				if( playerWitcher.HasAbility('Glyphword 9 _Stats', true) )
-					armorPieces[2].all += 1;
+					armorPieces[2].exact += 1;
 				else
-					armorPieces[3].all += 1;
+					armorPieces[3].exact += 1;
 			}
 			
 			if( playerVictim.CanUseSkill(S_Perk_06) )
-				poiseThreshold -= armorPieces[2].all * 0.075f;
+				poiseThreshold -= armorPieces[2].exact * 0.075f;
 			
 			actionPoiseBonus = 1.f;
 			
@@ -3237,10 +3248,17 @@ class W3EECombatHandler extends W3EEOptionHandler
     public function GetSafeDodgeAngle() : float
     {
 		var angle : float;
+		var lightCount : int;
 		
 		angle = 91.0f + CalculateAttributeValue(GetWitcherPlayer().GetAttributeValue('safe_dodge_angle_bonus'));
-		if( GetWitcherPlayer().IsSetBonusActive(EISB_LightArmor) )
+		lightCount = GetWitcherPlayer().GetSetPartsEquipped(EIST_LightArmor);
+		
+		if (lightCount >= 4)
 			angle += 9.0f;
+		else if (lightCount == 3)
+			angle += 6.0f;
+		else if (lightCount == 2)
+			angle += 3.0f;
 			
 		return angle;
     }

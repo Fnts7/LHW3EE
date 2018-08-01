@@ -1,4 +1,41 @@
-﻿Version 17
+﻿Version 18
+
+Major improvement in armor logic towards possiblity of mixing armor types. In W3EE armor has many influences
+that are not listed in item's tooltips, some listed on stats screen. So they are: action speed influence, poise, stamina cost of actions.
+1) Now armor parts are not just counted, but they have weights when it comes to speed influence, poise and stamina costs
+so standard average became weighted average. The weights are following:
+body: 45%, pants: 25%, gloves and boots: 15%
+For example if you have no armor, the attack speed bonus is now + 4.8%. If you put on just heavy body part, it will drop down to ~0.
+Similar if you have no chest armor and put on heavy gloves, boots and pants. If you put all heavy, it will be then -4.8%. And the opposite
+way - body part will give you the highest poise gain.
+2) Now all the armor pieces influence all of: attack speed, evasion speed. Boundaries (so values when all naked or all heavy) were adjusted
+a bit. I see no logical reason why pants and boots shouldn't influence attack speed, as obviously whole body is involved in proper attacks of a witcher.
+3) Basic light, medium, heavy set bonuses will now also work with 2,3 pieces of the kind. 4 is the full bonus, while 2,3 is 33%, 66% of the bonus.
+So e.g. wearing 2 medium armor parts will give you -3.33% stamina action cost, instead of full -10%.
+
+Various armor items balances:
+- wolf, bear and manticore sets have now some bleeding resistance
+- nerfed a bit wolf and bear adrenaline gain bonus
+- wolf pants have now small bludgeoning resistance
+- bear chest and pants have monster dmg resistance a bit lowered, but gloves and boots have 1% boosts of reses on average
+- assasin's pants (relic) have now extra small elemental resistance
+- assasin's boots (relic) have now dodge angle bonus (like cat set, a bit stronger)
+
+Improved Strength training stagger part logic. Now - if there are other sources of stagger buff (like Stribog) rune it is added together
+with the Strenght Training amount. This results in a bit higher stagger probability and also counting when parried. Stribog rune lvl1,2 also
+boosted a bit.
+    
+Cat School light armor perk boosted a bit to 6% per piece.
+
+Bear school heavy armor perk boosted with new prop - +2% dmg through blocks and dodges per piece. Bear school witcher knows how to use
+heaviness of the armor to enhance his blows.
+
+Adjusted a bit toxicity dmg curve, so that dmg is increased lower with great intoxication with high max toxicity. To counter that also
+Heightened tolerance small nerf.
+
+Boosted Synergy for green mutagens adrenaline gain by 50%. So now 1 extra toxicity is 1.5% adrenaline gain bonus instead of previous 1%.
+
+Version 17
 
 Boosted a bit echidna decoction, 20% more healing rate.
 
