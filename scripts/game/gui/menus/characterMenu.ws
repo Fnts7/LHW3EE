@@ -2695,7 +2695,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				// W3EE - Begin
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s11, 'direct_damage_per_sec', false, false)) * skillLevel;
 				ability = GetWitcherPlayer().GetTotalSignSpellPower(S_Magic_3);
-				argsInt.PushBack(RoundMath(arg * ability.valueMultiplicative * 2.8f));
+				argsInt.PushBack(RoundMath(arg * ability.valueMultiplicative * 2.4f));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
 				
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s11, 'spell_power_yrden', false, false);
@@ -2782,7 +2782,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				ability.valueMultiplicative *= skillLevel;
 				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt)*/ /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
-				argsInt.PushBack(5 * skillLevel);
+				argsInt.PushBack(4 * skillLevel);
 				argsInt.PushBack(2 * skillLevel);
 				argsFloat.PushBack(1.5f * skillLevel);
 				argsInt.PushBack(3 * skillLevel);
@@ -3202,8 +3202,9 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsString.PushBack( FloatToString( ability.valueAdditive ) );
 				baseString = GetLocStringByKeyExtWithParams( locKey, , , argsString );
 				*/
-				argsInt.PushBack(8);
-				baseString = GetLocStringByKeyExtWithParams("W3EE_AtkBstDfnsSkill", argsInt);
+				/*argsInt.PushBack(7);
+				baseString = GetLocStringByKeyExtWithParams("W3EE_AtkBstDfnsSkill", argsInt);*/
+				baseString = "When your stamina is low, you will receive small stamina boost, just before performing a sword offensive action (not Rend) or counter or an offensive kick. The effect has 9 seconds cooldown.";
 				// W3EE - End
 				break;
 			case S_Perk_22:

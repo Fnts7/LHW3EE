@@ -62,6 +62,20 @@
 		<tags>							ReadableItem, mod_crafting
 		</tags>
 	</item>
+	
+	<item
+		name							="Blunt Bolt Legendary schematic"
+		category						="crafting_schematic"
+		price							="21"
+		weight							="0.1"
+		stackable						="100"
+		localisation_key_name			="item_name_blunt_bolt_schematic"
+		localisation_key_description	="item_desc_crafting_schematic"
+		icon_path						="icons/inventory/quests/ico_recipe.png"
+	>
+		<tags>							ReadableItem, mod_crafting
+		</tags>
+	</item>
 
 	<item
 		name							="Broadhead Bolt schematic"
@@ -192,7 +206,23 @@
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Timber"				/>
 										<ingredient	quantity="2"	item_name="Iron ingot"			/>
-										<ingredient	quantity="2"	item_name="Silver ore"			/>
+										<ingredient	quantity="1"	item_name="Silver ore"			/>
+										<ingredient	quantity="2"	item_name="Feather"				/>
+		</ingredients>
+	</schematic>
+	
+	<schematic
+		name_name						="Blunt Bolt Legendary schematic"
+		price							="105"
+		stackable						="100"
+		craftedItem_name				="Blunt Bolt Legendary"
+		craftsmanType_name				="Smith"
+		craftsmanLevel_name				="Journeyman"
+		craftedItemQuantity				="20"
+	>
+		<ingredients>					<ingredient	quantity="2"	item_name="Timber"				/>
+										<ingredient	quantity="2"	item_name="Iron ingot"			/>
+										<ingredient	quantity="1"	item_name="Silver ingot"		/>
 										<ingredient	quantity="2"	item_name="Feather"				/>
 		</ingredients>
 	</schematic>

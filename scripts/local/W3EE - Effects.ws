@@ -587,7 +587,7 @@ class W3Effect_YrdenAbilityEffect extends CBaseGameplayEffect
 		params.duration = 1000;
 		
 		signPower = super.GetCreatorPowerStat();
-		params.effectValue.valueAdditive = 0.2f * signPower.valueMultiplicative * (1 - slowResist);
+		params.effectValue.valueAdditive = 0.24f * signPower.valueMultiplicative * (1 - slowResist);
 		
 		npcTarget.AddEffectCustom(params);
 		if( ((W3SignEntity)GetCreator()).GetActualOwner().CanUseSkill(S_Magic_s11, (W3SignEntity)GetCreator()) )

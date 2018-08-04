@@ -123,9 +123,11 @@
 		<weight 						type="base" min="4.5"				/>
 		<quality 						type="add"	min="4"					/>
 		<armor 							type="base" min="66"				/>
-		<slashing_resistance_perc		type="base"	min="0.05"				/>
-		<piercing_resistance_perc		type="base"	min="0.05"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
+		<slashing_resistance_perc		type="base"	min="0.04"				/>
+		<piercing_resistance_perc		type="base"	min="0.04"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
+		<graze_damage_reduction			type="mult" min="0.04"				/>
+		<parry_stamina_cost_bonus       type="mult" min="0.04"				/>
 	</ability>
 
 <!-- Relic -->

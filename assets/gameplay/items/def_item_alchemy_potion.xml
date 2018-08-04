@@ -250,7 +250,7 @@
 	  
       <!-- Stamina Regen-->
       <ability name="TawnyOwl_1">
-        <toxicity min="30" max="30" type="add" />
+        <toxicity min="28" max="28" type="add" />
         <duration min="30" max="30" type="add" />
         <ammo type="add" min="3" />
         <TawnyOwlEffect_Level1 is_ability="true" />
@@ -258,7 +258,7 @@
 		    <level type="add" min="1" />
       </ability>
       <ability name="TawnyOwl_2">
-        <toxicity min="40" max="40" type="add" />
+        <toxicity min="38" max="38" type="add" />
         <duration min="45" max="45" type="add" />
         <ammo type="add" min="4" />
         <TawnyOwlEffect_Level2 is_ability="true" />
@@ -267,7 +267,7 @@
 		    <quality type="add" min="3" max="3"/>
       </ability>
       <ability name="TawnyOwl_3">
-        <toxicity min="50" max="50" type="add" />
+        <toxicity min="48" max="48" type="add" />
         <duration min="60" max="60" type="add" />
         <ammo type="add" min="5" />
         <TawnyOwlEffect_Level3 is_ability="true" />

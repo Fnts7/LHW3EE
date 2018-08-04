@@ -4202,6 +4202,7 @@
 		<loot_entry name="Bait Bolt schematic"						player_level_min="4"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="1"			/>
 		<loot_entry name="Tracking Bolt schematic"					player_level_min="4"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="1"			/>
 		<loot_entry name="Blunt Bolt schematic"						player_level_min="4"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="1"			/>
+		<loot_entry name="Blunt Bolt Legendary schematic"			player_level_min="4"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="1"			/>
 		<loot_entry name="Target Point Bolt schematic"				player_level_min="4"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="1"			/>
 		<loot_entry name="Broadhead Bolt schematic"					player_level_min="8"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="1"			/>
 		<loot_entry name="Split Bolt schematic"						player_level_min="13"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="1"			/>

@@ -75,7 +75,7 @@
 <!-- -->
 	<ability name="Lynx School Crossbow _Stats">
 		<quality						type="add"	min="5"		max="5"		/>
-		<attack_power					type="mult"	min="2.95"	max="2.95"	/>
+		<attack_power					type="mult"	min="2.9"	max="2.9"	/>
 		<nonhuman_exp_bonus_when_fatal	type="add"	min="0.15" 	max="0.15"	/>
 		<critical_hit_chance			type="add"	min="0.02"	max="0.02"	/>
 		<focus_gain						type="mult"	min="0.01"	max="0.02"	/>
@@ -85,10 +85,10 @@
 <!-- -->
 	<ability name="Bear School Crossbow _Stats">
 		<quality						type="add"	min="5"		max="5"		/>
-		<attack_power					type="mult"	min="2.9"	max="2.9"	/>
+		<attack_power					type="mult"	min="2.8"	max="2.8"	/>
 		<nonhuman_exp_bonus_when_fatal	type="add"	min="0.15" 	max="0.15"	/>
-		<critical_hit_chance			type="add"	min="0.05"	max="0.05"	/>
-		<critical_hit_damage_bonus		type="add"	min="0.02"	max="0.02"	/>
+		<critical_hit_chance			type="add"	min="0.04"	max="0.04"	/>
+		<critical_hit_damage_bonus		type="add"	min="0.04"	max="0.04"	/>
 		<focus_gain						type="mult"	min="0.01"	max="0.02"	/>
 		<ammo							type="add"	min="2"					/>
 	</ability>

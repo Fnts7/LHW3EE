@@ -8519,9 +8519,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			staminaRegenVal = 0;
 			if( inv.GetItemEquippedOnSlot( EES_Armor, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.05;
-			if( inv.GetItemEquippedOnSlot( EES_Gloves, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.01;
-			if( inv.GetItemEquippedOnSlot( EES_Pants, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.05;
-			if( inv.GetItemEquippedOnSlot( EES_Boots, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.015;
+			if( inv.GetItemEquippedOnSlot( EES_Gloves, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.015;
+			if( inv.GetItemEquippedOnSlot( EES_Pants, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.035;
+			if( inv.GetItemEquippedOnSlot( EES_Boots, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.02;
 		}
 		else
 		{
@@ -8530,17 +8530,17 @@ statemachine class W3PlayerWitcher extends CR4Player
 			else
 			if( inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.1;
 			
-			if( inv.GetItemEquippedOnSlot( EES_Gloves, tempItem ) && inv.GetArmorType(tempItem) == EAT_Medium ) staminaRegenVal -= 0.01;
-			else
-			if( inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.02;
-			
-			if( inv.GetItemEquippedOnSlot( EES_Pants, tempItem ) && inv.GetArmorType(tempItem) == EAT_Medium ) staminaRegenVal -= 0.05;
-			else
-			if( inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.1;
-			
-			if( inv.GetItemEquippedOnSlot( EES_Boots, tempItem ) && inv.GetArmorType(tempItem) == EAT_Medium ) staminaRegenVal -= 0.015;
+			if( inv.GetItemEquippedOnSlot( EES_Gloves, tempItem ) && inv.GetArmorType(tempItem) == EAT_Medium ) staminaRegenVal -= 0.015;
 			else
 			if( inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.03;
+			
+			if( inv.GetItemEquippedOnSlot( EES_Pants, tempItem ) && inv.GetArmorType(tempItem) == EAT_Medium ) staminaRegenVal -= 0.035;
+			else
+			if( inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.07;
+			
+			if( inv.GetItemEquippedOnSlot( EES_Boots, tempItem ) && inv.GetArmorType(tempItem) == EAT_Medium ) staminaRegenVal -= 0.02;
+			else
+			if( inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.04;
 		}
 		// W3EE - End
 		

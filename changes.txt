@@ -1,4 +1,29 @@
-﻿Version 18
+﻿Version 19
+
+Tawny Owl nerfed all levels. Noticed that actually this potion was ultra op, completelly removing a need to manage
+stamina in most fights. Now is more balanced. Small decrease in toxicity of the potion in return.
+
+Balanced better armor influence on stamina regen - adjusted weights - fixup after armor logic rework in previous
+version.
+
+Reworked Attack is the best defense perk to finally work as it should. When low on stamina, gives small stamina
+gain when performing offensive sword action (but not Rend), counter or offensive kick. Effect has 9 sec cooldown.
+So this perk effect will not be triggered on just passive defense.
+
+Yrden small balance shift - basic slowdown is 20% stronger, but effects of 3rd and 4th skills for basic Yrden
+nerfed about the same.
+
+Condotiere relic boosts lowered reses, but added graze dmg reduction and special prop - lower defense stamina cost.
+
+Added crafting recipe for stronger blunt bolts. Should be available where the ordinary one was. In console item
+code: 'Blunt Bolt Legendary schematic'.
+
+Bear and Lynx crossbows small adjustments.
+
+Fixed a bug of wrong stamina regen display in character stats.
+
+
+Version 18
 
 Major improvement in armor logic towards possiblity of mixing armor types. In W3EE armor has many influences
 that are not listed in item's tooltips, some listed on stats screen. So they are: action speed influence, poise, stamina cost of actions.

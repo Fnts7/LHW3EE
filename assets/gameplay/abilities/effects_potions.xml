@@ -134,15 +134,15 @@
 			<!-- TAWNY OWL -->
 			<ability name="TawnyOwlEffect_Level1">
 				<tags>passive</tags>
-				<staminaRegen min="0.09" type="mult"/>
+				<staminaRegen min="0.06" type="mult"/>
 			</ability>
 			<ability name="TawnyOwlEffect_Level2">
 				<tags>passive</tags>
-				<staminaRegen min="0.12" type="mult"/>
+				<staminaRegen min="0.09" type="mult"/>
 			</ability>
 			<ability name="TawnyOwlEffect_Level3">
 				<tags>passive</tags>
-				<staminaRegen min="0.15" type="mult"/>
+				<staminaRegen min="0.12" type="mult"/>
 			</ability>
 			
 			<!-- THUNDERBOLT -->

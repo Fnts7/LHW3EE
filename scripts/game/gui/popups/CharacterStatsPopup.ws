@@ -581,13 +581,13 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 		
 		valueAbility *= 1 + GetWitcherPlayer().CalculatedArmorStaminaRegenBonus();
 		
-		valueAbility *= GetWitcherPlayer().GetStatPercents(BCS_Vitality);
+		valueAbility *= 1.f - PowF(1.f - GetWitcherPlayer().GetStatPercents(BCS_Vitality), 2) * 0.75f * playerWitcher.GetAdrenalinePercMult();
 		
 		valueAbility *= 1 - (clampVal * GetWitcherPlayer().GetStatPercents(BCS_Toxicity));
 		
 		valueAbility *= 1.f + GetWitcherPlayer().GetAdrenalineEffect().GetValue();
 		
-		valueStr = NoTrailZeros(RoundMath(valueAbility)) + "/" + GetLocStringByKeyExt("per_second"); 
+		valueStr = NoTrailZeros(RoundTo(valueAbility, 2)) + "/" + GetLocStringByKeyExt("per_second"); 
 	}
 	else if ( varKey == 'staminaOutOfCombatRegen' ) 
 	{
@@ -598,13 +598,13 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 		
 		valueAbility *= 1 + GetWitcherPlayer().CalculatedArmorStaminaRegenBonus();
 		
-		valueAbility *= GetWitcherPlayer().GetStatPercents(BCS_Vitality);
+		valueAbility *= 1.f - PowF(1.f - GetWitcherPlayer().GetStatPercents(BCS_Vitality), 2) * 0.75f * playerWitcher.GetAdrenalinePercMult();
 		
 		valueAbility *= 1 - (clampVal * GetWitcherPlayer().GetStatPercents(BCS_Toxicity));
 		
 		valueAbility *= 1.f + GetWitcherPlayer().GetAdrenalineEffect().GetValue();
 		
-		valueStr = NoTrailZeros(RoundMath(valueAbility)) + "/" + GetLocStringByKeyExt("per_second"); 
+		valueStr = NoTrailZeros(RoundTo(valueAbility, 2)) + "/" + GetLocStringByKeyExt("per_second"); 
 	}
 	else if ( varKey == 'healthRegenRed' ) 
 	{
@@ -1043,7 +1043,7 @@ function AddCharacterStatSigns(tag : string, varKey:name, locKey:string, iconTag
 		sp = GetWitcherPlayer().GetTotalSignSpellPower(S_Magic_3);
 		min = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_3, 'min_slowdown', false, true));
 		max = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_3, 'max_slowdown', false, true));
-		valueAbility =  0.2f * sp.valueMultiplicative;
+		valueAbility =  0.24f * sp.valueMultiplicative;
 		valueStr = (string)RoundMath( valueAbility * 100 ) + " %";
 	}
 	else if ( varKey == 'yrden_damage' )
@@ -1052,7 +1052,7 @@ function AddCharacterStatSigns(tag : string, varKey:name, locKey:string, iconTag
 		{
 			sp = GetWitcherPlayer().GetTotalSignSpellPower(S_Magic_3);
 			valueAbility = CalculateAttributeValue( GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s11, 'direct_damage_per_sec', false, true) );
-			valueAbility *= sp.valueMultiplicative * GetWitcherPlayer().GetSkillLevel(S_Magic_s11) * 2.8f;
+			valueAbility *= sp.valueMultiplicative * GetWitcherPlayer().GetSkillLevel(S_Magic_s11) * 2.4f;
 			valueStr = (string)RoundMath( valueAbility * Damage().pdams );
 		}
 		else

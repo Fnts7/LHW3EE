@@ -50,6 +50,13 @@ assetFile[28]="/dlc/dlc14/data/gameplay/items/dlc14_shop.xml"
 assetFile[29]="/dlc/dlc14/data/gameplay/items/dlc14_items.xml"
 assetFile[30]="/dlc/dlc10/data/gameplay/items/dlc10_wolf_armor.xml"
 
+assetFile[31]="/gameplay/items/def_loot_containers.xml"
+assetFile[32]="/gameplay/items/def_loot_shops.xml"
+assetFile[33]="/gameplay/items/def_item_weapons_crossbow.xml"
+assetFile[34]="/gameplay/items/def_item_boots.xml"
+assetFile[35]="/gameplay/items/def_item_pants.xml"
+assetFile[36]="/gameplay/items/def_item_crafting_recipes_bolts.xml"
+
 
 # ASSET FILES END
 

@@ -47,7 +47,7 @@ class W3Effect_YrdenHealthDrain extends W3DamageOverTimeEffect
 		
 		sp = ((W3SignEntity)GetCreator()).GetTotalSignIntensity();
 		effectValue = thePlayer.GetSkillAttributeValue(S_Magic_s11, 'direct_damage_per_sec', false, true);
-		effectValue.valueAdditive *= sp.valueMultiplicative * ((W3SignEntity)GetCreator()).GetActualOwner().GetSkillLevel(S_Magic_s11, (W3SignEntity)GetCreator()) * 2.8f;
+		effectValue.valueAdditive *= sp.valueMultiplicative * ((W3SignEntity)GetCreator()).GetActualOwner().GetSkillLevel(S_Magic_s11, (W3SignEntity)GetCreator()) * 2.4f;
 	}
 	// W3EE - End
 }

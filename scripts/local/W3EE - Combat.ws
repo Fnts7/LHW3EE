@@ -16,6 +16,12 @@ class W3EECombatHandler extends W3EEOptionHandler
 	private var countered : bool;
 	private var Perk21Active : bool;
 	private var Perk21TimerActive : bool;
+		
+	private const var PERK_21_BOOST : float;																			
+		default PERK_21_BOOST = 30.0f;
+		
+	private const var PERK_21_THRESHOLD : float;																			
+		default PERK_21_THRESHOLD = 0.3f;		
 	
 	default Perk21Active = true;
 	default Perk21TimerActive = false;
@@ -159,117 +165,125 @@ class W3EECombatHandler extends W3EEOptionHandler
 			return ( armorPieces[0].weighted * 0.018f + armorPieces[1].weighted * 0.009f - armorPieces[3].weighted * 0.018f );
 	}	
 	
-	public function GetActionStaminaCost( actionType : EStaminaActionType, out regenDelay : float, optional mult : float, optional dt : float, optional abilityName : name ) : float
+	public function GetActionStaminaCost( actionType : EStaminaActionType, out regenDelay : float, optional mult : float, optional dt : float, optional abilityName : name, optional recursiveCall : bool ) : float
+	{
+		var witcher : W3PlayerWitcher = GetWitcherPlayer();
+		
+		if ( !recursiveCall && witcher.CanUseSkill(S_Perk_21) && Perk21Active
+			&& (actionType == ESAT_LightAttack || actionType == ESAT_HeavyAttack || actionType == ESAT_Counterattack) 
+			&& witcher.GetStatPercents(BCS_Stamina) <= PERK_21_THRESHOLD )
+		{
+			return GetActionStaminaCostInternal(actionType, regenDelay, mult, dt, abilityName) - PERK_21_BOOST;			
+		}
+		else
+			return GetActionStaminaCostInternal(actionType, regenDelay, mult, dt, abilityName);
+	}
+	
+	private function GetActionStaminaCostInternal( actionType : EStaminaActionType, out regenDelay : float, optional mult : float, optional dt : float, optional abilityName : name) : float
 	{
 		var witcher : W3PlayerWitcher = GetWitcherPlayer();
 		var costMult, delayReduction : SAbilityAttributeValue;
 		
-		if( actionType != ESAT_Parry && witcher.CanUseSkill(S_Perk_21) && Perk21Active )
+		delayReduction = witcher.GetAttributeValue('delayReduction');
+		if( dt == 0.f )
+			dt = 1.f;
+		if( mult == 0.f )
+			mult = 1.f;
+		
+		switch(actionType)
 		{
-			regenDelay = 0.f;
-			return 0.f;
-		}
-		else
-		{
-			delayReduction = witcher.GetAttributeValue('delayReduction');
-			if( dt == 0.f )
-				dt = 1.f;
-			if( mult == 0.f )
-				mult = 1.f;
-			switch(actionType)
+			case ESAT_LightAttack:
+			costMult = witcher.GetAttributeValue('attack_stamina_cost');
+			if( witcher.WasPlayerSpamming() )
 			{
-				case ESAT_LightAttack:
-					costMult = witcher.GetAttributeValue('attack_stamina_cost');
-					if( witcher.WasPlayerSpamming() )
-					{
-						delayReduction.valueMultiplicative -= 0.3f;
-						mult += 0.3f;
-					}
-					mult += costMult.valueMultiplicative;
-					
-					costMult = witcher.GetAttributeValue('attack_stamina_cost_bonus');
-					mult -= costMult.valueMultiplicative;
-					
-					regenDelay = StamRegenDelay() * (1.f - delayReduction.valueMultiplicative);
-				return CalcStaminaCost(actionType, mult, dt, abilityName);
-				
-				case ESAT_HeavyAttack:
-					costMult = witcher.GetAttributeValue('attack_stamina_cost');
-					if( witcher.WasPlayerSpamming() )
-					{
-						delayReduction.valueMultiplicative -= 0.3f;
-						mult += 0.3f;
-					}
-					mult += costMult.valueMultiplicative;
-					
-					costMult = witcher.GetAttributeValue('attack_stamina_cost_bonus');
-					mult -= costMult.valueMultiplicative;
-					
-					regenDelay = StamRegenDelayHeavy() * (1.f - delayReduction.valueMultiplicative);
-				return CalcStaminaCost(actionType, mult, dt, abilityName);
-				
-				case ESAT_Dodge:
-					if( ((W3Effect_SwordDancing)witcher.GetBuff(EET_SwordDancing)).GetSwordDanceActive() )
-						mult = 0.f;
-						
-					if (witcher.HasBuff(EET_Mutagen24))
-					{
-						mult /= 2;
-						regenDelay = StamRegenDelayDodge() * (1.f - delayReduction.valueMultiplicative) * 0.5f;
-					}
-					else	
-						regenDelay = StamRegenDelayDodge() * (1.f - delayReduction.valueMultiplicative);
-				return CalcStaminaCost(actionType, mult, dt, abilityName);
-				
-				case ESAT_Parry:
-					costMult = witcher.GetAttributeValue('parry_stamina_cost');
-					mult += costMult.valueMultiplicative - 1.f;
-					
-					costMult = witcher.GetAttributeValue('parry_stamina_cost_bonus');
-					mult -= costMult.valueMultiplicative;
-					
-					regenDelay = StamRegenDelayBlock() * (1.f - delayReduction.valueMultiplicative);
-				return CalcStaminaCost(actionType, mult, dt, abilityName);
-				
-				case ESAT_Counterattack:
-					costMult = witcher.GetAttributeValue('parry_stamina_cost');
-					mult += costMult.valueMultiplicative - 1.f;
-					if( witcher.WasPlayerSpamming() )
-					{
-						delayReduction.valueMultiplicative -= 0.3f;
-						mult += 0.3f;
-					}
-					
-					costMult = witcher.GetAttributeValue('parry_stamina_cost_bonus');
-					mult -= costMult.valueMultiplicative;
-					
-					regenDelay = StamRegenDelayCounter() * (1.f - delayReduction.valueMultiplicative);
-				return CalcStaminaCost(actionType, mult, dt, abilityName);
-				
-				case ESAT_Roll:
-					if (witcher.HasBuff(EET_Mutagen24))
-					{
-						mult /= 2;
-						regenDelay = StamRegenDelayDodge() * (1.3f - delayReduction.valueMultiplicative) * 0.5f;
-					}
-					else
-						regenDelay = StamRegenDelayDodge() * (1.3f - delayReduction.valueMultiplicative);
-				return CalcStaminaCost(actionType, mult, dt, abilityName);
-				
-				case ESAT_Jump:
-					if (witcher.HasBuff(EET_Mutagen24))
-					{
-						mult /= 2;
-						regenDelay = StamRegenDelayDodge() * (1.2f - delayReduction.valueMultiplicative) * 0.5f;
-					}
-					else
-						regenDelay = StamRegenDelayDodge() * (1.2f - delayReduction.valueMultiplicative);
-				return CalcStaminaCost(actionType, mult, dt, abilityName);
-				
-				default:
-				return CalcStaminaCost(actionType, mult, dt, abilityName);
+				delayReduction.valueMultiplicative -= 0.3f;
+				mult += 0.3f;
 			}
+			mult += costMult.valueMultiplicative;
+			
+			costMult = witcher.GetAttributeValue('attack_stamina_cost_bonus');
+			mult -= costMult.valueMultiplicative;
+			
+			regenDelay = StamRegenDelay() * (1.f - delayReduction.valueMultiplicative);
+		return CalcStaminaCost(actionType, mult, dt, abilityName);
+		
+		case ESAT_HeavyAttack:
+			costMult = witcher.GetAttributeValue('attack_stamina_cost');
+			if( witcher.WasPlayerSpamming() )
+			{
+				delayReduction.valueMultiplicative -= 0.3f;
+				mult += 0.3f;
+			}
+			mult += costMult.valueMultiplicative;
+			
+			costMult = witcher.GetAttributeValue('attack_stamina_cost_bonus');
+			mult -= costMult.valueMultiplicative;
+			
+			regenDelay = StamRegenDelayHeavy() * (1.f - delayReduction.valueMultiplicative);
+		return CalcStaminaCost(actionType, mult, dt, abilityName);
+		
+		case ESAT_Dodge:
+			if( ((W3Effect_SwordDancing)witcher.GetBuff(EET_SwordDancing)).GetSwordDanceActive() )
+				mult = 0.f;
+				
+			if (witcher.HasBuff(EET_Mutagen24))
+			{
+				mult /= 2;
+				regenDelay = StamRegenDelayDodge() * (1.f - delayReduction.valueMultiplicative) * 0.5f;
+			}
+			else	
+				regenDelay = StamRegenDelayDodge() * (1.f - delayReduction.valueMultiplicative);
+		return CalcStaminaCost(actionType, mult, dt, abilityName);
+		
+		case ESAT_Parry:
+			costMult = witcher.GetAttributeValue('parry_stamina_cost');
+			mult += costMult.valueMultiplicative - 1.f;
+			
+			costMult = witcher.GetAttributeValue('parry_stamina_cost_bonus');
+			mult -= costMult.valueMultiplicative;
+			
+			regenDelay = StamRegenDelayBlock() * (1.f - delayReduction.valueMultiplicative);
+		return CalcStaminaCost(actionType, mult, dt, abilityName);
+		
+		case ESAT_Counterattack:
+			costMult = witcher.GetAttributeValue('parry_stamina_cost');
+			mult += costMult.valueMultiplicative - 1.f;
+			if( witcher.WasPlayerSpamming() )
+			{
+				delayReduction.valueMultiplicative -= 0.3f;
+				mult += 0.3f;
+			}
+			
+			costMult = witcher.GetAttributeValue('parry_stamina_cost_bonus');
+			mult -= costMult.valueMultiplicative;
+			
+			regenDelay = StamRegenDelayCounter() * (1.f - delayReduction.valueMultiplicative);
+		return CalcStaminaCost(actionType, mult, dt, abilityName);
+		
+		case ESAT_Roll:
+			if (witcher.HasBuff(EET_Mutagen24))
+			{
+				mult /= 2;
+				regenDelay = StamRegenDelayDodge() * (1.3f - delayReduction.valueMultiplicative) * 0.5f;
+			}
+			else
+				regenDelay = StamRegenDelayDodge() * (1.3f - delayReduction.valueMultiplicative);
+		return CalcStaminaCost(actionType, mult, dt, abilityName);
+		
+		case ESAT_Jump:
+			if (witcher.HasBuff(EET_Mutagen24))
+			{
+				mult /= 2;
+				regenDelay = StamRegenDelayDodge() * (1.2f - delayReduction.valueMultiplicative) * 0.5f;
+			}
+			else
+				regenDelay = StamRegenDelayDodge() * (1.2f - delayReduction.valueMultiplicative);
+		return CalcStaminaCost(actionType, mult, dt, abilityName);
+		
+		default:
+		return CalcStaminaCost(actionType, mult, dt, abilityName);
 		}
+	
 	}
 	
 	public final function StaminaLoss( actionType : EStaminaActionType, optional mult : float )
@@ -277,20 +291,14 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var witcher : W3PlayerWitcher = GetWitcherPlayer();
 		var staminaCost, regenDelay : float;
 		
-		if( actionType != ESAT_Parry && witcher.CanUseSkill(S_Perk_21) && Perk21Active )
+		staminaCost = GetActionStaminaCostInternal(actionType, regenDelay, mult);
+		
+		if ( actionType == ESAT_LightAttack || actionType == ESAT_HeavyAttack || actionType == ESAT_Counterattack )
 		{
-			SetPerk21State(false);
-			if( !Perk21TimerActive )
-			{
-				SetPerk21TimerState(true);
-				witcher.AddTimer('ReactivatePerk21', 8, false);
-			}
+			ProcPerk21BeforeAttack();				
 		}
-		else
-		{
-			staminaCost = GetActionStaminaCost(actionType, regenDelay, mult);
-			witcher.DrainStamina(ESAT_FixedValue, staminaCost, regenDelay);
-		}
+			
+		witcher.DrainStamina(ESAT_FixedValue, staminaCost, regenDelay);
 	}
 	
 	public final function EnemyDodge( out damageData : W3DamageAction, actor : CActor )
@@ -1374,6 +1382,8 @@ class W3EECombatHandler extends W3EEOptionHandler
 		witcher = GetWitcherPlayer();
 		target = witcher.GetTarget();
 		
+		ProcPerk21BeforeAttack();
+		
 		staminaCost = CalcStaminaCost(ESAT_SpecialAttackLight, 2, 1);
 		if( witcher && target && !witcher.GetIsBashing() && !target.IsHuge() && witcher.GetStat(BCS_Stamina) >= staminaCost && VecDistance(witcher.GetWorldPosition(), target.GetWorldPosition()) < 2.3f )
 		{
@@ -1402,6 +1412,25 @@ class W3EECombatHandler extends W3EEOptionHandler
 			return false;
 		}
 	}
+	
+	
+	private function ProcPerk21BeforeAttack()
+	{
+		var witcher : W3PlayerWitcher = GetWitcherPlayer();
+		
+		if ( witcher.CanUseSkill(S_Perk_21) && Perk21Active && witcher.GetStatPercents(BCS_Stamina) <= PERK_21_THRESHOLD )
+		{
+			witcher.GainStat(BCS_Stamina, PERK_21_BOOST);
+			
+			SetPerk21State(false);
+			if( !Perk21TimerActive )
+			{
+				SetPerk21TimerState(true);
+				witcher.AddTimer('ReactivatePerk21', 9, false);
+			}
+		}
+	}
+	
 	
 	public function LightBashEffect( attackAction : W3Action_Attack, action : W3DamageAction, actorVictim : CActor )
 	{
@@ -1545,6 +1574,8 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var target : CActor;
 		
 		witcher = GetWitcherPlayer();
+		
+		ProcPerk21BeforeAttack();
 		
 		staminaCost = CalcStaminaCost(ESAT_SpecialAttackHeavy, 2, 1);
 		if( witcher && !witcher.IsWeaponHeld('fist') && !witcher.GetIsBashing() && witcher.GetStat(BCS_Stamina) >= staminaCost )
@@ -2032,8 +2063,8 @@ class W3EECombatHandler extends W3EEOptionHandler
 					{
 						numberOfYrdens = 1;
 						isSlowdownActive = true;
-						shakeAmount = 0.05f * witcher.GetSignOwner().GetSkillLevel(S_Magic_s16, (W3SignEntity)yrden);
-						slowdownAmount = 1 - 0.05f * witcher.GetSignOwner().GetSkillLevel(S_Magic_s16, (W3SignEntity)yrden);
+						shakeAmount = 0.04f * witcher.GetSignOwner().GetSkillLevel(S_Magic_s16, (W3SignEntity)yrden);
+						slowdownAmount = 1 - 0.04f * witcher.GetSignOwner().GetSkillLevel(S_Magic_s16, (W3SignEntity)yrden);
 						fx = witcher.CreateFXEntityAtPelvis('mutation2_critical', true);
 						fx.PlayEffect('critical_yrden');
 						theGame.SetTimeScale(slowdownAmount, theGame.GetTimescaleSource(ETS_Yrden), theGame.GetTimescalePriority(ETS_Yrden));

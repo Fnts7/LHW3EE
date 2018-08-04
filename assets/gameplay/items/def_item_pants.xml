@@ -67,12 +67,12 @@
 	<ability name="Pants 04 _Stats">
 		<weight 						type="base"	min="2" 				/>
 		<quality 						type="add"	min="4"		max="4"		/>
-		<slashing_resistance_perc 		type="base"	min="0.15"				/>
+		<slashing_resistance_perc 		type="base"	min="0.1"				/>
 		<piercing_resistance_perc 		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.05"				/>
 		<rending_resistance_perc		type="base" min="0.0"				/>
-		<elemental_resistance_perc 		type="base" min="0.0"				/>
-		<vitality 						type="base" min="150" max="200"		/>
+		<elemental_resistance_perc 		type="base" min="0.12"				/>
+		<vitality 						type="base" min="250" max="350"		/>
 		<staminaRegen_armor_mod 		type="mult"	min="0.10"				/>
 	</ability>
 

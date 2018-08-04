@@ -220,11 +220,11 @@
 	<ability name="Heavy boots 07 _Stats" >
 		<weight	 						type="base" min="5"				/>
 		<quality 						type="add"	min="4"		max="4"		/>
-		<slashing_resistance_perc		type="base"	min="0.05"				/>
-		<piercing_resistance_perc		type="base"	min="0.05"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
-		<rending_resistance_perc		type="base"	min="0.0"				/>
-		<elemental_resistance_perc		type="base"	min="0.0"				/>
+		<slashing_resistance_perc		type="base"	min="0.04"				/>
+		<piercing_resistance_perc		type="base"	min="0.04"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
+		<graze_damage_reduction			type="mult" min="0.04"				/>
+		<parry_stamina_cost_bonus       type="mult" min="0.04"				/>
 	</ability>
 
 <!-- Relic -->
