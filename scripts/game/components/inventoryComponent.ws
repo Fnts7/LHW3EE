@@ -3305,12 +3305,12 @@ import class CInventoryComponent extends CComponent
 			if(val.valueAdditive == 3)
 				attrs.Insert(0, 'duration');
 		}
-		else if(buffType == EET_Mutagen20)
+		/*else if(buffType == EET_Mutagen20)
 		{
 			attrs.Remove('burning_DoT_damage_resistance_perc');
 			attrs.Remove('poison_DoT_damage_resistance_perc');
 			attrs.Remove('bleeding_DoT_damage_resistance_perc');
-		}
+		}*/
 		else if(buffType == EET_Mutagen27)
 		{
 			attrs.Remove('mutagen27_max_stack');
@@ -3342,7 +3342,9 @@ import class CInventoryComponent extends CComponent
 		}
 		else if(buffType == EET_Mutagen08)
 		{
-			attrs.Remove('resistGainRate');
+			attrs.Remove('burning_resistance_perc');
+			attrs.Remove('bleeding_resistance_perc');
+			attrs.Remove('poison_resistance_perc');
 		}
 		else if(buffType == EET_Mutagen10)
 		{

@@ -12,7 +12,7 @@
 		var adrenalineGain : SAbilityAttributeValue;
 		var adrenalineGainValue : float;
 		
-		if( attackAction.IsDoTDamage() )
+		if( !attackAction || attackAction.IsDoTDamage() )
 			return;
 		
 		if( (W3PlayerWitcher)attackAction.attacker )
@@ -43,17 +43,37 @@
 			if( attackAction.IsParried() )
 			{
 				if( attackAction.GetDamageDealt() > 1.f && (attackAction.GetHitAnimationPlayType() != EAHA_ForceNo || attackAction.HasBuff(EET_Stagger) || attackAction.HasBuff(EET_LongStagger) || attackAction.HasBuff(EET_Knockdown) || attackAction.HasBuff(EET_HeavyKnockdown)) )
-					currentAdrenaline = 0;
+					currentAdrenaline *= SavedAdrenalineRoll(false);
 			}
 			else
-			if( attackAction.GetDamageDealt() > 1.f && (!((W3Effect_Toxicity)playerWitcher.GetBuff(EET_Toxicity)).isUnsafe || RandRange(100, 1) > (30 + 7 * playerWitcher.GetSkillLevel(S_Alchemy_s20)) ) )
+			if( attackAction.GetDamageDealt() > 1.f && (!((W3Effect_Toxicity)playerWitcher.GetBuff(EET_Toxicity)).isUnsafe || RandRange(100, 1) > (30 + 6 * playerWitcher.GetSkillLevel(S_Alchemy_s20)) ) )
 			{
-				if (attackAction.WasPartiallyDodged())
-					currentAdrenaline *= 0.667f;
-				else
-					currentAdrenaline = 0;
+				currentAdrenaline *= SavedAdrenalineRoll(attackAction.WasPartiallyDodged());
 			}
 		}
+	}
+	
+	private function SavedAdrenalineRoll( dodged : bool ) : float
+	{
+		var armorPieces : array<SArmorCount>;
+		var savedAdrenaline : float;
+		
+		armorPieces = GetWitcherPlayer().GetArmorCountOrig();
+		
+		savedAdrenaline = (armorPieces[3].weighted * 6.0f + armorPieces[2].weighted * 3.0f) / 100.0f + RandF() - 0.5f;
+		
+		if (savedAdrenaline < 0)
+		{
+			if (dodged)
+				return 0.667f;
+			else
+				return 0;
+		}
+			
+		if (dodged)
+			savedAdrenaline = 1.0f - ((1.0f - savedAdrenaline) * 0.333f);
+			
+		return savedAdrenaline;		
 	}
 	
 	public function AddAdrenaline( value : float )

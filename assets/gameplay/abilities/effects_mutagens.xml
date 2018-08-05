@@ -38,7 +38,14 @@
 			</ability>
 			
 			<!-- Czart -->
-			<ability name="Mutagen08Effect" />
+			<ability name="Mutagen08Effect">
+				<elemental_resistance_perc 		type="base" min="0.15" 	/>
+				<piercing_resistance_perc 		type="base"	min="0.10"	/>
+				<bludgeoning_resistance_perc 	type="base"	min="0.10"	/>
+				<burning_resistance_perc   type="base" min="1" />
+				<bleeding_resistance_perc  type="base" min="1" />
+				<poison_resistance_perc	   type="base" min="1" />
+			</ability>
 			
 			<!-- Fogling -->
 			<ability name="Mutagen09Effect">
@@ -121,9 +128,9 @@
 			<!-- Earth Elemental -->
 			<ability name="Mutagen20Effect">
 				<!-- bonus per sec -->
-				<burning_DoT_damage_resistance_perc type="add" min="0.1" />
+				<!--<burning_DoT_damage_resistance_perc type="add" min="0.1" />
 				<poison_DoT_damage_resistance_perc type="add" min="0.1" />
-				<bleeding_DoT_damage_resistance_perc type="add" min="0.1" />
+				<bleeding_DoT_damage_resistance_perc type="add" min="0.1" />-->
 			</ability>
 			
 			<!-- Ekhidna -->

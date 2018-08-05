@@ -812,16 +812,16 @@ class W3EffectManager
 		
 		Combat().KnockdownNegation(owner, effectType);
 		
-		if( owner == thePlayer && thePlayer.HasBuff( EET_Mutagen08 ) )
+		if( owner == thePlayer && thePlayer.HasBuff( EET_Mutagen20 ) )
 		{
 			if( effectType == EET_Knockdown || effectType == EET_HeavyKnockdown )
 			{
-				LogEffects( "EffectManager.InternalAddEffect: changing EET_Knockdown to EET_Stagger due to Mutagen 8 in effect" );
+				LogEffects( "EffectManager.InternalAddEffect: changing EET_Knockdown to EET_Stagger due to Mutagen 20 in effect" );
 				effectType = EET_Stagger;
 			}
 			else if( effectType == EET_LongStagger || effectType == EET_Stagger )
 			{
-				LogEffects( "EffectManager.InternalAddEffect: denying " + effectType + " due to Mutagen 8 in effect" );
+				LogEffects( "EffectManager.InternalAddEffect: denying " + effectType + " due to Mutagen 20 in effect" );
 				return EI_Deny;
 			}
 		}

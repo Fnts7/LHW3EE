@@ -2300,10 +2300,13 @@ class CR4CharacterMenu extends CR4MenuBase
 				// W3EE - Begin
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s01, 'cost_reduction', false, false);				
 				argsInt.PushBack( RoundMath(ability.valueMultiplicative * 100 * skillLevel) );
-				if( skillLevel >= 5 )
+				if( skillLevel >= 4 ) {
 					baseString = GetLocStringByKeyExtWithParams("W3EE_WhirlLvl1", argsInt) + GetLocStringByKeyExt("W3EE_WhirlLvl2") + GetLocStringByKeyExt("W3EE_WhirlLvl3");
+					if (skillLevel == 5)
+						baseString += "<br>Even if your poise is not above unblockable attacks threshold, you have an extra 20% chance to resist stagger from such attacks during whirling.";
+				}
 				else
-				if( skillLevel >=3 )
+				if( skillLevel >= 2 )
 					baseString = GetLocStringByKeyExtWithParams("W3EE_WhirlLvl1", argsInt) + GetLocStringByKeyExt("W3EE_WhirlLvl2");
 				else
 					baseString = GetLocStringByKeyExtWithParams("W3EE_WhirlLvl1", argsInt);
@@ -3036,7 +3039,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				arg = ability.valueMultiplicative * skillLevel;				
 				argsInt.PushBack(RoundMath(arg*100));
 				*/
-				argsInt.PushBack(70 - 7 * skillLevel);
+				argsInt.PushBack(70 - 6 * skillLevel);
 				argsInt.PushBack(60);
 				argsInt.PushBack(60 - 6 * skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_EndurePain", argsInt) + " (vigor and stamina)";

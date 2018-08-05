@@ -614,6 +614,10 @@ class W3TooltipComponent
 				uniqueDescription = "Getting damage from hits can trigger quen. The more damage taken or the stronger hit, the higher chance.";
 			else if (itemName == 'Mutagen 4')
 				uniqueDescription = "Every heavy attack landed consumes additionally 25% of available stamina. Drains 3% of target health for 25 stamina consumed. Linear scaling.";
+			else if (itemName == 'Mutagen 8')
+				uniqueDescription = "Grants immunity to bleeding, burning and poison. Gives also small additional resistances to listed damage types.";
+			else if (itemName == 'Mutagen 20')
+				uniqueDescription = "Reduces knockdown effect to stagger. Makes you much more resistant to any stagger (including breaking you from whirling). NOTE: Poise and whirl skill level still matter.";
 			else
 				uniqueDescription += GetLocStringByKeyExt( itemInvComponent.GetItemLocalizedDescriptionByUniqueID(item) );
 				

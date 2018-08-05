@@ -334,6 +334,10 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 			itemDesc = "Getting damage from hits can trigger quen. The more damage taken or the stronger hit, the higher chance.";
 		else if (craftedItemName == 'Mutagen 4')
 			itemDesc = "Every heavy attack landed consumes additionally 25% of available stamina. Drains 3% of target health for 25 stamina consumed. Linear scaling.";
+		else if (craftedItemName == 'Mutagen 8')
+			itemDesc = "Grants immunity to bleeding, burning and poison. Gives also small additional resistances to listed damage types.";
+		else if (craftedItemName == 'Mutagen 20')
+			itemDesc = "Reduces knockdown effect to stagger. Makes you much more resistant to any stagger (including breaking you from whirling). NOTE: Poise and whirl skill level still matter.";
 		else if (craftedItemName == 'Mutagen 16')
 			itemDesc += "<br>Every melee attack has 30% chance to apply random buff: burning, blindness, frost slowdown, bleeding, poison, long stagger, knockdown.";
 		else if (craftedItemName == 'Mutagen 24')

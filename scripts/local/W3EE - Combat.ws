@@ -12,7 +12,6 @@ enum EArmorInfusionType
 
 class W3EECombatHandler extends W3EEOptionHandler
 {	
-	protected var whirlPoise : float;
 	private var countered : bool;
 	private var Perk21Active : bool;
 	private var Perk21TimerActive : bool;
@@ -539,10 +538,10 @@ class W3EECombatHandler extends W3EEOptionHandler
 	public final function WhirlBlockingModule( playerVictim : CR4Player, attackAction : W3Action_Attack, act : W3DamageAction )
 	{
 		var skillLevel : int;
-		var poiseThreshold : float;
-		var armorPieces : array<SArmorCount>;
+		var poiseThreshold, whirlPoise : float;
 		var witcher : W3PlayerWitcher;
 		var isSpecialAttack, isLightAttack : bool;
+		var earthMutagen : bool;
 		
 		if( (W3Effect_Toxicity)act.causer )
 			return;
@@ -552,22 +551,15 @@ class W3EECombatHandler extends W3EEOptionHandler
 		isSpecialAttack = witcher.GetBehaviorVariable( 'isPerformingSpecialAttack' ) > 0;
 		isLightAttack = witcher.GetBehaviorVariable( 'playerAttackType' ) == (int)PAT_Light;
 		
-		if( witcher && isSpecialAttack && isLightAttack && skillLevel >= 3 )
+		earthMutagen = witcher.HasBuff(EET_Mutagen20);
+		if (earthMutagen)
+			skillLevel += 2;
+		
+		if( witcher && isSpecialAttack && isLightAttack && skillLevel >= 2 )
 		{
-			armorPieces = witcher.GetArmorCountOrig();
-			poiseThreshold = 1.0f;
-			
-			if( witcher.IsHelmetEquipped(EIST_Gothic) || witcher.IsHelmetEquipped(EIST_Meteorite) || witcher.IsHelmetEquipped(EIST_Dimeritium) )
-			{
-				if( witcher.HasAbility('Glyphword 9 _Stats', true) )
-					armorPieces[2].exact += 1;
-				else
-					armorPieces[3].exact += 1;
-			}
-			
-			if( playerVictim.CanUseSkill(S_Perk_06) )
-				poiseThreshold -= armorPieces[2].exact * 0.075f;
-			
+			poiseThreshold = 1.0f;			
+			whirlPoise = CalcPoise(poiseThreshold);			
+		
 			if( attackAction.CanBeDodged() && attackAction.CanBeParried() && !((W3ArrowProjectile)act.causer) )
 			{
 				act.processedDmg.vitalityDamage = 0;
@@ -580,33 +572,51 @@ class W3EECombatHandler extends W3EEOptionHandler
 				((CActor)act.attacker).ReactToReflectedAttack(act.attacker);
 			}
 			else
-			if( attackAction.CanBeDodged() && whirlPoise > poiseThreshold && skillLevel >= 5 )
+			if( attackAction.CanBeDodged() && skillLevel >= 4 )
 			{
-				act.SetHitAnimationPlayType(EAHA_ForceNo);
-				act.SetCanPlayHitParticle(false);
-				act.ClearEffects();
-				act.RemoveBuffsByType(EET_Bleeding);
-				act.RemoveBuffsByType(EET_Poison);
-				
-				if( !((W3ArrowProjectile)act.causer) )
-				{
-					((CActor)act.attacker).ReactToReflectedAttack(act.attacker);
-					act.processedDmg.vitalityDamage *= 0.2;
-					act.processedDmg.essenceDamage *= 0.2;
+				skillLevel -= 4;
+			
+				if ( whirlPoise > poiseThreshold || (skillLevel > 0 && RandRange(100, 0) < skillLevel * 20) )
+				{			
+					act.SetHitAnimationPlayType(EAHA_ForceNo);
+					act.SetCanPlayHitParticle(false);
+					act.ClearEffects();
+					act.RemoveBuffsByType(EET_Bleeding);
+					act.RemoveBuffsByType(EET_Poison);
+					
+					if( !((W3ArrowProjectile)act.causer) )
+					{
+						((CActor)act.attacker).ReactToReflectedAttack(act.attacker);
+						act.processedDmg.vitalityDamage *= 0.2;
+						act.processedDmg.essenceDamage *= 0.2;
+					}
+				}
+				else {
+					WhirlStagger(act, earthMutagen);
 				}
 			}
 			else
 			{
-				act.SetHitAnimationPlayType(EAHA_ForceNo);
-				act.AddEffectInfo(EET_LongStagger);			
+				WhirlStagger(act, earthMutagen);		
 			}
 		}
 		else
-		if( witcher && isSpecialAttack && isLightAttack && skillLevel < 3 && act.DealsAnyDamage() && !act.IsDoTDamage() )
+		if( witcher && isSpecialAttack && isLightAttack && skillLevel < 2 && act.DealsAnyDamage() && !act.IsDoTDamage() )
+		{
+			WhirlStagger(act, earthMutagen);
+		}
+	}
+	
+	private function WhirlStagger(act : W3DamageAction, earthMutagen : bool)
+	{
+		if (earthMutagen) {
+			act.SetHitAnimationPlayType(EAHA_ForceYes);
+		}
+		else 
 		{
 			act.SetHitAnimationPlayType(EAHA_ForceNo);
 			act.AddEffectInfo(EET_LongStagger);
-		}
+		}	
 	}
 	
 	public final function BreakEnemyBlock( attackAction : W3Action_Attack, playerAttacker : CR4Player, actorVictim : CActor )
@@ -1205,56 +1215,70 @@ class W3EECombatHandler extends W3EEOptionHandler
 	
 	public final function ApplyPlayerStaggerMechanics( playerVictim : CR4Player, attackAction : W3Action_Attack, out act : W3DamageAction )
 	{
-		var mut15Bonus, actionPoiseBonus, poiseValue, poiseThreshold, staggerChance : float;
-		var playerWitcher : W3PlayerWitcher;
-		var armorPieces : array<SArmorCount>;
-		
+		var poiseValue, poiseThreshold : float;
+			
 		if( playerVictim && attackAction && attackAction.GetHitAnimationPlayType() != EAHA_ForceYes )
 		{
-			playerWitcher = (W3PlayerWitcher)playerVictim;
-			armorPieces = playerWitcher.GetArmorCountOrig();
 			poiseThreshold = 1.0f;
+			poiseValue = CalcPoise(poiseThreshold);
 			
-			if( playerWitcher.IsHelmetEquipped(EIST_Gothic) || playerWitcher.IsHelmetEquipped(EIST_Meteorite) || playerWitcher.IsHelmetEquipped(EIST_Dimeritium) )
+						
+			if( RandRangeF(1,0) <= poiseValue && ( attackAction.CanBeParried() || poiseValue >= poiseThreshold ) && playerVictim.GetCurrentStateName() != 'W3EEAnimation' )
 			{
-				if( playerWitcher.HasAbility('Glyphword 9 _Stats', true) )
-					armorPieces[2].exact += 1;
-				else
-					armorPieces[3].exact += 1;
+				act.SetHitAnimationPlayType(EAHA_ForceNo);
+				return;
 			}
 			
-			if( playerVictim.CanUseSkill(S_Perk_06) )
-				poiseThreshold -= armorPieces[2].exact * 0.075f;
-			
-			actionPoiseBonus = 1.f;
-			
-			if( playerVictim.IsInCombatAction_Attack() )
-			{
-				actionPoiseBonus += 0.22f;
-			}
-			
-			if( playerVictim.IsInCombatAction_SpecialAttack() )
-				actionPoiseBonus += 0.10f;
-			
-			if( playerVictim.IsCurrentlyDodging() )
-				actionPoiseBonus += 0.24f;
-			
-			if( playerVictim.GetIsSprinting() )
-				actionPoiseBonus += 0.29f;
-			else
-			if( playerVictim.GetIsRunning() )
-				actionPoiseBonus += 0.18f;
-			
-			mut15Bonus = playerWitcher.GetMutagen15() * 0.05f;
-			
-			poiseValue = ( BaseStatsPoiseValue(playerWitcher) + SkillsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() ) * HPPoiseRatio(playerWitcher) * actionPoiseBonus + mut15Bonus;
-			whirlPoise = poiseValue;
-			
-			if( RandRangeF(1,0) <= poiseValue && ( attackAction.CanBeParried() || poiseValue >= poiseThreshold ) && playerWitcher.GetCurrentStateName() != 'W3EEAnimation' )
+			if ( playerVictim.GetCurrentStateName() != 'W3EEAnimation' && playerVictim.HasBuff(EET_Mutagen20) && RandRangeF(1,0) <= poiseValue ) 
 			{
 				act.SetHitAnimationPlayType(EAHA_ForceNo);
 			}
 		}
+	}
+	
+	
+	private function CalcPoise(out poiseThreshold : float) : float
+	{
+		var mut15Bonus, actionPoiseBonus : float;
+		var armorPieces : array<SArmorCount>;
+		var playerWitcher : W3PlayerWitcher;
+		
+		playerWitcher = (W3PlayerWitcher)thePlayer;
+		armorPieces = playerWitcher.GetArmorCountOrig();
+	
+		if( playerWitcher.IsHelmetEquipped(EIST_Gothic) || playerWitcher.IsHelmetEquipped(EIST_Meteorite) || playerWitcher.IsHelmetEquipped(EIST_Dimeritium) )
+		{
+			if( playerWitcher.HasAbility('Glyphword 9 _Stats', true) )
+				armorPieces[2].exact += 1;
+			else
+				armorPieces[3].exact += 1;
+		}
+			
+		if( playerWitcher.CanUseSkill(S_Perk_06) )
+			poiseThreshold -= armorPieces[2].exact * 0.075f;
+			
+		actionPoiseBonus = 1.f;
+			
+		if( playerWitcher.IsInCombatAction_Attack() )
+		{
+			actionPoiseBonus += 0.22f;
+		}
+			
+		if( playerWitcher.IsInCombatAction_SpecialAttack() )
+			actionPoiseBonus += 0.10f;
+			
+		if( playerWitcher.IsCurrentlyDodging() )
+			actionPoiseBonus += 0.24f;
+			
+		if( playerWitcher.GetIsSprinting() )
+			actionPoiseBonus += 0.29f;
+		else
+		if( playerWitcher.GetIsRunning() )
+			actionPoiseBonus += 0.18f;
+			
+		mut15Bonus = playerWitcher.GetMutagen15() * 0.05f;
+			
+		return (BaseStatsPoiseValue(playerWitcher) + SkillsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() ) * HPPoiseRatio(playerWitcher) * actionPoiseBonus + mut15Bonus;
 	}
 	
 	public final function HPPoiseRatio( playerWitcher : W3PlayerWitcher ) : float

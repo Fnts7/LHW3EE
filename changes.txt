@@ -1,4 +1,23 @@
-﻿Version 19
+﻿Version 20
+
+This is an updates of boosts so greatly in the sense of this mod :).
+
+Changes in adrenaline loosing logic. Now there is some chance to maintain at least some portion of adrenaline. Heavy and medium armor parts increase that chance.
+Also dodged attack with graze damage still reduces the lost adrenaline by 3.
+
+Whirl skill level requirement for higher breaking prevention mechanics lowered. Was 3,5, now 2,4. 5th level gives extra stagger resist chance.
+
+Reworked 2 decoctions:
+1) Czart decoction - pretty simple - immunity to bleeding, poison and burning plus small extra reses to elemental, blunt and piercing damage.
+2) Earth elemental decoction. Inherited the vanilla effect of Czart decoction. However mechanics had to be reworked completelly to fit to the W3EE
+poise and stagger logic. Non power gamer just need to know this: greatly increases your overall stagger resistance including breaking from whirl.
+Also breaking from whirl will only result in normal stagger instead of long. Reduced knockdown effect to stagger as it was. Poise and whirl skill
+level still matters. It will enhance your stagger resistance always and will not be that great if your base stagger resistance factors are low.
+
+When updating from pre 20 version it is recommended not to load a save in which you have active effect of either Czart or Earth Elemental decoction.
+
+
+Version 19
 
 Tawny Owl nerfed all levels. Noticed that actually this potion was ultra op, completelly removing a need to manage
 stamina in most fights. Now is more balanced. Small decrease in toxicity of the potion in return.
