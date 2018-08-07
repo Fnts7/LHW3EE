@@ -538,7 +538,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 	public final function WhirlBlockingModule( playerVictim : CR4Player, attackAction : W3Action_Attack, act : W3DamageAction )
 	{
 		var skillLevel : int;
-		var poiseThreshold, whirlPoise : float;
+		var poiseThreshold, whirlPoise, poiseMod : float;
 		var witcher : W3PlayerWitcher;
 		var isSpecialAttack, isLightAttack : bool;
 		var earthMutagen : bool;
@@ -551,32 +551,43 @@ class W3EECombatHandler extends W3EEOptionHandler
 		isSpecialAttack = witcher.GetBehaviorVariable( 'isPerformingSpecialAttack' ) > 0;
 		isLightAttack = witcher.GetBehaviorVariable( 'playerAttackType' ) == (int)PAT_Light;
 		
+		if (!witcher || !isSpecialAttack || !isLightAttack || act.IsDoTDamage())
+			return;
+		
 		earthMutagen = witcher.HasBuff(EET_Mutagen20);
 		if (earthMutagen)
 			skillLevel += 2;
+					
+		poiseThreshold = 0.6f;	
+		whirlPoise = CalcPoise(poiseThreshold);	
+
+		if( skillLevel >= 2 )
+		{					
+			if (!attackAction.CanBeDodged())
+				return;
 		
-		if( witcher && isSpecialAttack && isLightAttack && skillLevel >= 2 )
-		{
-			poiseThreshold = 1.0f;			
-			whirlPoise = CalcPoise(poiseThreshold);			
-		
-			if( attackAction.CanBeDodged() && attackAction.CanBeParried() && !((W3ArrowProjectile)act.causer) )
+			if( attackAction.CanBeParried() && !((W3ArrowProjectile)act.causer) )
 			{
-				act.processedDmg.vitalityDamage = 0;
-				act.processedDmg.essenceDamage = 0;
-				act.SetHitAnimationPlayType(EAHA_ForceNo);
-				act.SetCanPlayHitParticle(false);
-				act.ClearEffects();
-				act.RemoveBuffsByType(EET_Bleeding);
-				act.RemoveBuffsByType(EET_Poison);
-				((CActor)act.attacker).ReactToReflectedAttack(act.attacker);
+				if (skillLevel == 2)
+					poiseMod = 0.12f;
+				else
+					poiseMod = 0.24f;
+					
+				if (skillLevel > 5)
+					poiseMod += 0.12f;
+			
+				if (RandRangeF(1,0) > whirlPoise + poiseMod )
+					WhirlStagger(act, earthMutagen);				
+				else
+					WhirlSaveTypical(act);
 			}
 			else
-			if( attackAction.CanBeDodged() && skillLevel >= 4 )
+			if( skillLevel >= 4 )
 			{
-				skillLevel -= 4;
+				if (skillLevel > 4)
+					poiseThreshold -= (skillLevel - 4) * 0.1f; 
 			
-				if ( whirlPoise > poiseThreshold || (skillLevel > 0 && RandRange(100, 0) < skillLevel * 20) )
+				if ( whirlPoise > poiseThreshold && RandRangeF(1,0) <= whirlPoise - poiseThreshold )
 				{			
 					act.SetHitAnimationPlayType(EAHA_ForceNo);
 					act.SetCanPlayHitParticle(false);
@@ -601,9 +612,17 @@ class W3EECombatHandler extends W3EEOptionHandler
 			}
 		}
 		else
-		if( witcher && isSpecialAttack && isLightAttack && skillLevel < 2 && act.DealsAnyDamage() && !act.IsDoTDamage() )
+		if( skillLevel < 2 && act.DealsAnyDamage())
 		{
-			WhirlStagger(act, earthMutagen);
+			if (skillLevel == 1)
+				poiseMod = 0.12f;
+			else
+				poiseMod = 0.24f;
+		
+			if (attackAction.CanBeDodged() && attackAction.CanBeParried() && !((W3ArrowProjectile)act.causer) && RandRangeF(1,0) <= whirlPoise - poiseMod)
+				WhirlSaveTypical(act);
+			else
+				WhirlStagger(act, earthMutagen);
 		}
 	}
 	
@@ -617,6 +636,18 @@ class W3EECombatHandler extends W3EEOptionHandler
 			act.SetHitAnimationPlayType(EAHA_ForceNo);
 			act.AddEffectInfo(EET_LongStagger);
 		}	
+	}
+	
+	private function WhirlSaveTypical( act : W3DamageAction )
+	{
+		act.processedDmg.vitalityDamage = 0;
+		act.processedDmg.essenceDamage = 0;
+		act.SetHitAnimationPlayType(EAHA_ForceNo);
+		act.SetCanPlayHitParticle(false);
+		act.ClearEffects();
+		act.RemoveBuffsByType(EET_Bleeding);
+		act.RemoveBuffsByType(EET_Poison);
+		((CActor)act.attacker).ReactToReflectedAttack(act.attacker);	
 	}
 	
 	public final function BreakEnemyBlock( attackAction : W3Action_Attack, playerAttacker : CR4Player, actorVictim : CActor )
@@ -1219,19 +1250,26 @@ class W3EECombatHandler extends W3EEOptionHandler
 			
 		if( playerVictim && attackAction && attackAction.GetHitAnimationPlayType() != EAHA_ForceYes )
 		{
-			poiseThreshold = 1.0f;
+			poiseThreshold = 0.6f;
 			poiseValue = CalcPoise(poiseThreshold);
 			
-						
-			if( RandRangeF(1,0) <= poiseValue && ( attackAction.CanBeParried() || poiseValue >= poiseThreshold ) && playerVictim.GetCurrentStateName() != 'W3EEAnimation' )
+			if (playerVictim.GetCurrentStateName() != 'W3EEAnimation')
 			{
-				act.SetHitAnimationPlayType(EAHA_ForceNo);
-				return;
-			}
+				if( (attackAction.CanBeParried() && RandRangeF(1,0) <= poiseValue) || (!attackAction.CanBeParried() && poiseValue > poiseThreshold && RandRangeF(1,0) <= poiseValue - poiseThreshold) )
+				{
+					act.SetHitAnimationPlayType(EAHA_ForceNo);
+					return;
+				}
+				
+				if (playerVictim.HasBuff(EET_Mutagen20))
+				{
+					poiseThreshold -= 0.25f;
 			
-			if ( playerVictim.GetCurrentStateName() != 'W3EEAnimation' && playerVictim.HasBuff(EET_Mutagen20) && RandRangeF(1,0) <= poiseValue ) 
-			{
-				act.SetHitAnimationPlayType(EAHA_ForceNo);
+					if ( (attackAction.CanBeParried() && RandRangeF(1,0) <= poiseValue) || (!attackAction.CanBeParried() && poiseValue > poiseThreshold && RandRangeF(1,0) <= poiseValue - poiseThreshold) )
+					{
+						act.SetHitAnimationPlayType(EAHA_ForceNo);
+					}			
+				}
 			}
 		}
 	}
@@ -1239,7 +1277,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 	
 	private function CalcPoise(out poiseThreshold : float) : float
 	{
-		var mut15Bonus, actionPoiseBonus : float;
+		var actionPoiseBonus : float;
 		var armorPieces : array<SArmorCount>;
 		var playerWitcher : W3PlayerWitcher;
 		
@@ -1255,7 +1293,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		}
 			
 		if( playerWitcher.CanUseSkill(S_Perk_06) )
-			poiseThreshold -= armorPieces[2].exact * 0.075f;
+			poiseThreshold -= armorPieces[2].exact * 0.05f;
 			
 		actionPoiseBonus = 1.f;
 			
@@ -1276,9 +1314,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		if( playerWitcher.GetIsRunning() )
 			actionPoiseBonus += 0.18f;
 			
-		mut15Bonus = playerWitcher.GetMutagen15() * 0.05f;
-			
-		return (BaseStatsPoiseValue(playerWitcher) + SkillsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() ) * HPPoiseRatio(playerWitcher) * actionPoiseBonus + mut15Bonus;
+		return (BaseStatsPoiseValue(playerWitcher) + SkillsPoiseValue(playerWitcher) + ArmorPoiseValue(armorPieces) + RedMutagenPoiseValue() + playerWitcher.GetMutagen15Poise()) * HPPoiseRatio(playerWitcher) * actionPoiseBonus;
 	}
 	
 	public final function HPPoiseRatio( playerWitcher : W3PlayerWitcher ) : float

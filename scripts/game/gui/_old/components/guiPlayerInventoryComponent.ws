@@ -336,6 +336,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 			itemDesc = "Every heavy attack landed consumes additionally 25% of available stamina. Drains 3% of target health for 25 stamina consumed. Linear scaling.";
 		else if (craftedItemName == 'Mutagen 8')
 			itemDesc = "Grants immunity to bleeding, burning and poison. Gives also small additional resistances to listed damage types.";
+		else if (craftedItemName == 'Mutagen 15')
+			itemDesc = "Boosts your adrenaline gain. Your adrenaline gives also attack power bonus and poise increase - both values at rate: (current adrenaline percentage) / 4.";
 		else if (craftedItemName == 'Mutagen 20')
 			itemDesc = "Reduces knockdown effect to stagger. Makes you much more resistant to any stagger (including breaking you from whirling). NOTE: Poise and whirl skill level still matter.";
 		else if (craftedItemName == 'Mutagen 16')

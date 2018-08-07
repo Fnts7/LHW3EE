@@ -1,4 +1,18 @@
-﻿Version 20
+﻿Version 21
+
+Reworked poise and stagger resist while whirling logic. Gives more smooth scaling over poise value and whirl skill level.
+Most important fact is that unblockable attacks threshold was lowered even further to 60 poise, but such attacks also 
+require successful poise roll reduced by the threshold value. For example if you stand still and have 80 poise, receive
+unblockable hit, you will have 80 - 60 = 20% chance to not stagger. While when it comes to blockable attacks that chance is 80%.
+That threshold can be lowered even more by:
+1) medium armor perk (but value nerfed to -5 per armor piece.
+2) level 5 whirl skill
+3) Earth elemental decoction
+
+Reworked alghoul mutagen. Now increases adrenaline gain by 33% and makes your adrenaline increase also your attack power
+and poise by values at rate current adrenaline percentage / 4.
+
+Version 20
 
 This is an updates of boosts so greatly in the sense of this mod :).
 

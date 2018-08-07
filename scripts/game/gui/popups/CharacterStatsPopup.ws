@@ -477,10 +477,10 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	playerWitcher = GetWitcherPlayer();
 	adrenalineEffect = playerWitcher.GetAdrenalineEffect();
 	armorPieces = playerWitcher.GetArmorCountOrig();		
-	poiseThreshold = 100;
+	poiseThreshold = 60;
 	
 	if( playerWitcher.CanUseSkill(S_Perk_06) )
-		poiseThreshold -= armorPieces[2].exact * 7.5f;
+		poiseThreshold -= armorPieces[2].exact * 5.0f;
 	
 	actionPoiseBonus = 1.f;
 	
@@ -499,7 +499,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	if( playerWitcher.GetIsRunning() )
 		actionPoiseBonus += 0.18f;
 	
-	poiseVal = ( Combat().BaseStatsPoiseValue(playerWitcher) + Combat().SkillsPoiseValue(playerWitcher) + Combat().ArmorPoiseValue(armorPieces) + Combat().RedMutagenPoiseValue() ) * Combat().HPPoiseRatio(playerWitcher) * actionPoiseBonus * 100 + (playerWitcher.GetMutagen15() * 5.f);
+	poiseVal = ( Combat().BaseStatsPoiseValue(playerWitcher) + Combat().SkillsPoiseValue(playerWitcher) + Combat().ArmorPoiseValue(armorPieces) + Combat().RedMutagenPoiseValue() + playerWitcher.GetMutagen15Poise() ) * Combat().HPPoiseRatio(playerWitcher) * actionPoiseBonus * 100;
 
 	if( Options().SkillDependant() )
 	{
@@ -787,7 +787,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	}
 	else if ( varKey == 'poiseDecBon' )
 	{
-		valueAbility = GetWitcherPlayer().GetMutagen15() * 0.05 * 100;
+		valueAbility = GetWitcherPlayer().GetMutagen15Poise() * 100;
 		valueAbility += Combat().SkillsPoiseValue(GetWitcherPlayer()) * 100;
 		valueStr = NoTrailZeros(RoundMath(valueAbility));
 	}

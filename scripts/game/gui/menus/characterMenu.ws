@@ -2300,16 +2300,34 @@ class CR4CharacterMenu extends CR4MenuBase
 				// W3EE - Begin
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s01, 'cost_reduction', false, false);				
 				argsInt.PushBack( RoundMath(ability.valueMultiplicative * 100 * skillLevel) );
-				if( skillLevel >= 4 ) {
+				/*if( skillLevel >= 4 ) {
 					baseString = GetLocStringByKeyExtWithParams("W3EE_WhirlLvl1", argsInt) + GetLocStringByKeyExt("W3EE_WhirlLvl2") + GetLocStringByKeyExt("W3EE_WhirlLvl3");
-					if (skillLevel == 5)
-						baseString += "<br>Even if your poise is not above unblockable attacks threshold, you have an extra 20% chance to resist stagger from such attacks during whirling.";
 				}
 				else
 				if( skillLevel >= 2 )
 					baseString = GetLocStringByKeyExtWithParams("W3EE_WhirlLvl1", argsInt) + GetLocStringByKeyExt("W3EE_WhirlLvl2");
 				else
-					baseString = GetLocStringByKeyExtWithParams("W3EE_WhirlLvl1", argsInt);
+					baseString = GetLocStringByKeyExtWithParams("W3EE_WhirlLvl1", argsInt);*/
+					
+				baseString = GetLocStringByKeyExtWithParams("W3EE_WhirlLvl1", argsInt);
+				
+				if (skillLevel >= 2) {
+					if (skillLevel == 2)
+						baseString += "<br>Increases chance to resist pariable attacks based on your poise.";
+					else
+						baseString += "<br>Greatly increases chance to resist pariable attacks based on your poise.";
+				
+					if ( skillLevel >= 4 ) {
+					
+						baseString += "<br>Enables possibility to resist unpariable attacks when your poise is above unblockable threshold. Resisted hits will only deal 20% of their damage.";						
+						
+						if (skillLevel == 5)
+							baseString += " The threshold is lowered, so increasing resist chance.";	
+					}				
+				}
+				else
+					baseString += "<br>You are more vulnerable to stagger on hit when whirling.";
+	
 				// W3EE - End
 				break;
 			case S_Sword_s02:
@@ -3100,7 +3118,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_06, 'staminaRegen', false, true);
 				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));*/
 				//argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
-				argsFloat.PushBack(7.5f);
+				argsFloat.PushBack(5.0f);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_GriffinSkill",, argsFloat);
 				break;
 			case S_Perk_07:

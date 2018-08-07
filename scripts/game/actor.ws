@@ -2572,7 +2572,7 @@ import abstract class CActor extends CGameplayEntity
 		var items : array<SItemUniqueId>;
 		var signType : ESignType;
 		var weaponEnt : CEntity;
-		var mut15Val : int;
+		//var mut15Val : int;
 		// var npc : CNewNPC;
 		// W3EE - End
 		
@@ -2635,12 +2635,12 @@ import abstract class CActor extends CGameplayEntity
 		}
 		*/
 		
-		if( playerAttacker && witcher.HasBuff(EET_Mutagen15) && action.IsActionMelee() && action.DealsAnyDamage() && witcher.GetMutagen15() < 10 )
-			witcher.SetMutagen15(1);
+		/*if( playerAttacker && witcher.HasBuff(EET_Mutagen15) && action.IsActionMelee() && action.DealsAnyDamage() && witcher.GetMutagen15() < 10 )
+			witcher.SetMutagen15(1);*/
 		
 		Combat().CrippleEnemy( playerAttacker, (CNewNPC)action.victim, action );
 		
-		if( (CPlayer)action.victim && !action.IsDoTDamage() && !attackAction.WasDodged() && !attackAction.IsCountered() && action.processedDmg.vitalityDamage > 0 && witcher.HasBuff(EET_Mutagen15) && !((W3Effect_Toxicity)action.causer) )
+		/*if( (CPlayer)action.victim && !action.IsDoTDamage() && !attackAction.WasDodged() && !attackAction.IsCountered() && action.processedDmg.vitalityDamage > 0 && witcher.HasBuff(EET_Mutagen15) && !((W3Effect_Toxicity)action.causer) )
 		{
 			mut15Val = witcher.GetMutagen15();
 			
@@ -2649,7 +2649,7 @@ import abstract class CActor extends CGameplayEntity
 			else
 			if( mut15Val == 1 )
 				witcher.SetMutagen15(-1);
-		}
+		}*/
 		// W3EE - End
 		
 		

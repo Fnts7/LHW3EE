@@ -143,7 +143,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	
 	// W3EE - Begin
-	private var mutagen15Count : int;
+	//private var mutagen15Count : int;
 	private var horseFollowTask : CBTTaskHorseSummon;
 	private var battleTranceHitCount : int;
 	default battleTranceHitCount = 0;
@@ -186,7 +186,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 	}
 	
-	public function ForceSetMutagen15( i : int )
+	/*public function ForceSetMutagen15( i : int )
 	{
 		mutagen15Count = i;
 	}
@@ -194,12 +194,22 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function SetMutagen15( i : int )
 	{	
 		mutagen15Count += i;
-	}	
+	}	*/
 
-	public function GetMutagen15() : int
+	public function GetMutagen15Poise() : float
 	{	
-		return mutagen15Count;
-	}	
+		var adrenalineEffect : W3Effect_CombatAdrenaline;
+	
+		if (HasBuff(EET_Mutagen15))
+		{
+			adrenalineEffect = (W3Effect_CombatAdrenaline)GetBuff(EET_CombatAdr);
+				
+			if (adrenalineEffect)
+				return adrenalineEffect.GetValue() / 4.0f;			
+		}		
+	
+		return 0;
+	}
 	
 	timer function ResetPerk10( dt : float, id : int )
 	{	
@@ -2380,8 +2390,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 				RemoveAbilityMultiple( GetBuff(EET_Mutagen10).GetAbilityName(), (int) RoundMath(remAbilityCount));
 			}
 			
-			if(HasBuff(EET_Mutagen15))
-				RemoveAbilityAll( GetBuff(EET_Mutagen15).GetAbilityName() );
+			/*if(HasBuff(EET_Mutagen15))
+				RemoveAbilityAll( GetBuff(EET_Mutagen15).GetAbilityName() );*/
 			
 			// W3EE - Begin
 			if( HasBuff(EET_Mutagen03) )
@@ -3163,7 +3173,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			RemoveTimer('Mutagen14Timer');
 		//}
 		
-		ForceSetMutagen15(0);
+		//ForceSetMutagen15(0);
 		
 		//Experience().AwardCombatAdrenalineXP(this, enemiesKilled, startingHealthPerc == GetStatPercents(BCS_Vitality));
 		

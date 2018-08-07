@@ -268,6 +268,7 @@ class W3Action_Attack extends W3DamageAction
 		var playerAttacker : CPlayer;
 		var mutagen25 : W3Mutagen25_Effect;
 		var mutagen17 : W3Mutagen17_Effect;
+		var adrenalineEffect : W3Effect_CombatAdrenaline;
 		
 
 		result = super.GetPowerStatValue();
@@ -369,6 +370,14 @@ class W3Action_Attack extends W3DamageAction
 			if(witcherAttacker.IsHeavyAttack(attackTypeName))
 			{
 				result += witcherAttacker.GetAttributeValue('attack_power_heavy_style');
+			}
+			
+			if (IsActionMelee() && witcherAttacker.HasBuff(EET_Mutagen15))
+			{
+				adrenalineEffect = (W3Effect_CombatAdrenaline)witcherAttacker.GetBuff(EET_CombatAdr);
+				
+				if (adrenalineEffect)
+					result.valueMultiplicative += adrenalineEffect.GetValue() / 4.0f;
 			}
 		}
 			

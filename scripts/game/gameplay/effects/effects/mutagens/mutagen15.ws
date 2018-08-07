@@ -9,7 +9,7 @@
 class W3Mutagen15_Effect extends W3Mutagen_Effect
 {
 	default effectType = EET_Mutagen15;
-	default dontAddAbilityOnTarget = true;
+	/*default dontAddAbilityOnTarget = true;
 	
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
@@ -23,5 +23,5 @@ class W3Mutagen15_Effect extends W3Mutagen_Effect
 		// W3EE - Begin
 		GetWitcherPlayer().ForceSetMutagen15(0);
 		// W3EE - End
-	}
+	}*/
 }

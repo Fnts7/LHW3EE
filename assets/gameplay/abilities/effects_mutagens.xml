@@ -83,7 +83,7 @@
 			
 			<!-- Alghoul -->
 			<ability name="Mutagen15Effect">
-				<focus_gain type="mult" min="0.25" />
+				<focus_gain type="mult" min="0.33" />
 			</ability>
 			
 			<!-- Fiend -->
