@@ -2649,6 +2649,8 @@ class CR4CharacterMenu extends CR4MenuBase
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s05, 'duration', false, false);
 				argsInt.PushBack(RoundMath(ability.valueBase));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
+				if (skillLevel > 1)				
+					baseString += "<br>Hitting axii puppet has " + (30 + (skillLevel - 2) * 35) + "% chance not to break spell.<br>Axii casting level: +1.";
 				break;
 			case S_Magic_s06:
 				// W3EE - Begin
@@ -2814,29 +2816,47 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(10 + 2*(skillLevel-1));
 				argsInt.PushBack(25 * (skillLevel-1));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
+				baseString += "<br>Axii casting level: +" + skillLevel + ".";
 				break;
 			case S_Magic_s18:
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s18, 'spell_power_axii', false, false);
 				ability.valueMultiplicative *= skillLevel;
 				argsInt.PushBack(RoundMath(ability.valueMultiplicative * 100));
-				argsFloat.PushBack(12.f * skillLevel);
+				
+				/*argsFloat.PushBack(12.f * skillLevel);
 				argsFloat.PushBack(3.6f * skillLevel);
 				if( skillLevel < 4 )
 					baseString = GetLocStringByKeyExtWithParams("W3EE_AxiiLink", , argsFloat) + "<br>" + GetLocStringByKeyExtWithParams(locKey, argsInt);
 				else
-					baseString = GetLocStringByKeyExtWithParams("W3EE_AxiiLink2", , argsFloat) + "<br>" + GetLocStringByKeyExtWithParams(locKey, argsInt);
-				// baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
+					baseString = GetLocStringByKeyExtWithParams("W3EE_AxiiLink2", , argsFloat) + "<br>" + GetLocStringByKeyExtWithParams(locKey, argsInt);*/
+					
+				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
+				
+				ability = GetWitcherPlayer().GetTotalSignSpellPower(S_Magic_5);				
+				if (ability.valueMultiplicative >= 1.0f)
+					ability.valueMultiplicative = 1.0f + (ability.valueMultiplicative - 1.0f) / 2;
+				else
+					ability.valueMultiplicative = 1.0f - (1.0f - ability.valueMultiplicative) / 2;
+				baseString += "<br>Increases critical chance and critical damage against axied enemy by: " + RoundMath( 3 * skillLevel * ability.valueMultiplicative ) + "%.";
+				baseString += "<br>When axii effect ends on an enemy, that enemy has " + (skillLevel * 10) + "% chance to have all stamina drained.";
+				
 				break;
 			case S_Magic_s19:
 				/*argsInt.PushBack(10 + 2*(skillLevel-1));
 				argsInt.PushBack(25 * (skillLevel-1));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second");*/
-				argsInt.PushBack(skillLevel + 1);
-				argsInt.PushBack(25 * (3 - skillLevel));
-				if( skillLevel < 3 )
+				
+				argsInt.PushBack(skillLevel + 1);				
+				
+				/*if( skillLevel < 3 )
 					baseString = GetLocStringByKeyExtWithParams("W3EE_AxiiLvl1", argsInt);
-				else
-					baseString = GetLocStringByKeyExtWithParams("W3EE_AxiiLvl2", argsInt);	
+				else*/
+					baseString = GetLocStringByKeyExtWithParams("W3EE_AxiiLvl2", argsInt);
+					
+				baseString += "<br>First target faces initial sign power. Every next target has power reduced by " + (30 - skillLevel * 5) + "%.";
+				
+				if (skillLevel > 1)
+					baseString += "<br>Axii casting level: +" + (skillLevel - 1) + ".";
 				break;
 			case S_Magic_s20:
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s20, 'range', false, false)) * skillLevel;
@@ -3337,7 +3357,11 @@ class CR4CharacterMenu extends CR4MenuBase
 		}
 		
 		resultGFxData.SetMemberFlashString('skillSubCategory', targetSubPathLocName);
-		resultGFxData.SetMemberFlashString('skillName', GetLocStringByKeyExt(targetSkillData.localisationNameKey));
+		
+		if (targetSkill == S_Magic_s18)
+			resultGFxData.SetMemberFlashString('skillName', "Deep Confusion");
+		else
+			resultGFxData.SetMemberFlashString('skillName', GetLocStringByKeyExt(targetSkillData.localisationNameKey));
 		
 		GetSkillTooltipDescription(targetSkillData, isGridView, skillCurrentLevelDesc, skillNextLevelDesc);
 		

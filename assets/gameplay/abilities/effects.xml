@@ -46,7 +46,7 @@
       </ability>
 	  
       <ability name="AxiiGuardMeEffect">
-        <duration type="add" min="15" max="15" />
+        <duration type="add" min="9" max="9" />
       </ability>
 	  
 	  <ability name="BasicQuenEffect">

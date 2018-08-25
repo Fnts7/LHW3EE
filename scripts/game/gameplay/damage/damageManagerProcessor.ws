@@ -526,7 +526,7 @@ class W3DamageManagerProcessor extends CObject
 			
 			witcher.GetAdrenalineEffect().ManageAdrenaline(attackAction);
 			
-			combatHandler.ProcessAxiiLink(action);
+			//combatHandler.ProcessAxiiLink(action);
 			
 			((W3Effect_SwordRendBlast)playerAttacker.GetBuff(EET_SwordRendBlast)).FireDischarge(attackAction, playerAttacker, actorVictim);
 			
@@ -1664,6 +1664,18 @@ class W3DamageManagerProcessor extends CObject
 					//else if (!playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && playerAttacker.CanUseSkill(S_Sword_s17))
 						//criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s17);
 					// W3EE - End
+					
+					if (actorVictim)
+					{
+						if ( actorVictim.HasBuff( EET_Confusion ) )
+						{
+							criticalDamageBonus.valueAdditive += ( ( W3ConfuseEffect )actorVictim.GetBuff( EET_Confusion ) ).GetCriticalDamageBonus();
+						}
+						else if (actorVictim.HasBuff( EET_AxiiGuardMe ) )
+						{
+							criticalDamageBonus.valueAdditive += ( ( W3Effect_AxiiGuardMe )actorVictim.GetBuff( EET_AxiiGuardMe ) ).GetCriticalDamageBonus();
+						}
+					}
 				}
 			}
 			

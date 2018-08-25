@@ -18,7 +18,11 @@ statemachine class W3AxiiEntity extends W3SignEntity
 	
 	default skillEnum = S_Magic_5;
 	
-	protected var targets		: array<CActor>;
+	protected var targets			: array<CActor>;
+	protected var slowdownTargets	: array<CActor>;
+	protected var axiiCastLevel 	: int;
+	protected var applySlowdown 	: bool;
+	
 	protected var orientationTarget : CActor;
 	
 	public function GetSignType() : ESignType
@@ -36,6 +40,19 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		ownerActor = inOwner.GetActor();
 		
 		CacheSignStats(inOwner);
+		
+		axiiCastLevel = inOwner.GetSkillLevel(S_Magic_s17, this);
+		
+		if (inOwner.CanUseSkill(S_Magic_s05, this) && inOwner.GetSkillLevel(S_Magic_s05, this) > 1)
+			axiiCastLevel += 1;
+				
+		if (inOwner.CanUseSkill(S_Magic_s19, this) && inOwner.GetSkillLevel(S_Magic_s19, this) > 1)
+			axiiCastLevel += inOwner.GetSkillLevel(S_Magic_s19, this) - 1;		
+			
+		if ( owner == thePlayer && GetWitcherPlayer().GetPotionBuffLevel(EET_PetriPhiltre) == 3)
+			axiiCastLevel += 2;
+			
+		applySlowdown = inOwner.CanUseSkill(S_Magic_s17, this);
 		
 		if( (CPlayer)ownerActor )
 		{
@@ -77,15 +94,19 @@ statemachine class W3AxiiEntity extends W3SignEntity
 	{
 		var player : CR4Player;
 		var i : int;
+		var slowdown : float;
 		
 		SelectTargets();
 		// W3EE - Begin
-		Combat().CacheAxiiLinkActors(targets);
+		//Combat().CacheAxiiLinkActors(targets);
 		// W3EE - End
 		
-		for(i=0; i<targets.Size(); i+=1)
+		if (slowdownTargets.Size() > 0)
+			slowdown = CalcSlowdown();
+		
+		for(i=0; i<slowdownTargets.Size(); i+=1)
 		{
-			AddMagic17Effect(targets[i]);
+			AddMagic17Effect(slowdownTargets[i], slowdown);
 		}
 		
 		Attach(true);
@@ -164,7 +185,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 	private function SelectTargets()
 	{
 		// W3EE - Begin
-		var projCount, i, j : int;
+		var projCount, projCountSlowdown, i, j : int;
 		var actors, finalActors : array<CActor>;
 		var ownerPos : Vector;
 		var ownerActor : CActor;
@@ -177,12 +198,19 @@ statemachine class W3AxiiEntity extends W3SignEntity
 			projCount = 1;
 		*/
 		
-		if( owner.CanUseSkill(S_Magic_s19, this) )
-			projCount = 1 + owner.GetSkillLevel(S_Magic_s19, this);
+		if( owner.CanUseSkill(S_Magic_s19, this) ) {
+			projCount = owner.GetSkillLevel(S_Magic_s19, this) + 1;
+		}
 		else
 			projCount = 1;
+			
+		if (applySlowdown)
+			projCountSlowdown = axiiCastLevel;
+		else
+			projCountSlowdown = 0;
 		
 		targets.Clear();
+		slowdownTargets.Clear();
 		actor = (CActor)thePlayer.slideTarget;	
 		
 		if(actor && IsTargetValid(actor, false))
@@ -190,7 +218,13 @@ statemachine class W3AxiiEntity extends W3SignEntity
 			targets.PushBack(actor);
 			projCount -= 1;
 			
-			if(projCount == 0)
+			if (projCountSlowdown > 0)
+			{
+				slowdownTargets.PushBack(actor);
+				projCountSlowdown -= 1;
+			}
+			
+			if(projCount == 0 && projCountSlowdown == 0)
 				return;
 		}
 		
@@ -198,7 +232,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		ownerPos = ownerActor.GetWorldPosition();
 		
 		
-		actors = ownerActor.GetNPCsAndPlayersInCone(15, VecHeading(ownerActor.GetHeadingVector()), 150, 20, , FLAG_OnlyAliveActors);
+		actors = ownerActor.GetNPCsAndPlayersInCone(12 + axiiCastLevel, VecHeading(ownerActor.GetHeadingVector()), 70 + 10 * axiiCastLevel, 20, , FLAG_OnlyAliveActors);
 					
 		
 		for(i=actors.Size()-1; i>=0; i-=1)
@@ -229,7 +263,25 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		}
 		
 		
-		if(finalActors.Size() > 0)
+		for (i=0; i < finalActors.Size(); i += 1)
+		{
+			if (projCount == 0 && projCountSlowdown == 0)
+				break;
+				
+			if (projCount > 0)
+			{	
+				targets.PushBack(finalActors[i]);
+				projCount -= 1;
+			}
+			
+			if (projCountSlowdown > 0)
+			{	
+				slowdownTargets.PushBack(finalActors[i]);
+				projCountSlowdown -= 1;
+			}
+		}
+		
+		/*if(finalActors.Size() > 0)
 		{
 			for(i=0; i<projCount; i+=1)
 			{
@@ -238,7 +290,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 				else
 					break;	
 			}
-		}
+		}*/		
 	}
 	
 	protected function ProcessThrow()
@@ -274,6 +326,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 	{
 		var buff : EEffectInteract;
 		var conf : W3ConfuseEffect;
+		var puppet : W3Effect_AxiiGuardMe;
 		var i : int;
 		// W3EE - Begin
 		var duration, durationAnimal, axiiPower : SAbilityAttributeValue;
@@ -284,7 +337,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		var npcTarget : CNewNPC;
 		var jobTreeType : EJobTreeType;
 		// W3EE - Begin
-		var sp, pts, prc, raw, chance, reductionLevel : float;
+		var pts, prc, raw, chance, powerDec : float;
 		// W3EE - End
 		
 		casterActor = owner.GetActor();		
@@ -292,9 +345,9 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		StopEffect(effects[fireMode].throwEffect);
 		
 		
-		for(i=0; i<targets.Size(); i+=1)
+		for(i=0; i<slowdownTargets.Size(); i+=1)
 		{
-			RemoveMagic17Effect(targets[i]);
+			RemoveMagic17Effect(slowdownTargets[i]);
 		}
 		
 		
@@ -314,17 +367,18 @@ statemachine class W3AxiiEntity extends W3SignEntity
 			durationAnimal = thePlayer.GetSkillAttributeValue(skillEnum, 'duration_animals', false, true);
 			
 			durationAnimal.valueMultiplicative = 1.0f;
+			duration.valueMultiplicative = 1.0f;
 			
 			
 			
 			
 			// W3EE - Begin
-			if( owner.CanUseSkill(S_Magic_s19, this) && targets.Size() > 1 )
+			/*if( owner.CanUseSkill(S_Magic_s19, this) && targets.Size() > 1 )
 			{
-				reductionLevel = (3 - owner.GetSkillLevel(S_Magic_s19, this)) * targets.Size() / (owner.GetSkillLevel(S_Magic_s19, this) + 1);
+				/*reductionLevel = (3 - owner.GetSkillLevel(S_Magic_s19, this)) * targets.Size() / (owner.GetSkillLevel(S_Magic_s19, this) + 1);
 				duration -= owner.GetSkillAttributeValue(S_Magic_s19, 'duration', false, true) * reductionLevel;
 				durationAnimal -= owner.GetSkillAttributeValue(S_Magic_s19, 'duration', false, true) * reductionLevel;
-			}
+			}*/
 			// W3EE - End
 			
 			
@@ -334,36 +388,35 @@ statemachine class W3AxiiEntity extends W3SignEntity
 			
 			params.creator = casterActor;
 			params.sourceName = "axii_" + skillEnum;			
-			params.customPowerStatValue = super.GetTotalSignIntensity();
+			//params.customPowerStatValue = super.GetTotalSignIntensity();
 			params.isSignEffect = true;
 			
 			// W3EE - Begin
-			if( IsAlternateCast() )
-				dur *= 2.f;
-			
-			if( npcTarget.HasTag('WeakToAxii') )
-				dur *= 2;
 			
 			axiiPower = super.GetTotalSignIntensity();
+			powerDec = 0.3f - owner.GetSkillLevel(S_Magic_s19, this) * 0.05f;
 			
-			prc = npcTarget.GetNPCCustomStat(theGame.params.DAMAGE_NAME_MENTAL);
-			chance = 0.7f * axiiPower.valueMultiplicative * (1 - prc);
-			dur *= axiiPower.valueMultiplicative;
 			// W3EE - End
 			
 			for(i=0; i<targets.Size(); i+=1)
 			{
 				npcTarget = (CNewNPC)targets[i];
-				
+
+				prc = npcTarget.GetNPCCustomStat(theGame.params.DAMAGE_NAME_MENTAL);
+				chance = 0.7f * axiiPower.valueMultiplicative * (1 - prc);				
 				
 				if( targets[i].IsAnimal() || npcTarget.IsHorse() )
 				{
 					params.duration = durAnimals;
+					chance *= 1.4f;
 				}
 				else
 				{
 					params.duration = dur;
 				}
+				
+				params.customPowerStatValue = axiiPower;
+
 				
 				jobTreeType = npcTarget.GetCurrentJTType();	
 					
@@ -382,20 +435,20 @@ statemachine class W3AxiiEntity extends W3SignEntity
 				}
 			
 				
-				RemoveMagic17Effect(targets[i]);
+				//RemoveMagic17Effect(targets[i]);
 			
 				// W3EE - Begin
 				if( npcTarget.UsesEssence() )
-					chance *= 1 + (1 - npcTarget.GetStatPercents(BCS_Essence));
+					chance *= 1 + PowF(1.0f - npcTarget.GetStatPercents(BCS_Essence), 2);
 				else
-					chance *= 1 + (1 - npcTarget.GetStatPercents(BCS_Vitality));
+					chance *= 1 + PowF(1.0f - npcTarget.GetStatPercents(BCS_Vitality), 2);
 				
-				if(owner == thePlayer && GetWitcherPlayer().GetPotionBuffLevel(EET_PetriPhiltre) == 3)
+				if(i == 0 && owner == thePlayer && GetWitcherPlayer().GetPotionBuffLevel(EET_PetriPhiltre) == 3)
 				{
 					chance = 1;
 				}
 				
-				if( targets[i].IsAnimal() || npcTarget.IsHorse() || (owner.GetActor() == thePlayer && GetAttitudeBetween(targets[i], owner.GetActor()) == AIA_Friendly) )
+				if( npcTarget.IsHorse() || (owner.GetActor() == thePlayer && GetAttitudeBetween(targets[i], owner.GetActor()) == AIA_Friendly) )
 				{
 					chance = 1;
 				}
@@ -416,8 +469,23 @@ statemachine class W3AxiiEntity extends W3SignEntity
 					if(owner.CanUseSkill(S_Magic_s18, this) || owner.GetActor().HasAbility('Glyphword 13 _Stats', true))
 					// W3EE - End
 					{
-						conf = (W3ConfuseEffect)(targets[i].GetBuff(params.effectType, "axii_" + skillEnum));
-						conf.SetDrainStaminaOnExit();
+						chance = 0;
+						if (owner.CanUseSkill(S_Magic_s18, this))
+							chance += owner.GetSkillLevel(S_Magic_s18, this) * 0.1f;
+							
+						if (owner.GetActor().HasAbility('Glyphword 13 _Stats', true))
+							chance += 0.3f;
+						
+						if (params.effectType == EET_Confusion)
+						{
+							conf = (W3ConfuseEffect)(targets[i].GetBuff(EET_Confusion));
+							conf.SetDrainStaminaOnExit(chance);
+						}
+						else if (params.effectType == EET_AxiiGuardMe)
+						{
+							puppet = (W3Effect_AxiiGuardMe)(targets[i].GetBuff(EET_AxiiGuardMe));
+							puppet.SetDrainStaminaOnExit(chance);
+						}
 					}
 				}
 				else
@@ -426,7 +494,10 @@ statemachine class W3AxiiEntity extends W3SignEntity
 					if(owner.CanUseSkill(S_Magic_s17, this) && owner.GetSkillLevel(S_Magic_s17, this) == 3)
 					{
 						staggerParams = params;
-						staggerParams.effectType = EET_Stagger;
+						if ( i == 0 )
+							staggerParams.effectType = EET_LongStagger;
+						else
+							staggerParams.effectType = EET_Stagger;
 						params.duration = 0;	
 						targets[i].AddEffectCustom(staggerParams);					
 					}
@@ -438,8 +509,10 @@ statemachine class W3AxiiEntity extends W3SignEntity
 				}
 				
 				// W3EE - Begin
-				Combat().CullAxiiLinkActors(targets[i], buff);
+				//Combat().CullAxiiLinkActors(targets[i], buff);
 				// W3EE - End
+				
+				axiiPower.valueMultiplicative *= 1.0f - powerDec;
 			}
 		}
 		
@@ -459,9 +532,9 @@ statemachine class W3AxiiEntity extends W3SignEntity
 	{
 		var i : int;
 		
-		for(i=0; i<targets.Size(); i+=1)
+		for(i=0; i<slowdownTargets.Size(); i+=1)
 		{
-			RemoveMagic17Effect(targets[i]);
+			RemoveMagic17Effect(slowdownTargets[i]);
 		}
 		RemoveMagic17Effect(orientationTarget);
 	}
@@ -472,7 +545,10 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		var buffParams : SCustomEffectParams;
 	
 		
-		if(!owner.CanUseSkill(S_Magic_s17, this) || owner.GetSkillLevel(S_Magic_s17, this) == 0)
+		if(!applySlowdown)
+			return;
+			
+		if (slowdownTargets.Size() >= axiiCastLevel)
 			return;
 	 
 		if(newTarget == orientationTarget)
@@ -481,10 +557,10 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		RemoveMagic17Effect(orientationTarget);
 		orientationTarget = newTarget;
 		
-		AddMagic17Effect(orientationTarget);			
+		AddMagic17Effect(orientationTarget, CalcSlowdown());			
 	}
 	
-	private function AddMagic17Effect(target : CActor)
+	private function AddMagic17Effect(target : CActor, slowdown : float)
 	{
 		var buffParams : SCustomEffectParams;
 		
@@ -495,10 +571,34 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		buffParams.creator = this;
 		buffParams.sourceName = "axii_immobilize";
 		buffParams.duration = 10;
-		buffParams.effectValue.valueAdditive = 0.999f;
+		buffParams.effectValue.valueAdditive = slowdown;
 		buffParams.isSignEffect = true;
 		
 		target.AddEffectCustom(buffParams);
+	}
+	
+	
+	private function CalcSlowdown() : float
+	{
+		var slowdown : float;
+		var axiiPower : SAbilityAttributeValue;
+		
+		axiiPower = super.GetTotalSignIntensity();
+		slowdown = 0.785f + 0.015f * axiiCastLevel;
+		
+		slowdown = 1.0f - slowdown; // remaining speed
+		
+		if (axiiPower.valueMultiplicative >= 1.0f)
+			slowdown /= axiiPower.valueMultiplicative;
+		else if (axiiPower.valueMultiplicative >= 0)
+			slowdown *= 2.0f - axiiPower.valueMultiplicative;
+		else
+			slowdown *= 2.0f;
+			
+		if (slowdown < 0.04f)
+			slowdown = 0.04f;
+
+		return 1.0f - slowdown;	
 	}
 	
 	private function RemoveMagic17Effect(target : CActor)

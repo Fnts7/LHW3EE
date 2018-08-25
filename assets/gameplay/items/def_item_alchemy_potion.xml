@@ -195,7 +195,7 @@
       <!-- Spell Power Bonus-->
       <ability name="PetriPhiltre_1">
         <toxicity min="35" max="35" type="add" />
-        <duration min="60" max="60" type="add" />
+        <duration min="50" max="50" type="add" />
         <ammo type="add" min="3" />
         <PetriPhiltreEffect_Level1 is_ability="true" />
 		    <quality type="add" min="2" max="2"/>
@@ -203,7 +203,7 @@
       </ability>
       <ability name="PetriPhiltre_2">
         <toxicity min="45" max="45" type="add" />
-        <duration min="90" max="90" type="add" />
+        <duration min="100" max="100" type="add" />
         <ammo type="add" min="4" />
         <PetriPhiltreEffect_Level2 is_ability="true" />
         <PetriPhiltre_3 is_ability="true" />
@@ -212,7 +212,7 @@
       </ability>
       <ability name="PetriPhiltre_3">
         <toxicity min="55" max="55" type="add" />
-        <duration min="90" max="90" type="add" />
+        <duration min="100" max="100" type="add" />
         <ammo type="add" min="5" />
         <PetriPhiltreEffect_Level3 is_ability="true" />
         <PetriPhiltre_2 is_ability="true" />

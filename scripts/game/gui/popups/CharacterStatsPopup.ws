@@ -634,7 +634,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	}
 	else if ( varKey == 'healthPoiseRed' ) 
 	{
-		valueAbility =  ( 1 - ClampF( thePlayer.GetStatPercents(BCS_Vitality) * 1.3f, 0.7f, 1.0f ) ) * 100;
+		valueAbility =  ( 1.0f - Combat().HPPoiseRatio(playerWitcher) ) * 100;
 		valueStr = NoTrailZeros(RoundMath(valueAbility)) + "%"; 
 	}
 	else if ( varKey == 'armorPoiseBon' ) 

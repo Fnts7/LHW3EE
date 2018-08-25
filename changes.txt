@@ -1,4 +1,47 @@
-﻿Version 21
+﻿Version 22
+
+Major Axii logic overhaul.
+1) Fixed some bugs related with duration and chance calculation.
+2) Normalized durations, small balancing in enemies will resistances.
+
+3) Introduced new concept: 'Axii casting level'. Influences many factors, such as: slowdown when casting strength,
+maximum number of enemies that can have axii slowdown effect when casting, range and cone angle for target selection.
+Axii casting level can be 0-8. 3 levels per each Delusion skill level. 1 for 2nd level of puppet. 2 for 2nd,3rd
+level of Domination. And 2 extra when having Petri's philter lvl 3 effect.
+
+4) Axii puppet skill attack power bonus a bit nerfed and skill has now better scaling of chance to break spell when Geralt
+hits enemies - you still can use puppet to get easy hits.
+
+5) Changed Axii Link skill to Deep Confusion skill. I don't like how Axii Link effect was made so I disabled it
+totally. For example - when you have domination and many puppets/confused, hitting one can result in unnecesary
+spell break on others. So now Deep Confusion skill has three effects:
+- axii spell power (as vanilla)
+- gives a chance to drain full stamina when spell ends (modified from W3EE when it happened always, now 10% chance
+per skill level, also glyphword 13 increases that chance by 30%).
+- increaeses crit chance and dmg against axied enemies by 3% per skill level and scales a bit with spellpower
+
+6) Domination skill reworked. Now first target faces Axii cast with full power. Each subsequent enemy gets the
+power reduced.
+
+7) Axii related glyphwords have now better scaled durations extensions based on axii spellpower value on given
+target's effect and confusion resistances. Strongest glyphword has now 30% drain stamina chance
+- cumulates with Deep Confusion skill.
+
+Axii spellpower scales 3 things: duration, Deep Confusion skill's crit chance and damage and also
+slowdown when casting. Slowdown when casting is not that overwhelming anymore - you need a bit more skill for
+successful Axii casts (puppet mostly, because takes long time). However with high Axii casting level it is quite
+easy, because the number of slowed down enemies can be very high.
+
+Small adjustment in whirl - the amount of damage reduced when resisting pariable attack depends now on skill level.
+Ranges from 25% on level zero to 100% on level 3+.
+
+Adjusted a bit poise toxicity curve (from quadratic to 1.5 exponent), so there will be faster poise gain with
+growing toxicity.
+
+Boosted a bit Petri's philtre spell power, +5% all levels.
+
+
+Version 21
 
 Reworked poise and stagger resist while whirling logic. Gives more smooth scaling over poise value and whirl skill level.
 Most important fact is that unblockable attacks threshold was lowered even further to 60 poise, but such attacks also 

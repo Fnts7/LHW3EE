@@ -120,7 +120,7 @@
 			<ability name="Glyphword 13 _Stats">
 				<tags>Glyphword</tags>
 
-				<increas_duration type="add" min="3" />
+				<increas_duration type="add" min="1.5" />
 				<glyphword_range type="add" min="15" />
 				<spell_power_axii type="mult" min="0.15" />
 			</ability>
@@ -128,7 +128,7 @@
 			<ability name="Glyphword 14 _Stats">
 				<tags>Glyphword</tags>
 
-				<increas_duration type="add" min="2" />
+				<increas_duration type="add" min="1.5" />
 			</ability>
 			
 			<ability name="Glyphword 15 _Stats">
@@ -148,7 +148,7 @@
 			<ability name="Glyphword 18 _Stats">
 				<tags>Glyphword</tags>
 
-				<increas_duration type="add" min="2" />
+				<increas_duration type="add" min="1.5" />
 				<glyphword_range type="add" min="15" />
 			</ability>
 

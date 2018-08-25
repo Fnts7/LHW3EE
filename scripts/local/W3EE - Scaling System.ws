@@ -1744,6 +1744,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 					else
 					if( NPC.HasAbility('mon_black_spider_base') || NPC.HasAbility('mon_black_spider_ep2_base') )
 					{
+						NPC.AddTag('WeakToAxii');
 						if( NPC.HasAbility('mon_black_spider_large') || NPC.HasAbility('mon_black_spider_ep2_large') )
 						{
 							opponentStats.damageValue = 2125;
@@ -1905,7 +1906,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.shockResist 		= 0.f;
 							opponentStats.elementalResist 	= 0.f;
 							opponentStats.slowResist 		= 0.5f;
-							opponentStats.confusionResist 	= -1.0f;
+							opponentStats.confusionResist 	= -0.7f;
 							opponentStats.bleedingResist 	= 0.4f;
 							opponentStats.poisonResist 		= 0.6f;
 							opponentStats.stunResist 		= 0.1f;
@@ -2197,7 +2198,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.shockResist 		= 0.f;
 						opponentStats.elementalResist 	= 0.f;
 						opponentStats.slowResist 		= 0.2f;
-						opponentStats.confusionResist 	= -0.8f;
+						opponentStats.confusionResist 	= -1.0f;
 						opponentStats.bleedingResist 	= 1.f;
 						opponentStats.poisonResist 		= 1.f;
 						opponentStats.stunResist 		= 0.f;
@@ -2453,6 +2454,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 					else
 					if( NPC.HasAbility('mon_black_spider_base') || NPC.HasAbility('mon_black_spider_ep2_base') )
 					{
+						NPC.AddTag('WeakToAxii');
 						if( NPC.HasAbility('mon_black_spider_large') || NPC.HasAbility('mon_black_spider_ep2_large') )
 						{
 							opponentStats.damageValue = 2125;
@@ -2705,6 +2707,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 					if( NPC.HasAbility('mon_troll_base') )
 					{
 						NPC.AddTag('WeakToQuen');
+						NPC.AddTag('WeakToAxii');
 						opponentStats.damageValue = 2985;
 						opponentStats.healthValue = 17460;
 						opponentStats.healthType = BCS_Vitality;
@@ -2720,7 +2723,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.shockResist 		= 0.f;
 						opponentStats.elementalResist 	= 0.f;
 						opponentStats.slowResist 		= 0.2f;
-						opponentStats.confusionResist 	= -1.f;
+						opponentStats.confusionResist 	= -0.6f;
 						opponentStats.bleedingResist 	= 0.4f;
 						opponentStats.poisonResist 		= 0.f;
 						opponentStats.stunResist 		= 1.f;
@@ -2749,7 +2752,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.shockResist 		= 0.f;
 						opponentStats.elementalResist 	= 0.f;
 						opponentStats.slowResist 		= 0.3f;
-						opponentStats.confusionResist 	= -1.0f;
+						opponentStats.confusionResist 	= -0.6f;
 						opponentStats.bleedingResist 	= 0.f;
 						opponentStats.poisonResist 		= 0.f;
 						opponentStats.stunResist 		= 1.f;
@@ -2881,7 +2884,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.shockResist 		= 0.f;
 							opponentStats.elementalResist 	= 0.f;
 							opponentStats.slowResist 		= 0.f;
-							opponentStats.confusionResist 	= -2.0f;
+							opponentStats.confusionResist 	= -0.5f;
 							opponentStats.bleedingResist 	= 0.f;
 							opponentStats.poisonResist 		= 0.3f;
 							opponentStats.stunResist 		= 0.f;
@@ -2905,7 +2908,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.shockResist 		= 0.f;
 							opponentStats.elementalResist 	= 0.f;
 							opponentStats.slowResist 		= 0.f;
-							opponentStats.confusionResist 	= -2.0f;
+							opponentStats.confusionResist 	= -1.0f;
 							opponentStats.bleedingResist 	= 0.f;
 							opponentStats.poisonResist 		= 0.3f;
 							opponentStats.stunResist 		= 0.f;
@@ -2932,7 +2935,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.shockResist 		= -0.3f;
 							opponentStats.elementalResist 	= 0.f;
 							opponentStats.slowResist 		= 0.f;
-							opponentStats.confusionResist 	= -0.6f;
+							opponentStats.confusionResist 	= -0.25f;
 							opponentStats.bleedingResist 	= -0.4f;
 							opponentStats.poisonResist 		= 1.0f;
 							opponentStats.stunResist 		= 0.f;
@@ -3446,7 +3449,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.shockResist 		= 0.f;
 							opponentStats.elementalResist 	= 0.f;
 							opponentStats.slowResist 		= 0.25f;
-							opponentStats.confusionResist 	= 0.f;
+							opponentStats.confusionResist 	= -0.2f;
 							opponentStats.bleedingResist 	= 0.f;
 							opponentStats.poisonResist 		= 0.f;
 							opponentStats.stunResist 		= 0.2f;
@@ -3510,6 +3513,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						else
 						if( NPC.GetSfxTag() == 'sfx_wild_dog' )
 						{
+							NPC.AddTag('WeakToAxii');
 							opponentStats.damageValue = 1950;
 							opponentStats.healthValue = 2850;
 							opponentStats.healthType = BCS_Vitality;
@@ -3524,7 +3528,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.shockResist 		= 0.f;
 							opponentStats.elementalResist 	= 0.f;
 							opponentStats.slowResist 		= 0.f;
-							opponentStats.confusionResist 	= -1.f;
+							opponentStats.confusionResist 	= -0.6f;
 							opponentStats.bleedingResist 	= 0.f;
 							opponentStats.poisonResist 		= 0.f;
 							opponentStats.stunResist 		= 0.f;
@@ -3548,7 +3552,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.shockResist 		= 0.f;
 							opponentStats.elementalResist 	= 0.f;
 							opponentStats.slowResist 		= 0.f;
-							opponentStats.confusionResist 	= -1.f;
+							opponentStats.confusionResist 	= -0.3f;
 							opponentStats.bleedingResist 	= 0.f;
 							opponentStats.poisonResist 		= 0.f;
 							opponentStats.stunResist 		= 0.f;
@@ -3621,7 +3625,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.shockResist 		= 0.f;
 						opponentStats.elementalResist 	= 0.f;
 						opponentStats.slowResist 		= -0.1f;
-						opponentStats.confusionResist 	= -1.f;
+						opponentStats.confusionResist 	= -0.3f;
 						opponentStats.bleedingResist 	= 0.f;
 						opponentStats.poisonResist 		= 0.f;
 						opponentStats.stunResist 		= 0.f;
@@ -3631,6 +3635,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 					else
 					if( NPC.HasAbility('mon_boar_base') || NPC.HasAbility('mon_boar_ep2_base') || NPC.HasAbility('mon_ft_boar_ep2_base') )
 					{
+						NPC.AddTag('WeakToAxii');
 						opponentStats.damageValue = 2350;
 						opponentStats.healthValue = 5350;
 						opponentStats.healthType = BCS_Vitality;
@@ -3645,7 +3650,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.shockResist 		= 0.f;
 						opponentStats.elementalResist 	= 0.f;
 						opponentStats.slowResist 		= -0.4f;
-						opponentStats.confusionResist 	= -1.f;
+						opponentStats.confusionResist 	= -0.5f;
 						opponentStats.bleedingResist 	= 0.f;
 						opponentStats.poisonResist 		= 0.f;
 						opponentStats.stunResist 		= 0.f;
@@ -3681,6 +3686,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 					if( NPC.HasAbility('mon_troll_fistfight') )
 					{
 						NPC.AddTag('WeakToQuen');
+						NPC.AddTag('WeakToAxii');
 						opponentStats.damageValue = 2700;
 						opponentStats.healthValue = 9460;
 						opponentStats.healthType = BCS_Vitality;
@@ -3695,7 +3701,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.shockResist 		= 0.f;
 						opponentStats.elementalResist 	= 0.f;
 						opponentStats.slowResist 		= 0.2f;
-						opponentStats.confusionResist 	= -1.f;
+						opponentStats.confusionResist 	= -0.6f;
 						opponentStats.bleedingResist 	= 0.4f;
 						opponentStats.poisonResist 		= 0.f;
 						opponentStats.stunResist 		= 1.f;

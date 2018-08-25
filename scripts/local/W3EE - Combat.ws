@@ -579,7 +579,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 				if (RandRangeF(1,0) > whirlPoise + poiseMod )
 					WhirlStagger(act, earthMutagen);				
 				else
-					WhirlSaveTypical(act);
+					WhirlSaveTypical(act, 0.75f - 0.25f * skillLevel);
 			}
 			else
 			if( skillLevel >= 4 )
@@ -620,7 +620,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 				poiseMod = 0.24f;
 		
 			if (attackAction.CanBeDodged() && attackAction.CanBeParried() && !((W3ArrowProjectile)act.causer) && RandRangeF(1,0) <= whirlPoise - poiseMod)
-				WhirlSaveTypical(act);
+				WhirlSaveTypical(act, 0.75f - 0.25f * skillLevel);
 			else
 				WhirlStagger(act, earthMutagen);
 		}
@@ -638,10 +638,13 @@ class W3EECombatHandler extends W3EEOptionHandler
 		}	
 	}
 	
-	private function WhirlSaveTypical( act : W3DamageAction )
+	private function WhirlSaveTypical( act : W3DamageAction, damageMult : float )
 	{
-		act.processedDmg.vitalityDamage = 0;
-		act.processedDmg.essenceDamage = 0;
+		if (damageMult < 0)
+			damageMult = 0;
+	
+		act.processedDmg.vitalityDamage *= damageMult;
+		act.processedDmg.essenceDamage *= damageMult;
 		act.SetHitAnimationPlayType(EAHA_ForceNo);
 		act.SetCanPlayHitParticle(false);
 		act.ClearEffects();
@@ -1227,7 +1230,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 	
 	public final function BaseStatsPoiseValue( witcher : W3PlayerWitcher ) : float
 	{	
-		return PowF(witcher.GetStatPercents(BCS_Toxicity), 2) * witcher.GetStatMax(BCS_Toxicity) / 500.f;
+		return PowF(witcher.GetStatPercents(BCS_Toxicity), 1.5f) * ( 0.15f + witcher.GetStatMax(BCS_Toxicity) / 700.f );
 	}
 	
 	public final function SkillsPoiseValue( witcher : W3PlayerWitcher ) : float
@@ -1322,7 +1325,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var reduct : float;	
 		var injuryRes : SAbilityAttributeValue;
 		
-		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 2);
+		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 1.7f);
 		
 		if (playerWitcher.CanUseSkill(S_Sword_s10))
 		{
@@ -3354,7 +3357,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		return angle;
     }
     
-    var linkedActors : array<CActor>;
+    /*var linkedActors : array<CActor>;
     public function CacheAxiiLinkActors( finalTargets : array<CActor> )
     {
 		var i : int;
@@ -3411,7 +3414,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 			theGame.damageMgr.ProcessAction(axiiLinkReaction);
 			delete axiiLinkReaction;
 		}
-    }
+    }*/
 }
 
 exec function applypoison()

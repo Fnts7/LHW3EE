@@ -8746,10 +8746,17 @@ statemachine abstract import class CR4Player extends CPlayer
 			critChance += CalculateAttributeValue( GetSkillAttributeValue( S_Sword_s17, theGame.params.CRITICAL_HIT_CHANCE, false, true ) ) * GetSkillLevel( S_Sword_s17 );
 		}
 		*/
-	
-		if( target && target.HasBuff( EET_Confusion ) )
+		
+		if (target)
 		{
-			critChance += ( ( W3ConfuseEffect )target.GetBuff( EET_Confusion ) ).GetCriticalHitChanceBonus();
+			if ( target.HasBuff( EET_Confusion ) )
+			{
+				critChance += ( ( W3ConfuseEffect )target.GetBuff( EET_Confusion ) ).GetCriticalHitChanceBonus();
+			}
+			else if (target.HasBuff( EET_AxiiGuardMe ) )
+			{
+				critChance += ( ( W3Effect_AxiiGuardMe )target.GetBuff( EET_AxiiGuardMe ) ).GetCriticalHitChanceBonus();
+			}
 		}
 		
 		/*

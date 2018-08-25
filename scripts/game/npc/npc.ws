@@ -1049,7 +1049,7 @@ statemachine import class CNewNPC extends CActor
 	{
 		var actorVictim : CActor;
 		var time, maxTox, toxToAdd : float;
-		var gameplayEffect : CBaseGameplayEffect;
+		var gameplayEffect : W3Effect_AxiiGuardMe;
 		var template : CEntityTemplate;
 		var fxEnt : CEntity;
 		var toxicity : SAbilityAttributeValue;
@@ -1063,8 +1063,8 @@ statemachine import class CNewNPC extends CActor
 		// W3EE - End
 		{
 			time = CalculateAttributeValue(thePlayer.GetAttributeValue('increas_duration'));
-			gameplayEffect = GetBuff(EET_AxiiGuardMe);
-			gameplayEffect.SetTimeLeft( gameplayEffect.GetTimeLeft() + time );
+			gameplayEffect = (W3Effect_AxiiGuardMe)GetBuff(EET_AxiiGuardMe);
+			gameplayEffect.SetTimeLeft( gameplayEffect.GetTimeLeft() + gameplayEffect.TransformExtraTime(time) );
 			
 			template = (CEntityTemplate)LoadResource('glyphword_10_18');
 			
@@ -2203,8 +2203,15 @@ statemachine import class CNewNPC extends CActor
 		if ( damageAction.attacker == witcher && HasBuff( EET_AxiiGuardMe ) )
 		{
 			
-			if(!witcher.CanUseSkill(S_Magic_s05) || witcher.GetSkillLevel(S_Magic_s05) < 3)
+			if(!witcher.CanUseSkill(S_Magic_s05) || witcher.GetSkillLevel(S_Magic_s05) < 2)
 				RemoveBuff(EET_AxiiGuardMe, true);
+			else if (witcher.GetSkillLevel(S_Magic_s05) == 2)
+			{
+				if (RandF() < 0.7f)
+					RemoveBuff(EET_AxiiGuardMe, true);
+			}
+			else if (RandF() < 0.35f)
+				RemoveBuff(EET_AxiiGuardMe, true);			
 		}
 		
 		if(damageAction.attacker == thePlayer && damageAction.DealsAnyDamage() && !damageAction.IsDoTDamage())
@@ -2714,7 +2721,7 @@ statemachine import class CNewNPC extends CActor
 		var inWater, fists, tmpBool, addAbility, isFinisher : bool;		
 		var expPoints, npcLevel, lvlDiff, i, j 				: int;
 		var abilityName, tmpName 							: name;
-		var abilityCount, maxStack, minDist					: float;
+		var abilityCount, maxStack, minDist, extraDuration : float;
 		var itemExpBonus, radius							: float;
 		
 		var allItems 										: array<SItemUniqueId>;
@@ -2763,61 +2770,88 @@ statemachine import class CNewNPC extends CActor
 		if( damageAction.attacker == thePlayer && damageAction.IsActionMelee() )
 			((W3Effect_SwordKillBuff)thePlayer.GetBuff(EET_SwordKillBuff)).SetKillBuffActive(true);
 			
-		if ( (thePlayer.HasAbility('Glyphword 18 _Stats', true) || thePlayer.HasAbility('Glyphword 13 _Stats', true)) && (HasBuff(EET_AxiiGuardMe) || HasBuff(EET_Confusion)) )
+		if ( thePlayer.HasAbility('Glyphword 18 _Stats', true) || thePlayer.HasAbility('Glyphword 13 _Stats', true) )
 		{
-			if(thePlayer.HasAbility('Glyphword 13 _Stats', true))
-				abilityName = 'Glyphword 13 _Stats';
-			else
-				abilityName = 'Glyphword 18 _Stats';
-		// W3EE - End
-			min = thePlayer.GetAbilityAttributeValue(abilityName, 'glyphword_range');
-			FindGameplayEntitiesInRange(entities, this, CalculateAttributeValue(min), 10,, FLAG_OnlyAliveActors + FLAG_ExcludeTarget, this); 	
-			
-			minDist = 10000;
-			for (i = 0; i < entities.Size(); i += 1)
+			gameplayEffect = NULL;
+			if ( HasBuff(EET_AxiiGuardMe) )
 			{
-				if ( entities[i] == thePlayer.GetHorseWithInventory() || entities[i] == thePlayer || !IsRequiredAttitudeBetween(thePlayer, entities[i], true) )
-					continue;
-					
-				if ( VecDistance2D(this.GetWorldPosition(), entities[i].GetWorldPosition()) < minDist)
+				gameplayEffect = GetBuff(EET_AxiiGuardMe);				
+			}
+			else if ( HasBuff(EET_Confusion) )
+			{
+				gameplayEffect = GetBuff(EET_Confusion);
+				if ( ! ((W3ConfuseEffect)gameplayEffect).IsWitcherAxii() )
+					gameplayEffect = NULL;				
+			}
+			
+			if (gameplayEffect)
+			{		
+				if(thePlayer.HasAbility('Glyphword 13 _Stats', true))
 				{
-					minDist = VecDistance2D(this.GetWorldPosition(), entities[i].GetWorldPosition());
-					targetEntity = (CActor)entities[i];
+					abilityName = 'Glyphword 13 _Stats';
+					extraDuration = 3.0f;
 				}
+				else {
+					abilityName = 'Glyphword 18 _Stats';
+					extraDuration = 2.0f;
+				}
+				
+				params.effectType = gameplayEffect.GetEffectType();
+					
+			// W3EE - End
+				min = thePlayer.GetAbilityAttributeValue(abilityName, 'glyphword_range');
+				FindGameplayEntitiesInRange(entities, this, CalculateAttributeValue(min), 10,, FLAG_OnlyAliveActors + FLAG_ExcludeTarget, this); 	
+				
+				minDist = 10000;
+				for (i = 0; i < entities.Size(); i += 1)
+				{
+					if ( entities[i] == thePlayer.GetHorseWithInventory() || entities[i] == thePlayer || !IsRequiredAttitudeBetween(thePlayer, entities[i], true) )
+						continue;
+						
+					if ( VecDistance2D(this.GetWorldPosition(), entities[i].GetWorldPosition()) < minDist)
+					{
+						minDist = VecDistance2D(this.GetWorldPosition(), entities[i].GetWorldPosition());
+						targetEntity = (CActor)entities[i];
+					}
+				}
+				
+				if ( targetEntity )
+				{
+					if ( params.effectType == EET_AxiiGuardMe )
+					{
+						params.duration = ((W3Effect_AxiiGuardMe)gameplayEffect).GetCoreTimeLeft() + extraDuration;
+					}
+					else if ( params.effectType ==  EET_Confusion )
+					{
+						params.duration = ((W3ConfuseEffect)gameplayEffect).GetCoreTimeLeft() + extraDuration;
+					}
+				
+					params.creator 					= gameplayEffect.GetCreator();
+					params.sourceName 				= gameplayEffect.GetSourceName();
+					//params.duration 				= gameplayEffect.GetDurationLeft();
+					//if ( params.duration < 5.0f ) 	params.duration = 5.0f;
+					params.effectValue 				= gameplayEffect.GetEffectValue();
+					params.customAbilityName 		= gameplayEffect.GetAbilityName();
+					params.customFXName 			= gameplayEffect.GetTargetEffectName();
+					params.isSignEffect 			= gameplayEffect.IsSignEffect();
+					params.customPowerStatValue 	= gameplayEffect.GetCreatorPowerStat();
+					params.vibratePadLowFreq 		= gameplayEffect.GetVibratePadLowFreq();
+					params.vibratePadHighFreq		= gameplayEffect.GetVibratePadHighFreq();
+					
+					targetEntity.AddEffectCustom(params);
+					//gameplayEffect = targetEntity.GetBuff(params.effectType);
+					//gameplayEffect.SetTimeLeft(params.duration);
+					
+					fxEnt = CreateFXEntityAtPelvis( 'glyphword_10_18', true );
+					fxEnt.PlayEffect('out');
+					fxEnt.DestroyAfter(5);
+					
+					fxEnt = targetEntity.CreateFXEntityAtPelvis( 'glyphword_10_18', true );
+					fxEnt.PlayEffect('in');
+					fxEnt.DestroyAfter(5);
+				}			
 			}
 			
-			if ( targetEntity )
-			{
-				if ( HasBuff(EET_AxiiGuardMe) )
-					gameplayEffect = GetBuff(EET_AxiiGuardMe);
-				else if ( HasBuff(EET_Confusion) )
-					gameplayEffect = GetBuff(EET_Confusion);
-				
-				params.effectType 				= gameplayEffect.GetEffectType();
-				params.creator 					= gameplayEffect.GetCreator();
-				params.sourceName 				= gameplayEffect.GetSourceName();
-				params.duration 				= gameplayEffect.GetDurationLeft();
-				if ( params.duration < 5.0f ) 	params.duration = 5.0f;
-				params.effectValue 				= gameplayEffect.GetEffectValue();
-				params.customAbilityName 		= gameplayEffect.GetAbilityName();
-				params.customFXName 			= gameplayEffect.GetTargetEffectName();
-				params.isSignEffect 			= gameplayEffect.IsSignEffect();
-				params.customPowerStatValue 	= gameplayEffect.GetCreatorPowerStat();
-				params.vibratePadLowFreq 		= gameplayEffect.GetVibratePadLowFreq();
-				params.vibratePadHighFreq		= gameplayEffect.GetVibratePadHighFreq();
-				
-				targetEntity.AddEffectCustom(params);
-				gameplayEffect = targetEntity.GetBuff(params.effectType);
-				gameplayEffect.SetTimeLeft(params.duration);
-				
-				fxEnt = CreateFXEntityAtPelvis( 'glyphword_10_18', true );
-				fxEnt.PlayEffect('out');
-				fxEnt.DestroyAfter(5);
-				
-				fxEnt = targetEntity.CreateFXEntityAtPelvis( 'glyphword_10_18', true );
-				fxEnt.PlayEffect('in');
-				fxEnt.DestroyAfter(5);
-			}
 		}
 		
 		super.OnDeath( damageAction );

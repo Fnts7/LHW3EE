@@ -98,15 +98,15 @@
 			<!-- PETRI PHILTRE -->
 			<ability name="PetriPhiltreEffect_Level1">
 				<tags>passive</tags>
-				<spell_power type="mult" min="0.1" max="0.1"/>
+				<spell_power type="mult" min="0.15" max="0.15"/>
 			</ability>
 			<ability name="PetriPhiltreEffect_Level2">
 				<tags>passive</tags>
-				<spell_power type="mult" min="0.15" max="0.15"/>
+				<spell_power type="mult" min="0.2" max="0.2"/>
 			</ability>
 			<ability name="PetriPhiltreEffect_Level3">
 				<tags>passive</tags>
-				<spell_power type="mult" min="0.15" max="0.15"/>
+				<spell_power type="mult" min="0.2" max="0.2"/>
 			</ability>
 			
 			<!-- PHEROMONES -->

@@ -155,7 +155,7 @@ class CBaseGameplayEffect extends CObject
 		if( target == thePlayer )
 			target.GetResistValue(resistStat, resistancePts, resistance);
 		else
-		if( !((CNewNPC)target).IsProtectedByArmor() )
+		if( resistStat == CDS_WillRes || !((CNewNPC)target).IsProtectedByArmor() )
 			resistance = ((CNewNPC)target).GetNPCCustomStat(((CNewNPC)target).ResistStatToName(resistStat));
 		else
 			resistance = 0;
