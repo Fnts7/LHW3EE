@@ -125,7 +125,7 @@ class W3TooltipComponent
 					switch(inv.GetArmorType(item))
 					{
 						case EAT_Light:		primaryStat += 150;	break;
-						case EAT_Medium:	primaryStat += 300;	break;
+						case EAT_Medium:	primaryStat += 200;	break;
 						default : break;
 					}
 				}
@@ -138,7 +138,7 @@ class W3TooltipComponent
 					switch(inv.GetArmorType(item))
 					{
 						case EAT_Light:		primaryStat += 75;	break;
-						case EAT_Medium:	primaryStat += 150;	break;
+						case EAT_Medium:	primaryStat += 100;	break;
 						default : break;
 					}
 				}
@@ -151,7 +151,7 @@ class W3TooltipComponent
 					switch(inv.GetArmorType(item))
 					{
 						case EAT_Light:		primaryStat += 75;	break;
-						case EAT_Medium:	primaryStat += 150;	break;
+						case EAT_Medium:	primaryStat += 100;	break;
 						default : break;
 					}
 				}
@@ -164,7 +164,7 @@ class W3TooltipComponent
 					switch(inv.GetArmorType(item))
 					{
 						case EAT_Light:		primaryStat += 75;	break;
-						case EAT_Medium:	primaryStat += 150;	break;
+						case EAT_Medium:	primaryStat += 100;	break;
 						default : break;
 					}
 				}

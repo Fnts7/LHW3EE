@@ -94,7 +94,7 @@ class CBTTaskWraithDrainDance extends CBTTaskPlayAnimationEventDecorator
 				{
 					
 					l_summonerHealth = summonedEntityComponent.GetSummoner().GetCurrentHealth();
-					summonedEntityComponent.GetSummoner().Heal( l_summonerHealth * 0.002f );
+					summonedEntityComponent.GetSummoner().Heal( l_summonerHealth * 0.0015f );
 				}
 				
 				if( !m_DrainEffectEntity )

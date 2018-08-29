@@ -88,13 +88,13 @@
 	<ability name="Boots 022 _Stats">
 		<weight							type="base"	min="3.5"				/>
 		<quality						type="add"	min="4"		max="4"		/>
-		<slashing_resistance_perc		type="base"	min="0.04"				/>
-		<piercing_resistance_perc		type="base"	min="0.03"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
+		<slashing_resistance_perc		type="base"	min="0.03"				/>
+		<piercing_resistance_perc		type="base"	min="0.02"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.03"				/>
-		<spell_power_quen 				type="mult" min="0.05" 				/>
+		<spell_power_quen 				type="mult" min="0.1" 				/>
 	</ability>
 
 <!-- Medium -->

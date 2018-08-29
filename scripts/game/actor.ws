@@ -6188,6 +6188,10 @@ import abstract class CActor extends CGameplayEntity
 			if( attackAction && damageData.IsActionMelee() && attackAction.CanBeParried() && (attackAction.IsParried() || attackAction.IsCountered()) )
 			{
 				crushThroughBlocks = actorAttacker.GetAttributeValue('damage_through_blocks');
+				
+				if ( actorAttacker == thePlayer && thePlayer.CanUseSkill(S_Sword_s06) && thePlayer.IsHeavyAttack(attackAction.GetAttackName()) )
+					crushThroughBlocks.valueMultiplicative += 0.015f * thePlayer.GetSkillLevel(S_Sword_s06);
+					
 				if( !((W3PlayerWitcher)this) && crushThroughBlocks.valueMultiplicative <= 0.f )
 				{
 					arrStr.PushBack(GetDisplayName());

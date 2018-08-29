@@ -176,7 +176,7 @@
 			<!-- WHITE RAFFARD DECOCTION -->
 			<ability name="WhiteRaffardDecoctionEffect_Level1">
 				<tags>passive</tags>
-				<vitality min="0.35" type="mult" />
+				<vitality min="0.4" type="mult" />
 				<duration min="0.01" type="add" />
 			</ability>
 			<ability name="WhiteRaffardDecoctionEffect_Level2">

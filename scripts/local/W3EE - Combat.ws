@@ -318,6 +318,10 @@ class W3EECombatHandler extends W3EEOptionHandler
 				if (damageData.attacker == thePlayer)
 				{
 					ignoreReduct = thePlayer.GetAttributeValue('damage_through_blocks');
+					
+					if ( thePlayer.CanUseSkill(S_Sword_s06) && ((W3Action_Attack)damageData) && thePlayer.IsHeavyAttack( ((W3Action_Attack)damageData).GetAttackName() ) )
+						dmgTaken += 0.015f * thePlayer.GetSkillLevel(S_Sword_s06);
+					
 					dmgTaken += ignoreReduct.valueMultiplicative;
 					dmgTaken = MinF(dmgTaken, 1.0f);
 				}
@@ -408,13 +412,13 @@ class W3EECombatHandler extends W3EEOptionHandler
 			{
 				if( actorAttacker.IsHuge() || action.IsParryStagger() )
 				{
-					action.MultiplyAllDamageBy(0.0925f);
+					action.MultiplyAllDamageBy(0.1f);
 					action.MultiplyAllDamageBy(1.f - 0.15f * playerVictim.GetSkillLevel(S_Sword_s03));
 				}
 				else
 				if( !attackAction.CanBeParried() )
 				{
-					action.MultiplyAllDamageBy(0.0725f);
+					action.MultiplyAllDamageBy(0.075f);
 					action.MultiplyAllDamageBy(1.f - 0.34f * playerVictim.GetSkillLevel(S_Sword_s03));
 				}
 				else
@@ -440,7 +444,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 						if( BlockingStaggerImmunityCheck(playerVictim, action, attackAction) && !actorAttacker.IsHuge() )
 						{
 							action.ClearEffects();
-							action.MultiplyAllDamageBy(0.1f);
+							action.MultiplyAllDamageBy(0.15f);
 							if( RandRange(100, 0) <= ((W3PlayerWitcher)playerVictim).HeavySetStaggerProbability() )
 								actorAttacker.AddEffectDefault(EET_Stagger, action.victim, "ParryStagger");
 						}
@@ -655,15 +659,11 @@ class W3EECombatHandler extends W3EEOptionHandler
 	
 	public final function BreakEnemyBlock( attackAction : W3Action_Attack, playerAttacker : CR4Player, actorVictim : CActor )
 	{
-		if( playerAttacker && playerAttacker.CanUseSkill(S_Sword_s06) && playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && (RandRange(100,0) <= (20 * playerAttacker.GetSkillLevel(S_Sword_s06))) )
+		if( actorVictim.IsGuarded() && attackAction && playerAttacker && playerAttacker.CanUseSkill(S_Sword_s06) && playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && RandRange(100,0) <= (15 * playerAttacker.GetSkillLevel(S_Sword_s06)) )
 		{
-			if( actorVictim.IsGuarded() )
-			{
-				actorVictim.ResetHitCounter(0, 0);
-				actorVictim.ResetDefendCounter(0, 0);
-				((CNewNPC)actorVictim).LowerGuard();
-			}
-			return;
+			actorVictim.ResetHitCounter(0, 0);
+			actorVictim.ResetDefendCounter(0, 0);
+			((CNewNPC)actorVictim).LowerGuard();
 		}
 	}	
 	
@@ -698,7 +698,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		baseSpeed = 1.f;
 		
 		baseSpeed -= ( PowF(1 - witcher.GetStatPercents(BCS_Stamina), 2) * StamRed() / 100 ) * witcher.GetAdrenalinePercMult();
-		baseSpeed -= ( PowF(1 - witcher.GetStatPercents(BCS_Vitality), 2) * HPRed() * (1 - (witcher.GetSkillLevel(S_Sword_s16) * 0.1)) / 100 ) * witcher.GetAdrenalinePercMult();
+		baseSpeed -= PowF(1 - witcher.GetStatPercents(BCS_Vitality), 2) * HPRed() * (1 - (witcher.GetSkillLevel(S_Sword_s16) * 0.1)) / 100;
 		baseSpeed += CalcArmorPenalty(witcher, isAttack);
 		
 		actionSpeedMult = witcher.GetAttributeValue('action_speed');
@@ -1296,7 +1296,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		}
 			
 		if( playerWitcher.CanUseSkill(S_Perk_06) )
-			poiseThreshold -= armorPieces[2].exact * 0.05f;
+			poiseThreshold -= armorPieces[2].exact * 0.06f;
 			
 		actionPoiseBonus = 1.f;
 			
@@ -1325,7 +1325,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var reduct : float;	
 		var injuryRes : SAbilityAttributeValue;
 		
-		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 1.7f);
+		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 1.5f);
 		
 		if (playerWitcher.CanUseSkill(S_Sword_s10))
 		{
@@ -1735,6 +1735,9 @@ class W3EECombatHandler extends W3EEOptionHandler
 			}
 			else
 			{
+				if ( attackAction.attacker == thePlayer && thePlayer.CanUseSkill(S_Sword_s06) && thePlayer.IsHeavyAttack(attackAction.GetAttackName()) )
+					blockCrushValue.valueMultiplicative += 0.015f * thePlayer.GetSkillLevel(S_Sword_s06);
+			
 				if( npcTarget && RandF() <= disarmChance.valueMultiplicative )
 					npcTarget.ProcessWeaponDisarm();
 				attackAction.MultiplyAllDamageBy(blockCrushValue.valueMultiplicative);
@@ -2361,11 +2364,15 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var witcher : W3PlayerWitcher;
 		
 		witcher = (W3PlayerWitcher)attackAction.attacker;
-		if( witcher.HasAbility('Runeword 5 _Stats', true) || witcher.HasAbility('Runeword 2 _Stats', true) || witcher.HasAbility('Runeword 1 _Stats', true) )
+		if( witcher && (witcher.HasAbility('Runeword 5 _Stats', true) || witcher.HasAbility('Runeword 2 _Stats', true) || witcher.HasAbility('Runeword 1 _Stats', true)) )
 		{
 			if( witcher.IsInCombatAction_SpecialAttack() )
 			{
-				witcher.GainStat(BCS_Stamina, witcher.GetStatMax(BCS_Stamina) * 0.25f);
+				if (witcher.IsInCombatAction_SpecialAttackHeavy())
+					witcher.GainStat(BCS_Stamina, 30.0f);
+				else
+					witcher.GainStat(BCS_Stamina, 20.0f);
+					
 				witcher.PlayEffectSingle('drain_energy_caretaker_shovel');
 			}
 		}
@@ -3219,8 +3226,21 @@ class W3EECombatHandler extends W3EEOptionHandler
     
     public function BlockingStaggerImmunityCheck( playerVictim : CR4Player, out action : W3DamageAction, attackAction : W3Action_Attack ) : bool
     {
-		if( playerVictim && attackAction && attackAction.IsActionMelee() && attackAction.IsParried() && (((W3PlayerWitcher)playerVictim).IsSetBonusActive(EISB_Gothic1) || ((W3PlayerWitcher)playerVictim).IsSetBonusActive(EISB_Bear_1)) )
-			return true;
+		var chance : float;
+	
+		if( playerVictim && attackAction && attackAction.IsActionMelee() && attackAction.IsParried() )
+		{
+			chance = 0;
+			
+			if ( ((W3PlayerWitcher)playerVictim).IsSetBonusActive(EISB_Gothic1) || ((W3PlayerWitcher)playerVictim).IsSetBonusActive(EISB_Bear_1) )
+				chance += 0.5f;
+			
+			if (playerVictim.CanUseSkill(S_Sword_s03))
+				chance += 0.15f * playerVictim.GetSkillLevel(S_Sword_s03);
+				
+			if (RandF() < chance)
+				return true;
+		}
 		
 		return false;
     }

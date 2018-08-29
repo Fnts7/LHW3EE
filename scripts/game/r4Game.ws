@@ -69,6 +69,7 @@ import class CR4Game extends CCommonGame
 	public var CampfireManager : CWitcherCampfireManager;
 	
 	public var questInventoryComponents : array<CInventoryComponent>;
+	private var runewordRendRange, runewordWhirlRange : CAIAttackRange;
 	//W3EE - End
 	
 	private saved var uberMovement : bool; 	default uberMovement = false;
@@ -762,6 +763,11 @@ import class CR4Game extends CCommonGame
 			thePlayer.AddTimer( 'DelayedSpawnAndMountBoat', 0.001f, false );
 		}
 		
+		runewordRendRange = theGame.GetAttackRangeForEntity( thePlayer, 'runeword2_heavy' );
+		runewordRendRange.rangeMax -= 0.6f;
+		runewordWhirlRange = theGame.GetAttackRangeForEntity( thePlayer, 'runeword2_light' );
+		runewordWhirlRange.rangeMax -= 0.3f;
+		
 	}
 	
 	event OnHandleWorldChange()
@@ -1115,6 +1121,9 @@ import class CR4Game extends CCommonGame
 	event OnGameEnded()
 	{	
 		var focusModeController : CFocusModeController;
+		
+		runewordRendRange.rangeMax += 0.6f;
+		runewordWhirlRange.rangeMax += 0.3f;
 		
 		if ( runewordMgr )
 		{

@@ -480,7 +480,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	poiseThreshold = 60;
 	
 	if( playerWitcher.CanUseSkill(S_Perk_06) )
-		poiseThreshold -= armorPieces[2].exact * 5.0f;
+		poiseThreshold -= armorPieces[2].exact * 6.0f;
 	
 	actionPoiseBonus = 1.f;
 	

@@ -33,8 +33,8 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="276"				/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<armor_reduction_fast_style		type="mult"	min="0.075"				/>
-				<attack_speed_heavy_style		type="mult"	min="0.09"				/>
+				<armor_reduction_fast_style		type="mult"	min="0.07"				/>
+				<attack_speed_heavy_style		type="mult"	min="0.08"				/>
 				<attack_stamina_cost_bonus		type="mult"	min="0.1"				/>
 				<parry_stamina_cost_bonus		type="mult"	min="0.1"				/>
 				<spell_power 					type="mult" min="-0.2" 				/>
@@ -45,8 +45,8 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="316"				/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<armor_reduction_fast_style		type="mult"	min="0.1"				/>
-				<attack_speed_heavy_style		type="mult"	min="0.12"				/>
+				<armor_reduction_fast_style		type="mult"	min="0.09"				/>
+				<attack_speed_heavy_style		type="mult"	min="0.1"				/>
 				<attack_stamina_cost_bonus		type="mult"	min="0.125"				/>
 				<parry_stamina_cost_bonus		type="mult"	min="0.125"				/>
 				<spell_power 					type="mult" min="-0.25" 				/>
@@ -61,7 +61,8 @@
 				<attack_speed	 				type="mult"	min="0.04"				/>
 				<critical_hit_chance			type="add"	min="0.02"				/>
 				<counter_damage_bonus			type="mult"	min="0.05"				/>
-				<parry_stamina_cost_bonus		type="mult"	min="0.05"				/>
+				<parry_stamina_cost_bonus		type="mult"	min="0.025"				/>
+				<attack_stamina_cost_bonus		type="mult"	min="0.025"				/>
 				<spell_power 					type="mult" min="-0.1" 				/>
 			</ability>
 
@@ -73,8 +74,9 @@
 				<attack_speed	 				type="mult"	min="0.05"				/>
 				<critical_hit_chance			type="add"	min="0.04"				/>
 				<counter_damage_bonus			type="mult"	min="0.075"				/>
-				<parry_stamina_cost_bonus		type="mult"	min="0.075"				/>
-				<spell_power 					type="mult" min="-0.18" 				/>
+				<parry_stamina_cost_bonus		type="mult"	min="0.04"				/>
+				<attack_stamina_cost_bonus		type="mult"	min="0.035"				/>
+				<spell_power 					type="mult" min="-0.15" 			/>
 			</ability>
 
 			<ability name="Wolf School silver sword 2 _Stats">
@@ -85,8 +87,9 @@
 				<attack_speed	 				type="mult"	min="0.06"				/>
 				<critical_hit_chance			type="add"	min="0.06"				/>
 				<counter_damage_bonus			type="mult"	min="0.1"				/>
-				<parry_stamina_cost_bonus		type="mult"	min="0.1"				/>
-				<spell_power 					type="mult" min="-0.26" 				/>
+				<parry_stamina_cost_bonus		type="mult"	min="0.05"				/>
+				<attack_stamina_cost_bonus		type="mult"	min="0.05"				/>
+				<spell_power 					type="mult" min="-0.20" 			/>
 			</ability>
 
 			<ability name="Wolf School silver sword 3 _Stats">
@@ -97,8 +100,9 @@
 				<attack_speed	 				type="mult"	min="0.08"				/>
 				<critical_hit_chance			type="add"	min="0.08"				/>
 				<counter_damage_bonus			type="mult"	min="0.125"				/>
-				<parry_stamina_cost_bonus		type="mult"	min="0.15"				/>
-				<spell_power 					type="mult" min="-0.32" 				/>
+				<parry_stamina_cost_bonus		type="mult"	min="0.065"				/>
+				<attack_stamina_cost_bonus		type="mult"	min="0.06"				/>
+				<spell_power 					type="mult" min="-0.25" 			/>
 			</ability>
 			
 		<!-- NEW GAME+ WITCHER WOLF STEEL SWORD -->

@@ -3453,14 +3453,32 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	public final timer function SpecialAttackHeavySustainCost(dt : float, id : int)
 	{
-		var focusHighlight, ratio : float;
+		var focusHighlight, ratio, mult : float;
 		var hud : CR4ScriptedHud;
 		var hudWolfHeadModule : CR4HudModuleWolfHead;		
+		var attackCostMult : SAbilityAttributeValue;
 		
 		//W3EE - Begin
 		PauseStaminaRegen('RendSkill');
 		
-		DrainStamina(ESAT_Ability, 0, 0, GetSkillAbilityName(S_Sword_s02), dt, Options().RendCostStam());
+		attackCostMult = GetAttributeValue('attack_stamina_cost_bonus');
+		mult = 1.0f - attackCostMult.valueMultiplicative;
+		
+		if( armorPieces[2].exact > 3 )
+			mult -= 0.1f;
+		else if ( armorPieces[2].exact == 3 )
+			mult -= 0.0667f;
+		else if ( armorPieces[2].exact == 2 )
+			mult -= 0.0333f;
+			
+		if (mult < 1.0f)
+		{
+			mult -= armorPieces[2].weighted * 0.01f + armorPieces[1].weighted * 0.015f + armorPieces[0].weighted * 0.02f;
+		}
+		else
+			mult = 1.0f;
+		
+		DrainStamina(ESAT_Ability, 0, 0, GetSkillAbilityName(S_Sword_s02), dt, Options().RendCostStam() * mult);
 		// W3EE - End
 		
 		if(GetStat(BCS_Stamina) <= 0)
@@ -5606,25 +5624,25 @@ statemachine class W3PlayerWitcher extends CR4Player
 			if (GetItemEquippedOnSlot(EES_Armor, armorItem))
 			{
 				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 150; armor += tempArmorGlyph; }
-				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 300; armor += tempArmorGlyph; }
+				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 200; armor += tempArmorGlyph; }
 			}
 			if (GetItemEquippedOnSlot(EES_Pants, armorItem))
 			{
 				tempArmorGlyph.valueBase = 0;
 				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 75; armor += tempArmorGlyph; }
-				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 150; armor += tempArmorGlyph; }
+				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 100; armor += tempArmorGlyph; }
 			}
 			if (GetItemEquippedOnSlot(EES_Gloves, armorItem))
 			{
 				tempArmorGlyph.valueBase = 0;
 				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 75; armor += tempArmorGlyph; }
-				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 150; armor += tempArmorGlyph; }
+				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 100; armor += tempArmorGlyph; }
 			}
 			if (GetItemEquippedOnSlot(EES_Boots, armorItem))
 			{
 				tempArmorGlyph.valueBase = 0;
 				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 75; armor += tempArmorGlyph; }
-				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 150; armor += tempArmorGlyph; }
+				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 100; armor += tempArmorGlyph; }
 			}
 		}
 		
@@ -11433,6 +11451,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			arrString.PushBack( FloatToString( min.valueMultiplicative * 100 * amountOfSetPiecesEquipped[ EIST_Bear ] ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
+			finalString += "<br>LHW3EE Override: Gives 50% chance.";
 			break;
 		case EISB_Bear_2:
 			dm.GetAbilityAttributeValue( 'setBonusAbilityBear_2', 'quen_dmg_boost', min, max );
@@ -13165,7 +13184,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				finalArmorPiercing += 0.25f;
 				if( IsInCombatAction_SpecialAttackHeavy() )
-					finalArmorPiercing += (0.15f + 0.04f * GetSkillLevel(S_Sword_s02)) * (GetSpecialAttackTimeRatio() + 0.05f);
+					finalArmorPiercing += (0.08f + 0.05f * GetSkillLevel(S_Sword_s02)) * (GetSpecialAttackTimeRatio() + 0.05f);
 
 				finalArmorPiercing += GetSkillLevel(S_Sword_s08) * 0.025f + armorPiercing.valueMultiplicative;
 			}

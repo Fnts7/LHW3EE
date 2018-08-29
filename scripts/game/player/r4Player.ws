@@ -11224,6 +11224,23 @@ statemachine abstract import class CR4Player extends CPlayer
 			if (foodBuffLvl > 0)
 			{
 				foodHeal = 100.0f * PowF(2.0f, foodBuffLvl - 1) * (1.0f - PowF(GetStatPercents(BCS_Toxicity), 1.8f));
+				
+				switch ( theGame.GetDifficultyMode() )
+				{
+				case EDM_Easy:
+					foodHeal *= 1.15f;
+					break;
+				case EDM_Hard:
+					foodHeal *= 0.85f;
+					break;
+				case EDM_Hardcore:
+					foodHeal *= 0.7f;
+					break;
+				case EDM_Medium:
+				default:
+					break;
+				}
+				
 				if (CanUseSkill(S_Perk_15))
 					foodHeal *= 1.25f;
 				Heal( foodHeal );

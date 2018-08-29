@@ -195,7 +195,7 @@
       <ability name="sword_s11">
         <tags>sword_s11</tags>
         <attack_power type="mult" min="0.05" />
-		<critical_hit_chance type="add" min="0.3" />
+		<critical_hit_chance type="add" min="0.05" />
         <duration type="add" min="3.0" />
       </ability>
 	

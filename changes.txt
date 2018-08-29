@@ -1,4 +1,52 @@
-﻿Version 22
+﻿Version 23
+
+Update with many various balance changes and small improvements.
+
+Equipment:
+Wolf silver sword boosted a bit - less sign power penalty, stamina cost bonus divided between defense and attack.
+Small nerf to wolf steel sword.
+
+Potions:
+White Raffard decoction lvl1 a bit boosted to 40% hp heal.
+
+Sword skills:
+4th defense skill has now new additional effect - 15% chance to resist unclean parries per skill level. This combines
+with Bear set bonus. Critical chance increase after counter nerfed to +5% per skill level.
+Counter Attack skill boosted crit chance increase after counter to +5% per level. I had to split the crit chance increase
+over those two skills to keep them balanced.
+
+Rend extra armor piercing nerfed when having no skill points, but raised a bit with each level. Also Rend has now new
+property - with higher skill level gains not only the maximum damage, but also the tempo of gaining damage. So the curve
+is adjusted. Rend stamina usage can be now reduced by 'attack_stamina_cost_bonus', medium armor set bonus and also small
+amount when having lighter armor then heavy.
+
+Sundering blows skill have now +1.5% damage through blocks and dodges per skill level. Chance to break defences reduced
+from 20% to 15% per skill level to counter the new gain.
+
+Enemies:
+Reduced regen rates of many high HP enemies (fiend, noon, nightwraiths, vampires a little bit). Also noon, nightwraith
+drain dance has 25% lower healing rate.
+Normalized human ranged weapons damages and armor piercing. Bows have lower AP, short bow a bit higher dmg.
+Crossbows have extremely high AP, but reduced damage greatly.
+
+Runewords and glyphwords:
+Severance rune word range extensions to Rend and Whirl reduced. They were extremely OP - baby values from vanilla.
+Stamina gain now differs between Rend and Whirl - the second has lower stamina gain. Runeword is still very powerful
+in my opinion leaving 3-rune socketed sword behind.
+Heaviness glyphword nerfed a bit when medium armor assumes point armor of heavy. Because point armor in W3EE is much more
+important then percentage resistances, the values needed to be lowered. Still medium->heavy gain is higher than
+light->medium.
+
+Misc:
+- small nerfs in some specialized mutagen drop chances (were to high after my changes)
+- medium armor perk boosted from -5 poise threshold reduction to -6 per medium armor piece
+- bear set bonus prop now comes with 50% chance. That stacks with 4th defence skill, so you can still achieve almost
+100% chance.
+- food heal amount is now affected by difficulty level, reduced for easy, normal. increased for "you're not even trying" :D
+- poise loss with lower HP is now a bit faster (curve adjustment) to counter the fact that it can be reduced with
+heightened senses skill as well as 'injury resist' attribute on armours.
+
+Version 22
 
 Major Axii logic overhaul.
 1) Fixed some bugs related with duration and chance calculation.

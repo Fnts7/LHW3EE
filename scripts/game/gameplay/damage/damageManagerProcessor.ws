@@ -841,17 +841,16 @@ class W3DamageManagerProcessor extends CObject
 					}
 					
 					// W3EE - Begin
-					if( playerAttacker && GetWitcherPlayer().HasRecentlyCountered() || playerAttacker.IsCounterAttack(attackAction.GetAttackName()) )
+					if( playerAttacker && (GetWitcherPlayer().HasRecentlyCountered() || playerAttacker.IsCounterAttack(attackAction.GetAttackName())) )
 					{
-						if( playerAttacker.GetSkillLevel(S_Sword_s11) > 2 )
+						if( playerAttacker.CanUseSkill(S_Sword_s11) )
 						{
-							critChance += 0.05f;
-								//critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s11, theGame.params.CRITICAL_HIT_CHANCE, false, true));
+							critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s11, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * playerAttacker.GetSkillLevel(S_Sword_s11);
 						}
 						
 						if( playerAttacker.CanUseSkill(S_Sword_s03) )
 						{
-							critChance += 0.08f * playerAttacker.GetSkillLevel(S_Sword_s03);
+							critChance += 0.05f * playerAttacker.GetSkillLevel(S_Sword_s03);
 						}												
 						
 					}
@@ -1036,8 +1035,8 @@ class W3DamageManagerProcessor extends CObject
 			damageBonusStack += bonusDamagePercents * Options().RendDamage();
 			*/
 			
-			rendRatio = 1.0f - PowF(1.0f - witcherAttacker.GetSpecialAttackTimeRatio(), 1.8f);
-			damageBonusStack += - 0.7f + rendRatio * 1.2f;
+			rendRatio = 1.0f - PowF(1.0f - witcherAttacker.GetSpecialAttackTimeRatio(), 1.5f + witcherAttacker.GetSkillLevel(S_Sword_s02) * 0.1f);
+			damageBonusStack += - 0.7f + rendRatio * 1.3f;
 			
 		}
 		/*

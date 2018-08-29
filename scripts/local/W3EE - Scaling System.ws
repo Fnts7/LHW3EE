@@ -1350,9 +1350,12 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						
 						switch(opponentStats.rangedWeapon)
 						{
-							case ERWT_ShortBow:		opponentStats.rangedDamageValue = 2870;	opponentStats.rangedArmorPiercing = 0.25f;	break;
+							/*case ERWT_ShortBow:		opponentStats.rangedDamageValue = 2870;	opponentStats.rangedArmorPiercing = 0.25f;	break;
 							case ERWT_LongBow:		opponentStats.rangedDamageValue = 3860;	opponentStats.rangedArmorPiercing = 0.35f;	break;
-							case ERWT_Crossbow:		opponentStats.rangedDamageValue = 3685;	opponentStats.rangedArmorPiercing = 0.80f;	break;
+							case ERWT_Crossbow:		opponentStats.rangedDamageValue = 3685;	opponentStats.rangedArmorPiercing = 0.80f;	break;*/
+							case ERWT_ShortBow:		opponentStats.rangedDamageValue = 3000;	opponentStats.rangedArmorPiercing = 0.15f;	break;
+							case ERWT_LongBow:		opponentStats.rangedDamageValue = 3600;	opponentStats.rangedArmorPiercing = 0.2f;	break;
+							case ERWT_Crossbow:		opponentStats.rangedDamageValue = 2350;	opponentStats.rangedArmorPiercing = 0.8f;	break;
 							default :				opponentStats.rangedDamageValue = 0;	opponentStats.rangedArmorPiercing = 0.f;	break;
 						}
 						
@@ -1638,7 +1641,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.injuryResist 		= 1.f;
 						opponentStats.armorPiercing 	= 0.7f;
 						opponentStats.regenDelay 		= 2.f;
-						opponentStats.healthRegenFactor = 0.004f;
+						opponentStats.healthRegenFactor = 0.003f;
 						AddSpecterResistances(NPC);
 					}
 					else
@@ -1968,7 +1971,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.injuryResist 		= 0.1f;
 							opponentStats.armorPiercing 	= 0.6f;
 							opponentStats.regenDelay		= 4.f;
-							opponentStats.healthRegenFactor = 0.01f;
+							opponentStats.healthRegenFactor = 0.008f;
 							NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FORCE);
 						}
 						else
@@ -1997,7 +2000,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.injuryResist 		= 0.1f;
 							opponentStats.armorPiercing 	= 0.65f;
 							opponentStats.regenDelay		= 4.f;
-							opponentStats.healthRegenFactor = 0.01f;
+							opponentStats.healthRegenFactor = 0.008f;
 							NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FORCE);
 						}
 						else
@@ -3261,7 +3264,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.injuryResist 		= 0.15f;
 							opponentStats.armorPiercing 	= 0.70f;
 							opponentStats.regenDelay		= 3.0f;
-							opponentStats.healthRegenFactor	= 0.008f;
+							opponentStats.healthRegenFactor	= 0.005f;
 							NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_MENTAL);
 							NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FORCE);
 						}
@@ -3290,7 +3293,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.injuryResist 		= 0.15f;
 							opponentStats.armorPiercing 	= 0.80f;
 							opponentStats.regenDelay		= 3.0f;
-							opponentStats.healthRegenFactor	= 0.01f;
+							opponentStats.healthRegenFactor	= 0.007f;
 							NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_MENTAL);
 							NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FORCE);
 						}

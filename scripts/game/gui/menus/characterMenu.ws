@@ -2342,7 +2342,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(RoundMath(ability.valueMultiplicative + 4 * skillLevel * Options().RendDamageStam()));
 				argsInt.PushBack(Min(RoundMath(arg*100),100));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_RendSkill", argsInt);
-				baseString += "<br>Extra armor piercing on full load is " + (15 + 4 * skillLevel) + "%.";
+				baseString += "<br>Extra armor piercing on full load is " + (8 + 5 * skillLevel) + "%.";
 				// W3EE - End
 				break;
 			case S_Sword_s03:
@@ -2353,7 +2353,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt, , argsString) + "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%";*/
 				argsFloat.PushBack(FloorF(33.4f * skillLevel));
 				argsFloat.PushBack(FloorF(15.f * skillLevel));
-				argsFloat.PushBack(8.0f * skillLevel);
+				argsFloat.PushBack(5.0f * skillLevel);
 				/*if( skillLevel == 1 )
 					baseString = GetLocStringByKeyExtWithParams("W3EE_DeadlyPrecLvl1", , argsFloat);
 				else
@@ -2361,6 +2361,8 @@ class CR4CharacterMenu extends CR4MenuBase
 					baseString = GetLocStringByKeyExtWithParams("W3EE_DeadlyPrecLvl2", , argsFloat);
 				else*/
 					baseString = GetLocStringByKeyExtWithParams("W3EE_DeadlyPrecLvl3", , argsFloat);
+					
+				baseString += "<br>Various unclean parries (unblockable attacks or when no stamina) have " + (skillLevel * 15) + "% chance not to stagger and reduce damage taken.";
 				// W3EE - End
 				break;
 			case S_Sword_s04:
@@ -2393,8 +2395,9 @@ class CR4CharacterMenu extends CR4MenuBase
 				// arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s06, 'armor_reduction_perc', false, false)) * skillLevel;
 				// argsInt.PushBack(RoundMath(arg*100));
 				argsInt.PushBack(5 * skillLevel);
-				argsInt.PushBack(20 * skillLevel);
+				argsInt.PushBack(15 * skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_SunderingBlowsSkill", argsInt);
+				baseString += "<br>Heavy attacks have " + NoTrailZeros(RoundTo(skillLevel * 1.5f, 1)) + "% damage through blocks and dodges.";
 				// W3EE - End
 				break;
 			case S_Sword_s07:
@@ -2448,7 +2451,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				break;
 			case S_Sword_s11:
 				// W3EE - Begin
-				if( skillLevel <= 2 )
+				/*if( skillLevel <= 2 )
 				{
 					ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s11, 'attack_power', false, false);
 					argsFloat.PushBack(RoundMath(ability.valueMultiplicative * skillLevel * 100));
@@ -2460,18 +2463,18 @@ class CR4CharacterMenu extends CR4MenuBase
 					baseString = GetLocStringByKeyExtWithParams("W3EE_CounterattackLvl1", argsInt, argsFloat);
 				}
 				else
-				{
+				{*/
 					ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s11, 'attack_power', false, false);
 					argsFloat.PushBack(RoundMath(ability.valueMultiplicative * skillLevel * 100));
 					ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s11, 'critical_hit_chance', false, false);
-					argsFloat.PushBack(RoundMath( /*ability.valueAdditive*/ 0.05f * 100));
+					argsFloat.PushBack(RoundMath( ability.valueAdditive * 100 * skillLevel));
 					argsFloat.PushBack(25);
 					argsFloat.PushBack(15.f * skillLevel);
 					argsFloat.PushBack(2.5f);
 					argsFloat.PushBack(50 * skillLevel);
 					argsFloat.PushBack(2 * skillLevel);
 					baseString = GetLocStringByKeyExtWithParams("W3EE_CounterattackLvl2", argsInt, argsFloat);
-				}
+				//}
 				// W3EE - End
 				break;
 			case S_Sword_s12:
@@ -3138,7 +3141,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_06, 'staminaRegen', false, true);
 				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));*/
 				//argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
-				argsFloat.PushBack(5.0f);
+				argsFloat.PushBack(6.0f);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_GriffinSkill",, argsFloat);
 				break;
 			case S_Perk_07:
