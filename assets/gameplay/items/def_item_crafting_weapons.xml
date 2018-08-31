@@ -633,8 +633,10 @@
 		<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="mult"	min="0.025"				/>
 		<counter_damage_bonus 			type="mult"	min="0.025"				/>
-		<damage_through_blocks 			type="mult"	min="0.025"				/>
+		<damage_through_blocks 			type="mult"	min="0.01"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.025"				/>
 		<attack_speed_fast_style 		type="mult"	min="-0.02"				/>
+		<attack_speed_heavy_style 		type="mult"	min="-0.01"				/>
 	</ability>
 
 	<ability name="Bear School steel sword 1 _Stats">
@@ -644,8 +646,10 @@
 		<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="mult"	min="0.05"				/>
 		<counter_damage_bonus 			type="mult"	min="0.05"				/>
-		<damage_through_blocks 			type="mult"	min="0.05"				/>
+		<damage_through_blocks 			type="mult"	min="0.025"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.05"				/>
 		<attack_speed_fast_style 		type="mult"	min="-0.04"				/>
+		<attack_speed_heavy_style 		type="mult"	min="-0.02"				/>
 	</ability>
 
 	<ability name="Bear School steel sword 2 _Stats">
@@ -655,8 +659,10 @@
 		<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="mult"	min="0.075"				/>
 		<counter_damage_bonus 			type="mult"	min="0.075"				/>
-		<damage_through_blocks 			type="mult"	min="0.075"				/>
+		<damage_through_blocks 			type="mult"	min="0.035"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.075"				/>
 		<attack_speed_fast_style 		type="mult"	min="-0.06"				/>
+		<attack_speed_heavy_style 		type="mult"	min="-0.03"				/>
 	</ability>
 
 	<ability name="Bear School steel sword 3 _Stats">
@@ -666,8 +672,10 @@
 		<SilverDamage 					type="base"	min="1"					/>
 		<armor_reduction 				type="mult"	min="0.1"				/>
 		<counter_damage_bonus 			type="mult"	min="0.1"				/>
-		<damage_through_blocks 			type="mult"	min="0.1"				/>
+		<damage_through_blocks 			type="mult"	min="0.05"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.1"				/>
 		<attack_speed_fast_style 		type="mult"	min="-0.08"				/>
+		<attack_speed_heavy_style 		type="mult"	min="-0.04"				/>
 	</ability>
 
 <!-- SILVER -->
@@ -1067,9 +1075,11 @@
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="314" 				/>
 		<armor_reduction_heavy_style	type="mult"	min="0.02"				/>
-		<attack_power_fast_style		type="mult"	min="0.05"				/>
+		<attack_power_fast_style		type="mult"	min="0.04"				/>
 		<parry_stamina_cost_bonus		type="mult"	min="0.025"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.02"				/>
 		<attack_speed_fast_style 		type="mult"	min="-0.02"				/>
+		<attack_speed_heavy_style 		type="mult"	min="-0.01"				/>
 	</ability>
 
 	<ability name="Bear School silver sword 1 _Stats">
@@ -1078,9 +1088,11 @@
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="364"				/>
 		<armor_reduction_heavy_style	type="mult"	min="0.04"				/>
-		<attack_power_fast_style		type="mult"	min="0.075"				/>
+		<attack_power_fast_style		type="mult"	min="0.06"				/>
 		<parry_stamina_cost_bonus		type="mult"	min="0.05"				/>
-		<attack_speed_fast_style 		type="mult"	min="-0.04"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.04"				/>
+		<attack_speed_fast_style 		type="mult"	min="-0.03"				/>
+		<attack_speed_heavy_style 		type="mult"	min="-0.02"				/>
 	</ability>
 
 	<ability name="Bear School silver sword 2 _Stats">
@@ -1089,10 +1101,11 @@
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="414"				/>
 		<armor_reduction_heavy_style	type="mult"	min="0.06"				/>
-		<attack_power_fast_style		type="mult"	min="0.1"				/>
+		<attack_power_fast_style		type="mult"	min="0.09"				/>
 		<parry_stamina_cost_bonus		type="mult"	min="0.075"				/>
-		<attack_speed_fast_style 		type="mult"	min="-0.06"				/>
-		<spell_power_quen 				type="mult"	min="0.033"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.06"				/>
+		<attack_speed_fast_style 		type="mult"	min="-0.045"			/>
+		<attack_speed_heavy_style 		type="mult"	min="-0.03"				/>
 	</ability>
 
 	<ability name="Bear School silver sword 3 _Stats">
@@ -1101,10 +1114,11 @@
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="454"				/>
 		<armor_reduction_heavy_style	type="mult"	min="0.08"				/>
-		<attack_power_fast_style		type="mult"	min="0.125"				/>
+		<attack_power_fast_style		type="mult"	min="0.12"				/>
 		<parry_stamina_cost_bonus		type="mult"	min="0.1"				/>
-		<attack_speed_fast_style 		type="mult"	min="-0.08"				/>
-		<spell_power_quen 				type="mult"	min="0.067"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.08"				/>
+		<attack_speed_fast_style 		type="mult"	min="-0.06"				/>
+		<attack_speed_heavy_style 		type="mult"	min="-0.04"				/>
 	</ability>
 		
 </abilities>

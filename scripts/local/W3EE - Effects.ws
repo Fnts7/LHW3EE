@@ -20,7 +20,7 @@
 			if( attackAction.DealsAnyDamage() && (attackAction.IsActionMelee() || attackAction.IsActionRanged()) )
 			{
 				adrenalineGain = playerWitcher.GetAttributeValue('focus_gain');
-				adrenalineGainValue = RandRangeF(0.024f, 0.006f) * (adrenalineGain.valueAdditive + adrenalineGain.valueMultiplicative + adrenalineGain.valueBase + thePlayer.GetSkillLevel(S_Alchemy_s18) * 0.02f);
+				adrenalineGainValue = RandRangeF(0.024f, 0.006f) * (adrenalineGain.valueAdditive + adrenalineGain.valueMultiplicative + adrenalineGain.valueBase + thePlayer.GetSkillLevel(S_Alchemy_s18) * 0.03f);
 				
 				((W3Effect_SwordReachoftheDamned)playerWitcher.GetBuff(EET_SwordReachoftheDamned)).MultiplyAdrenaline(adrenalineGainValue);
 				
@@ -34,7 +34,7 @@
 			if( attackAction.IsCountered() )
 			{
 				adrenalineGain = playerWitcher.GetAttributeValue('focus_gain');
-				adrenalineGainValue = RandRangeF(0.05f, 0.014f) * (adrenalineGain.valueAdditive + adrenalineGain.valueMultiplicative + adrenalineGain.valueBase + thePlayer.GetSkillLevel(S_Alchemy_s18) * 0.02f);
+				adrenalineGainValue = RandRangeF(0.05f, 0.014f) * (adrenalineGain.valueAdditive + adrenalineGain.valueMultiplicative + adrenalineGain.valueBase + thePlayer.GetSkillLevel(S_Alchemy_s18) * 0.03f);
 				
 				currentAdrenaline += adrenalineGainValue;
 				currentAdrenaline = ClampF(currentAdrenaline, 0.f, GetMaximumAdrenaline());
@@ -895,7 +895,7 @@ class W3Effect_SwordRendBlast extends CBaseGameplayEffect
 		var npcVictim : CNewNPC;
 		var fx : CEntity;
 		
-		if(	playerAttacker && attackAction.IsActionMelee() && attackAction.DealsAnyDamage() && ((W3PlayerWitcher)playerAttacker).IsInCombatAction_SpecialAttackHeavy() && playerAttacker.GetSpecialAttackTimeRatio() > 0.78f )
+		if(	playerAttacker && attackAction.IsActionMelee() && attackAction.DealsAnyDamage() && ((W3PlayerWitcher)playerAttacker).IsInCombatAction_SpecialAttackHeavy() && playerAttacker.GetSpecialAttackTimeRatio() > 0.75f )
 		{
 			npcVictim = (CNewNPC)actorVictim;
 			fireDamage = new W3DamageAction in theGame.damageMgr;

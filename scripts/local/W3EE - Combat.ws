@@ -375,7 +375,10 @@ class W3EECombatHandler extends W3EEOptionHandler
 	{
 		var focusDrain : float;
 		
-		if( actorVictim.HasBuff(EET_BasicQuen) || (thePlayer.IsGuarded() && (GetWitcherPlayer().IsSetBonusActive(EISB_Gothic1) || GetWitcherPlayer().IsSetBonusActive(EISB_Bear_1))) )
+		if( actorVictim.HasBuff(EET_BasicQuen) )
+			return;
+
+		if ( thePlayer.IsGuarded() && ( GetWitcherPlayer().IsSetBonusActive(EISB_Gothic1) || action.IsUncleanParried() ) )
 			return;
 		
 		if( (CPlayer)actorVictim && action.DealsAnyDamage() && !attackAction.IsCountered() && !action.IsDoTDamage() )
@@ -445,6 +448,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 						{
 							action.ClearEffects();
 							action.MultiplyAllDamageBy(0.15f);
+							action.SetUncleanParried();
 							if( RandRange(100, 0) <= ((W3PlayerWitcher)playerVictim).HeavySetStaggerProbability() )
 								actorAttacker.AddEffectDefault(EET_Stagger, action.victim, "ParryStagger");
 						}
@@ -476,6 +480,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 								action.ClearEffects();
 								action.MultiplyAllDamageBy(0.1f);
 								action.SetHitAnimationPlayType(EAHA_ForceNo);
+								action.SetUncleanParried();
 								if( RandRange(100, 0) <= ((W3PlayerWitcher)playerVictim).HeavySetStaggerProbability() )
 									actorAttacker.AddEffectDefault(EET_Stagger, action.victim, "ParryStagger");
 							}
@@ -505,6 +510,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 							{
 								action.ClearEffects();
 								action.MultiplyAllDamageBy(0.05f);
+								action.SetUncleanParried();
 							}
 							else
 							{
@@ -1240,8 +1246,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		skillPoise = 0;		
 		if (witcher.CanUseSkill(S_Sword_s10))
 		{
-			skillPoise = witcher.GetSkillLevel(S_Sword_s10) * 2;
-			if (skillPoise > 5) skillPoise = 5;
+			skillPoise = Min(8, witcher.GetSkillLevel(S_Sword_s10) * 3);
 		}
 		
 		return skillPoise / 100.0f;
@@ -1325,7 +1330,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var reduct : float;	
 		var injuryRes : SAbilityAttributeValue;
 		
-		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 1.5f);
+		reduct = PowF(1 - playerWitcher.GetStatPercents(BCS_Vitality), 1.6f);
 		
 		if (playerWitcher.CanUseSkill(S_Sword_s10))
 		{

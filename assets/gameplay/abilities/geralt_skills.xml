@@ -139,7 +139,7 @@
 		<stamina_max_dmg_bonus type="mult" min="0.5" />
 		
 		<stamina_cost type="add" min="0" />
-        <stamina_cost_per_sec type="add" min="50" />
+        <stamina_cost_per_sec type="add" min="47.4" />
         <stamina_delay type="add" min="0.5" />
       </ability>
 	

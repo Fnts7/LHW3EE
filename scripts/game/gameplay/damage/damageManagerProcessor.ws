@@ -836,7 +836,7 @@ class W3DamageManagerProcessor extends CObject
 					
 					if( SkillEnumToName(S_Sword_s02) == attackAction.GetAttackTypeName() )
 					{			
-						rendLoad = GetWitcherPlayer().GetSpecialAttackTimeRatio() + 0.05f;
+						rendLoad = GetWitcherPlayer().GetSpecialAttackTimeRatio() + 0.01f;
 						critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s02, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * playerAttacker.GetSkillLevel(S_Sword_s02) * rendLoad;
 					}
 					
@@ -1035,8 +1035,8 @@ class W3DamageManagerProcessor extends CObject
 			damageBonusStack += bonusDamagePercents * Options().RendDamage();
 			*/
 			
-			rendRatio = 1.0f - PowF(1.0f - witcherAttacker.GetSpecialAttackTimeRatio(), 1.5f + witcherAttacker.GetSkillLevel(S_Sword_s02) * 0.1f);
-			damageBonusStack += - 0.7f + rendRatio * 1.3f;
+			rendRatio = PowF(witcherAttacker.GetSpecialAttackTimeRatio(), 0.75f - witcherAttacker.GetSkillLevel(S_Sword_s02) * 0.025f);
+			damageBonusStack += - 0.8f + rendRatio * 1.4f;
 			
 		}
 		/*
@@ -1702,7 +1702,7 @@ class W3DamageManagerProcessor extends CObject
 		{	
 			witcherAttacker = (W3PlayerWitcher)playerAttacker;
 			
-			rendRatio = witcherAttacker.GetSpecialAttackTimeRatio() + 0.05f;
+			rendRatio = witcherAttacker.GetSpecialAttackTimeRatio() + 0.01f;
 			
 			staminaRendBonus = witcherAttacker.GetSkillAttributeValue(S_Sword_s02, 'stamina_max_dmg_bonus', false, true);
 			staminaRendBonus.valueMultiplicative += playerAttacker.GetSkillLevel(S_Sword_s02) * 0.04f;
@@ -1988,8 +1988,23 @@ class W3DamageManagerProcessor extends CObject
 			}
 		}
 		
-		if( playerVictim )
-			resistPercents = MaxF(0.f, resistPercents - armorPiercing);
+		if( actionIgnoresArmor )
+		{
+			resistPoints = 0;
+			resistPercents = 0;
+			armorPiercing = 1;
+		}
+		
+		if( playerVictim && !actionIgnoresArmor)
+		{		
+			if (!action.IsDoTDamage() && resistPoints > 0)
+			{
+				resistPercents *= 1.0f - armorPiercing;
+				resistPoints *= 1.0f - PowF(armorPiercing, 0.8f);
+			}
+			else
+				resistPercents = MaxF(0.f, resistPercents - armorPiercing);			
+		}
 			
 		if (playerAttacker && attackAction && playerAttacker.IsHeavyAttack(attackAction.GetAttackName()))
 			finalDamage *= 1.25f;
@@ -2000,15 +2015,8 @@ class W3DamageManagerProcessor extends CObject
 		if( DamageHitsMorale(   dmgInfo.dmgType ) )		action.originalDamageArmor.moraleDamage   += tempDamage;
 		if( DamageHitsStamina(  dmgInfo.dmgType ) )		action.originalDamageArmor.staminaDamage  += tempDamage;
 		
-		if( actionIgnoresArmor )
-		{
-			resistPoints = 0;
-			resistPercents = 0;
-			armorPiercing = 1;
-		}
-		
-		
-		finalDamage = MaxF(finalDamage - resistPoints, finalDamage * armorPiercing) * (1 - resistPercents);
+	
+		finalDamage = tempDamage;
 		// resistPoints = resistPoints * (1.f + resistPercents - armorPiercing);
 		// finalDamage = finalDamage - resistPoints;
 		
@@ -2523,7 +2531,7 @@ class W3DamageManagerProcessor extends CObject
 			dismember = false;		
 		}
 		// W3EE - Begin
-		else if( playerAttacker && ((W3PlayerWitcher)playerAttacker).IsInCombatAction_SpecialAttackHeavy() && playerAttacker.GetSpecialAttackTimeRatio() > 0.78f && playerAttacker.inv.ItemHasTag(weaponId, 'SwordRendBlastEffect') )
+		else if( playerAttacker && ((W3PlayerWitcher)playerAttacker).IsInCombatAction_SpecialAttackHeavy() && playerAttacker.GetSpecialAttackTimeRatio() > 0.75f && playerAttacker.inv.ItemHasTag(weaponId, 'SwordRendBlastEffect') )
 		{
 			dismember = true;
 			dismemberExplosion = true;

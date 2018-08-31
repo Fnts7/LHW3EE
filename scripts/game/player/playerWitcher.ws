@@ -2920,7 +2920,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function GetAdrenalinePercMult() : float
 	{
 		if( IsSetBonusActive(EISB_Wolf_2) )
-			return (1.f - adrenalineEffect.GetValue());
+			return MaxF(0.0f, 1.f - adrenalineEffect.GetValue());
 			
 		return 1.f;
 	}
@@ -2928,7 +2928,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function GetAdrenalinePercMultHalf() : float
 	{
 		if( IsSetBonusActive(EISB_Wolf_2) )
-			return (1.f - adrenalineEffect.GetValue() / 2.f);
+			return MaxF(0.0f, 1.f - adrenalineEffect.GetValue() / 2.f);
 			
 		return 1.f;
 	}
@@ -3451,15 +3451,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 		return val;
 	}
 	
-	public final timer function SpecialAttackHeavySustainCost(dt : float, id : int)
+	private final function GetRendStaminaBonus() : float
 	{
-		var focusHighlight, ratio, mult : float;
-		var hud : CR4ScriptedHud;
-		var hudWolfHeadModule : CR4HudModuleWolfHead;		
+		var mult : float;
 		var attackCostMult : SAbilityAttributeValue;
-		
-		//W3EE - Begin
-		PauseStaminaRegen('RendSkill');
 		
 		attackCostMult = GetAttributeValue('attack_stamina_cost_bonus');
 		mult = 1.0f - attackCostMult.valueMultiplicative;
@@ -3471,25 +3466,29 @@ statemachine class W3PlayerWitcher extends CR4Player
 		else if ( armorPieces[2].exact == 2 )
 			mult -= 0.0333f;
 			
-		if (mult < 1.0f)
-		{
-			mult -= armorPieces[2].weighted * 0.01f + armorPieces[1].weighted * 0.015f + armorPieces[0].weighted * 0.02f;
-		}
-		else
-			mult = 1.0f;
+		mult -= armorPieces[2].weighted * 0.01f + armorPieces[1].weighted * 0.015f + armorPieces[0].weighted * 0.02f;
+			
+		return MinF(1.0f, mult);
+	}
+
+	public final timer function SpecialAttackHeavySustainCost(dt : float, id : int)
+	{
+		var focusHighlight, ratio, mult : float;
+		var hud : CR4ScriptedHud;
+		var hudWolfHeadModule : CR4HudModuleWolfHead;		
 		
-		DrainStamina(ESAT_Ability, 0, 0, GetSkillAbilityName(S_Sword_s02), dt, Options().RendCostStam() * mult);
+		//W3EE - Begin
+		PauseStaminaRegen('RendSkill');		
+		DrainStamina(ESAT_Ability, 0, 0, GetSkillAbilityName(S_Sword_s02), dt, Options().RendCostStam() * specialHeavyStaminaMult * GetRendStaminaBonus());
 		// W3EE - End
 		
 		if(GetStat(BCS_Stamina) <= 0)
-			OnPerformSpecialAttack(false, false);
-			
+			OnPerformSpecialAttack(false, false);			
 		
 		ratio = EngineTimeToFloat(theGame.GetEngineTime() - specialHeavyStartEngineTime) / specialHeavyChargeDuration;
-		
-		
-		if(ratio > 0.95)
-			ratio = 1;
+			
+		/*if(ratio > 0.95)
+			ratio = 1;*/
 			
 		SetSpecialAttackTimeRatio(ratio);
 		
@@ -3577,7 +3576,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			if( GetBIsCombatActionAllowed() && inputHandler.IsActionAllowed(EIAB_SwordAttack) )
 			{
-				cost = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s02, 'stamina_cost_per_sec', false, false));
+				cost = CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s02, 'stamina_cost_per_sec', false, false)) * 0.9f * GetRendStaminaBonus();
 				
 				if(GetStat(BCS_Stamina) >= cost)
 				{
@@ -5623,26 +5622,26 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			if (GetItemEquippedOnSlot(EES_Armor, armorItem))
 			{
-				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 150; armor += tempArmorGlyph; }
-				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 200; armor += tempArmorGlyph; }
+				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 225; armor += tempArmorGlyph; }
+				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 225; armor += tempArmorGlyph; }
 			}
 			if (GetItemEquippedOnSlot(EES_Pants, armorItem))
 			{
 				tempArmorGlyph.valueBase = 0;
-				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 75; armor += tempArmorGlyph; }
-				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 100; armor += tempArmorGlyph; }
+				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 113; armor += tempArmorGlyph; }
+				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 113; armor += tempArmorGlyph; }
 			}
 			if (GetItemEquippedOnSlot(EES_Gloves, armorItem))
 			{
 				tempArmorGlyph.valueBase = 0;
-				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 75; armor += tempArmorGlyph; }
-				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 100; armor += tempArmorGlyph; }
+				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 113; armor += tempArmorGlyph; }
+				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 113; armor += tempArmorGlyph; }
 			}
 			if (GetItemEquippedOnSlot(EES_Boots, armorItem))
 			{
 				tempArmorGlyph.valueBase = 0;
-				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 75; armor += tempArmorGlyph; }
-				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 100; armor += tempArmorGlyph; }
+				if (inv.GetArmorType(armorItem) == EAT_Light) { tempArmorGlyph.valueBase += 113; armor += tempArmorGlyph; }
+				else if (inv.GetArmorType(armorItem) == EAT_Medium) { tempArmorGlyph.valueBase += 113; armor += tempArmorGlyph; }
 			}
 		}
 		
@@ -13184,7 +13183,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				finalArmorPiercing += 0.25f;
 				if( IsInCombatAction_SpecialAttackHeavy() )
-					finalArmorPiercing += (0.08f + 0.05f * GetSkillLevel(S_Sword_s02)) * (GetSpecialAttackTimeRatio() + 0.05f);
+					finalArmorPiercing += (0.1f + 0.05f * GetSkillLevel(S_Sword_s02)) * (GetSpecialAttackTimeRatio() + 0.01f);
 
 				finalArmorPiercing += GetSkillLevel(S_Sword_s08) * 0.025f + armorPiercing.valueMultiplicative;
 			}

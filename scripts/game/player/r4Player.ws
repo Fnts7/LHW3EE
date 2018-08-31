@@ -70,6 +70,7 @@ statemachine abstract import class CR4Player extends CPlayer
 	public			var vehicleCbtMgrAiming				: bool;		
 	
 	public			var specialHeavyChargeDuration		: float;				
+	protected		var specialHeavyStaminaMult			: float;
 	public 			var specialHeavyStartEngineTime 	: EngineTime;			
 	public 			var playedSpecialAttackMissingResourceSound : bool;			
 	public function SetPlayedSpecialAttackMissingResourceSound(b : bool) {playedSpecialAttackMissingResourceSound = b;}

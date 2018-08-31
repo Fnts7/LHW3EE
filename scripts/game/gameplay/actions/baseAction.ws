@@ -63,6 +63,7 @@ class W3DamageAction extends CDamageData
 	protected var signSkill : ESkill;								
 	protected var isDodged : bool;									
 	protected var isPartDodged : bool;
+	protected var isUncleanParried : bool;
 	protected var shouldProcessBuffsIfNoDamage : bool;				
 	private var ignoreImmortalityMode : bool;						
 	private var dealtFireDamage : bool;								
@@ -103,6 +104,7 @@ class W3DamageAction extends CDamageData
 	default canPlayHitParticle 				= true;
 	default isDodged						= false;
 	default isPartDodged					= false;
+	default isUncleanParried 				= false;
 	default isActionMelee					= false;
 	default isActionRanged					= false;
 	default isActionWitcherSign				= false;
@@ -484,6 +486,8 @@ class W3DamageAction extends CDamageData
 	// LHW3EE
 	public function SetWasPartiallyDodged()								{isPartDodged = true;}
 	public function WasPartiallyDodged() : bool							{return isPartDodged;}	
+	public function SetUncleanParried() 								{ isUncleanParried = true; }
+	public function IsUncleanParried() : bool 							{ return isUncleanParried; }
 	
 	public function SetIsDoTDamage(dt : float)
 	{

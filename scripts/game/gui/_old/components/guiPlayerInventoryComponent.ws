@@ -566,8 +566,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 					{
 						switch(playerInv.GetArmorType(equipedItemId))
 						{
-							case EAT_Light:		eqPrimaryStatValue += 150;	break;
-							case EAT_Medium:	eqPrimaryStatValue += 200;	break;
+							case EAT_Light:		eqPrimaryStatValue += 225;	break;
+							case EAT_Medium:	eqPrimaryStatValue += 225;	break;
 							default : break;
 						}
 					}
@@ -579,8 +579,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 					{
 						switch(playerInv.GetArmorType(equipedItemId))
 						{
-							case EAT_Light:		eqPrimaryStatValue += 75;	break;
-							case EAT_Medium:	eqPrimaryStatValue += 100;	break;
+							case EAT_Light:		eqPrimaryStatValue += 113;	break;
+							case EAT_Medium:	eqPrimaryStatValue += 113;	break;
 							default : break;
 						}
 					}
@@ -592,8 +592,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 					{
 						switch(playerInv.GetArmorType(equipedItemId))
 						{
-							case EAT_Light:		eqPrimaryStatValue += 75;	break;
-							case EAT_Medium:	eqPrimaryStatValue += 100;	break;
+							case EAT_Light:		eqPrimaryStatValue += 113;	break;
+							case EAT_Medium:	eqPrimaryStatValue += 113;	break;
 							default : break;
 						}
 					}
@@ -605,8 +605,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 					{
 						switch(playerInv.GetArmorType(equipedItemId))
 						{
-							case EAT_Light:		eqPrimaryStatValue += 75;	break;
-							case EAT_Medium:	eqPrimaryStatValue += 100;	break;
+							case EAT_Light:		eqPrimaryStatValue += 113;	break;
+							case EAT_Medium:	eqPrimaryStatValue += 113;	break;
 							default : break;
 						}
 					}

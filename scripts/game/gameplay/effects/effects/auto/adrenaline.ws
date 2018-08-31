@@ -50,7 +50,7 @@ class W3Effect_AdrenalineDrain extends CBaseGameplayEffect
 		reductionValue = 0.6f - 0.06f * playerWitcher.GetSkillLevel(S_Alchemy_s20);
 		
 		focusGain = 0.135f * vigorRegenBonus.valueMultiplicative * dt;
-		focusGain *= 1.f - PowF(1.f - target.GetStatPercents(BCS_Vitality), 2) * 0.75f * playerWitcher.GetAdrenalinePercMult();
+		focusGain *= 1.f - PowF(1.f - target.GetStatPercents(BCS_Vitality), 2) * 0.75f * playerWitcher.GetAdrenalinePercMultHalf();
 		focusGain *= (1.f + playerWitcher.GetAdrenalineEffect().GetValue());
 		focusGain *= Adr.AdrGenSpeedMult;
 		focusGain *= 1.f - (reductionValue * target.GetStatPercents(BCS_Toxicity));

@@ -1,4 +1,31 @@
-﻿Version 23
+﻿Version 24
+
+Fixed bugs in Rend mechanics connected with heavy attack speed and wrong ratios when having improved conditioning perk.
+Overall heavy attack speed now influences total Rend time, but not stamina usage!
+Rend stamina usage can be lowered regardless, see version 23 changes.
+Rend with no skill points extra armor piercing boosted a bit.
+
+Adjustment to bear school swords: added crit damage bonus and smaller strong attack speed penalty. Steel sword
+has also lower dmg through blocks, while silver has lowered fast attack speed penalty.
+
+Adjustment in armor piercing against player. Now armor piercing is split better between percentage dmg resists
+and point armor value. This adjust the damage curves against player and has mostly two effects:
+- damage normalization - extreme damages will be a bit lower, while small damages (but not ultra small)
+a bit higher
+- a bit smaller differences between armor tiers
+- percentage resists on armor matter now more
+
+Glyphword heaviness adjusted once again to have same point armor gain both for light and medium armor and
+boosted a bit, because point armor now matters a bit less.
+
+Heightened Senses skill poise increase boosted from 5 to 8 on 3rd skill level.
+
+Acquired Tolerance a bit boosted back adrenaline gain bonus.
+
+Wolf set bonus now reduces also toxicity influence on stamina regen in lower extent. But reduced its influence
+on vigor regen due to low HP.
+
+Version 23
 
 Update with many various balance changes and small improvements.
 

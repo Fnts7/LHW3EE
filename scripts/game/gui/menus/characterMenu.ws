@@ -2333,16 +2333,18 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Sword_s02:
 				// W3EE - Begin
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s02, theGame.params.CRITICAL_HIT_CHANCE, false, false)) * skillLevel;
-				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s02, 'stamina_max_dmg_bonus', false, true) * Options().RendDamageStam() * 100;
-				//argsInt.PushBack(Min(RoundMath(arg*100),100));
-				
+				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s02, 'stamina_max_dmg_bonus', false, true) * Options().RendDamageStam() * 100;				
+				ability.valueMultiplicative += 4 * skillLevel * Options().RendDamageStam();
+				ability.valueMultiplicative = 1.6f * (1.0f + ability.valueMultiplicative / 100.0f) - 1.0f;
+				ability.valueMultiplicative *= 100.0f;				
+				//argsInt.PushBack(Min(RoundMath(arg*100),100));				
 				
 				//ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s02, 'adrenaline_final_damage_bonus', false, false);
 				//argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
-				argsInt.PushBack(RoundMath(ability.valueMultiplicative + 4 * skillLevel * Options().RendDamageStam()));
+				argsInt.PushBack(RoundMath(ability.valueMultiplicative));
 				argsInt.PushBack(Min(RoundMath(arg*100),100));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_RendSkill", argsInt);
-				baseString += "<br>Extra armor piercing on full load is " + (8 + 5 * skillLevel) + "%.";
+				baseString += "<br>Extra armor piercing on full load is " + (10 + 5 * skillLevel) + "%.";
 				// W3EE - End
 				break;
 			case S_Sword_s03:
@@ -2441,11 +2443,8 @@ class CR4CharacterMenu extends CR4MenuBase
 				if( skillLevel == 2 ) 		baseString = GetLocStringByKeyExtWithParams("W3EE_HeightenedSenseLvl2",, argsFloat);
 				else						baseString = GetLocStringByKeyExtWithParams("W3EE_HeightenedSenseLvl1",, argsFloat);
 				
-				if (skillLevel == 3)
-					store = 5;
-				else
-					store = 2 * skillLevel;
-				
+
+				store = Min(8, 3 * skillLevel);				
 				baseString += "<br>Increases poise by: " + store + ". Reduces poise reduction due to low vitality by: " + (10 * skillLevel) + "%.";
 				// W3EE - End
 				break;
@@ -3063,7 +3062,7 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Alchemy_s18:
 				//argsInt.PushBack(skillLevel * 10);
 				//baseString = GetLocStringByKeyExtWithParams("primer_descr_tolerance", argsInt);
-				baseString = "Adrenaline is increased by: " + (skillLevel * 10) + "%, adrenaline gain is increased by: " + (2 * skillLevel) + "%, toxicity is increased by: " + (12 * skillLevel) + ".";
+				baseString = "Adrenaline is increased by: " + (skillLevel * 10) + "%, adrenaline gain is increased by: " + (3 * skillLevel) + "%, toxicity is increased by: " + (12 * skillLevel) + ".";
 				break;
 			// W3EE - End
 			case S_Alchemy_s19:

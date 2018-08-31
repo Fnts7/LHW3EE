@@ -1108,11 +1108,11 @@ state CombatSword in W3PlayerWitcher extends Combat
 					parent.specialHeavyStartEngineTime = theGame.GetEngineTime();
 					
 					
-					if(parent.GetStatPercents(BCS_Stamina) > 0.99f)
+					/*if(parent.GetStatPercents(BCS_Stamina) > 0.99f)
 					{
 						staminaCostPerSec = parent.GetStaminaActionCost(ESAT_Ability, parent.GetSkillAbilityName(S_Sword_s02), 1.0f);
 						parent.specialHeavyChargeDuration = parent.GetStatMax(BCS_Stamina) / staminaCostPerSec;
-					}
+					}*/
 					
 					parent.AddTimer('SpecialAttackHeavySustainCost', 0.001, true);
 					parent.DrainStamina(ESAT_Ability, 0, 0, parent.GetSkillAbilityName(S_Sword_s02));
@@ -1232,7 +1232,7 @@ state CombatSword in W3PlayerWitcher extends Combat
 	event OnAnimEvent_FinishSpecialHeavyAttack( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo )
 	{
 		var animation : SCameraAnimationDefinition;
-		var specialHeavyAnimDuration : float;
+		//var specialHeavyAnimDuration : float;
 
 		if ( animEventType == AET_DurationStart )
 		{
@@ -1252,11 +1252,11 @@ state CombatSword in W3PlayerWitcher extends Combat
 			*/
 			// W3EE - End
 			
-			specialHeavyAnimDuration = GetEventDurationFromEventAnimInfo( animInfo );									
-			specialHeavyAnimDuration += EngineTimeToFloat(theGame.GetEngineTime() - parent.specialHeavyStartEngineTime);			
+			parent.specialHeavyStaminaMult = Combat().HeavyAttackSpeedModule(true);
+			//specialHeavyAnimDuration += EngineTimeToFloat(theGame.GetEngineTime() - parent.specialHeavyStartEngineTime);			
+			parent.specialHeavyChargeDuration = GetEventDurationFromEventAnimInfo( animInfo ) / parent.specialHeavyStaminaMult;
 			
-			
-			parent.specialHeavyChargeDuration = MinF(parent.specialHeavyChargeDuration, specialHeavyAnimDuration);
+			//parent.specialHeavyChargeDuration = MinF(parent.specialHeavyChargeDuration, specialHeavyAnimDuration);			
 		}
 	}
 	
