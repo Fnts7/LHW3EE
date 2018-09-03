@@ -3319,6 +3319,10 @@ import class CInventoryComponent extends CComponent
 		{
 			attrs.Remove('mutagen18_max_stack');
 		}
+		else if(buffType == EET_Mutagen06)
+		{
+			attrs.Remove('mutagen06_max_stack');
+		} 
 		else if(buffType == EET_Mutagen19)
 		{
 			attrs.Remove('max_hp_perc_trigger');

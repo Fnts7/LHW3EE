@@ -30,7 +30,8 @@
 			
 			<!-- Nightwraith -->
 			<ability name="Mutagen06Effect">
-				<vitality type="mult" always_random="false" min="0.005" max="0.005" />
+				<vitality type="mult" always_random="false" min="0.02" max="0.02" />
+				<mutagen06_max_stack type="add" min="20" />
 			</ability>
 			
 			<!-- Ekkima -->

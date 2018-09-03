@@ -372,11 +372,14 @@ class W3Action_Attack extends W3DamageAction
 				result += witcherAttacker.GetAttributeValue('attack_power_heavy_style');
 			}
 			
-			if (IsActionMelee() && witcherAttacker.HasBuff(EET_Mutagen15))
+			if (IsActionMelee() && (witcherAttacker.HasBuff(EET_Mutagen15) || Damage().GetPerk10State()))
 			{
 				adrenalineEffect = (W3Effect_CombatAdrenaline)witcherAttacker.GetBuff(EET_CombatAdr);
 				
 				if (adrenalineEffect)
+					result.valueMultiplicative += adrenalineEffect.GetValue() / 4.0f;
+					
+				if (Damage().GetPerk10State())
 					result.valueMultiplicative += adrenalineEffect.GetValue() / 4.0f;
 			}
 		}

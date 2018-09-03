@@ -1,8 +1,37 @@
-﻿Version 24
+﻿Version 25
+
+Perks boosts and adjustments:
+- Rage Management - lowered stamina cost of signs (basic casts greatly, alternate a bit)
+- Focus - boosted perk value to 40% reduction
+- Adrenaline Burst - reworked mechanics - now enables adrenaline transfer to attack power at rate of current
+adrenaline value / 4. If combined with Alghoul decoction, will be / 2.
+- Survival Instinct boosted to 700 HP
+
+Improved two decoctions:
+- Nightwraith is now stronger with each kill and stacks up to maximum +40% HP. Effect is reset when meditating.
+Actually fast travel doesn't reset it and I left this way.
+- Noonwraith keeps the old effect with small adjustment - force effect have just small duration reduction.
+New strong effect added - improves dodging capabilities greatly.
+
+Improved W3EE/LHW3EE staggering logic to be more consistent and balanced.
+
+Potions:
+- Maribor Forest now also grants small vigor regen boost and delay reduction (better with higher level)
+- Full Moon lvl2 small nerf to 20% HP, but longer duration
+- made Nigredo effect longer and Rubedo shorter, so now they have the same duration.
+- Albedo a bit longer
+
+Small toxicity degeneration fixes including stange mechanics, in which toxicity caused by White Raffards would
+degenarate slower with potion duration skill. This caused a negative effect of that skill in this field, which is wrong.
+
+Lowered experience and adrenaline gain while whirling.
+
+Version 24
 
 Fixed bugs in Rend mechanics connected with heavy attack speed and wrong ratios when having improved conditioning perk.
 Overall heavy attack speed now influences total Rend time, but not stamina usage!
 Rend stamina usage can be lowered regardless, see version 23 changes.
+Rend tooltip now better reflects the real damage increase.
 Rend with no skill points extra armor piercing boosted a bit.
 
 Adjustment to bear school swords: added crit damage bonus and smaller strong attack speed penalty. Steel sword

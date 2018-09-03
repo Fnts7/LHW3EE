@@ -629,6 +629,8 @@ class W3TooltipComponent
 				uniqueDescription += "<br>Halves stamina cost and regen delay of all movement actions: evasion, jump, sprint.";
 			else if (itemName == 'Mutagen 3')
 				uniqueDescription += "<br>LHW3EE override: reset time is 4.5s.";
+			else if (itemName == 'Mutagen 13')
+				uniqueDescription += "<br>Increases safe dodge angle by 30 degrees and greatly reduces graze damage. Reduces stagger times a bit.";
 				
 		}
 		if ( theGame.GetGuiManager().GetShowItemNames() )

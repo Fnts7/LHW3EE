@@ -718,7 +718,7 @@ state AardCircleCast in W3AardEntity extends NormalCast
 						if( player.GetStat(BCS_Focus) >= 1 )
 							cost += 1.f;
 						else
-							caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
+							caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ), , 0.4f );
 					else cost += 1.f;
 					
 					cost = ClampF(cost, 0.f, 3.f);

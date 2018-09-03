@@ -415,13 +415,13 @@ class W3EECombatHandler extends W3EEOptionHandler
 			{
 				if( actorAttacker.IsHuge() || action.IsParryStagger() )
 				{
-					action.MultiplyAllDamageBy(0.1f);
+					action.MultiplyAllDamageBy(0.15f);
 					action.MultiplyAllDamageBy(1.f - 0.15f * playerVictim.GetSkillLevel(S_Sword_s03));
 				}
 				else
 				if( !attackAction.CanBeParried() )
 				{
-					action.MultiplyAllDamageBy(0.075f);
+					action.MultiplyAllDamageBy(0.1f);
 					action.MultiplyAllDamageBy(1.f - 0.34f * playerVictim.GetSkillLevel(S_Sword_s03));
 				}
 				else
@@ -443,9 +443,9 @@ class W3EECombatHandler extends W3EEOptionHandler
 						action.SetCanPlayHitParticle(false);
 						action.SetProcessBuffsIfNoDamage(true);
 						action.SetHitAnimationPlayType(EAHA_ForceNo);
-						
+												
 						if( BlockingStaggerImmunityCheck(playerVictim, action, attackAction) && !actorAttacker.IsHuge() )
-						{
+						{							
 							action.ClearEffects();
 							action.MultiplyAllDamageBy(0.15f);
 							action.SetUncleanParried();
@@ -454,7 +454,10 @@ class W3EECombatHandler extends W3EEOptionHandler
 						}
 						else
 						{
-							playerVictim.AddEffectDefault(EET_Stagger, action.attacker, "Parry");
+							if( !playerVictim.HasStaminaToParry(attackAction.GetAttackName()) )
+								action.AddEffectInfo(EET_LongStagger);
+							else
+								action.AddEffectInfo(EET_Stagger, 1.5f);							
 							
 							action.MultiplyAllDamageBy(0.4f);
 							action.RemoveBuffsByType(EET_Poison);
@@ -488,7 +491,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 							{
 								action.SetHitAnimationPlayType(EAHA_ForceYes);
 								action.SetHitReactionType(EHRT_Heavy);
-								action.MultiplyAllDamageBy(0.2f);
+								action.MultiplyAllDamageBy(0.25f);
 								action.RemoveBuffsByType(EET_Poison);
 								action.RemoveBuffsByType(EET_Bleeding);
 								action.RemoveBuffsByType(EET_Stagger);
@@ -515,7 +518,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 							else
 							{
 								action.ClearEffects();
-								action.MultiplyAllDamageBy(0.1f);
+								action.MultiplyAllDamageBy(0.15f);
 							}
 							
 							if( RandRange(100, 0) <= ((W3PlayerWitcher)playerVictim).HeavySetStaggerProbability() )
@@ -587,7 +590,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 					poiseMod += 0.12f;
 			
 				if (RandRangeF(1,0) > whirlPoise + poiseMod )
-					WhirlStagger(act, earthMutagen);				
+					WhirlStagger(act);				
 				else
 					WhirlSaveTypical(act, 0.75f - 0.25f * skillLevel);
 			}
@@ -613,12 +616,12 @@ class W3EECombatHandler extends W3EEOptionHandler
 					}
 				}
 				else {
-					WhirlStagger(act, earthMutagen);
+					WhirlStagger(act);
 				}
 			}
 			else
 			{
-				WhirlStagger(act, earthMutagen);		
+				WhirlStagger(act);		
 			}
 		}
 		else
@@ -632,20 +635,14 @@ class W3EECombatHandler extends W3EEOptionHandler
 			if (attackAction.CanBeDodged() && attackAction.CanBeParried() && !((W3ArrowProjectile)act.causer) && RandRangeF(1,0) <= whirlPoise - poiseMod)
 				WhirlSaveTypical(act, 0.75f - 0.25f * skillLevel);
 			else
-				WhirlStagger(act, earthMutagen);
+				WhirlStagger(act);
 		}
 	}
 	
-	private function WhirlStagger(act : W3DamageAction, earthMutagen : bool)
+	private function WhirlStagger(act : W3DamageAction)
 	{
-		if (earthMutagen) {
-			act.SetHitAnimationPlayType(EAHA_ForceYes);
-		}
-		else 
-		{
-			act.SetHitAnimationPlayType(EAHA_ForceNo);
-			act.AddEffectInfo(EET_LongStagger);
-		}	
+		act.SetHitAnimationPlayType(EAHA_ForceNo);
+		act.AddEffectInfo(EET_LongStagger);
 	}
 	
 	private function WhirlSaveTypical( act : W3DamageAction, damageMult : float )
@@ -1255,30 +1252,57 @@ class W3EECombatHandler extends W3EEOptionHandler
 	public final function ApplyPlayerStaggerMechanics( playerVictim : CR4Player, attackAction : W3Action_Attack, out act : W3DamageAction )
 	{
 		var poiseValue, poiseThreshold : float;
-			
-		if( playerVictim && attackAction && attackAction.GetHitAnimationPlayType() != EAHA_ForceYes )
+		
+		if (playerVictim)
 		{
-			poiseThreshold = 0.6f;
-			poiseValue = CalcPoise(poiseThreshold);
-			
-			if (playerVictim.GetCurrentStateName() != 'W3EEAnimation')
+			if( attackAction )
 			{
-				if( (attackAction.CanBeParried() && RandRangeF(1,0) <= poiseValue) || (!attackAction.CanBeParried() && poiseValue > poiseThreshold && RandRangeF(1,0) <= poiseValue - poiseThreshold) )
-				{
-					act.SetHitAnimationPlayType(EAHA_ForceNo);
+				if (attackAction.GetHitAnimationPlayType() == EAHA_ForceYes)
 					return;
-				}
+					
+				poiseThreshold = 0.6f;
+				poiseValue = CalcPoise(poiseThreshold);
 				
-				if (playerVictim.HasBuff(EET_Mutagen20))
+				if (playerVictim.GetCurrentStateName() != 'W3EEAnimation')
 				{
-					poiseThreshold -= 0.25f;
-			
-					if ( (attackAction.CanBeParried() && RandRangeF(1,0) <= poiseValue) || (!attackAction.CanBeParried() && poiseValue > poiseThreshold && RandRangeF(1,0) <= poiseValue - poiseThreshold) )
+					if( (attackAction.CanBeParried() && RandRangeF(1,0) <= poiseValue) || (!attackAction.CanBeParried() && poiseValue > poiseThreshold && RandRangeF(1,0) <= poiseValue - poiseThreshold) )
 					{
-						act.SetHitAnimationPlayType(EAHA_ForceNo);
-					}			
+						ApplyPoiseResist(act);
+						return;
+					}
+					
+					if (playerVictim.HasBuff(EET_Mutagen20))
+					{
+						poiseThreshold -= 0.25f;
+				
+						if ( (attackAction.CanBeParried() && RandRangeF(1,0) <= poiseValue) || (!attackAction.CanBeParried() && poiseValue > poiseThreshold && RandRangeF(1,0) <= poiseValue - poiseThreshold) )
+						{
+							ApplyPoiseResist(act);
+						}			
+					}
 				}
 			}
+			else if (playerVictim.HasBuff(EET_Mutagen20) && act.GetHitAnimationPlayType() != EAHA_ForceYes)
+			{
+				ApplyPoiseResist(act);
+			}		
+		}
+	}
+	
+	
+	private function ApplyPoiseResist(out act : W3DamageAction )
+	{
+		act.SetHitAnimationPlayType(EAHA_ForceNo);
+		
+		if (act.HasBuff(EET_LongStagger))
+		{
+			act.RemoveBuffsByType(EET_LongStagger);
+			if (!act.HasBuff(EET_Stagger))
+				act.AddEffectInfo(EET_Stagger);
+		}
+		else if (act.HasBuff(EET_Stagger))
+		{
+			act.RemoveBuffsByType(EET_Stagger);
 		}
 	}
 	

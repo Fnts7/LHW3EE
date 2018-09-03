@@ -423,21 +423,21 @@ class W3EEAlchemyExtender
 		{
 			effectParams.customAbilityName = 'AlbedoDominanceEffect';
 			effectParams.effectType = EET_AlbedoDominance;
-			effectParams.duration = 240.0f;
+			effectParams.duration = 300.0f;
 		}
 		else
 		if( playerWitcher.inv.ItemHasTag(potion, 'Rubedo') )			
 		{
 			effectParams.customAbilityName = 'RubedoDominanceEffect';
 			effectParams.effectType = EET_RubedoDominance;
-			effectParams.duration = 960.0f;
+			effectParams.duration = 720.0f;
 		}
 		else
 		if( playerWitcher.inv.ItemHasTag(potion, 'Nigredo') )
 		{
 			effectParams.customAbilityName = 'NigredoDominanceEffect';
 			effectParams.effectType = EET_NigredoDominance;
-			effectParams.duration = 480.0f;
+			effectParams.duration = 720.0f;
 		}
 		else return;
 		

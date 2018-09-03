@@ -3154,7 +3154,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				break;
 			case S_Perk_09:
 				if( GetWitcherPlayer().CanUseSkill(S_Perk_11) )
-					argsInt.PushBack(RoundMath(2.0f * Options().VigIntLost()));
+					argsInt.PushBack(RoundMath(1.8f * Options().VigIntLost()));
 				else
 					argsInt.PushBack(RoundMath(3.0f * Options().VigIntLost()));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_RageManageSkill", argsInt);
@@ -3165,13 +3165,14 @@ class CR4CharacterMenu extends CR4MenuBase
 				/*ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_10, 'focus_gain', false, true);
 				argsInt.PushBack(RoundMath(ability.valueBase*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);*/
-				argsInt.PushBack(10);
-				baseString = GetLocStringByKeyExtWithParams("W3EE_AdrBurstSkill", argsInt);
+				/*argsInt.PushBack(10);
+				baseString = GetLocStringByKeyExtWithParams("W3EE_AdrBurstSkill", argsInt);*/
+				baseString = "Hitting and enemy with a sword activates an adrenaline boost to melee attack power. The effect lasts 4s and the deactivation time is reset with every hit. The attack power boost is current adrenaline value / 4.";
 				// W3EE - End
 				break;
 			// W3EE - Begin
 			case S_Perk_11:
-				argsInt.PushBack(33);
+				argsInt.PushBack(40);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_FocusSkill", argsInt);
 				break;
 			// W3EE - End

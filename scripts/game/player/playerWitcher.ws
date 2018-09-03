@@ -5,7 +5,8 @@
 /***********************************************************************/
 
 statemachine class W3PlayerWitcher extends CR4Player
-{		
+{	
+	
 	private saved var craftingSchematics				: array<name>; 					
 	private saved var expandedCraftingCategories		: array<name>;
 	private saved var craftingFilters : SCraftingFilters;
@@ -2107,6 +2108,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		// W3EE - Begin
 		//var useQuenForBleeding : bool;
 		var safeDodgeAngle : float;
+		var mutagen13 : bool;
 		// W3EE - End
 		var min, max : SAbilityAttributeValue;
 		var skillLevel : int;
@@ -2146,11 +2148,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 			attackName = actorAttacker.GetLastAttackRangeName();
 			attackRange = theGame.GetAttackRangeForEntity( actorAttacker, attackName );
 			attackerMovementAdjustor = actorAttacker.GetMovingAgentComponent().GetMovementAdjustor();
+			mutagen13 = HasBuff(EET_Mutagen13);
 			
-			if ( CanUseSkill(S_Sword_s09) && GetSkillLevel(S_Sword_s09) > 3 )
+			if ( (CanUseSkill(S_Sword_s09) && GetSkillLevel(S_Sword_s09) > 3 ) || mutagen13)
 				damageData.SetHitAnimationPlayType(EAHA_ForceNo);
 			
-			if( Combat().GetDodgeTimeDiff() >= 0.15f )
+			if( Combat().GetDodgeTimeDiff() >= 0.1f )
 			{
 				if (CanUseSkill(S_Sword_s09))
 					skillLevel = GetSkillLevel(S_Sword_s09);
@@ -2158,29 +2161,59 @@ statemachine class W3PlayerWitcher extends CR4Player
 					skillLevel = 0;
 				safeDodgeAngle = Combat().GetSafeDodgeAngle();
 				safeDodgeAngle += 5.0f * skillLevel;
+							
+				if (mutagen13)
+				{
+					safeDodgeAngle += 30.0f;
+					distToAttacker += attackRange.rangeMax * 0.25f;				
+				}
 				
 				if( damageData.CanBeDodged() && ( ( AbsF(dist) < safeDodgeAngle && attackName != 'stomp' && attackName != 'anchor_special_far' && attackName != 'anchor_far' )
 					|| ( ( attackName == 'stomp' || attackName == 'anchor_special_far' || attackName == 'anchor_far' ) && distToAttacker > attackRange.rangeMax * 0.75 ) ) )
 				{
-					damageData.processedDmg.vitalityDamage *= 0.30;
-					damageData.processedDmg.essenceDamage *= 0.30;
-					dmgDodgeMax = 600.0f / Options().SetHealthPlayer();
-					damageData.processedDmg.vitalityDamage = MinF(dmgDodgeMax, damageData.processedDmg.vitalityDamage);
-					damageData.processedDmg.essenceDamage = MinF(dmgDodgeMax, damageData.processedDmg.essenceDamage);
+					if (mutagen13)
+					{
+						damageData.processedDmg.vitalityDamage *= 0.1f;
+						damageData.processedDmg.essenceDamage *= 0.1f;
+						PlayEffect( 'mutation_6_power' );
+					}
+					else
+					{
+						damageData.processedDmg.vitalityDamage *= 0.3f;
+						damageData.processedDmg.essenceDamage *= 0.3f;						
+					}
 					
+					dmgDodgeMax = 550.0f / Options().SetHealthPlayer();
+					switch ( theGame.GetDifficultyMode() )
+					{
+					case EDM_Easy:
+						dmgDodgeMax *= 0.8f;
+						break;
+					case EDM_Hard:
+						dmgDodgeMax *= 1.2f;
+						break;
+					case EDM_Hardcore:
+						dmgDodgeMax *= 1.4f;
+						break;
+					case EDM_Medium:
+					default:
+						break;
+					}
+					
+					damageData.processedDmg.vitalityDamage = MinF(dmgDodgeMax, damageData.processedDmg.vitalityDamage);
+					damageData.processedDmg.essenceDamage = MinF(dmgDodgeMax, damageData.processedDmg.essenceDamage);					
 					
 					min = GetAttributeValue('graze_damage_reduction');
 					damageData.processedDmg.vitalityDamage *= 1.0f - min.valueMultiplicative;
-					damageData.processedDmg.essenceDamage *= 1.0f - min.valueMultiplicative;
-					
-					damageData.SetWasPartiallyDodged();
-												
+					damageData.processedDmg.essenceDamage *= 1.0f - min.valueMultiplicative;				
+								
 					if (skillLevel > 0)
 					{
 						damageData.processedDmg.vitalityDamage *= 1.0f - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s09, 'damage_reduction', false, true)) * skillLevel;
 						damageData.processedDmg.essenceDamage *= 1.0f - CalculateAttributeValue(GetSkillAttributeValue(S_Sword_s09, 'damage_reduction', false, true)) * skillLevel;
-					}
-							
+					}						
+					
+					damageData.SetWasPartiallyDodged();
 					
 					if ( theGame.CanLog() )
 					{
@@ -3323,8 +3356,19 @@ statemachine class W3PlayerWitcher extends CR4Player
 	
 	public function StartRegenTimer()
 	{
+		var regen_time : float;
+		var maribor_level : int;
+		
+		regen_time = Options().AdrGenDelay;
+		
+		if (HasBuff(EET_MariborForest))
+		{
+			maribor_level = GetBuff(EET_MariborForest).GetBuffLevel();
+			regen_time *= 1.0f - (0.05f + (maribor_level - 1) * 0.1f);
+		}
+	
 		((W3Effect_AdrenalineDrain)GetBuff(EET_AdrenalineDrain)).StopRegen();
-		AddTimer('ResumeVigorRegen', Options().AdrGenDelay, false,,,,true);
+		AddTimer('ResumeVigorRegen', regen_time, false,,,,true);
 	}
 	
 	timer function ResumeVigorRegen(dt : float, id : int)
@@ -7298,7 +7342,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				duration *= 1.1f;
 		}
 		else
-		if( inv.GetItemName(item) != 'White Raffards Decoction 3' )
+		//if( inv.GetItemName(item) != 'White Raffards Decoction 3' )
 		{
 			if( Options().GetGlobalPotionDuration() )
 				duration = Options().GetGlobalPotionDuration();
@@ -7323,8 +7367,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 				duration *= (1 + mutagenSkillMod);
 			}
 		}
-		else
-			duration = duration * (1 + skillPassiveMod);
+		else if ( !IsNameValid(itemName) || !StrContains(NameToString(itemName), "White Raffards"))
+			duration *= 1 + skillPassiveMod;		
 		// W3EE - End
 
 		return duration;
@@ -7409,7 +7453,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var ret : EEffectInteract;
 		var effectType : EEffectType;
 		var item : SItemUniqueId;
-		var customAbilityName, factId : name;
+		var customAbilityName, factId, potionName : name;
 		var atts : array<name>;
 		var i : int;
 		var mutagenParams : W3MutagenBuffCustomParams;
@@ -7442,6 +7486,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 				
 		isDecoction = inv.ItemHasTag( item, 'Mutagen' );
+		potionName = inv.GetItemName(item);
 		
 		if(effectType == EET_Fact)
 		{
@@ -7458,7 +7503,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			factPotionParams = new W3Potion_Fact_Params in theGame;
 			factPotionParams.factName = factId;
-			factPotionParams.potionItemName = inv.GetItemName(item);
+			factPotionParams.potionItemName = potionName;
 			
 			potionParams.buffSpecificParams = factPotionParams;
 		}
@@ -7467,7 +7512,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			mutagenParams = new W3MutagenBuffCustomParams in theGame;
 			mutagenParams.toxicityOffset = CalculateAttributeValue(inv.GetItemAttributeValue(item, 'toxicity_offset'));
-			mutagenParams.potionItemName = inv.GetItemName(item);
+			mutagenParams.potionItemName = potionName;
 			
 			// W3EE - Begin
 			if( CanUseSkill(S_Alchemy_s14) )
@@ -7486,14 +7531,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 		else
 		{
 			potParams = new W3PotionParams in theGame;
-			potParams.potionItemName = inv.GetItemName(item);
+			potParams.potionItemName = potionName;
 			
 			potionParams.buffSpecificParams = potParams;
 		}
 		
 		Experience().AwardAlchemyUsageXP(this, isDecoction, finalPotionToxicity);	
 		
-		duration = CalculatePotionDuration(item, isDecoction);
+		duration = CalculatePotionDuration(item, isDecoction, potionName);
 		
 		potionParams.effectType = effectType;
 		potionParams.creator = this;
@@ -7533,8 +7578,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			// W3EE - Begin
 			toxicity = (W3Effect_Toxicity)GetBuff(EET_Toxicity);
-			if( toxicity )
-				toxicity.SetEffectTime(finalPotionToxicity, duration);
+			if( toxicity ) 
+				toxicity.SetEffectTime(finalPotionToxicity, duration);			
 			
 			/*if(CanUseSkill(S_Perk_13))
 			{
@@ -8085,6 +8130,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function IsInCombatAction_SpecialAttackHeavy() : bool
 	{
 		if ( IsInCombatAction() && GetCombatAction() == EBAT_SpecialAttack_Heavy )
+			return true;
+		else
+			return false;
+	}
+	
+	public function IsInCombatAction_SpecialAttackLight() : bool
+	{
+		if ( IsInCombatAction() && GetCombatAction() == EBAT_SpecialAttack_Light )
 			return true;
 		else
 			return false;
@@ -9358,7 +9411,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		maxFocus = GetStatMax(BCS_Focus);
 		currFocus = GetStat(BCS_Focus);
 		if( CanUseSkill(S_Perk_11) )
-			penaltyPerc = Options().VigIntLost() / 150.f;
+			penaltyPerc = Options().VigIntLost() / 166.667f;
 		else
 			penaltyPerc = Options().VigIntLost() / 100.f;
 		
@@ -9408,7 +9461,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		maxFocus = GetStatMax(BCS_Focus);
 		currFocus = GetStat(BCS_Focus);
 		if( CanUseSkill(S_Perk_11) )
-			penaltyPerc = Options().VigIntLost() / 150.f;
+			penaltyPerc = Options().VigIntLost() / 166.667f;
 		else
 			penaltyPerc = Options().VigIntLost() / 100.f;
 		
@@ -9459,7 +9512,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		maxFocus = GetStatMax(BCS_Focus);
 		currFocus = GetStat(BCS_Focus);
 		if( CanUseSkill(S_Perk_11) )
-			penaltyPerc = Options().VigIntLost() / 150.f;
+			penaltyPerc = Options().VigIntLost() / 166.667f;
 		else
 			penaltyPerc = Options().VigIntLost() / 100.f;
 		

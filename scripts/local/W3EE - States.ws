@@ -442,6 +442,8 @@ state W3EEMeditation in W3PlayerWitcher extends MeditationBase
 	
 	private entry function StartMeditationState()
 	{
+		var mutagen : CBaseGameplayEffect;
+	
 		fastForwardSystem = theGame.GetFastForwardSystem();
 		shouldSpinCamera = false;
 		reduceCameraSpin = false;
@@ -459,6 +461,12 @@ state W3EEMeditation in W3PlayerWitcher extends MeditationBase
 		{
 			alchemyManager.SetBrewingInterrupted(false);
 			SetShouldBrew();
+		}
+		
+		if(parent.HasBuff(EET_Mutagen06))
+		{
+			mutagen = parent.GetBuff(EET_Mutagen06);
+			parent.RemoveAbilityAll(mutagen.GetAbilityName());
 		}
 	}
 	

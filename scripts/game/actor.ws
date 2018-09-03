@@ -2922,10 +2922,6 @@ import abstract class CActor extends CGameplayEntity
 			{
 				playHitAnim = true;
 			}
-			else if(hitAnimationPlayType == EAHA_ForceYes)
-			{
-				playHitAnim = true;
-			}
 			else
 			{
 				if(effectManager)

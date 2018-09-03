@@ -702,10 +702,8 @@ class W3EffectManager
 		
 		
 		mutagen = (W3Mutagen13_Effect)owner.GetBuff(EET_Mutagen13);
-		if(mutagen && mutagen.IsEffectTypeAffected(effectType))
-		{					
-			effect.SetTimeLeft(mutagen.GetForcedDuration());
-		}		
+		if(mutagen)
+			mutagen.AdjustEffect(effect);
 	}
 	
 	
@@ -814,18 +812,19 @@ class W3EffectManager
 		
 		if( owner == thePlayer && thePlayer.HasBuff( EET_Mutagen20 ) )
 		{
-			if( effectType == EET_Knockdown || effectType == EET_HeavyKnockdown )
+			if(effectType == EET_Knockdown || effectType == EET_HeavyKnockdown )
 			{
 				LogEffects( "EffectManager.InternalAddEffect: changing EET_Knockdown to EET_Stagger due to Mutagen 20 in effect" );
 				effectType = EET_Stagger;
+				inDuration = 0;
 			}
-			else if( effectType == EET_LongStagger || effectType == EET_Stagger )
+			/*else if( effectType == EET_Stagger )
 			{
 				LogEffects( "EffectManager.InternalAddEffect: denying " + effectType + " due to Mutagen 20 in effect" );
 				return EI_Deny;
-			}
+			}*/
 		}
-		// W3EE - End		
+		// W3EE - End
 		
 		if( ((W3PlayerWitcher)owner) && GetWitcherPlayer().IsAnyQuenActive())
 		{

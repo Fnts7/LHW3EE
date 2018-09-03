@@ -181,20 +181,15 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 			drainVal = (-1 * toxicity * Options().GetToxicityResidualDegen()) - 0.1f;
 		else
 		if( (duration / origDuration) < Options().GetFastToxicityDegenThreshold() )
-			drainVal = -1 * GetToxicityDegen(Options().GetFastToxicityDegen());
+			drainVal = -1 * GetToxicityDegen(Options().GetStandardToxicityDegen(), Options().GetFastToxicityDegen());
 		else			
-			drainVal = -1 * GetToxicityDegen() * Options().GetStandardToxicityDegen();
+			drainVal = -1 * GetToxicityDegen( Options().GetStandardToxicityDegen() );
 		
 		
 		if( Options().GetSlowToxicityCombatDegen() )
 		{
 			if( target.IsInCombat() && index > -1 )
-				drainVal = -1 * GetToxicityDegen() * Options().GetToxicityCombatDegen();
-		}
-		if( witcher.GetSkillLevel(S_Alchemy_s15) && (toxicity / witcher.GetStatMax(BCS_Toxicity)) >= threshold )
-		{
-			drainVal -= (witcher.GetSkillLevel(S_Alchemy_s15) * 0.1);
-			witcher.GetAdrenalineEffect().AddAdrenaline(AbsF(drainVal) / 100.f);
+				drainVal = -1 * GetToxicityDegen( Options().GetToxicityCombatDegen() );
 		}
 		
 		if( isUnsafe )
@@ -233,17 +228,17 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 		effectDurationOrig.Erase(index);
 	}
 	
-	private function GetToxicityDegen( optional multiplier : float ) : float
+	private function GetToxicityDegen( multiplierStandard : float, optional multiplierFast : float) : float
 	{
 		var index : int;
 		var degenValue : float;
 		
 		for(index=0; index<effectToxicity.Size(); index+=1)
 		{
-			if( multiplier && (effectDuration[index] / effectDurationOrig[index]) < Options().GetFastToxicityDegenThreshold() )
-				degenValue += (effectToxicity[index] / effectDurationOrig[index]) * multiplier;
-			else 
-				degenValue += (effectToxicity[index] / effectDurationOrig[index]);
+			if( multiplierFast && (effectDuration[index] / effectDurationOrig[index]) < Options().GetFastToxicityDegenThreshold() )
+				degenValue += (effectToxicity[index] / effectDurationOrig[index]) * multiplierFast;
+			else
+				degenValue += (effectToxicity[index] / effectDurationOrig[index]) * multiplierStandard;
 		}
 		
 		return degenValue;

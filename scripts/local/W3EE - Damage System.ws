@@ -246,18 +246,18 @@ class W3EEDamageHandler
 
 	public function Perk10DamageBoost( out damageData : W3DamageAction )
 	{
-		if( (CPlayer)damageData.attacker && damageData.IsActionMelee() && Perk10Active )
+		/*if( (CPlayer)damageData.attacker && Perk10Active )
 		{
 			damageData.processedDmg.vitalityDamage *= 1.1f;
 			damageData.processedDmg.essenceDamage *= 1.1f;
 			
 			GetWitcherPlayer().AddTimer('ResetPerk10', 0.65f, false,,,,true);
-		}
+		}*/
 		
-		if( (CPlayer)damageData.attacker && thePlayer.CanUseSkill(S_Perk_10) && !Perk10Active )
+		if( damageData.IsActionMelee() && (CPlayer)damageData.attacker && thePlayer.CanUseSkill(S_Perk_10) )
 		{
 			SetPerk10State(true);
-			GetWitcherPlayer().AddTimer('ResetPerk10', 0.65f, false,,,,true);
+			GetWitcherPlayer().AddTimer('ResetPerk10', 4.0f, false,,,,true);
 		}
 	}
 	

@@ -373,6 +373,9 @@ class W3EEExperienceHandler
 				{
 					if( playerWitcher.IsLightAttack(attackAction.GetAttackName()) )
 					{
+						if (playerWitcher.GetCombatAction() == EBAT_SpecialAttack_Light)
+							mult *= 0.75f;
+					
 						ModPathProgress(ESSP_Sword_StyleFast, mult);
 					}
 					else

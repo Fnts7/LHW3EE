@@ -346,6 +346,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 			itemDesc += "<br>Halves stamina cost and regen delay of all movement actions: evasion, jump, sprint.";
 		else if (craftedItemName == 'Mutagen 3')
 			itemDesc += "<br>LHW3EE override: reset time is 4.5s.";
+		else if (craftedItemName == 'Mutagen 13')
+			itemDesc += "<br>Increases safe dodge angle by 30 degrees and greatly reduces graze damage. Reduces stagger times a bit.";
 		
 		rarityId = minQuality;
 		rarity = GetItemRarityDescriptionFromInt(minQuality);

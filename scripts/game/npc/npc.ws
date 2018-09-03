@@ -3049,8 +3049,32 @@ statemachine import class CNewNPC extends CActor
 				
 				if(monsterCategory != MC_Animal || IsRequiredAttitudeBetween(this, thePlayer, true))
 				{	
-					gameplayEffect = thePlayer.GetBuff(EET_Mutagen06);
-					thePlayer.AddAbility( gameplayEffect.GetAbilityName(), true);
+					abilityName = thePlayer.GetBuff(EET_Mutagen06).GetAbilityName();
+					abilityCount = thePlayer.GetAbilityCount(abilityName);
+					
+					if(abilityCount == 0)
+					{
+						addAbility = true;
+					}
+					else
+					{
+						theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen06_max_stack', min, max);
+						maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+						
+						if(maxStack >= 0)
+						{
+							addAbility = (abilityCount < maxStack);
+						}
+						else
+						{
+							addAbility = true;
+						}
+					}
+					
+					if(addAbility)
+					{
+						thePlayer.AddAbility(abilityName, true);
+					}
 				}
 			}
 			

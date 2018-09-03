@@ -11525,7 +11525,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		ret = ( CanUseSkill(skill) && (abilityManager.GetStat(BCS_Focus/*, signHack*/) >= 1) );
 		
-		if(!ret && IsSkillSign(skill) && CanUseSkill(S_Perk_09) && GetStat(BCS_Stamina) >= cost)
+		if(!ret && IsSkillSign(skill) && CanUseSkill(S_Perk_09) && GetStat(BCS_Stamina) >= cost * 0.4f)
 		{
 			ret = true;
 		}
@@ -13280,19 +13280,30 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		if(effectType == EET_Stagger || effectType == EET_LongStagger || effectType == EET_Knockdown || effectType == EET_HeavyKnockdown)
 		{
+			if (HasBuff(EET_Mutagen20))
+			{
+				if (effectType == EET_Stagger)
+					return EI_Deny;
+				else if (effectType == EET_LongStagger || effectType == EET_Knockdown || effectType == EET_HeavyKnockdown)
+					effectType = EET_Stagger;
+			}
+		
 			params.effectType = effectType;
 			params.creator = creat;
 			params.sourceName = srcName;
 			params.isSignEffect = isSignEffect;
 			
 			if ( effectType == EET_Stagger )
-				params.duration = 1.83;
+				params.duration = 1.7f;
 			else if ( effectType == EET_LongStagger )
-				params.duration = 4;
+				params.duration = 3.5f;
 			else if ( effectType == EET_Knockdown ) 
-				params.duration = 2.5;
+				params.duration = 2.0f;
 			else if ( effectType == EET_HeavyKnockdown ) 
-				params.duration = 4;
+			{
+				params.effectType = EET_Knockdown;
+				params.duration = 2.0f;
+			}
 				
 			return super.AddEffectCustom(params);
 		}

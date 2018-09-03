@@ -639,7 +639,7 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 					if( l_player.GetStat(BCS_Focus) >= 1 )
 						l_cost += 1.f;
 					else
-						l_player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( skillEnum ) );
+						l_player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( skillEnum ), , 0.4f );
 				}
 				else l_cost += 1.f;
 			}
@@ -862,7 +862,7 @@ state Channeling in W3SignEntity extends BaseCast
 				{
 					if( parent.cachedCost <= 0.0f )
 					{
-						parent.cachedCost = player.GetStaminaActionCost( ESAT_Ability, SkillEnumToName( parent.skillEnum ), 0 );
+						parent.cachedCost = player.GetStaminaActionCost( ESAT_Ability, SkillEnumToName( parent.skillEnum ), 0 ) * 0.4f;
 					}
 					
 					stamina = player.GetStat(BCS_Stamina);
@@ -883,7 +883,7 @@ state Channeling in W3SignEntity extends BaseCast
 						else
 						if( player.CanUseSkill( S_Perk_09 ) && parent.cachedCost <= stamina && player.GetStat(BCS_Focus, true) < 1 )
 						{
-							player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
+							player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ), , 0.4f );
 							player.StartStaminaRegen();
 							player.PauseStaminaRegen( 'SignCast' );
 						}
@@ -941,7 +941,7 @@ state Channeling in W3SignEntity extends BaseCast
 			// W3EE - Begin
 				if(player.CanUseSkill(S_Perk_09))
 				{
-					if(player.GetStat( BCS_Stamina ) <= 5 && player.GetStat(BCS_Focus) <= 0)
+					if(player.GetStat( BCS_Stamina ) <= 2 && player.GetStat(BCS_Focus) <= 0)
 						stop = true;
 				}
 				else
@@ -1010,7 +1010,8 @@ state Channeling in W3SignEntity extends BaseCast
 					
 					if( /*parent.cachedCost < stamina &&*/ player.CanUseSkill( S_Perk_09 ) && focus <= 0 )
 					{
-							player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ), dt, multiplier );
+							player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ), dt, multiplier * 0.8f);
+							player.StartStaminaRegen();
 							player.PauseStaminaRegen('SignCast');
 					}
 				}
