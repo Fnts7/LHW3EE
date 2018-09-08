@@ -1,4 +1,31 @@
-﻿Version 25
+﻿Version 26
+
+Small nerf to Dancing Star impact damage, a bigger one to Devil's Puffbal impact damage.
+
+Changed the logic of burning effect of NPCs overall. Now burning animation will cease after some part of total
+burning duration has passed, making enemy active. But hitting burning enemy will not end burning, thus
+preventing remaining burning damage. So now burning is even more damage dealing, less distraction effect.
+
+Reduced a bit heavy attack extra damage, but also reduced a bit stamina cost of medium and long distance
+heavy attacks.
+
+Added an extra effect to Enzymatic Reduction skill. Now every active potion reduces toxicity of next
+applied potion a bit.
+
+Fixed lvl3 severance Axii cast from Rend, so that it stays after the hit. Also changed quen severance
+effect, so that it heals instead of replenishing stamina, which is already an effect of lvl1 severance.
+For on enemy quen effect inscreased area - for Rend range by one meter, for whirl made an AoE sphere
+instead of cone.
+
+Added possibility that in case of failed parry, toxicity can prevent adrenaline loss, but only 50%. That is because
+parry is considered aware action, so the pain in case of failure would be felt more. Small reduction of saved adrenaline
+amount when dodging.
+
+Adjusted experiences - perks have even more harsh exp penalty with amount of them. Also slight increase for all other
+skill paths. All signs a bit lowered in exp gain, except yrden - a bit raised. Axii lowered more significantly.
+Sword defense a bit lowered, ranged combat very little.
+
+Version 25
 
 Perks boosts and adjustments:
 - Rage Management - lowered stamina cost of signs (basic casts greatly, alternate a bit)

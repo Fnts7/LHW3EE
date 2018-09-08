@@ -214,6 +214,17 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 		effectDurationOrig.PushBack(duration);
 	}
 	
+	public function GetEnzymaticToxReduction() : float
+	{
+		if (thePlayer.CanUseSkill(S_Alchemy_s03))
+		{
+			return effectDuration.Size() * (1.0f + (thePlayer.GetSkillLevel(S_Alchemy_s03) - 1) * 0.5f);
+			
+		}
+		else
+			return 0;
+	}
+	
 	private function UpdateEffectsTime() : void
 	{
 		var i : int;

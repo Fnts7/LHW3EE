@@ -2925,6 +2925,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(RoundMath(arg));
 				//W3EE - End
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
+				baseString += "<br>Drunk potion toxicity is reduced by number of current active potions multiplied by " + NoTrailZeros(RoundTo( 1.0f + (skillLevel - 1) * 0.5f, 1)) + ". Decoctions don't count.";
 				break;
 			case S_Alchemy_s04:
 				// W3EE - Begin

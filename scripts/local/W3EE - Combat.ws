@@ -2462,13 +2462,14 @@ class W3EECombatHandler extends W3EEOptionHandler
 						
 						case ST_Quen:
 							witcher.PlayEffectSingle('drain_energy_caretaker_shovel');
-							actors = witcher.GetNPCsAndPlayersInCone(3, VecHeading(witcher.GetHeadingVector()), 110, 20, , FLAG_OnlyAliveActors);
-							witcher.GainStat(BCS_Stamina, witcher.GetStatMax(BCS_Stamina) * 0.15f);
+							actors = witcher.GetAttackableNPCsAndPlayersInCone(4.0f, VecHeading(witcher.GetHeadingVector()), 110, 20);
+							if (actors.Size() > 0)
+								witcher.GainStat(BCS_Vitality, witcher.GetStatMax(BCS_Vitality) * 0.08f);
 							for(i=0; i<actors.Size(); i+=1)
 							{
 								if( !((W3PlayerWitcher)actors[i]) )
 								{
-									actors[i].DrainStamina(ESAT_FixedValue, actors[i].GetStat(BCS_Stamina) * 0.3f, 3.f);
+									actors[i].DrainStamina(ESAT_FixedValue, actors[i].GetStat(BCS_Stamina) * 0.35f, 3.f);
 									actors[i].AddEffectDefault(EET_Stagger, witcher, "Runeword 1", true);
 								}
 							}
@@ -2480,8 +2481,6 @@ class W3EECombatHandler extends W3EEOptionHandler
 							weaponEntity.CalcEntitySlotMatrix('blood_fx_point', slotMatrix);
 							witcher.CastDesiredSign(infusionType, true, true, MatrixGetTranslation(slotMatrix), witcher.GetWorldRotation());
 							witcher.SetRunewordInfusionType(ST_None);
-							witcher.SetRunewordInfusionType(ST_None);
-							weaponEntity.StopEffect('runeword_yrden');
 							weaponEntity.StopEffect('runeword_yrden');
 						break;
 					}
@@ -2512,8 +2511,10 @@ class W3EECombatHandler extends W3EEOptionHandler
 						
 						case ST_Quen:
 							witcher.PlayEffectSingle('drain_energy_caretaker_shovel');
-							actors = witcher.GetNPCsAndPlayersInCone(3, VecHeading(witcher.GetHeadingVector()), 110, 20, , FLAG_OnlyAliveActors);
-							witcher.GainStat(BCS_Stamina, witcher.GetStatMax(BCS_Stamina) * 0.15f);
+							//actors = witcher.GetNPCsAndPlayersInCone(3f, VecHeading(witcher.GetHeadingVector()), 110, 20, , FLAG_OnlyAliveActors);
+							actors = witcher.GetAttackableNPCsAndPlayersInRange(3.0f, 20);							
+							if (actors.Size() > 0)
+								witcher.GainStat(BCS_Vitality, witcher.GetStatMax(BCS_Vitality) * 0.08f);
 							for(i=0; i<actors.Size(); i+=1)
 							{
 								if( !((W3PlayerWitcher)actors[i]) )

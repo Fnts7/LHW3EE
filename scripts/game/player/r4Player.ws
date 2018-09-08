@@ -9276,7 +9276,6 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		Combat().AttackCameraShake(animData.attackName);
 		Combat().ObliterationRunewordLvl1Flame();
-		Combat().SeveranceRunewordSignEffect(((W3PlayerWitcher)this).GetRunewordInfusionType());
 		Experience().AwardNonCombatXP(animData.attackName);
 		// W3EE - End
 		
@@ -9324,6 +9323,9 @@ statemachine abstract import class CR4Player extends CPlayer
 		super.DoAttack(animData, weaponId, parried, countered, parriedBy, attackAnimationName, hitTime);
 		
 		// W3EE - Begin
+
+		Combat().SeveranceRunewordSignEffect(((W3PlayerWitcher)this).GetRunewordInfusionType());
+		
 		if( IsLightAttack(animData.attackName) )
 		{
 			Combat().ActivateSwordDance();
@@ -9351,14 +9353,14 @@ statemachine abstract import class CR4Player extends CPlayer
 		{
 			case ADIST_Large: 
 				if( IsHeavyAttack(animData.attackName) )
-					Combat().StaminaLoss(ESAT_HeavyAttack, 1.20f);
+					Combat().StaminaLoss(ESAT_HeavyAttack, 1.1f);
 				else
 					Combat().StaminaLoss(ESAT_LightAttack, 1.20f);
 			break;
 			
 			case ADIST_Medium:	
 				if( IsHeavyAttack(animData.attackName) )
-					Combat().StaminaLoss(ESAT_HeavyAttack, 1.10f);
+					Combat().StaminaLoss(ESAT_HeavyAttack, 1.05f);
 				else
 					Combat().StaminaLoss(ESAT_LightAttack, 1.10f);
 			break;
@@ -10205,7 +10207,7 @@ statemachine abstract import class CR4Player extends CPlayer
 						if( HasStaminaToUseAction(ESAT_Roll, , 1.6f) )
 						{
 							Combat().EvadeSpeedModule();
-							Combat().StaminaLoss(ESAT_Roll, 1.6f);
+							Combat().StaminaLoss(ESAT_Roll, 1.5f);
 							Experience().AwardDodgingXP(this);	
 							theGame.GetBehTreeReactionManager().CreateReactionEvent( this, 'PlayerEvade', 1.0f, 10.0f, -1.0f, -1 );
 							thePlayer.BreakPheromoneEffect();

@@ -7420,10 +7420,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 			//toxicityOffset = CeilF(toxicityOffset * (1.f + (GetNumMutagensActive() / 2.f))) + CeilF(GetStat(BCS_Toxicity, true) * ((GetNumMutagensActive() + 1) / 2.f)); 
 		}
-		/*else
+		else
 		{
-			finalPotionToxicity = CeilF(finalPotionToxicity * (1.f + (GetNumMutagensActive() / 2.f)));
-		}*/
+			//finalPotionToxicity = CeilF(finalPotionToxicity * (1.f + (GetNumMutagensActive() / 2.f)));
+			finalPotionToxicity -= ((W3Effect_Toxicity)GetBuff(EET_Toxicity)).GetEnzymaticToxReduction();
+			
+		}
 		
 		/*
 		if(CanUseSkill(S_Perk_13))

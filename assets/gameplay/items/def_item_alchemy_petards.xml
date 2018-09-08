@@ -25,7 +25,7 @@
       <!-- DANCING STAR -->
       <ability name="DancingStar_1_impact">
         <tags>PetardImpactParams</tags>
-        <FireDamage type="add" min="1300" max="1300" />
+        <FireDamage type="add" min="1000" max="1000" />
         <ammo type="add" min="2" />
 		<quality type="add" min="2" max="2"/>
 		<level type="add" min="1" />
@@ -38,7 +38,7 @@
 	  
       <ability name="DancingStar_2_impact">
         <tags>PetardImpactParams</tags>
-        <FireDamage type="add" min="1700" max="1700" />
+        <FireDamage type="add" min="1350" max="1350" />
         <ammo type="add" min="3" />
         <DancingStar_3_impact is_ability="true" />
         <level type="add" min="2" />
@@ -52,7 +52,7 @@
 	  
       <ability name="DancingStar_3_impact">
         <tags>PetardImpactParams</tags>
-        <FireDamage type="add" min="2100" max="2100" />
+        <FireDamage type="add" min="1700" max="1700" />
         <ammo type="add" min="4" />
         <DancingStar_2_impact is_ability="true" />
         <level type="add" min="3" />
@@ -67,7 +67,7 @@
       <!-- DEVILS PUFFBALL -->
       <ability name="DevilsPuffball_1_impact">
         <tags>PetardImpactParams</tags>
-        <PoisonDamage type="add" min="900" max="900" />
+        <PoisonDamage type="add" min="600" max="600" />
         <ammo type="add" min="2" />
 		<quality type="add" min="2" max="2"/>
 		<level type="add" min="1" />
@@ -80,7 +80,7 @@
 	  
       <ability name="DevilsPuffball_2_impact">
         <tags>PetardImpactParams</tags>
-        <PoisonDamage type="add" min="1200" max="1200" />
+        <PoisonDamage type="add" min="600" max="600" />
         <ammo type="add" min="3" />
         <DevilsPuffball_3_impact is_ability="true" />
         <level type="add" min="2" />
@@ -94,7 +94,7 @@
 	  
       <ability name="DevilsPuffball_3_impact">
         <tags>PetardImpactParams</tags>
-        <PoisonDamage type="add" min="1500" max="1500" />
+        <PoisonDamage type="add" min="600" max="600" />
         <ammo type="add" min="4" />
         <DevilsPuffball_2_impact is_ability="true" />
         <level type="add" min="3" />

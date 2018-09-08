@@ -3847,6 +3847,12 @@ import abstract class CActor extends CGameplayEntity
 			csType = GetBuffCriticalType(buff);
 
 			LogCritical("Stopping CS animation for <<" + csType + ">>");
+			
+			if (buff.GetEffectType() == EET_Burning && !((CPlayer)this))
+			{
+				RemoveTimer('StopBurningAnimation');
+				forceRemoveBuff = false;
+			}
 		
 			if(forceRemoveBuff || buff.GetDurationLeft() < 0 || !buff.IsActive() || CriticalBuffIsDestroyedOnInterrupt(buff))
 			{
@@ -3858,14 +3864,19 @@ import abstract class CActor extends CGameplayEntity
 				LogCritical("Buff <<" + csType + ">> gets moved to background and won't be played now but isn't removed yet. Duration left = " + NoTrailZeros(buff.GetDurationLeft()) );
 				effectManager.SetCurrentlyAnimatedCS(NULL);
 			}
-		}
-		else
-		{
-			
-		}
-			
+		}	
 		
-		
+	}
+	
+	
+	public timer function StopBurningAnimation( dt : float , id : int)
+	{
+		var buff : CBaseGameplayEffect;
+ 		if(effectManager)
+			buff = effectManager.GetCurrentlyAnimatedCS();
+			
+ 		if (buff && buff.GetEffectType() == EET_Burning)
+			RequestCriticalAnimStop();
 	}
 	
 	

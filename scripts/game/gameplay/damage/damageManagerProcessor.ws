@@ -2007,7 +2007,7 @@ class W3DamageManagerProcessor extends CObject
 		}
 			
 		if (playerAttacker && attackAction && playerAttacker.IsHeavyAttack(attackAction.GetAttackName()))
-			finalDamage *= 1.25f;
+			finalDamage *= 1.2f;
 			
 		tempDamage = MaxF(finalDamage - resistPoints, finalDamage * armorPiercing) * (1 - resistPercents);
 		if( DamageHitsEssence(  dmgInfo.dmgType ) )		action.originalDamageArmor.essenceDamage  += tempDamage;

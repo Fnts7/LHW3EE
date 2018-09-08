@@ -1355,7 +1355,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							case ERWT_Crossbow:		opponentStats.rangedDamageValue = 3685;	opponentStats.rangedArmorPiercing = 0.80f;	break;*/
 							case ERWT_ShortBow:		opponentStats.rangedDamageValue = 3000;	opponentStats.rangedArmorPiercing = 0.15f;	break;
 							case ERWT_LongBow:		opponentStats.rangedDamageValue = 3600;	opponentStats.rangedArmorPiercing = 0.2f;	break;
-							case ERWT_Crossbow:		opponentStats.rangedDamageValue = 2350;	opponentStats.rangedArmorPiercing = 0.8f;	break;
+							case ERWT_Crossbow:		opponentStats.rangedDamageValue = 2200;	opponentStats.rangedArmorPiercing = 0.8f;	break;
 							default :				opponentStats.rangedDamageValue = 0;	opponentStats.rangedArmorPiercing = 0.f;	break;
 						}
 						
