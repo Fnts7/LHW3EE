@@ -1957,12 +1957,20 @@ class W3DamageManagerProcessor extends CObject
 			witcherAttacker = (W3PlayerWitcher)playerAttacker;
 			if( witcherAttacker )
 			{
-				if( action.IsActionMelee() || action.IsActionRanged() )
+				if( action.IsActionMelee() || ( action.IsActionRanged() && ((W3BoltProjectile)action.causer) ) )
 				{
-					armorPiercing = witcherAttacker.GetPlayerArmorPiercingValue(action.IsActionMelee(), action.IsActionRanged(), attackAction.GetAttackName());
+					if (!actionIgnoresArmor)
+						armorPiercing = witcherAttacker.GetPlayerArmorPiercingValue(action.IsActionMelee(), action.IsActionRanged(), attackAction.GetAttackName());
+					else
+						armorPiercing = 0;
+										
 					resistPercents = MaxF(0.f, resistPercents * (1.f - armorPiercing));
-					resistPercents -= witcherAttacker.GetOilResistIgnore(victimMonsterCategory);
+					
+					if( action.IsActionMelee() )
+						resistPercents -= witcherAttacker.GetOilResistIgnore(victimMonsterCategory);
 				}
+				else
+					armorPiercing = 0;
 			}
 			else
 			if( playerAttacker )
@@ -1990,9 +1998,17 @@ class W3DamageManagerProcessor extends CObject
 		
 		if( actionIgnoresArmor )
 		{
-			resistPoints = 0;
-			resistPercents = 0;
-			armorPiercing = 1;
+			if (playerVictim || !actorVictim.HasTag('IsBoss'))
+			{
+				resistPoints = 0;
+				resistPercents = 0;
+				armorPiercing = 1;
+			}
+			else
+			{
+				resistPoints *= 0.5f;
+				resistPercents *= 0.5f;
+			}
 		}
 		
 		if( playerVictim && !actionIgnoresArmor)

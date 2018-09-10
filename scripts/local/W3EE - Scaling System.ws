@@ -305,12 +305,12 @@ class W3EEScalingHandler extends W3EEOptionHandler
 				speedMult -= 0.2f;
 			
 			if( NPC.HasAbility('mon_rotfiend') )
-				speedMult += 0.2f;
-			if( NPC.HasAbility('mon_gravier') )
 				speedMult += 0.1f;
+			if( NPC.HasAbility('mon_gravier') )
+				speedMult += 0.02f;
 			
 			if( NPC.HasAbility('mon_endriaga_worker') )
-				speedMult += 0.15f;
+				speedMult += 0.12f;
 			if( NPC.HasAbility('mon_endriaga_soldier_spikey') )
 				speedMult -= 0.1f;
 				
@@ -318,7 +318,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 				speedMult -= 0.1f;
 			
 			if( NPC.HasAbility('WildHunt_Eredin') )
-				speedMult += 0.18f;
+				speedMult += 0.15f;
 			
 			if( NPC.HasAbility('mon_wild_hunt_default') && !NPC.HasTag('IsBoss') )
 			{
@@ -388,17 +388,17 @@ class W3EEScalingHandler extends W3EEOptionHandler
 			else
 			if( NPC.HasAbility('WildHunt_Imlerith') )
 			{
-				opponentStats.damageValue = 3775;
-				opponentStats.healthValue = 43940;
+				opponentStats.damageValue = 3400;
+				opponentStats.healthValue = 32500;
 				opponentStats.healthType = BCS_Vitality;
 				
 				opponentStats.isArmored			= true;
 				opponentStats.dangerLevel		= 100;
 				opponentStats.poiseValue 		= 1.f;
-				opponentStats.physicalResist	= 1.0f;
+				opponentStats.physicalResist	= 0.9f;
 				opponentStats.forceResist 		= 0.4f;
 				opponentStats.frostResist 		= 1.f;
-				opponentStats.fireResist 		= 0.6f;
+				opponentStats.fireResist 		= 0.5f;
 				opponentStats.shockResist 		= -0.1f;
 				opponentStats.elementalResist 	= -0.1f;
 				opponentStats.slowResist 		= 0.3f;
@@ -414,40 +414,14 @@ class W3EEScalingHandler extends W3EEOptionHandler
 			else
 			if( NPC.HasAbility('WildHunt_Caranthir') )
 			{
-				opponentStats.damageValue = 2260;
-				opponentStats.healthValue = 34420;
+				opponentStats.damageValue = 2000;
+				opponentStats.healthValue = 23000;
 				opponentStats.healthType = BCS_Vitality;
 				
 				opponentStats.isArmored			= true;
 				opponentStats.dangerLevel		= 100;
-				opponentStats.poiseValue 		= 1.f;
-				opponentStats.physicalResist	= 0.9f;
-				opponentStats.forceResist 		= 0.4f;
-				opponentStats.frostResist 		= 1.f;
-				opponentStats.fireResist 		= 0.6f;
-				opponentStats.shockResist 		= -0.1f;
-				opponentStats.elementalResist 	= -0.1f;
-				opponentStats.slowResist 		= 0.3f;
-				opponentStats.confusionResist 	= 0.f;
-				opponentStats.bleedingResist 	= 0.5f;
-				opponentStats.poisonResist 		= 0.35f;
-				opponentStats.stunResist 		= 0.f;
-				opponentStats.injuryResist 		= 0.3f;
-				opponentStats.armorPiercing 	= 0.8f;
-				NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FROST);
-				NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FORCE);
-			}
-			else
-			if( NPC.HasAbility('WildHunt_Eredin') )
-			{
-				opponentStats.damageValue = 2540;
-				opponentStats.healthValue = 39940;
-				opponentStats.healthType = BCS_Vitality;
-				
-				opponentStats.isArmored			= true;
-				opponentStats.dangerLevel		= 100;
-				opponentStats.poiseValue 		= 1.f;
-				opponentStats.physicalResist	= 1.0f;
+				opponentStats.poiseValue 		= 0.75f;
+				opponentStats.physicalResist	= 0.7f;
 				opponentStats.forceResist 		= 0.4f;
 				opponentStats.frostResist 		= 1.f;
 				opponentStats.fireResist 		= 0.6f;
@@ -460,9 +434,35 @@ class W3EEScalingHandler extends W3EEOptionHandler
 				opponentStats.stunResist 		= 0.f;
 				opponentStats.injuryResist 		= 0.3f;
 				opponentStats.armorPiercing 	= 0.6f;
+				NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FROST);
+				NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FORCE);
+			}
+			else
+			if( NPC.HasAbility('WildHunt_Eredin') )
+			{
+				opponentStats.damageValue = 2200;
+				opponentStats.healthValue = 30000;
+				opponentStats.healthType = BCS_Vitality;
 				
-				opponentStats.rangedDamageValue = 6200;
-				opponentStats.rangedArmorPiercing = 0.8f;
+				opponentStats.isArmored			= true;
+				opponentStats.dangerLevel		= 100;
+				opponentStats.poiseValue 		= 0.9f;
+				opponentStats.physicalResist	= 0.85f;
+				opponentStats.forceResist 		= 0.4f;
+				opponentStats.frostResist 		= 1.f;
+				opponentStats.fireResist 		= 0.5f;
+				opponentStats.shockResist 		= -0.1f;
+				opponentStats.elementalResist 	= -0.1f;
+				opponentStats.slowResist 		= 0.3f;
+				opponentStats.confusionResist 	= 0.f;
+				opponentStats.bleedingResist 	= 0.5f;
+				opponentStats.poisonResist 		= 0.35f;
+				opponentStats.stunResist 		= 0.f;
+				opponentStats.injuryResist 		= 0.3f;
+				opponentStats.armorPiercing 	= 0.5f;
+				
+				opponentStats.rangedDamageValue = 4200;
+				opponentStats.rangedArmorPiercing = 0.6f;
 				NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FROST);
 				NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FORCE);
 			}

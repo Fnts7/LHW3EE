@@ -88,21 +88,21 @@ class W3EECombatHandler extends W3EEOptionHandler
 	{
 		var armorPieces : array<SArmorCount>;
 		var witcher : W3PlayerWitcher;
+		var mediumArmorCount : int;
 		
 		if( thePlayer.IsCiri() )
 			return 0;
 		
 		witcher = GetWitcherPlayer();
 		armorPieces = witcher.GetArmorCount();
+		mediumArmorCount = witcher.GetSetPartsEquipped(EIST_MediumArmor);
 		if( witcher.IsHelmetEquipped(EIST_Gothic) || witcher.IsHelmetEquipped(EIST_Meteorite) || witcher.IsHelmetEquipped(EIST_Dimeritium) )
 		{
 			if( witcher.HasAbility('Glyphword 9 _Stats', true) )
 			{
-				armorPieces[2].exact += 1;
 				armorPieces[2].weighted += 1.0f;
 			}
 			else {
-				armorPieces[3].exact += 1;
 				armorPieces[3].weighted += 1.0f;
 			}
 		}
@@ -112,11 +112,11 @@ class W3EECombatHandler extends W3EEOptionHandler
 		if( thePlayer.GetInjuryManager().HasInjury(EFI_Legs) || thePlayer.GetInjuryManager().HasInjury(EPI_Legs) )
 			mult += 0.2f;
 			
-		if( armorPieces[2].exact > 3 )
+		if( mediumArmorCount > 3 )
 			mult -= 0.1f;
-		else if ( armorPieces[2].exact == 3 )
+		else if ( mediumArmorCount == 3 )
 			mult -= 0.0667f;
-		else if ( armorPieces[2].exact == 2 )
+		else if ( mediumArmorCount == 2 )
 			mult -= 0.0333f;
 		
 		
@@ -3398,11 +3398,11 @@ class W3EECombatHandler extends W3EEOptionHandler
 		lightCount = GetWitcherPlayer().GetSetPartsEquipped(EIST_LightArmor);
 		
 		if (lightCount >= 4)
-			angle += 9.0f;
+			angle += 10.0f;
 		else if (lightCount == 3)
-			angle += 6.0f;
+			angle += 6.667f;
 		else if (lightCount == 2)
-			angle += 3.0f;
+			angle += 3.333f;
 			
 		return angle;
     }

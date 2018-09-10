@@ -185,7 +185,7 @@ class W3EEExperienceHandler
 				pathEntry.progressID = "GeneralProgress";
 				pathEntry.maxPoints = 20;
 				// W3EE orig value: 201
-				pathEntry.expValue = RoundMath(140 * Options().GetSkillRateGeneral());
+				pathEntry.expValue = RoundMath(150 * Options().GetSkillRateGeneral());
 			break;
 		}
 		return pathEntry;

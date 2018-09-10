@@ -3503,11 +3503,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 		attackCostMult = GetAttributeValue('attack_stamina_cost_bonus');
 		mult = 1.0f - attackCostMult.valueMultiplicative;
 		
-		if( armorPieces[2].exact > 3 )
+		if( armorPiecesOriginal[2].exact > 3 )
 			mult -= 0.1f;
-		else if ( armorPieces[2].exact == 3 )
+		else if ( armorPiecesOriginal[2].exact == 3 )
 			mult -= 0.0667f;
-		else if ( armorPieces[2].exact == 2 )
+		else if ( armorPiecesOriginal[2].exact == 2 )
 			mult -= 0.0333f;
 			
 		mult -= armorPieces[2].weighted * 0.01f + armorPieces[1].weighted * 0.015f + armorPieces[0].weighted * 0.02f;
@@ -10929,11 +10929,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 		count = GetSetPartsEquipped(EIST_HeavyArmor);
 		
 		if (count >= 4)
-			return 20;
+			return 24;
 		else if (count == 3)
-			return 14;
+			return 16;
 		else if (count == 2)
-			return 7;
+			return 8;
 		else
 			return -1;
 	}
@@ -11523,10 +11523,6 @@ statemachine class W3PlayerWitcher extends CR4Player
 			arrString.PushBack( FloatToString( min.valueAdditive * amountOfSetPiecesEquipped[ EIST_Vampire ] ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;*/
-		case EISB_LightArmor:
-			finalString = GetLocStringByKeyExtWithParams( tempString );	
-			finalString += "<br>LHW3EE Override: Set bonus is really 9.";			
-			break;
 		default:
 			finalString = GetLocStringByKeyExtWithParams( tempString );			
 		}

@@ -1,4 +1,22 @@
-﻿Version 26
+﻿Version 27
+
+Fixed a bug where glyphword Levity would affect medium armor set bonus.
+Fixed a bug where player's armor piercing could apply to stuff other than sword attacks and bolts.
+
+Player's actions that ignore armor vs. bosses now will instead reduce resistances by 2 instead of neglecting
+them completely. For example physical damage of grapeshot bomb.
+
+Light armor set bonus is back to original 10 degrees value.
+Buffed a bit heavy armor set bonus from 20% enemy stagger chance to 24%.
+
+Enemies balancing:
+- Weakened the 3 Wild Hunt bosses - Imlerith, Caranthir and Eredin. The figths with them where ridiculously difficult and/or
+laborious. Imlerith is mostly significantly weakened in second stage - slower, lower dmg, lowered most resistances. Caranthir
+and Eredin lower HP and slightly lower damage, armor piercing and physical reses. Eredin also a bit slower and lower fire res.
+- slowed down rotfiends and graveirs
+- slowed down a bit endriaga workers
+
+Version 26
 
 Small nerf to Dancing Star impact damage, a bigger one to Devil's Puffbal impact damage.
 
