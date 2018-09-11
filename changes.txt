@@ -1,4 +1,10 @@
-﻿Version 27
+﻿Version 28
+
+Fixed a strange logic that injury chance setting was the same versus the player and for player's attacks.
+Injury chance is now independent from the setting, higher, precise slashes skill increase it even more,
+but injury chance is greatly lowered when whirling.
+
+Version 27
 
 Fixed a bug where glyphword Levity would affect medium armor set bonus.
 Fixed a bug where player's armor piercing could apply to stuff other than sword attacks and bolts.

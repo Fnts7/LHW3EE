@@ -150,32 +150,38 @@ class W3EEInjurySystem
 		var appliedInjury : EInjuryType;
 		var injuryChance : float;
 		var injuryResist : float;
-		var applyInjury : bool;
 		
 		if( (CPlayer)cachedActor && Options().InjuryPlayerImmunity() )
 			return;
 		
 		if( !attackAction.DealsAnyDamage() || attackAction.IsCountered() || attackAction.IsParried() || attackAction.IsActionWitcherSign() || attackAction.IsActionEnvironment() || attackAction.IsParried() )
 			return;
-		
-		injuryChance = Options().InjuryChance();
+			
+		playerAttacker = (W3PlayerWitcher)attackAction.attacker;
+		if (playerAttacker)
+			injuryChance = 0.06f;
+		else
+			injuryChance = Options().InjuryChance() / 100.0f;
+			
 		if( injuryChance > 0.f )
 		{
-			playerAttacker = (W3PlayerWitcher)attackAction.attacker;
-			injuryResist = ((CNewNPC)cachedActor).GetNPCCustomStat(theGame.params.DAMAGE_NAME_INJURY);
-			
 			if( attackAction.GetForceInjury() )
-				injuryChance = 100;
+				injuryChance = 1.0f;
 			else
 			{
 				
 				if( attackAction.IsCriticalHit() )
-					injuryChance *= 1.5f;
+					injuryChance *= 2.0f;
 				
 				if( playerAttacker )
 				{
 					if( playerAttacker.IsLightAttack(attackAction.GetAttackName()) )
-						injuryChance += injuryChance * (0.1f * GetWitcherPlayer().GetSkillLevel(S_Sword_s17));
+					{
+						injuryChance *= 1.0f + 0.2f * playerAttacker.GetSkillLevel(S_Sword_s17);
+						
+						if (playerAttacker.GetCombatAction() == EBAT_SpecialAttack_Light)
+							injuryChance /= 3.0f;
+					}
 					injuryChanceMult = playerAttacker.GetAttributeValue('injury_chance');
 					injuryChance *= 1.f + injuryChanceMult.valueMultiplicative;
 					
@@ -189,14 +195,20 @@ class W3EEInjurySystem
 					injuryChance -= injuryChance * (0.1f * GetWitcherPlayer().GetSkillLevel(S_Sword_s10));
 					chanceMult = ClampF(chanceMult, 0.f, 1.f);
 					injuryChance *= chanceMult * (1.f - injuryChanceMult.valueMultiplicative);
+					
+					injuryChance /= appliedInjuries.Size() + 1;
 				}
-				injuryChance /= appliedInjuries.Size() + 1;
+				else
+					injuryChance /= (appliedInjuries.Size() * 0.5f) + 1.0f;
 			}
 			
-			injuryChance *= 1 - injuryResist;
-			applyInjury = RandRange(100, 0) < injuryChance;
+			if ( (CNewNPC)cachedActor ) 
+			{
+				injuryResist = ((CNewNPC)cachedActor).GetNPCCustomStat(theGame.params.DAMAGE_NAME_INJURY);
+				injuryChance *= 1 - injuryResist;
+			}
 			
-			if( applyInjury )
+			if( RandF() < injuryChance )
 			{
 				appliedInjury = GetInjuryType(attackAction);
 				if( appliedInjury != EIT_None )

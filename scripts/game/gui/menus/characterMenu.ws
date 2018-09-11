@@ -2526,7 +2526,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(RoundMath(arg*100));*/
 				//baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /*+ "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%"*/;
 				argsInt.PushBack(3 * skillLevel);
-				argsInt.PushBack(10 * skillLevel);
+				argsInt.PushBack(20 * skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_PreciseBlowsSkill", argsInt);
 				break;
 			case S_Sword_s18:
