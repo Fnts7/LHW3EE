@@ -422,7 +422,7 @@ class W3DamageManagerProcessor extends CObject
 			if(dmgInfos[i].dmgType == theGame.params.DAMAGE_NAME_POISON && witcher == actorVictim && witcher.HasBuff(EET_GoldenOriole) && witcher.GetPotionBuffLevel(EET_GoldenOriole) == 3)
 			{
 				// W3EE - Begin
-				witcher.GainStat(BCS_Vitality, dmgInfos[i].dmgVal / 2);
+				witcher.GainStat(BCS_Vitality, dmgInfos[i].dmgVal / 4.0f);
 				// W3EE - End
 				
 				if ( canLog )
@@ -1648,9 +1648,24 @@ class W3DamageManagerProcessor extends CObject
 				
 				if(attackAction && playerAttacker)
 				{
+					if (actorVictim)
+					{
+						if ( actorVictim.HasBuff( EET_Confusion ) )
+						{
+							criticalDamageBonus.valueAdditive += ( ( W3ConfuseEffect )actorVictim.GetBuff( EET_Confusion ) ).GetCriticalDamageBonus();
+						}
+						else if (actorVictim.HasBuff( EET_AxiiGuardMe ) )
+						{
+							criticalDamageBonus.valueAdditive += ( ( W3Effect_AxiiGuardMe )actorVictim.GetBuff( EET_AxiiGuardMe ) ).GetCriticalDamageBonus();
+						}
+					}
+				
 					if ((W3BoltProjectile)attackAction.causer)
 					{
-						criticalDamageBonus.valueAdditive *= 2.0f;
+						if ( GetWitcherPlayer().IsMutationActive( EPMT_Mutation9 ) )
+							criticalDamageBonus.valueAdditive += 0.12f;
+						criticalDamageBonus.valueAdditive *= 2.4f;
+						criticalDamageBonus.valueMultiplicative *= 2.4f;
 					}
 					else if(playerAttacker.IsLightAttack(attackAction.GetAttackName()))
 						criticalDamageBonus += actorAttacker.GetAttributeValue('critical_hit_chance_fast_style');
@@ -1663,18 +1678,6 @@ class W3DamageManagerProcessor extends CObject
 					//else if (!playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && playerAttacker.CanUseSkill(S_Sword_s17))
 						//criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s17);
 					// W3EE - End
-					
-					if (actorVictim)
-					{
-						if ( actorVictim.HasBuff( EET_Confusion ) )
-						{
-							criticalDamageBonus.valueAdditive += ( ( W3ConfuseEffect )actorVictim.GetBuff( EET_Confusion ) ).GetCriticalDamageBonus();
-						}
-						else if (actorVictim.HasBuff( EET_AxiiGuardMe ) )
-						{
-							criticalDamageBonus.valueAdditive += ( ( W3Effect_AxiiGuardMe )actorVictim.GetBuff( EET_AxiiGuardMe ) ).GetCriticalDamageBonus();
-						}
-					}
 				}
 			}
 			
@@ -1869,7 +1872,8 @@ class W3DamageManagerProcessor extends CObject
 		//var encumbranceBonus : float;
 		var temp : bool;
 		var fistfightDamageMult : float;
-		var burning : W3Effect_Burning;
+		//var burning : W3Effect_Burning;		
+		var orioleLevel : int;
 		var npcAttacker : CNewNPC;
 		var witcherAttacker, witcherVictim : W3PlayerWitcher;
 		var damageHandler : W3EEDamageHandler = Damage();
@@ -1993,6 +1997,15 @@ class W3DamageManagerProcessor extends CObject
 				else
 				if( npcAttacker.IsHeavyAttack(attackAction.GetAttackName()) || npcAttacker.IsSuperHeavyAttack(attackAction.GetAttackName()) )
 					armorPiercing = MinF(1.f, armorPiercing * damageHandler.eaph);
+					
+				if (dmgInfo.dmgType == theGame.params.DAMAGE_NAME_POISON && armorPiercing > 0 && playerVictim && playerVictim.HasBuff(EET_GoldenOriole))
+				{
+					orioleLevel = playerVictim.GetBuff(EET_GoldenOriole).GetBuffLevel();
+					if (orioleLevel >= 2)
+						armorPiercing = 0;
+					else
+						armorPiercing *= 0.5f;
+				}
 			}
 		}
 		
@@ -2095,7 +2108,7 @@ class W3DamageManagerProcessor extends CObject
 		}
 		*/
 		
-		if(finalDamage == 0.f)
+		if(finalDamage <= 0.f)
 			action.SetArmorReducedDamageToZero();
 		
 		
@@ -3595,8 +3608,10 @@ class W3DamageManagerProcessor extends CObject
 				actorVictim.ForceSetStat( actorVictim.GetUsedHealthType(), maxHealth * ( 1 - min.valueMultiplicative ) );
 			}
 			
-			attribute.valueMultiplicative = 0.5f;
-			action.AddEffectInfo( EET_KnockdownTypeApplicator, 0.1f, attribute, , , 1.f );
+			attribute.valueMultiplicative = 0.75f + action.GetKnockdownChanceCombined() * 1.1f;			
+			action.RemoveBuffsByType(EET_Knockdown);
+			action.RemoveBuffsByType(EET_HeavyKnockdown);			
+			action.AddEffectInfo( EET_KnockdownTypeApplicator, , attribute, , , 1.f );
 		}
 		// W3EE - End
 	}

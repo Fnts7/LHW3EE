@@ -62,7 +62,7 @@
 			
 			<!-- Doppler -->
 			<ability name="Mutagen11Effect">
-				<damageIncrease type="mult" min="0.25"/>
+				<damageIncrease type="mult" min="0.35" />
 			</ability>
 			
 			<!-- Troll -->

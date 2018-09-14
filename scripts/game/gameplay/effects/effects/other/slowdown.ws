@@ -102,7 +102,7 @@ class W3Effect_Slowdown extends CBaseGameplayEffect
 		target.ResetAnimationSpeedMultiplier(slowdownCauserId);
 	}
 	
-	event OnEffectAddedPost()
+	/*event OnEffectAddedPost()
 	{
 		if( IsAddedByPlayer() && GetWitcherPlayer().IsMutationActive( EPMT_Mutation12 ) && target != thePlayer )
 		{
@@ -110,5 +110,5 @@ class W3Effect_Slowdown extends CBaseGameplayEffect
 		}
 		
 		super.OnEffectAddedPost();
-	}
+	}*/
 }

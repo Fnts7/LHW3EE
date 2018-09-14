@@ -72,7 +72,7 @@ class W3Effect_WellFed extends W3RegenEffect
 			toxPerc = witcher.GetStatPercents(BCS_Toxicity);
 	
 			if (toxPerc > 0)
-				value *= 1 - ( (0.5f - 0.06f * witcher.GetSkillLevel(S_Alchemy_s01)) * toxPerc );
+				value *= 1 - ( (0.45f - 0.06f * witcher.GetSkillLevel(S_Alchemy_s01)) * toxPerc );
 						
 			effectManager.CacheStatUpdate(BCS_Vitality, value * dt);
 		}

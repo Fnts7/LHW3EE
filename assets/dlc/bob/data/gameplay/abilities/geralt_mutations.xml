@@ -21,7 +21,7 @@
         </ability> 
 		
     	<ability name="Mutation5" >
-    		<mut5_dmg_red_perc type="add" min="0.1" />
+    		<mut5_dmg_red_perc type="add" min="0.15" />
     	</ability>
 		
 		<ability name="Mutation6" >
@@ -47,7 +47,7 @@
 		
 		<ability name="Mutation9">
 			<health_reduction type="mult" min="0.05" />
-			<critical_hit_chance type="mult" min="0.2" />
+			<critical_hit_chance type="mult" min="0.15" />
 			<damage type="add" min="30" />
 		</ability>
 
@@ -58,12 +58,12 @@
 		
 		<ability name="Mutation12">
 			<!-- internal cooldown between applications -->
-    		<cooldown type="add" min="0.10" />
-			
+    		<cooldown type="add" min="8" max="12" />
+
 			<!-- decoction duration -->
-			<duration type="add" min="120" /> 
+			<duration type="add" min="120" max="180" />
 			
-			<maxcap type="add" min="3" />
+			<maxcap type="add" min="2" />
     	</ability>
 		
 		<ability name="Mutation Master">
@@ -77,7 +77,7 @@
   </definitions>
   <custom>
     <mutations>	
-		<mutation type_name="mutation1" redMutagenPoints="2" blueMutagenPoints="3" greenMutagenPoints="0" skillPoints="5" localizationNameKey_name="skill_name_mutation_1" localizationDescriptionKey_name="skill_desc_mutation_1" iconPath_name="icons\mutations\mutation_1.png" soundbank="ep2_mutations_01.bnk">
+		<mutation type_name="mutation1" redMutagenPoints="2" blueMutagenPoints="3" greenMutagenPoints="0" skillPoints="4" localizationNameKey_name="skill_name_mutation_1" localizationDescriptionKey_name="skill_desc_mutation_1" iconPath_name="icons\mutations\mutation_1.png" soundbank="ep2_mutations_01.bnk">
 			<colors>
 				red, blue
 			</colors>
@@ -86,7 +86,7 @@
 			</required_mutations>
 		</mutation>
 		
-		<mutation type_name="mutation2" redMutagenPoints="0" blueMutagenPoints="2" greenMutagenPoints="0" skillPoints="2" localizationNameKey_name="skill_name_mutation_2" localizationDescriptionKey_name="skill_desc_mutation_2" iconPath_name="icons\mutations\mutation_2.png" soundbank="ep2_mutations_02.bnk">
+		<mutation type_name="mutation2" redMutagenPoints="0" blueMutagenPoints="2" greenMutagenPoints="0" skillPoints="3" localizationNameKey_name="skill_name_mutation_2" localizationDescriptionKey_name="skill_desc_mutation_2" iconPath_name="icons\mutations\mutation_2.png" soundbank="ep2_mutations_02.bnk">
 			<colors>
 				blue
 			</colors>
@@ -107,7 +107,7 @@
 			</colors>
 		</mutation>
 		
-		<mutation type_name="mutation5" redMutagenPoints="2" blueMutagenPoints="0" greenMutagenPoints="3" skillPoints="5" localizationNameKey_name="skill_name_mutation_5" localizationDescriptionKey_name="skill_desc_mutation_5" iconPath_name="icons\mutations\mutation_5.png">
+		<mutation type_name="mutation5" redMutagenPoints="2" blueMutagenPoints="0" greenMutagenPoints="3" skillPoints="4" localizationNameKey_name="skill_name_mutation_5" localizationDescriptionKey_name="skill_desc_mutation_5" iconPath_name="icons\mutations\mutation_5.png">
 			<colors>
 				red, green
 			</colors>
@@ -125,7 +125,7 @@
 			</required_mutations>
 		</mutation>
 		
-		<mutation type_name="mutation7" redMutagenPoints="2" blueMutagenPoints="3" greenMutagenPoints="0" skillPoints="5" localizationNameKey_name="skill_name_mutation_7" localizationDescriptionKey_name="skill_desc_mutation_7" iconPath_name="icons\mutations\mutation_7.png" soundbank="ep2_mutations_07.bnk">
+		<mutation type_name="mutation7" redMutagenPoints="2" blueMutagenPoints="3" greenMutagenPoints="0" skillPoints="3" localizationNameKey_name="skill_name_mutation_7" localizationDescriptionKey_name="skill_desc_mutation_7" iconPath_name="icons\mutations\mutation_7.png" soundbank="ep2_mutations_07.bnk">
 			<colors>
 				red, blue
 			</colors>
@@ -140,7 +140,7 @@
 			</colors>			
 		</mutation>
 		
-		<mutation type_name="mutation9" redMutagenPoints="2" blueMutagenPoints="0" greenMutagenPoints="3" skillPoints="5" localizationNameKey_name="skill_name_mutation_9" localizationDescriptionKey_name="skill_desc_mutation_9" iconPath_name="icons\mutations\mutation_9.png" soundbank="ep2_mutations_09.bnk">
+		<mutation type_name="mutation9" redMutagenPoints="2" blueMutagenPoints="0" greenMutagenPoints="3" skillPoints="3" localizationNameKey_name="skill_name_mutation_9" localizationDescriptionKey_name="skill_desc_mutation_9" iconPath_name="icons\mutations\mutation_9.png" soundbank="ep2_mutations_09.bnk">
 			<colors>
 				red, green
 			</colors>
@@ -158,7 +158,7 @@
 			</required_mutations>
 		</mutation>
 		
-		<mutation type_name="mutation11" redMutagenPoints="3" blueMutagenPoints="2" greenMutagenPoints="2" skillPoints="7" localizationNameKey_name="skill_name_mutation_11" localizationDescriptionKey_name="skill_desc_mutation_11" iconPath_name="icons\mutations\mutation_11.png" soundbank="ep2_mutations_11.bnk">
+		<mutation type_name="mutation11" redMutagenPoints="3" blueMutagenPoints="2" greenMutagenPoints="2" skillPoints="5" localizationNameKey_name="skill_name_mutation_11" localizationDescriptionKey_name="skill_desc_mutation_11" iconPath_name="icons\mutations\mutation_11.png" soundbank="ep2_mutations_11.bnk">
 			<colors>
 				red, blue, green
 			</colors>
@@ -167,7 +167,7 @@
 			</required_mutations>
 		</mutation>
 		
-		<mutation type_name="mutation12" redMutagenPoints="2" blueMutagenPoints="2" greenMutagenPoints="3" skillPoints="7" localizationNameKey_name="skill_name_mutation_12" localizationDescriptionKey_name="skill_desc_mutation_12" iconPath_name="icons\mutations\mutation_12.png">
+		<mutation type_name="mutation12" redMutagenPoints="2" blueMutagenPoints="2" greenMutagenPoints="3" skillPoints="4" localizationNameKey_name="skill_name_mutation_12" localizationDescriptionKey_name="skill_desc_mutation_12" iconPath_name="icons\mutations\mutation_12.png">
 			<colors>
 				red, blue, green
 			</colors>

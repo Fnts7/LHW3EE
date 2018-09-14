@@ -1,4 +1,54 @@
-﻿Version 28
+﻿Version 29
+
+Fixed a big bug where many critical damage bonuses would not apply (that is oils, hunter instinct skill and doppler
+decoction for example). It really surpised me to find such bug after many months of playing with the mod. Because
+all of that time I played with this bug present and being convinced that those crit damages work fine, I had to
+tweak many crit damages after fixing it. Basic Geralt crit damage bonus lowered from 35% to 30%. Hunter Instinct
+skill lowered to 4% per skill level. Oils have their stats lowered:
+lvl1: +8% crit chance, +12% crit damage
+lvl2: +12% crit chance, +18% crit damage
+lvl3: +12% crit chance, +24% crit damage, -10% reses
+
+Doppler decoction damage bonus is boosted to 35%.
+
+Fixed another bug - toxicity offset of decoctions was not counted in many situations to the current toxicity
+percentage. For example regen penalties. After fixing also reduced base regen penalties caused by toxicity.
+
+Mutations
+- Revised mutation costs. Mostly lowered gold mutations - that is because to get to them you still need to sacrifice
+skill points for previous mutations, so the overall cost is still high.
+- Skin mutation boosted to 15% dmg reduction per vigor point. Four vigor points due to Maribor Forest will not make it
+possible to have 60% resistance, but it will be easier to maintain 45%, so 3 vigor points value. With normal 3 vigor
+points, 45% is only possible on max vigor.
+- Cat Eyes mutation has slightly lower crit chance bonus, but has also crit damage bonus. And also improved force
+effect logic, so that blunt bolts make the force effect of that mutation really stronger, allowing e.g. heavy
+knockdown
+- Toxic Blood mutation nerfed by 20% and also made indicator to show more sane value - current damage as percentage
+of max vitality.
+- Metamorphosis mutation is changed so that decoctions are applied automatically. Also because in this mod I boosted
+decoctions greatly, this mutation allows to have 2 decoctions effects at once instead of 3.
+
+Golden Oriole balanced better:
+lvl1 - gives significant poison res, that still can be reduced by enemies armor piercing value
+lvl2 - gives 100% poison res always
+lvl3 - poison heals instead of dealing damage, but reduced healing rate - it was absurd
+
+Adjusted Tir Tochair relic sword. Lower fast attacks armor piercing, lower attack power penalties and stamina cost penalty,
+but has now also sign power penalty.
+
+Adjusted requirements for witcher gear set bonuses. Now every archmaster piece counts as 1.5, every other as
+1. So for sets with crossbow you can have 10 points this way, with no crossbow 9. The requirements then for
+minor set bonus: max / 2 (4.5 for sets with no crossbow, 5 with it), for major set bonus (3/4) * max. The tooltip
+will show requirements as you would have only non archmaster or only archmaster. But for example with wolf (no crossbow)
+set if you have 2 archmaster pieces and 1 non archmaster, that is 4.5 together and that is enough for minor set bonus.
+
+Frenzy skill boosted a bit now has max 24% speed bonus at lvl 3.
+
+Precise blows skill has even higher injury chance bonus, but lowered base injury chance.
+
+Archespor a bit slower and lower HP.
+
+Version 28
 
 Fixed a strange logic that injury chance setting was the same versus the player and for player's attacks.
 Injury chance is now independent from the setting, higher, precise slashes skill increase it even more,

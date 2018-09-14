@@ -2526,7 +2526,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(RoundMath(arg*100));*/
 				//baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /*+ "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%"*/;
 				argsInt.PushBack(3 * skillLevel);
-				argsInt.PushBack(20 * skillLevel);
+				argsInt.PushBack(25 * skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_PreciseBlowsSkill", argsInt);
 				break;
 			case S_Sword_s18:
@@ -2906,7 +2906,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				arg = 8 * skillLevel;
 				argsInt.PushBack(RoundMath(arg));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
-				baseString += "<br>Reduces toxicity negative influence on vitality regen from 50% to " + (50 - 6 * skillLevel) +"%.";
+				baseString += "<br>Reduces toxicity negative influence on vitality regen from 45% to " + (45 - 6 * skillLevel) +"%.";
 				// W3EE - End
 				break;
 			case S_Alchemy_s02:
@@ -3044,7 +3044,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				break;
 			// W3EE - Begin
 			case S_Alchemy_s16:
-				argsInt.PushBack(skillLevel * 5 + 5);
+				argsInt.PushBack(skillLevel * 7 + 3);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_Frenzy", argsInt);
 				break;
 			case S_Alchemy_s17:
@@ -3081,8 +3081,8 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(RoundMath(arg*100));
 				*/
 				argsInt.PushBack(70 - 6 * skillLevel);
-				argsInt.PushBack(60);
-				argsInt.PushBack(60 - 6 * skillLevel);
+				argsInt.PushBack(55);
+				argsInt.PushBack(55 - 6 * skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_EndurePain", argsInt) + " (vigor and stamina)";
 				// W3EE - End
 				break;

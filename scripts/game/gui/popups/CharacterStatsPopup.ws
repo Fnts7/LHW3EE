@@ -574,7 +574,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	// W3EE - Begin
 	else if ( varKey == 'staminaRegen' ) 
 	{
-		clampVal = 0.6f - 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20);
+		clampVal = 0.55f - 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20);
 		
 		sp = GetWitcherPlayer().GetAttributeValue('staminaRegen');
 		valueAbility = sp.valueAdditive + sp.valueMultiplicative * GetWitcherPlayer().GetStatMax(BCS_Stamina);
@@ -591,7 +591,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	}
 	else if ( varKey == 'staminaOutOfCombatRegen' ) 
 	{
-		clampVal = 0.6f - 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20);
+		clampVal = 0.55f - 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20);
 		
 		sp = GetWitcherPlayer().GetAttributeValue('staminaRegen');
 		valueAbility = sp.valueAdditive + sp.valueMultiplicative * GetWitcherPlayer().GetStatMax(BCS_Stamina);
@@ -613,7 +613,7 @@ function AddCharacterStat(tag : string, varKey:name, locKey:string, iconTag:stri
 	}
 	else if ( varKey == 'toxicRegenRed' ) 
 	{
-		valueAbility =  (0.6f - 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20)) * GetWitcherPlayer().GetStatPercents(BCS_Toxicity) * 100;
+		valueAbility =  (0.55f - 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20)) * GetWitcherPlayer().GetStatPercents(BCS_Toxicity) * 100;
 		
 		valueStr = NoTrailZeros(RoundMath(valueAbility)) + "%"; 
 	}
@@ -1074,12 +1074,12 @@ function AddCharacterStatSigns(tag : string, varKey:name, locKey:string, iconTag
 	{
 		sp = GetWitcherPlayer().GetAttributeValue('vigor_regen');
 		sp.valueMultiplicative += 1;
-		valueAbility = 0.135f * sp.valueMultiplicative * GetWitcherPlayer().GetStatPercents(BCS_Vitality) * (1 + GetWitcherPlayer().GetAdrenalineEffect().GetValue()) * Options().AdrGenSpeedMult * ClampF( (1 - GetWitcherPlayer().GetStatPercents(BCS_Toxicity)) * 1.5, 0.4f + 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20), 1.0f );
+		valueAbility = 0.135f * sp.valueMultiplicative * GetWitcherPlayer().GetStatPercents(BCS_Vitality) * (1 + GetWitcherPlayer().GetAdrenalineEffect().GetValue()) * Options().AdrGenSpeedMult * ClampF( (1 - GetWitcherPlayer().GetStatPercents(BCS_Toxicity)) * 1.5, 0.45f + 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20), 1.0f );
 		valueStr = NoTrailZeros(RoundTo(valueAbility, 3)) + "/" + GetLocStringByKeyExt("per_second");
 	}
 	else if ( varKey == 'vigorRegenDelay' ) 
 	{
-		valueAbility = Options().AdrPerc * GetWitcherPlayer().GetStatPercents(BCS_Vitality) * Options().AdrGenSpeedMult * (1.f - ((0.6f - 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20)) * GetWitcherPlayer().GetStatPercents(BCS_Toxicity))) * 100;
+		valueAbility = Options().AdrPerc * GetWitcherPlayer().GetStatPercents(BCS_Vitality) * Options().AdrGenSpeedMult * (1.f - ((0.55f - 0.06f * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s20)) * GetWitcherPlayer().GetStatPercents(BCS_Toxicity))) * 100;
 		valueStr = NoTrailZeros(RoundTo(Options().AdrGenDelay, 1)) + " " + GetLocStringByKeyExt("per_second");
 	}
 	else if ( varKey == 'vigorLossLight' ) 

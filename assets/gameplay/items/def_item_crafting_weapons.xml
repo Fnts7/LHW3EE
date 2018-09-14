@@ -258,12 +258,13 @@
 		<SlashingDamage					type="base"	min="405"				/>
 		<SilverDamage					type="base"	min="1"					/>
 		<ShockDamage					type="add"	min="30"				/>
-		<armor_reduction_fast_style 	type="mult"	min="0.23"				/>
+		<armor_reduction_fast_style 	type="mult"	min="0.15"				/>
 		<critical_hit_damage_bonus		type="add"	min="0.15"				/>
 		<attack_speed					type="mult" min="0.06"				/>
-		<attack_power_heavy_style		type="mult" min="-0.15"				/>
-		<attack_power_fast_style		type="mult" min="-0.075"			/>
-		<parry_stamina_cost_bonus		type="mult" min="-0.13"				/>
+		<attack_power_heavy_style		type="mult" min="-0.075"			/>
+		<attack_power_fast_style		type="mult" min="-0.05"				/>
+		<parry_stamina_cost_bonus		type="mult" min="-0.075"			/>
+		<spell_power	 				type="mult"	min="-0.1"				/>		
 	</ability>
 
 <!-- STEEL RELIC -->

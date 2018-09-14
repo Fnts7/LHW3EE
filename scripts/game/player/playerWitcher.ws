@@ -595,6 +595,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		AddTimer('ResetAdrenalineCombat', 5.f, false);
 		
+		if (IsMutationActive(EPMT_Mutation12))
+			AddTimer( 'Mutation12Refresh', 10.0f);
+		
 		RemoveAbilityAll('magic_staminaregen');
 		
 		RemoveAbilityAll('sword_adrenalinegain');
@@ -2249,7 +2252,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( IsMutationActive( EPMT_Mutation5 ) && !IsAnyQuenActive() && !damageData.IsDoTDamage() )
 		{
 			focus = GetStat( BCS_Focus );
-			currAdrenaline = FloorF( focus );
+			currAdrenaline = MinF(3.0f, FloorF( focus ));
 			if( currAdrenaline >= 1 )
 			{
 				theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation5', 'mut5_dmg_red_perc', min, max );
@@ -2620,7 +2623,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		if( inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) && GetStat( BCS_Focus ) > 0 && CanUseSkill( S_Alchemy_s07 ) )
 		{
-			monsterBonusType = MonsterCategoryToAttackPowerBonus( victimMonsterCategory );
+			monsterBonusType = MonsterCategoryToCriticalChanceBonus( victimMonsterCategory );
 			oilBonus = inv.GetItemAttributeValue( weaponId, monsterBonusType );
 			if(oilBonus != null)	
 			{
@@ -2851,7 +2854,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		if( IsMutationActive( EPMT_Mutation10 ) && ( action.IsActionMelee() || action.IsActionWitcherSign() ) )
+		if( IsMutationActive( EPMT_Mutation10 ) && GetStatPercents(BCS_Toxicity) >= 0.1f && ( action.IsActionMelee() || action.IsActionWitcherSign() ) )
 		{
 			PlayEffect( 'mutation_10_energy' );
 		}
@@ -3012,7 +3015,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		// W3EE - End
 		
 		
-		mutation12IsOnCooldown = false;
+		//mutation12IsOnCooldown = false;
 		
 		
 		quenEntity = (W3QuenEntity)signs[ST_Quen].entity;		
@@ -3103,8 +3106,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 			PlayEffect( 'mutation_10' );
 			
 			
-			PlayEffect( 'critical_toxicity' );
-			AddTimer( 'Mutation10StopEffect', 5.f );
+			/*PlayEffect( 'critical_toxicity' );
+			AddTimer( 'Mutation10StopEffect', 5.f );*/
 		}
 	}
 	
@@ -3168,10 +3171,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 		return false;
 	}
 	
-	timer function Mutation10StopEffect( dt : float, id : int )
+	/*timer function Mutation10StopEffect( dt : float, id : int )
 	{
 		StopEffect( 'critical_toxicity' );
-	}
+	}*/
 	
 	// W3EE - Begin
 	timer function ResetAdrenalineCombat( dt : float, id : int )
@@ -4075,36 +4078,36 @@ statemachine class W3PlayerWitcher extends CR4Player
 		theGame.GetGameCamera().StopAnimation( 'camera_shake_loop_lvl1_1' );
 	}
 	
-	private var mutation12IsOnCooldown : bool;
+	//private var mutation12IsOnCooldown : bool;
 	
 	public final function AddMutation12Decoction()
 	{
 		var params : SCustomEffectParams;
 		var buffs : array< EEffectType >;
 		var existingDecoctionBuffs : array<CBaseGameplayEffect>;
-		var i : int;
+		var i, maxCount : int;
 		var effectType : EEffectType;
 		var decoctions : array< SItemUniqueId >;
 		var tmpName : name;
 		var min, max : SAbilityAttributeValue;
 		
-		if( mutation12IsOnCooldown )
+		/*if( mutation12IsOnCooldown )
 		{
 			return;
-		}
+		}*/
 		
 		
 		existingDecoctionBuffs = GetDrunkMutagens( "Mutation12" );
 		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation12', 'maxcap', min, max );
-		if( existingDecoctionBuffs.Size() >= min.valueAdditive )
+		maxCount = (int)min.valueAdditive;		
+		//mutation12IsOnCooldown = true;		
+		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation12', 'cooldown', min, max );
+		AddTimer( 'Mutation12Refresh', CalculateAttributeValue( GetAttributeRandomizedValue(min, max) ) );
+		
+		if( existingDecoctionBuffs.Size() >= maxCount )
 		{
 			return;
 		}
-		
-		
-		mutation12IsOnCooldown = true;		
-		theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation12', 'cooldown', min, max );
-		AddTimer( 'Mutation12Cooldown', CalculateAttributeValue( min ) );
 		
 		
 		decoctions = inv.GetItemsByTag( 'Mutagen' );
@@ -4139,6 +4142,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 		// buffs.Remove( EET_Mutagen24 );
 		// W3EE - End
 		
+		buffs.Remove( EET_Mutagen06 ); // nightwraith
+		buffs.Remove( EET_Mutagen09 ); // fogling
+		buffs.Remove( EET_Mutagen23 ); // basilisk
+		buffs.Remove( EET_Mutagen28 ); // lagodziciel
+		
 		if( buffs.Size() == 0 )
 		{
 			return;
@@ -4149,7 +4157,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		params.effectType = buffs[ RandRange( buffs.Size() ) ];
 		params.creator = this;
 		params.sourceName = "Mutation12";
-		params.duration = min.valueAdditive;
+		params.duration = CalculateAttributeValue( GetAttributeRandomizedValue(min, max) );
 		AddEffectCustom( params );
 		( ( W3Mutagen_Effect ) GetBuff( params.effectType, params.sourceName ) ).OverrideIcon( DecoctionEffectTypeToItemName( params.effectType ) );
 		
@@ -4162,9 +4170,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 		theGame.MutationHUDFeedback( MFT_PlayOnce );
 	}
 	
-	timer function Mutation12Cooldown( dt : float, id : int )
+	public timer function Mutation12Refresh( dt : float, id : int )
 	{
-		mutation12IsOnCooldown = false;
+		//mutation12IsOnCooldown = false;
+		
+		if (IsMutationActive(EPMT_Mutation12))
+			AddMutation12Decoction();		
 	}
 	
 	
@@ -4508,7 +4519,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				tox = GetStatPercents( BCS_Toxicity );
 				if( tox > 0 )
 				{
-					tmp = RoundMath( GetStat(BCS_Vitality) * tox * 0.5f );
+					tmp = RoundMath( GetStat(BCS_Vitality) * tox * 0.4f );
 				}
 				else
 				{
@@ -4518,7 +4529,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				
 				//tox = GetStatMax( BCS_Toxicity );
-				tmp = RoundMath( GetStatMax(BCS_Vitality) * 0.5f );
+				tmp = RoundMath( GetStatMax(BCS_Vitality) * 0.4f );
 				arrStr.PushBack( NoTrailZeros( tmp ) );
 				// W3EE - End
 				break;
@@ -4635,7 +4646,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			case EPMT_Mutation12 :
 				
 				dm.GetAbilityAttributeValue( 'Mutation12', 'duration', min, max );
-				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );				
+				arrStr.PushBack( NoTrailZeros( (min.valueAdditive + max.valueAdditive) / 2.0f ) );				
 				
 				
 				dm.GetAbilityAttributeValue( 'Mutation12', 'maxcap', min, max );
@@ -4649,7 +4660,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 				break;
 		}
 		
-		return GetLocStringByKeyExtWithParams( locKey, , , arrStr );
+		if (mutationType == EPMT_Mutation9)
+			return GetLocStringByKeyExtWithParams( locKey, , , arrStr ) + " Increases also critical damage by 12%. Blunt bolts strengthen the mutation's force effect.";
+		else if (mutationType == EPMT_Mutation12)
+			return GetLocStringByKeyExtWithParams( locKey, , , arrStr ) + " LHW3EE: decoction effects are applied automaticaly and switched over time.";
+		else
+			return GetLocStringByKeyExtWithParams( locKey, , , arrStr );
 	}
 		
 	public final function ApplyMutation10StatBoost( out statValue : SAbilityAttributeValue )
@@ -4660,7 +4676,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( IsMutationActive( EPMT_Mutation10 ) )
 		{
 			// W3EE - Begin
-			currToxicity = GetStat(BCS_Toxicity) / GetStatMax(BCS_Toxicity);
+			currToxicity = GetStatPercents(BCS_Toxicity);
 			if( currToxicity > 0.f )
 			{
 				attValue = GetAttributeValue( 'mutation10_stat_boost' );
@@ -7293,6 +7309,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 	}
 	
 	
+	public function GetStatPercents(stat : EBaseCharacterStats) : float
+	{
+		if (stat == BCS_Toxicity)
+			return GetStat(BCS_Toxicity) / GetStatMax(BCS_Toxicity);
+		else
+			return super.GetStatPercents(stat);	
+	}	
+	
 	
 	public final function AddToxicityOffset( val : float)
 	{
@@ -8047,7 +8071,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		/*if( currToxicity > 0 )
 		{*/
-			customDamageValue.valueAdditive = MaxF(5.f, currToxicity * GetStat(BCS_Vitality) * 0.5f);
+			customDamageValue.valueAdditive = MaxF(5.f, currToxicity * GetStat(BCS_Vitality) * 0.4f);
 		//}
 		// W3EE - End
 		
@@ -10878,7 +10902,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	{
 		switch(bonus)
 		{
-			case EISB_Lynx_1:			return amountOfSetPiecesEquipped[ EIST_Lynx ] + Max(0, amountOfSetPiecesEquipped[ EIST_MinorLynx ] - (theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS - theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS)) >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
+			/*case EISB_Lynx_1:			return amountOfSetPiecesEquipped[ EIST_Lynx ] + Max(0, amountOfSetPiecesEquipped[ EIST_MinorLynx ] - (theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS - theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS)) >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
 			case EISB_Lynx_2:			return amountOfSetPiecesEquipped[ EIST_Lynx ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
 			case EISB_Gryphon_2:		return amountOfSetPiecesEquipped[ EIST_Gryphon ] +  Max(0, amountOfSetPiecesEquipped[ EIST_MinorGryphon ] - (theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS - theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS)) >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
 			case EISB_Gryphon_1:		return amountOfSetPiecesEquipped[ EIST_Gryphon ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
@@ -10887,7 +10911,23 @@ statemachine class W3PlayerWitcher extends CR4Player
 			case EISB_Wolf_2:			return amountOfSetPiecesEquipped[ EIST_Wolf ] +  Max(0, amountOfSetPiecesEquipped[ EIST_MinorWolf ] - (theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS - theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS)) >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
 			case EISB_Wolf_1:			return amountOfSetPiecesEquipped[ EIST_Wolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
 			case EISB_RedWolf_1:		return amountOfSetPiecesEquipped[ EIST_RedWolf ] +  Max(0, amountOfSetPiecesEquipped[ EIST_MinorRedWolf ] - (theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS - theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS)) >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
-			case EISB_RedWolf_2:		return amountOfSetPiecesEquipped[ EIST_RedWolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
+			case EISB_RedWolf_2:		return amountOfSetPiecesEquipped[ EIST_RedWolf ] >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;*/
+			
+			case EISB_Lynx_1:			return amountOfSetPiecesEquipped[ EIST_Lynx ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorLynx ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED_WITH_CROSSBOW * 0.5f - 0.001f;
+			case EISB_Lynx_2:			return amountOfSetPiecesEquipped[ EIST_Lynx ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorLynx ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED_WITH_CROSSBOW * 0.75f - 0.001f;
+			
+			case EISB_Gryphon_2:		return amountOfSetPiecesEquipped[ EIST_Gryphon ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorGryphon ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED * 0.5f - 0.001f;
+			case EISB_Gryphon_1:		return amountOfSetPiecesEquipped[ EIST_Gryphon ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorGryphon ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED * 0.75f - 0.001f;
+			
+			case EISB_Bear_1:			return amountOfSetPiecesEquipped[ EIST_Bear ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorBear ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED_WITH_CROSSBOW * 0.5f - 0.001f;
+			case EISB_Bear_2:			return amountOfSetPiecesEquipped[ EIST_Bear ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorBear ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED_WITH_CROSSBOW * 0.75f - 0.001f;
+			
+			case EISB_Wolf_2:			return amountOfSetPiecesEquipped[ EIST_Wolf ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorWolf ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED * 0.5f - 0.001f;
+			case EISB_Wolf_1:			return amountOfSetPiecesEquipped[ EIST_Wolf ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorWolf ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED * 0.75f - 0.001f;
+			
+			case EISB_RedWolf_1:		return amountOfSetPiecesEquipped[ EIST_RedWolf ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorRedWolf ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED * 0.5f - 0.001f;
+			case EISB_RedWolf_2:		return amountOfSetPiecesEquipped[ EIST_RedWolf ] * 1.5f + (float)amountOfSetPiecesEquipped[ EIST_MinorRedWolf ] > theGame.params.SET_ITEMS_COUNT_WEIGHTED * 0.75f - 0.001f;
+			
 			//case EISB_Vampire:			return amountOfSetPiecesEquipped[ EIST_Vampire ] >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
 			// W3EE - Begin
 			case EISB_Gothic1:			return amountOfSetPiecesEquipped[ EIST_Gothic ] + IsHelmetEquipped(EIST_Gothic) >= theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
@@ -11523,6 +11563,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 			arrString.PushBack( FloatToString( min.valueAdditive * amountOfSetPiecesEquipped[ EIST_Vampire ] ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;*/
+		case EISB_Wolf_2:
+			finalString = "Negative influences on stamina regen (like low HP, toxicity) as well as negative influences of low stamina (action speed, attack power) are reduced proportionally to current adrenaline. Also low HP influence on vigor regen is reduced the same way.";
+			break;
 		default:
 			finalString = GetLocStringByKeyExtWithParams( tempString );			
 		}

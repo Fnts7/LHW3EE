@@ -20,16 +20,16 @@
       <ability name="BeastOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsBeast_critical_hit_chance min="0.1" type="mult" />        
-        <vsBeast_critical_hit_damage_bonus min="0.15" type="mult" />    
+        <vsBeast_critical_hit_chance min="0.08" type="mult" />        
+        <vsBeast_critical_hit_damage_bonus min="0.12" type="mult" />    
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="BeastOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsBeast_critical_hit_chance min="0.15" type="mult" />        
-        <vsBeast_critical_hit_damage_bonus min="0.25" type="mult" />        
+        <vsBeast_critical_hit_chance min="0.12" type="mult" />        
+        <vsBeast_critical_hit_damage_bonus min="0.18" type="mult" />        
         <ammo type="add" min="45" />	
       </ability>
 	  
@@ -37,8 +37,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsBeast_resist_reduction min="0.1" type="mult" />
-        <vsBeast_critical_hit_chance min="0.15" type="mult" />
-		<vsBeast_critical_hit_damage_bonus min="0.3" type="mult" />      
+        <vsBeast_critical_hit_chance min="0.12" type="mult" />
+		<vsBeast_critical_hit_damage_bonus min="0.24" type="mult" />      
         <ammo type="add" min="45" />
 		<vsBeast_resist_reduction />
       </ability>
@@ -47,16 +47,16 @@
       <ability name="CursedOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsCursed_critical_hit_chance min="0.1" type="mult" />
-        <vsCursed_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsCursed_critical_hit_chance min="0.08" type="mult" />
+        <vsCursed_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="CursedOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsCursed_critical_hit_chance min="0.15" type="mult" />
-        <vsCursed_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsCursed_critical_hit_chance min="0.12" type="mult" />
+        <vsCursed_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -64,8 +64,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsCursed_resist_reduction min="0.1" type="mult" />       
-        <vsCursed_critical_hit_chance min="0.15" type="mult" />
-        <vsCursed_critical_hit_damage_bonus min="0.3" type="mult" />    
+        <vsCursed_critical_hit_chance min="0.12" type="mult" />
+        <vsCursed_critical_hit_damage_bonus min="0.24" type="mult" />    
         <ammo type="add" min="45" />
 		<vsCursed_resist_reduction />
       </ability>
@@ -74,16 +74,16 @@
       <ability name="HangedManVenom_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsHuman_critical_hit_chance min="0.1" type="mult" />
-        <vsHuman_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsHuman_critical_hit_chance min="0.08" type="mult" />
+        <vsHuman_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="HangedManVenom_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsHuman_critical_hit_chance min="0.15" type="mult" />
-        <vsHuman_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsHuman_critical_hit_chance min="0.12" type="mult" />
+        <vsHuman_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -91,8 +91,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsHuman_resist_reduction min="0.05" type="mult" />
-        <vsHuman_critical_hit_chance min="0.15" type="mult" />
-        <vsHuman_critical_hit_damage_bonus min="0.35" type="mult" />
+        <vsHuman_critical_hit_chance min="0.12" type="mult" />
+        <vsHuman_critical_hit_damage_bonus min="0.3" type="mult" />
         <ammo type="add" min="45" />
 		<vsHuman_resist_reduction />
       </ability>
@@ -101,16 +101,16 @@
       <ability name="HybridOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsHybrid_critical_hit_chance min="0.1" type="mult" />
-        <vsHybrid_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsHybrid_critical_hit_chance min="0.08" type="mult" />
+        <vsHybrid_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="HybridOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsHybrid_critical_hit_chance min="0.15" type="mult" />
-        <vsHybrid_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsHybrid_critical_hit_chance min="0.12" type="mult" />
+        <vsHybrid_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -118,8 +118,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsHybrid_resist_reduction min="0.1" type="mult" />
-        <vsHybrid_critical_hit_chance min="0.15" type="mult" />
-        <vsHybrid_critical_hit_damage_bonus min="0.3" type="mult" />
+        <vsHybrid_critical_hit_chance min="0.12" type="mult" />
+        <vsHybrid_critical_hit_damage_bonus min="0.24" type="mult" />
         <ammo type="add" min="45" />
 		<vsHybrid_resist_reduction />
       </ability>
@@ -128,16 +128,16 @@
       <ability name="InsectoidOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsInsectoid_critical_hit_chance min="0.1" type="mult" />
-        <vsInsectoid_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsInsectoid_critical_hit_chance min="0.08" type="mult" />
+        <vsInsectoid_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="InsectoidOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsInsectoid_critical_hit_chance min="0.15" type="mult" />
-        <vsInsectoid_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsInsectoid_critical_hit_chance min="0.12" type="mult" />
+        <vsInsectoid_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -145,8 +145,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsInsectoid_resist_reduction min="0.1" type="mult" />
-        <vsInsectoid_critical_hit_chance min="0.15" type="mult" />
-        <vsInsectoid_critical_hit_damage_bonus min="0.3" type="mult" />
+        <vsInsectoid_critical_hit_chance min="0.12" type="mult" />
+        <vsInsectoid_critical_hit_damage_bonus min="0.24" type="mult" />
         <ammo type="add" min="45" />
 		<vsInsectoid_resist_reduction />
       </ability>
@@ -155,16 +155,16 @@
       <ability name="MagicalsOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsMagicals_critical_hit_chance min="0.1" type="mult" />
-        <vsMagicals_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsMagicals_critical_hit_chance min="0.08" type="mult" />
+        <vsMagicals_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="MagicalsOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsMagicals_critical_hit_chance min="0.15" type="mult" />
-        <vsMagicals_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsMagicals_critical_hit_chance min="0.12" type="mult" />
+        <vsMagicals_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -172,8 +172,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsMagicals_resist_reduction min="0.1" type="mult" />
-        <vsMagicals_critical_hit_chance min="0.15" type="mult" />
-        <vsMagicals_critical_hit_damage_bonus min="0.3" type="mult" />
+        <vsMagicals_critical_hit_chance min="0.12" type="mult" />
+        <vsMagicals_critical_hit_damage_bonus min="0.24" type="mult" />
         <ammo type="add" min="45" />
 		<vsMagicals_resist_reduction />
       </ability>
@@ -182,16 +182,16 @@
       <ability name="NecrophageOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsNecrophage_critical_hit_chance min="0.1" type="mult" />
-        <vsNecrophage_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsNecrophage_critical_hit_chance min="0.08" type="mult" />
+        <vsNecrophage_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="NecrophageOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsNecrophage_critical_hit_chance min="0.15" type="mult" />
-        <vsNecrophage_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsNecrophage_critical_hit_chance min="0.12" type="mult" />
+        <vsNecrophage_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -199,8 +199,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsNecrophage_resist_reduction min="0.1" type="mult" />
-        <vsNecrophage_critical_hit_chance min="0.15" type="mult" />
-        <vsNecrophage_critical_hit_damage_bonus min="0.3" type="mult" />
+        <vsNecrophage_critical_hit_chance min="0.12" type="mult" />
+        <vsNecrophage_critical_hit_damage_bonus min="0.24" type="mult" />
         <ammo type="add" min="45" />
 		<vsNecrophage_resist_reduction />
       </ability>
@@ -209,16 +209,16 @@
       <ability name="SpecterOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsSpecter_critical_hit_chance min="0.1" type="mult" />
-        <vsSpecter_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsSpecter_critical_hit_chance min="0.08" type="mult" />
+        <vsSpecter_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="SpecterOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsSpecter_critical_hit_chance min="0.15" type="mult" />
-        <vsSpecter_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsSpecter_critical_hit_chance min="0.12" type="mult" />
+        <vsSpecter_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -226,8 +226,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsSpecter_resist_reduction min="0.1" type="mult" />
-        <vsSpecter_critical_hit_chance min="0.15" type="mult" />
-        <vsSpecter_critical_hit_damage_bonus min="0.3" type="mult" />
+        <vsSpecter_critical_hit_chance min="0.12" type="mult" />
+        <vsSpecter_critical_hit_damage_bonus min="0.24" type="mult" />
         <ammo type="add" min="45" />
 		<vsSpecter_resist_reduction />
       </ability>
@@ -236,16 +236,16 @@
       <ability name="VampireOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsVampire_critical_hit_chance min="0.1" type="mult" />
-        <vsVampire_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsVampire_critical_hit_chance min="0.08" type="mult" />
+        <vsVampire_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="VampireOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsVampire_critical_hit_chance min="0.15" type="mult" />
-        <vsVampire_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsVampire_critical_hit_chance min="0.12" type="mult" />
+        <vsVampire_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -253,8 +253,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsVampire_resist_reduction min="0.1" type="mult" />
-        <vsVampire_critical_hit_chance min="0.15" type="mult" />
-        <vsVampire_critical_hit_damage_bonus min="0.3" type="mult" />
+        <vsVampire_critical_hit_chance min="0.12" type="mult" />
+        <vsVampire_critical_hit_damage_bonus min="0.24" type="mult" />
         <ammo type="add" min="45" />
 		<vsVampire_resist_reduction />
       </ability>
@@ -263,16 +263,16 @@
       <ability name="DraconideOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsDraconide_critical_hit_chance min="0.1" type="mult" />
-        <vsDraconide_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsDraconide_critical_hit_chance min="0.08" type="mult" />
+        <vsDraconide_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="DraconideOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsDraconide_critical_hit_chance min="0.15" type="mult" />
-        <vsDraconide_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsDraconide_critical_hit_chance min="0.12" type="mult" />
+        <vsDraconide_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -280,8 +280,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsDraconide_resist_reduction min="0.1" type="mult" />
-        <vsDraconide_critical_hit_chance min="0.15" type="mult" />
-        <vsDraconide_critical_hit_damage_bonus min="0.3" type="mult" />
+        <vsDraconide_critical_hit_chance min="0.12" type="mult" />
+        <vsDraconide_critical_hit_damage_bonus min="0.24" type="mult" />
         <ammo type="add" min="45" />
 		<vsDraconide_resist_reduction />
       </ability>
@@ -290,16 +290,16 @@
       <ability name="OgreOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsTroll_critical_hit_chance min="0.1" type="mult" />
-        <vsTroll_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsTroll_critical_hit_chance min="0.08" type="mult" />
+        <vsTroll_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="OgreOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsTroll_critical_hit_chance min="0.15" type="mult" />
-        <vsTroll_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsTroll_critical_hit_chance min="0.12" type="mult" />
+        <vsTroll_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -307,8 +307,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsTroll_resist_reduction min="0.1" type="mult" />
-        <vsTroll_critical_hit_chance min="0.15" type="mult" />
-        <vsTroll_critical_hit_damage_bonus min="0.3" type="mult" />
+        <vsTroll_critical_hit_chance min="0.12" type="mult" />
+        <vsTroll_critical_hit_damage_bonus min="0.24" type="mult" />
         <ammo type="add" min="45" />
 		<vsTroll_resist_reduction />
       </ability>
@@ -317,16 +317,16 @@
       <ability name="RelicOil_1">
         <tags>OilBonus</tags>
         <level type="add" min="1" />
-        <vsRelic_critical_hit_chance min="0.1" type="mult" />
-        <vsRelic_critical_hit_damage_bonus min="0.15" type="mult" />
+        <vsRelic_critical_hit_chance min="0.08" type="mult" />
+        <vsRelic_critical_hit_damage_bonus min="0.12" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
       <ability name="RelicOil_2">
         <tags>OilBonus</tags>
         <level type="add" min="2" />
-        <vsRelic_critical_hit_chance min="0.15" type="mult" />
-        <vsRelic_critical_hit_damage_bonus min="0.25" type="mult" />
+        <vsRelic_critical_hit_chance min="0.12" type="mult" />
+        <vsRelic_critical_hit_damage_bonus min="0.18" type="mult" />
         <ammo type="add" min="45" />
       </ability>
 	  
@@ -334,8 +334,8 @@
         <tags>OilBonus</tags>
         <level type="add" min="3" />
         <vsRelic_resist_reduction min="0.1" type="mult" />
-        <vsRelic_critical_hit_chance min="0.15" type="mult" />
-        <vsRelic_critical_hit_damage_bonus min="0.3" type="mult" />
+        <vsRelic_critical_hit_chance min="0.12" type="mult" />
+        <vsRelic_critical_hit_damage_bonus min="0.24" type="mult" />
         <ammo type="add" min="45" />
 		<vsRelic_resist_reduction />
       </ability>

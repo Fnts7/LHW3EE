@@ -29,7 +29,7 @@ class W3Effect_SlowdownFrost extends CBaseGameplayEffect
 		super.OnEffectRemoved();			
 	}
 		
-	event OnEffectAddedPost()
+	/*event OnEffectAddedPost()
 	{
 		if( IsAddedByPlayer() && GetWitcherPlayer().IsMutationActive( EPMT_Mutation12 ) && target != thePlayer )
 		{
@@ -37,5 +37,5 @@ class W3Effect_SlowdownFrost extends CBaseGameplayEffect
 		}
 		
 		super.OnEffectAddedPost();
-	}
+	}*/
 }

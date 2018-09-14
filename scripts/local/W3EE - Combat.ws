@@ -715,7 +715,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		baseSpeed += actionSpeedMult.valueMultiplicative;
 		
 		if( witcher.CanUseSkill(S_Alchemy_s16) && witcher.GetStat(BCS_Toxicity, false) > witcher.GetToxicityDamageThreshold() )
-			baseSpeed += (witcher.GetSkillLevel(S_Alchemy_s16) * 0.05f + 0.05f) * PowF(witcher.GetStatPercents(BCS_Toxicity), 2);
+			baseSpeed += (witcher.GetSkillLevel(S_Alchemy_s16) * 0.07f + 0.03f) * PowF(witcher.GetStatPercents(BCS_Toxicity), 2);
 		
 		return baseSpeed;
 	}

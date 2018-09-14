@@ -159,7 +159,7 @@ class W3EEInjurySystem
 			
 		playerAttacker = (W3PlayerWitcher)attackAction.attacker;
 		if (playerAttacker)
-			injuryChance = 0.06f;
+			injuryChance = 0.05f;
 		else
 			injuryChance = Options().InjuryChance() / 100.0f;
 			
@@ -177,7 +177,7 @@ class W3EEInjurySystem
 				{
 					if( playerAttacker.IsLightAttack(attackAction.GetAttackName()) )
 					{
-						injuryChance *= 1.0f + 0.2f * playerAttacker.GetSkillLevel(S_Sword_s17);
+						injuryChance *= 1.0f + 0.25f * playerAttacker.GetSkillLevel(S_Sword_s17);
 						
 						if (playerAttacker.GetCombatAction() == EBAT_SpecialAttack_Light)
 							injuryChance /= 3.0f;

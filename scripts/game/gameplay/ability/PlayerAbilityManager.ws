@@ -3825,6 +3825,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			{
 				owner.RemoveEffect( buffs[i] );
 			}
+			owner.RemoveTimer('Mutation12Refresh');
 		}
 		
 		owner.RemoveBuff( EET_Mutation3 );
@@ -3855,6 +3856,9 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		{
 			owner.AddEffectDefault( EET_Mutation10, NULL, "Mutation 10" );
 		}
+		
+		if ( mutationType == EPMT_Mutation12 )
+			owner.AddTimer('Mutation12Refresh', 10.0f);
 		
 		
 		if( ShouldProcessTutorial( 'TutorialMutationsEquippingOnlyOne' ) )

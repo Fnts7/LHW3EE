@@ -52,14 +52,15 @@
 			<!-- GOLDEN ORIOLE -->
 			<ability name="GoldenOrioleEffect_Level1">
 				<tags>passive</tags>
-				<poison_resistance_perc type="base" min="0.5"/>
+				<poison_resistance_perc type="base" min="0.55" />
 			</ability>
 			<ability name="GoldenOrioleEffect_Level2">
 				<tags>passive</tags>
-				<poison_resistance_perc type="base" min="1"/>
+				<poison_resistance_perc type="base" min="1" />
 			</ability>
 			<ability name="GoldenOrioleEffect_Level3">
 				<tags>passive</tags>
+				<poison_resistance_perc type="base" min="1" />
 				<!-- no poison res as it grants absorb -->
 			</ability>
 			

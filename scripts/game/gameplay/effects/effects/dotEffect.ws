@@ -95,7 +95,7 @@ abstract class W3DamageOverTimeEffect extends CBaseGameplayEffect
 		super.OnEffectAdded(customParams);
 	}
 	
-	event OnEffectAddedPost()
+	/*event OnEffectAddedPost()
 	{
 		if( IsAddedByPlayer() && GetWitcherPlayer().IsMutationActive( EPMT_Mutation12 ) && target != thePlayer )
 		{
@@ -103,7 +103,7 @@ abstract class W3DamageOverTimeEffect extends CBaseGameplayEffect
 		}
 		
 		super.OnEffectAddedPost();
-	}
+	}*/
 	
 	
 	private function AddHealthRegenReductionBuff()

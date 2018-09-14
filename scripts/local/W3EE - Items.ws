@@ -856,6 +856,11 @@ class W3EEEquipmentHandler extends W3EEOptionHandler
 			case EIST_MinorRedWolf:
 				return theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
 				
+			case EIST_Wolf:
+			case EIST_Gryphon:
+			case EIST_RedWolf:
+				return theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS - 1;
+				
 			default:
 				return theGame.params.ITEMS_REQUIRED_FOR_MINOR_SET_BONUS;
 		}

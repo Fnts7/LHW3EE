@@ -316,6 +316,9 @@ class W3EEScalingHandler extends W3EEOptionHandler
 				
 			if( NPC.HasAbility('mon_kikimore_small') )
 				speedMult -= 0.1f;
+				
+			if (NPC.HasAbility('mon_archespor_base'))
+				speedMult -= 0.05f;
 			
 			if( NPC.HasAbility('WildHunt_Eredin') )
 				speedMult += 0.15f;
@@ -2231,13 +2234,13 @@ class W3EEScalingHandler extends W3EEOptionHandler
 						opponentStats.slowResist 		= 0.1f;
 						opponentStats.confusionResist 	= 1.f;
 						opponentStats.bleedingResist 	= 1.f;
-						opponentStats.poisonResist 		= 1.f;
+						opponentStats.poisonResist 		= 0.5f;
 						opponentStats.stunResist 		= 0.f;
 						opponentStats.injuryResist 		= 0.f;
 						opponentStats.armorPiercing 	= 0.45f;
 						NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FROST);
 						NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_BLEEDING);
-						NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_POISON);
+						//NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_POISON);
 						NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_MENTAL);
 					}
 					else
@@ -2268,8 +2271,8 @@ class W3EEScalingHandler extends W3EEOptionHandler
 				case MC_Cursed :
 					if( NPC.HasAbility('mon_archespor_base') )
 					{
-						opponentStats.damageValue = 1870;
-						opponentStats.healthValue = 14530;
+						opponentStats.damageValue = 1670;
+						opponentStats.healthValue = 13000;
 						opponentStats.healthType = BCS_Essence;
 						
 						opponentStats.dangerLevel		= 50;
@@ -2813,7 +2816,7 @@ class W3EEScalingHandler extends W3EEOptionHandler
 							opponentStats.slowResist 		= 0.f;
 							opponentStats.confusionResist 	= 0.f;
 							opponentStats.bleedingResist 	= -0.1f;
-							opponentStats.poisonResist 		= 0.f;
+							opponentStats.poisonResist 		= 0.3f;
 							opponentStats.stunResist 		= -0.1f;
 							opponentStats.injuryResist 		= -0.1f;
 							opponentStats.armorPiercing 	= 0.45f;

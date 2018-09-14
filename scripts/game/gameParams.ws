@@ -424,6 +424,11 @@ import class W3GameParams extends CObject
 		default ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS = 5;
 		// W3EE - End
 		default ITEM_SET_TAG_BONUS = 'SetBonusPiece';
+		
+	public const var SET_ITEMS_COUNT_WEIGHTED : float;
+	public const var SET_ITEMS_COUNT_WEIGHTED_WITH_CROSSBOW : float;
+		default SET_ITEMS_COUNT_WEIGHTED = 9.0f;
+		default SET_ITEMS_COUNT_WEIGHTED_WITH_CROSSBOW = 10.0f;
 	
 	public const var TAG_STEEL_SOCKETABLE, TAG_SILVER_SOCKETABLE, TAG_ARMOR_SOCKETABLE, TAG_ABILITY_SOCKET : name;
 		default TAG_STEEL_SOCKETABLE = 'SteelSocketable';							

@@ -597,8 +597,8 @@ class W3EEExperienceHandler
 		switch(mutationID)
 		{
 			case EPMT_Mutation1:
-				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Aard);
-				mutationRequirements.requiredPoints.PushBack(1);
+				/*mutationRequirements.skillPaths.PushBack(ESSP_Signs_Aard);
+				mutationRequirements.requiredPoints.PushBack(1);*/
 				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Yrden);
 				mutationRequirements.requiredPoints.PushBack(1);
 				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Igni);
@@ -613,6 +613,8 @@ class W3EEExperienceHandler
 				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Igni);
 				mutationRequirements.requiredPoints.PushBack(1);
 				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Yrden);
+				mutationRequirements.requiredPoints.PushBack(1);
+				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Quen);
 				mutationRequirements.requiredPoints.PushBack(1);
 			break;
 			
@@ -634,7 +636,7 @@ class W3EEExperienceHandler
 			
 			case EPMT_Mutation5:
 				mutationRequirements.skillPaths.PushBack(ESSP_Alchemy_Mutagens);
-				mutationRequirements.requiredPoints.PushBack(2);
+				mutationRequirements.requiredPoints.PushBack(1);
 				mutationRequirements.skillPaths.PushBack(ESSP_Sword_Utility);
 				mutationRequirements.requiredPoints.PushBack(1);
 				mutationRequirements.skillPaths.PushBack(ESSP_Sword_BattleTrance);
@@ -646,17 +648,20 @@ class W3EEExperienceHandler
 				mutationRequirements.requiredPoints.PushBack(3);
 			break;
 			
-			case EPMT_Mutation7:
-				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Aard);
+			case EPMT_Mutation7:			
+				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Axi);
+				mutationRequirements.requiredPoints.PushBack(1);
+				
+				/*mutationRequirements.skillPaths.PushBack(ESSP_Signs_Aard);
 				mutationRequirements.requiredPoints.PushBack(1);
 				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Yrden);
-				mutationRequirements.requiredPoints.PushBack(1);
+				mutationRequirements.requiredPoints.PushBack(1);*/
 				mutationRequirements.skillPaths.PushBack(ESSP_Sword_StyleFast);
 				mutationRequirements.requiredPoints.PushBack(1);
 				mutationRequirements.skillPaths.PushBack(ESSP_Sword_StyleStrong);
 				mutationRequirements.requiredPoints.PushBack(1);
-				mutationRequirements.skillPaths.PushBack(ESSP_Sword_BattleTrance);
-				mutationRequirements.requiredPoints.PushBack(1);
+				/*mutationRequirements.skillPaths.PushBack(ESSP_Sword_BattleTrance);
+				mutationRequirements.requiredPoints.PushBack(1);*/
 			break;
 			
 			case EPMT_Mutation8:
@@ -668,9 +673,9 @@ class W3EEExperienceHandler
 			
 			case EPMT_Mutation9:
 				mutationRequirements.skillPaths.PushBack(ESSP_Sword_Crossbow);
-				mutationRequirements.requiredPoints.PushBack(3);
-				mutationRequirements.skillPaths.PushBack(ESSP_Alchemy_Mutagens);
-				mutationRequirements.requiredPoints.PushBack(1);
+				mutationRequirements.requiredPoints.PushBack(2);
+				/*mutationRequirements.skillPaths.PushBack(ESSP_Alchemy_Mutagens);
+				mutationRequirements.requiredPoints.PushBack(1);*/
 				mutationRequirements.skillPaths.PushBack(ESSP_Alchemy_Bombs);
 				mutationRequirements.requiredPoints.PushBack(1);
 			break;
@@ -684,11 +689,11 @@ class W3EEExperienceHandler
 			
 			case EPMT_Mutation11:
 				mutationRequirements.skillPaths.PushBack(ESSP_Signs_Quen);
-				mutationRequirements.requiredPoints.PushBack(2);
+				mutationRequirements.requiredPoints.PushBack(1);
 				mutationRequirements.skillPaths.PushBack(ESSP_Sword_Utility);
 				mutationRequirements.requiredPoints.PushBack(2);
 				mutationRequirements.skillPaths.PushBack(ESSP_Alchemy_Grasses);
-				mutationRequirements.requiredPoints.PushBack(3);
+				mutationRequirements.requiredPoints.PushBack(2);
 			break;
 			
 			case EPMT_Mutation12:
@@ -696,12 +701,12 @@ class W3EEExperienceHandler
 				mutationRequirements.requiredPoints.PushBack(1);
 				mutationRequirements.skillPaths.PushBack(ESSP_Sword_StyleStrong);
 				mutationRequirements.requiredPoints.PushBack(1);
-				mutationRequirements.skillPaths.PushBack(ESSP_Alchemy_Mutagens);
-				mutationRequirements.requiredPoints.PushBack(1);
+				/*mutationRequirements.skillPaths.PushBack(ESSP_Alchemy_Mutagens);
+				mutationRequirements.requiredPoints.PushBack(1);*/
 				mutationRequirements.skillPaths.PushBack(ESSP_Alchemy_Potions);
-				mutationRequirements.requiredPoints.PushBack(2);
+				mutationRequirements.requiredPoints.PushBack(1);
 				mutationRequirements.skillPaths.PushBack(ESSP_Alchemy_Grasses);
-				mutationRequirements.requiredPoints.PushBack(2);
+				mutationRequirements.requiredPoints.PushBack(1);
 			break;
 		}
 		return mutationRequirements;
