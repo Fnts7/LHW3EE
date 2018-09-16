@@ -65,10 +65,15 @@
 	{
 		var armorPieces : array<SArmorCount>;
 		var savedAdrenaline : float;
-		
-		armorPieces = GetWitcherPlayer().GetArmorCountOrig();
-		
+		var witcher : W3PlayerWitcher = GetWitcherPlayer();
+				
+		armorPieces = witcher.GetArmorCountOrig();		
 		savedAdrenaline = (armorPieces[3].weighted * 6.0f + armorPieces[2].weighted * 3.0f) / 100.0f + RandF() - 0.5f;
+		
+		if (witcher.IsMutationActive(EPMT_Mutation5))
+		{
+			savedAdrenaline += MinF( 3.0f, FloorF(witcher.GetStat(BCS_Focus)) ) * 0.05f;
+		}
 		
 		if (savedAdrenaline < 0)
 		{
@@ -77,7 +82,7 @@
 			else
 				return 0;
 		}
-			
+
 		if (dodged)
 			savedAdrenaline = 1.0f - ((1.0f - savedAdrenaline) * 0.4f);
 			

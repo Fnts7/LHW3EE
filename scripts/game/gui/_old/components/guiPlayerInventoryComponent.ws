@@ -348,6 +348,12 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 			itemDesc += "<br>LHW3EE override: reset time is 4.5s.";
 		else if (craftedItemName == 'Mutagen 13')
 			itemDesc += "<br>Increases safe dodge angle by 30 degrees and greatly reduces graze damage. Reduces stagger times a bit.";
+		else if (StrContains(NameToString(craftedItemName), "Golden Oriole 1") )
+			itemDesc += "<br>Gives also 55% resistance against toxicity venom.";
+		else if (StrContains(NameToString(craftedItemName), "Golden Oriole 2"))
+			itemDesc += "<br>Gives also 70% resistance against toxicity venom.";
+		else if (StrContains(NameToString(craftedItemName), "Golden Oriole 3"))
+			itemDesc += "<br>Gives also 85% resistance against toxicity venom.";
 		
 		rarityId = minQuality;
 		rarity = GetItemRarityDescriptionFromInt(minQuality);

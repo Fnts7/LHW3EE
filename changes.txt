@@ -1,4 +1,15 @@
-﻿Version 29
+﻿Version 30
+
+Fixed a bug that when having bed well rested effect, campfire effect would be added thus doubling the vitality gain.
+Now instead of that erroneous stacking, bed resting simply gives +750 vitality (and lasts longer), while campfire
+resting gives as it was +500.
+
+Skin mutation now also increases chance to maintain adrenaline or some of it when hit, cumulating with armor.
+Skin mutation will now also have effect when a hit breaks quen and deals remaining damage to Geralt.
+
+Golden Oriole now also gives significant protection against toxicity venom (e.g. kikimoras).
+
+Version 29
 
 Fixed a big bug where many critical damage bonuses would not apply (that is oils, hunter instinct skill and doppler
 decoction for example). It really surpised me to find such bug after many months of playing with the mod. Because

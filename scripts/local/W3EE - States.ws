@@ -784,11 +784,17 @@ state W3EEMeditation in W3PlayerWitcher extends MeditationBase
 	private entry function ManageRestedBuff()
 	{
 		var storedMeditationTime : float;
+		var restedParams : SCustomEffectParams;
 		
 		storedMeditationTime = meditationTimeSpent;
 		if( meditationTimeSpent >= RESTED_BUFF_TIME && CanPerformAlchemy() )
 		{
-			parent.AddEffectDefault(EET_WellRested, parent, "RestedBuff");
+			//parent.AddEffectDefault(EET_WellRested, parent, "RestedBuff");
+			restedParams.effectType = EET_WellRested;
+			restedParams.creator = parent;
+			restedParams.sourceName =  "Bed Buff";
+			restedParams.customAbilityName = 'WellRestedEffectCampFire';			
+			parent.AddEffectCustom(restedParams);			
 			meditationTimeSpent = 0;
 		}
 		else

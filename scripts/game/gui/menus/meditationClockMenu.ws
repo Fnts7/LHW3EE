@@ -192,16 +192,16 @@ class CR4MeditationClockMenu extends CR4MenuBase
 			
 			defManager.GetAbilityAttributeValue( 'WellRestedEffect', 'vitality', min, max);
 			abilityVal = CalculateAttributeValue( min );
-			if( bedLevel > 1 )
-				abilityVal *= 2;
+			/*if( bedLevel > 1 )
+				abilityVal *= 2;*/
 			arrStr.PushBack( FloatToStringPrec( abilityVal, 0 ) );
 			flashObject.SetMemberFlashString( "description", GetLocStringByKeyExtWithParams( "panel_buff_bed_descr",,, arrStr ) );
 			arrStr.Clear();
 			
 			defManager.GetAbilityAttributeValue( 'WellRestedEffect', 'duration', min, max);
 			abilityVal = CalculateAttributeValue( min );
-			if( bedLevel == 2 )
-				abilityVal *= 2;
+			/*if( bedLevel == 2 )
+				abilityVal *= 2;*/
 			arrStr.PushBack( FloatToString( abilityVal / 60 ) );
 			durationStr = GetLocStringByKeyExtWithParams( "panel_buff_duration",,, arrStr );
 			flashObject.SetMemberFlashString( "duration", durationStr );

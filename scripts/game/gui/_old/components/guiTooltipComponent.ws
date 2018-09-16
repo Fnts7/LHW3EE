@@ -631,6 +631,12 @@ class W3TooltipComponent
 				uniqueDescription += "<br>LHW3EE override: reset time is 4.5s.";
 			else if (itemName == 'Mutagen 13')
 				uniqueDescription += "<br>Increases safe dodge angle by 30 degrees and greatly reduces graze damage. Reduces stagger times a bit.";
+			else if (StrContains(NameToString(itemName), "Golden Oriole 1") )
+				uniqueDescription += "<br>Gives also 55% resistance against toxicity venom.";
+			else if (StrContains(NameToString(itemName), "Golden Oriole 2"))
+				uniqueDescription += "<br>Gives also 70% resistance against toxicity venom.";
+			else if (StrContains(NameToString(itemName), "Golden Oriole 3"))
+				uniqueDescription += "<br>Gives also 85% resistance against toxicity venom.";
 				
 		}
 		if ( theGame.GetGuiManager().GetShowItemNames() )

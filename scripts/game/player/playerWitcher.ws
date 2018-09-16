@@ -2249,7 +2249,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		if( IsMutationActive( EPMT_Mutation5 ) && !IsAnyQuenActive() && !damageData.IsDoTDamage() )
+		if( IsMutationActive( EPMT_Mutation5 ) && (!IsAnyQuenActive() || damageData.EndsQuen()) && !damageData.IsDoTDamage() )
 		{
 			focus = GetStat( BCS_Focus );
 			currAdrenaline = MinF(3.0f, FloorF( focus ));
@@ -4664,6 +4664,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 			return GetLocStringByKeyExtWithParams( locKey, , , arrStr ) + " Increases also critical damage by 12%. Blunt bolts strengthen the mutation's force effect.";
 		else if (mutationType == EPMT_Mutation12)
 			return GetLocStringByKeyExtWithParams( locKey, , , arrStr ) + " LHW3EE: decoction effects are applied automaticaly and switched over time.";
+		else if (mutationType == EPMT_Mutation5)
+			return GetLocStringByKeyExtWithParams( locKey, , , arrStr ) + "<br>Also increases your chance to keep more adrenaline when hit (per vigor point, cumulates with armor).";
 		else
 			return GetLocStringByKeyExtWithParams( locKey, , , arrStr );
 	}

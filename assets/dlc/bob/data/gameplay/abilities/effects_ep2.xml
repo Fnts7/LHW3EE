@@ -85,9 +85,14 @@
         <duration type="add" min="3600"/>
       </ability>
 
-    <ability name="WellRestedEffect">
+    <ability name="WellRestedEffectCampFire">
       <duration type="add" min="1800"/>
-      <vitality type="add" min="250"/>
+      <vitality type="add" min="500" />
+    </ability>
+	
+	<ability name="WellRestedEffect">
+      <duration type="add" min="3600"/>
+      <vitality type="add" min="750" />
     </ability>
 
       <ability name="HorseStableBuff">

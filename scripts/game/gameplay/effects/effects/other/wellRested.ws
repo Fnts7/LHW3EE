@@ -15,7 +15,7 @@ class W3Effect_WellRested extends CBaseGameplayEffect
 	
 	event OnEffectAdded( customParams : W3BuffCustomParams )
 	{
-		var l_bed			: W3WitcherBed;
+		/*var l_bed			: W3WitcherBed;
 		
 		l_bed = (W3WitcherBed)theGame.GetEntityByTag( 'witcherBed' );
 		
@@ -23,7 +23,7 @@ class W3Effect_WellRested extends CBaseGameplayEffect
 		if( l_bed.GetBedLevel() == 2 || GetWitcherPlayer().IsMeditating() )
 		{
 			target.AddAbility( abilityName, true );
-		}
+		}*/
 		theGame.GetGuiManager().ShowNotification( GetLocStringByKeyExt( "message_common_well_rested_buff_applied" ),, true );
 		
 		super.OnEffectAdded( customParams );	
@@ -36,7 +36,7 @@ class W3Effect_WellRested extends CBaseGameplayEffect
 		super.OnEffectRemoved();
 	}
 	
-	protected function CalculateDuration( setInitialDuration : bool )
+	/*protected function CalculateDuration( setInitialDuration : bool )
 	{
 		var l_bed				: W3WitcherBed;
 		var l_min, l_max			: SAbilityAttributeValue;
@@ -55,5 +55,5 @@ class W3Effect_WellRested extends CBaseGameplayEffect
 		}
 		
 		super.CalculateDuration( true );
-	}
+	}*/
 }
