@@ -53,7 +53,7 @@
 		
 		<ability name="mon_iriseasy_ep1">
 			<tags>DifficultyModeAbility, Easy</tags>
-			<essenceRegen type="mult" always_random="false" min="0.025" max="0.025" />
+			<essenceRegen type="mult" always_random="false" min="0.02" max="0.02" />
 		</ability>	
 		
 		<ability name="mon_irismedium_ep1">
@@ -63,12 +63,12 @@
 		 
 		 <ability name="mon_irishard_ep1">
 			<tags>DifficultyModeAbility, Hard</tags>
-			<essenceRegen type="mult" always_random="false" min="0.049" max="0.045" />
+			<essenceRegen type="mult" always_random="false" min="0.035" max="0.035" />
 		</ability>	
 			
 		<ability name="mon_irishardcore_ep1"> 
 			<tags>DifficultyModeAbility, Hardcore</tags>	
-			<essenceRegen type="mult" always_random="false" min="0.049" max="0.045" />
+			<essenceRegen type="mult" always_random="false" min="0.04" max="0.04" />
 		</ability>	
 			
 		<!-- TOAD -->

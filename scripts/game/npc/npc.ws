@@ -1619,6 +1619,9 @@ statemachine import class CNewNPC extends CActor
 		*/
 		
 		Scaling().OpponentSetup(this, abilityManager, npcStats, currentLevel, displayLevel);
+		
+		if ( (W3NightWraithIris)this )
+			((W3NightWraithIris)this).AfterOpponentSetup();
 	}
 	// W3EE - End
 	
@@ -4576,6 +4579,31 @@ statemachine import class CNewNPC extends CActor
 	timer function LowerShield( td : float , id : int)
 	{
 		SetBehaviorVariable( 'bShieldUp', 0.f );
+	}
+	
+	
+	timer function ResetShieldRaiseBlock( dt : float, id : int )
+	{
+		Enemies().SunderShieldedBlockChance(this, false);
+	}	
+	
+	public function LowerGuardSunder()
+	{
+		var resetTime : float;
+		
+		LowerGuard();
+		
+		if (HasShieldedAbility() && Enemies().SunderShieldedBlockChance(this, true))
+		{
+			RemoveTimer('ResetShieldRaiseBlock');
+			
+			if (HasAbility('SkillShieldHard'))
+				resetTime = 1.0f;
+			else
+				resetTime = 1.5f;
+			
+			AddTimer('ResetShieldRaiseBlock', resetTime);
+		}
 	}
 		
 	public function ProcessShieldDestruction()

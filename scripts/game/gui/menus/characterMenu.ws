@@ -2397,7 +2397,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				// arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s06, 'armor_reduction_perc', false, false)) * skillLevel;
 				// argsInt.PushBack(RoundMath(arg*100));
 				argsInt.PushBack(5 * skillLevel);
-				argsInt.PushBack(15 * skillLevel);
+				argsInt.PushBack(20 * skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_SunderingBlowsSkill", argsInt);
 				baseString += "<br>Heavy attacks have " + NoTrailZeros(RoundTo(skillLevel * 1.5f, 1)) + "% damage through blocks and dodges.";
 				// W3EE - End

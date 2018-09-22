@@ -43,7 +43,7 @@
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-		<critical_hit_chance			type="add"	min="0.1"				/>
+		<critical_hit_chance			type="add"	min="0.08"				/>
 		<bonus_herb_chance				type="add"	min="0.05"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.02"				/>
 	</ability>
@@ -66,7 +66,9 @@
 		<armor 							type="base"	min="45"	max="45"	/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
+		<attack_power_heavy_style       type="mult" min="0.03" 				/>
+        <attack_speed_fast_style        type="mult" min="0.02" 				/>		
 	</ability>
 	
 	<ability name="Heavy gloves 03_crafted _Stats">

@@ -144,7 +144,7 @@ class BTTaskCaretakerManager extends IBehTreeTask
 	{
 		// W3EE - Begin
 		//recoverPercPerHit = CalculateAttributeValue( m_Npc.GetAttributeValue( 'healing_per_hit_perc' ));
-		recoverPercPerHit = 0.02f;
+		recoverPercPerHit = 0.03f;
 		shadesModifier = 0.5f; //CalculateAttributeValue( m_Npc.GetAttributeValue( 'number_of_shades' ));
 		// W3EE - End
 	}

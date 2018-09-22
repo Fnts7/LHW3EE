@@ -169,7 +169,7 @@
 				<rending_resistance_perc type="add" min="0.02" />
 				<elemental_resistance_perc type="add" min="0.02" />
 				
-				<mutagen27_max_stack type="add" min="10" />
+				<mutagen27_max_stack type="add" min="12" />
 			</ability>
 			
 			<!-- Reliever -->

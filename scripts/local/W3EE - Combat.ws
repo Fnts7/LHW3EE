@@ -312,6 +312,8 @@ class W3EECombatHandler extends W3EEOptionHandler
 			
 			// damageData.SetWasDodged();
 			
+			damageData.SetWasPartiallyDodged();
+			
 			if (EnemyDodgeNegateDamage())
 			{
 				dmgTaken = DamagePercentageTaken();
@@ -662,11 +664,13 @@ class W3EECombatHandler extends W3EEOptionHandler
 	
 	public final function BreakEnemyBlock( attackAction : W3Action_Attack, playerAttacker : CR4Player, actorVictim : CActor )
 	{
-		if( actorVictim.IsGuarded() && attackAction && playerAttacker && playerAttacker.CanUseSkill(S_Sword_s06) && playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && RandRange(100,0) <= (15 * playerAttacker.GetSkillLevel(S_Sword_s06)) )
+		if( actorVictim.IsGuarded() && attackAction && playerAttacker && playerAttacker.CanUseSkill(S_Sword_s06) && playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) && RandRange(100,0) <= (20 * playerAttacker.GetSkillLevel(S_Sword_s06)) )
 		{
 			actorVictim.ResetHitCounter(0, 0);
 			actorVictim.ResetDefendCounter(0, 0);
-			((CNewNPC)actorVictim).LowerGuard();
+			
+			if ((CNewNPC)actorVictim)
+				((CNewNPC)actorVictim).LowerGuardSunder();
 		}
 	}	
 	
@@ -1690,46 +1694,86 @@ class W3EECombatHandler extends W3EEOptionHandler
 			return false;
 		}
 	}
+
+	var firstHitHeavyBash : bool; default firstHitHeavyBash = false;	
+	var firstHitHeavyBashSuccess : bool; default firstHitHeavyBashSuccess = false;
 	
-	var dealtAnyDamage : bool; default dealtAnyDamage = false;
+	public function ResetSpecialHeavyFirstStage()
+	{
+		firstHitHeavyBashSuccess = false;
+		firstHitHeavyBash = false;
+	}
+	
 	public function SpecialAttackHeavy( action : W3Action_Attack )
 	{
 		var repelType : EPlayerRepelType = PRT_RepelToFinisher;
 		var witcher : W3PlayerWitcher;
 		var npcTarget : CNewNPC;
+		var shieldBreakChance : int;
 		
 		witcher = (W3PlayerWitcher)action.attacker;
-		if( witcher.HasBuff(EET_Stagger) || witcher.HasBuff(EET_LongStagger) || witcher.HasBuff(EET_Knockdown) || witcher.HasBuff(EET_HeavyKnockdown) || witcher.HasBuff(EET_Pull) )
+		
+		if( !witcher || witcher.HasBuff(EET_Stagger) || witcher.HasBuff(EET_LongStagger) || witcher.HasBuff(EET_Knockdown) || witcher.HasBuff(EET_HeavyKnockdown) || witcher.HasBuff(EET_Pull) )
 			return;
 		
-		if( witcher && action.victim && action.GetAttackAnimName() == 'geralt_heavy_special_attack' )
+		if( action.victim && action.GetAttackAnimName() == 'geralt_heavy_special_attack' )
 		{
 			npcTarget = (CNewNPC)action.victim;
 			
-			if( action.DealsAnyDamage() && action.GetAttackName() == 'geralt_heavy_special1' )
+			if( action.GetAttackName() == 'geralt_heavy_special1' )
 			{
-				action.SetHitAnimationPlayType(EAHA_ForceYes);
-				dealtAnyDamage = true;
+				if (!action.WasPartiallyDodged())
+				{
+					if (!npcTarget.IsShielded(witcher))
+						action.SetHitAnimationPlayType(EAHA_ForceYes);
+						
+					firstHitHeavyBash = true;					
+					if ( action.GetOriginalDamageDealtWithArmor() != 0 && RandF() < (action.GetDamageDealt() / action.GetOriginalDamageDealtWithArmor()) )
+						firstHitHeavyBashSuccess = true;
+				}
+				
+				action.processedDmg.vitalityDamage *= 0.8f;
+				action.processedDmg.essenceDamage *= 0.8f;
 			}
 			else
 			if( action.GetAttackName() == 'geralt_heavy_special2' )
 			{
-				action.SetHitAnimationPlayType(EAHA_ForceYes);
-				action.processedDmg.vitalityDamage *= 0.45f;
-				action.processedDmg.essenceDamage *= 0.45f;
-				if( RandRange(100, 0) <= 20 && npcTarget.IsShielded(witcher) )
-				{
-					npcTarget.ProcessShieldDestruction();
-					action.AddEffectInfo(EET_Stagger);
+				action.processedDmg.vitalityDamage *= 0.6f;
+				action.processedDmg.essenceDamage *= 0.6f;
+				
+				if (action.WasPartiallyDodged())
+					return;
+
+				action.SetHitAnimationPlayType(EAHA_ForceYes);				
+				if( firstHitHeavyBash && npcTarget.HasShieldedAbility())
+				{				
+					if (npcTarget.HasAbility('SkillShieldHard'))
+						shieldBreakChance = 15;
+					else
+						shieldBreakChance = 25;
+					
+					if (RandRange(100, 0) <= shieldBreakChance)
+					{
+						npcTarget.ProcessShieldDestruction();
+						action.AddEffectInfo(EET_Stagger);
+					}
 				}
 				
-				if( dealtAnyDamage && action.DealsAnyDamage() )
+				if( action.DealsAnyDamage() )
 				{
-					action.SetForceInjury(true);
-					dealtAnyDamage = false;
+					if (firstHitHeavyBashSuccess)
+					{
+						if ( action.IsCriticalHit() || RandRange(100, 0) <= 50 )
+							action.SetForceInjury(true);
+					}
+					else
+					{
+						if ( (action.IsCriticalHit() && RandRange(100, 0) <= 50) || (!action.IsCriticalHit() && RandRange(100, 0) <= 25 ) )
+							action.SetForceInjury(true);
+					}
 				}
 				
-				if( action.DealsAnyDamage() && !IsImmuneToFinisher(npcTarget) && npcTarget.GetHealthPercents() < 0.3f && !(IsUsingBattleAxe() || IsUsingBattleMace()) )
+				if( firstHitHeavyBash && action.DealsAnyDamage() && !IsImmuneToFinisher(npcTarget) && npcTarget.GetHealthPercents() < 0.25f && !(IsUsingBattleAxe() || IsUsingBattleMace()) )
 				{
 					npcTarget.AddEffectDefault(EET_CounterStrikeHit, witcher, "ReflexParryPerformed");
 					witcher.SetCachedAct(npcTarget);
@@ -1740,6 +1784,9 @@ class W3EECombatHandler extends W3EEOptionHandler
 					witcher.RaiseForceEvent('PerformCounter');
 					witcher.OnCombatActionStart();	
 				}
+
+				firstHitHeavyBashSuccess = false;				
+				firstHitHeavyBash = false;
 			}
 		}
 	}
@@ -1756,7 +1803,8 @@ class W3EECombatHandler extends W3EEOptionHandler
 		blockCrushValue = actorAttacker.GetAttributeValue('damage_through_blocks');
 		disarmChance = actorAttacker.GetAttributeValue('disarm_chance');
 		npcTarget = (CNewNPC)attackAction.victim;
-		if( attackAction && attackAction.IsActionMelee() && attackAction.IsParried() && !attackAction.IsCountered() )
+		if( attackAction && attackAction.IsActionMelee() && !attackAction.IsCountered()
+			&& ( attackAction.IsParried() || (attackAction.GetAttackName() == 'geralt_heavy_special2' && npcTarget.IsShielded(attackAction.attacker)) ) )
 		{
 			if( npcTarget && (npcTarget.HasTwoHandedWeapon() || npcTarget.IsShielded(attackAction.attacker)) )
 			{

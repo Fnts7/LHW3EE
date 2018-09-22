@@ -327,6 +327,10 @@ class W3EEScalingHandler extends W3EEOptionHandler
 			{
 				speedMult += 0.05f;
 			}
+			
+			if (NPC.HasAbility('mon_caretaker_ep1'))
+				speedMult += 0.07f;
+				
 		}
 		
 		opponentStats.spdMultID = NPC.SetAnimationSpeedMultiplier(speedMult, opponentStats.spdMultID);
@@ -601,18 +605,18 @@ class W3EEScalingHandler extends W3EEOptionHandler
 			else
 			if( NPC.HasAbility('mon_caretaker_ep1') )
 			{
-				opponentStats.damageValue = 2460;
-				opponentStats.healthValue = 34100;
+				opponentStats.damageValue = 2700;
+				opponentStats.healthValue = 37100;
 				opponentStats.healthType = BCS_Vitality;
 				
 				opponentStats.dangerLevel		= 100;
 				opponentStats.poiseValue 		= 0.f;
 				opponentStats.physicalResist	= 0.3f;
 				opponentStats.forceResist 		= 0.7f;
-				opponentStats.frostResist 		= 0.7f;
-				opponentStats.fireResist 		= 0.7f;
-				opponentStats.shockResist 		= 0.7f;
-				opponentStats.elementalResist 	= 0.7f;
+				opponentStats.frostResist 		= 0.6f;
+				opponentStats.fireResist 		= 0.6f;
+				opponentStats.shockResist 		= 0.6f;
+				opponentStats.elementalResist 	= 0.6f;
 				opponentStats.slowResist 		= 0.2f;
 				opponentStats.confusionResist 	= 1.f;
 				opponentStats.bleedingResist 	= 1.f;

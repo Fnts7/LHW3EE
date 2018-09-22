@@ -361,6 +361,54 @@ class W3EEEnemyHandler extends W3EEScalingHandler
 		}
 	}
 	
+	
+	public function SunderShieldedBlockChance(npc : CNewNPC, activate : bool) : bool
+	{
+		var raiseBlockChance  : float;
+	
+		if (!npc)
+			return false;
+			
+		if (activate)
+		{
+			if( npc.HasAbility('SkillShield') )
+			{
+				raiseBlockChance = Group2GetVal2();
+				
+				if (raiseBlockChance < npc.npcStats.ChanceToRaiseBlock)				
+				{
+					npc.npcStats.ChanceToRaiseBlock = raiseBlockChance;
+					return true;
+				}
+			}
+			else if (npc.HasAbility('SkillShieldHard'))
+			{
+				raiseBlockChance = Group4GetVal2();
+				
+				if (raiseBlockChance < npc.npcStats.ChanceToRaiseBlock)				
+				{
+					npc.npcStats.ChanceToRaiseBlock = raiseBlockChance;
+					return true;
+				}
+			}
+			
+			return false;
+			
+		}
+		else if( npc.HasAbility('SkillShield') )
+		{
+			npc.npcStats.ChanceToRaiseBlock = Group6GetVal2();
+			return true;
+		}
+		else if( npc.HasAbility('SkillShieldHard') )
+		{
+			npc.npcStats.ChanceToRaiseBlock = Group7GetVal2();
+			return true;
+		}
+		
+		return false;			
+	}
+	
 	public function SetSkillValue( npcActor : CNewNPC, skill : ENPCSkillTypes ) : int
 	{
 		var npcStats : SOpponentStats;

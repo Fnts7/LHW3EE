@@ -78,13 +78,13 @@
 		if (savedAdrenaline < 0)
 		{
 			if (dodged)
-				return 0.6f;
+				return 0.7f;
 			else
 				return 0;
 		}
 
 		if (dodged)
-			savedAdrenaline = 1.0f - ((1.0f - savedAdrenaline) * 0.4f);
+			savedAdrenaline = 1.0f - ((1.0f - savedAdrenaline) * 0.3f);
 			
 		return savedAdrenaline;		
 	}

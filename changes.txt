@@ -1,4 +1,46 @@
-﻿Version 30
+﻿Version 31
+
+Improved the Sundering blows skill against shields efficiency. The problem was that shielded enemies by default
+have 100% raise guard chance. So right after successful roll of sundering blows after hit, the guard was raised.
+I have solved this problem in following way: When sundering blow causes to lower guard of shielded enemy, that
+enemy also gets very short time adjustment of raise guard chance. Normal shielded enemy goes down to novice
+and expert shielded to expert. Because of how this skill works, it was also proper to boost it back to original
+values, so 100% lower guard chance on lvl5.
+
+Adjusted the overall logic of special heavy bash (the stationary double strong swing). The main problem is was
+that this attack was overpowered in combination with any damage through blocks. Also balanced it better overall.
+So special heavy bash is treated as type of heavy attack and so most heavy attack skills also apply. Besides that
+after my changes:
+1) First stage swing: deals 80% of damage, but has 100% small stagger chance (hit reaction), except for shielded enemies.
+2) Second stage swing: deals 60% of damage, but has lots of other properties:
+	a) 100% hit reaction chance also for shielded
+        b) Is unpariable except for shielded and guarded (NOTE: sundering blows skill success in first hit influences that)
+	c) Significant chance of breaking a shield (requirement - first stage hit cannot miss)
+	d) Significant chance of causing injury - requirement must deal some damage. If first hit was 'significant'
+	(chance depends on damage dealt), the injury chance is even higher and 100% if crit.
+	e) If enemy HP goes below 25%, finisher can be performed (requirement - first stage hit cannot miss).
+	
+Fixed a bug that Iris could be extremely weak (like ordinary wraith). However lowered Iris healing rates from
+pictures on two of higher difficulty levels.
+
+Boosted Caretaker boss (Olgierd's backyard thing). This fight was a joke, so caretaker has small boosts to:
+vitality, damage, speed. Moderate boost to life leech. As a compensation lowered a bit most magical/elemental
+resistances.
+
+Boosted a bit gryphon decoction - can stack up to +24% reses.
+
+Adjusted specialised mutagens drop rates.
+
+Adjustments in some non witcher gear gloves and boots.
+- Assassin gloves crit chance bonus nerfed to +8%
+- 'Mountain people' light boots have now also some bleed resistance and injury resistance.
+  Lowered poison res and slashing res.
+- Executioner heavy boots have now poise damage property
+- Knight's gloves have very small fast attack speed and strong attack power bonuses
+
+Increased saved adrenaline after graze damage taken (partial dodge). From 60% to 70%.
+
+Version 30
 
 Fixed a bug that when having bed well rested effect, campfire effect would be added thus doubling the vitality gain.
 Now instead of that erroneous stacking, bed resting simply gives +750 vitality (and lasts longer), while campfire

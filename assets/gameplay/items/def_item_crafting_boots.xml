@@ -60,12 +60,14 @@
 		<weight 						type="base" min="2.5"				/>
 		<quality 						type="add"	min="4"					/>
 		<armor 							type="base"	min="38"				/>
-		<slashing_resistance_perc		type="base"	min="0.05"				/>
+		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
 		<rending_resistance_perc		type="base"	min="0.02"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
-		<poison_resistance_perc			type="base"	min="0.25"				/>
+		<poison_resistance_perc			type="base"	min="0.15"				/>
+		<bleeding_resistance_perc		type="base"	min="0.15"				/>
+		<injury_resist			 		type="mult"	min="0.05"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.03"				/>
 	</ability>
 
@@ -99,9 +101,9 @@
 		<weight							type="base" min="4.5"				/>
 		<quality 						type="add"	min="3"					/>
 		<armor 							type="base"	min="50"				/>
-		<slashing_resistance_perc		type="base"	min="0.05"				/>
-		<piercing_resistance_perc		type="base"	min="0.04"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+		<slashing_resistance_perc		type="base"	min="0.07"				/>
+		<piercing_resistance_perc		type="base"	min="0.05"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 	</ability>
@@ -115,6 +117,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
+		<poise_damage                   type="add"  min="6"			        />
 		<staminaRegen_armor_mod			type="mult"	min="-0.03"				/>
 	</ability>
 
@@ -140,7 +143,9 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
 		<rending_resistance_perc		type="base"	min="0.05"				/>
 		<elemental_resistance_perc		type="base"	min="0.05"				/>
+		<burning_resistance_perc 		type="base" min="0.05" 				/>
 		<staminaRegen_armor_mod  		type="mult"	min="-0.03"				/>
+		<spell_power_igni 				type="mult" min="0.03" 				/>
 	</ability>
 	
 <!-- BOOTS WITCHER LYNX -->

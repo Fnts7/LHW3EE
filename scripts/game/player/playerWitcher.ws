@@ -13105,6 +13105,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	timer function RemoveBashing( dt : float, id : int )
 	{
 		SetIsBashing(false);
+		Combat().ResetSpecialHeavyFirstStage();
 	}
 	
 	public function SetCachedAct( act : CActor )
