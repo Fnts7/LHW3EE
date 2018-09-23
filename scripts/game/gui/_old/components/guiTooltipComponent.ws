@@ -1363,7 +1363,8 @@ class W3TooltipComponent
 					{
 						// W3EE - Begin
 						// currentStat.value = CeilF(currentStat.value * (1.f + (thePlayer.GetNumMutagensActive() / 2.f)));
-						currentStat.value -= ((W3Effect_Toxicity)thePlayer.GetBuff(EET_Toxicity)).GetEnzymaticToxReduction();
+						if (thePlayer.HasBuff(EET_Toxicity))
+							currentStat.value -= ((W3Effect_Toxicity)thePlayer.GetBuff(EET_Toxicity)).GetEnzymaticToxReduction();
 						// W3EE - End
 						
 						maxToxicity = RoundMath(thePlayer.GetStatMax( BCS_Toxicity ));

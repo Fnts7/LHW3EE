@@ -261,7 +261,9 @@ class W3EEScalingHandler extends W3EEOptionHandler
 			else
 			if( NPC.HasAbility('mon_golem_base') )
 				speedMult += 0.15f;
-			if( NPC.HasAbility('mon_cyclops') || NPC.HasAbility('mon_ice_giant') )
+			if( NPC.HasAbility('mon_cyclops'))
+				speedMult += 0.05f;
+			if( NPC.HasAbility('mon_ice_giant') )
 				speedMult += 0.10f;
 			if( NPC.HasAbility('mon_fleder') )
 				speedMult -= 0.15f;
@@ -2747,27 +2749,27 @@ class W3EEScalingHandler extends W3EEOptionHandler
 					{
 						NPC.AddTag('WeakToQuen');
 						NPC.AddTag('WeakToAxii');
-						opponentStats.damageValue = 3305;
-						opponentStats.healthValue = 31710;
+						opponentStats.damageValue = 2900;
+						opponentStats.healthValue = 26000;
 						opponentStats.healthType = BCS_Vitality;
 						
 						opponentStats.isHuge			= true;
 						opponentStats.dangerLevel		= 100;
 						opponentStats.canGetCrippled 	= true;
 						opponentStats.poiseValue 		= 0.7f;
-						opponentStats.physicalResist	= 0.f;
+						opponentStats.physicalResist	= 0.3f;
 						opponentStats.forceResist 		= 0.3f;
-						opponentStats.frostResist 		= 0.f;
-						opponentStats.fireResist 		= 0.f;
-						opponentStats.shockResist 		= 0.f;
-						opponentStats.elementalResist 	= 0.f;
+						opponentStats.frostResist 		= 0.3f;
+						opponentStats.fireResist 		= 0.2f;
+						opponentStats.shockResist 		= 0.15f;
+						opponentStats.elementalResist 	= 0.15f;
 						opponentStats.slowResist 		= 0.3f;
 						opponentStats.confusionResist 	= -0.6f;
 						opponentStats.bleedingResist 	= 0.f;
 						opponentStats.poisonResist 		= 0.f;
 						opponentStats.stunResist 		= 1.f;
 						opponentStats.injuryResist 		= 0.f;
-						opponentStats.armorPiercing 	= 0.65f;
+						opponentStats.armorPiercing 	= 0.6f;
 						NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_STUN);
 						NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FORCE);
 					}

@@ -1053,6 +1053,7 @@ statemachine import class CNewNPC extends CActor
 		var template : CEntityTemplate;
 		var fxEnt : CEntity;
 		var toxicity : SAbilityAttributeValue;
+		var toxicityEffect : W3Effect_Toxicity;
 		
 		super.OnProcessActionPost(action);
 		
@@ -1099,6 +1100,10 @@ statemachine import class CNewNPC extends CActor
 				}							
 				
 				GetWitcherPlayer().GainStat( BCS_Toxicity, toxToAdd );
+				
+				toxicityEffect = (W3Effect_Toxicity)(GetWitcherPlayer().GetBuff(EET_Toxicity));
+				if (toxicityEffect)
+					toxicityEffect.SetEffectTime(toxToAdd, 0.0f); // 0 duration means, the toxicity will be added to residual
 			}
 		}
 	}

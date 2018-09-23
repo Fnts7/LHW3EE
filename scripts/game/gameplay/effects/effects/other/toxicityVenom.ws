@@ -12,6 +12,7 @@ class W3Effect_ToxicityVenom extends CBaseGameplayEffect
 	event OnUpdate( dt : float )
 	{
 		var maxTox, toxToAdd : float;
+		var toxicityEffect : W3Effect_Toxicity;
 		
 		super.OnUpdate( dt );
 		
@@ -25,5 +26,8 @@ class W3Effect_ToxicityVenom extends CBaseGameplayEffect
 		}		
 		
 		target.GainStat( BCS_Toxicity, toxToAdd );
+		toxicityEffect = (W3Effect_Toxicity)target.GetBuff(EET_Toxicity);
+		if (toxicityEffect)
+			toxicityEffect.SetEffectTime(toxToAdd, 0.0f); // 0 duration means, the toxicity will be added to residual
 	}
 }

@@ -5,6 +5,41 @@
 /***********************************************************************/
 
 
+struct SEffectToxicity
+{
+	var effectToxicityOrig		: float; 
+	var effectToxicity			: float;
+	var effectDurationOrig		: float;
+	var effectDuration			: float;
+}
+
+
+function FindShortestSEffectToxicity( a : array< SEffectToxicity > ) : int
+{
+	var i, s, index : int;
+	var val, valNew : float;	
+	
+	s = a.Size();
+	if( s > 0 )
+	{			
+		index = 0;
+		val = a[0].effectDuration / a[0].effectDurationOrig	;
+		for( i=1; i<s; i+=1 )
+		{
+			valNew = a[i].effectDuration / a[i].effectDurationOrig;
+		
+			if( valNew < val )
+			{
+				index = i;
+				val = valNew;
+			}
+		}
+		
+		return index;
+	}	
+	
+	return -1;			
+}
 
 class W3Effect_Toxicity extends CBaseGameplayEffect
 {
@@ -25,6 +60,9 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 	private var witcher 					: W3PlayerWitcher;
 	private var updateInterval				: float;
 	private var maxStat						: float;
+	private var residualTox					: float; default residualTox = 0.0f;
+	private var effectsToxicity 			: array<SEffectToxicity>;
+	private var effectsRevoked				: array<float>;
 	// W3EE - End
 	
 	public function CacheSettings()
@@ -51,17 +89,16 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 			switchCameraEffect = true;
 		else
 			switchCameraEffect = false;
-			
 		
 		super.OnEffectAdded(customParams);	
 	}
 	
-	
+
 	// W3EE - Begin
 	event OnUpdate(deltaTime : float)
 	{
-		var dmg, dmgCurved, toxicity, toxicityPerc, threshold, drainVal, duration, origDuration : float;
-		var currentThreshold, index	: int;
+		var dmg, dmgCurved, toxicity, toxicityPerc, drainVal, lowestDurationRatio : float;
+		var currentThreshold, index : int;
 		var skillAbilityName : name;
 		
 		super.OnUpdate(deltaTime);
@@ -71,27 +108,16 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 			return false;
 		else
 		{
-			UpdateEffectsTime();
-			while( duration <= 0 )
-			{
-				index = ArrayFindMinF(effectDuration);
-				if( index > -1 )
-				{
-					duration = effectDuration[index];
-					origDuration = effectDurationOrig[index];
-					if( duration <= 0 || !effectToxicity[index] )
-						ClearEffects(index);
-				}
-				else break;				
-			}			
-			updateInterval = 0;
+			index = FindShortestSEffectToxicity(effectsToxicity);
+			if (index > -1)
+				lowestDurationRatio = effectsToxicity[index].effectDuration / effectsToxicity[index].effectDurationOrig;
 		}
 		
 		if (!witcher)
 			witcher = GetWitcherPlayer();
 		
-		toxicityPerc = witcher.GetStat(BCS_Toxicity, false) / witcher.GetStatMax(BCS_Toxicity);
-		threshold = witcher.GetToxicityDamageThreshold();
+		toxicity = witcher.GetStat(BCS_Toxicity, false);
+		toxicityPerc = toxicity / witcher.GetStatMax(BCS_Toxicity);
 		
 		if( toxicityPerc >= 0.5f && !isPlayingCameraEffect )
 			switchCameraEffect = true;
@@ -129,8 +155,7 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 			delayToNextVFXUpdate -= 1.0f;
 		}
 		
-		toxicity = witcher.GetStat(BCS_Toxicity, false);
-		if( toxicity > threshold )
+		if( toxicity > witcher.GetToxicityDamageThreshold() )
 		{
 			if( !maxStat )
 			{
@@ -141,7 +166,7 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 			}
 			dmgCurved = PowF(toxicityPerc, 2) * (1.3f + 0.008f * toxicity) / 100;
 			/*dmg = MaxF(0, dmgCurved * maxStat);*/
-			dmg = MaxF(0, dmgCurved * maxStat - effectDuration.Size() * RoundMath(2.0f * thePlayer.GetSkillLevel(S_Alchemy_s03)));
+			dmg = MaxF(0, dmgCurved * maxStat - (effectsToxicity.Size() + effectsRevoked.Size()) * 2.0f * thePlayer.GetSkillLevel(S_Alchemy_s03));
 			
 			if( thePlayer.CanUseSkill(S_Alchemy_s01) )
 				dmg *= (1 - 0.08f * thePlayer.GetSkillLevel(S_Alchemy_s01));
@@ -174,82 +199,175 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 		}
 		
 		toxicity = witcher.GetStat(BCS_Toxicity, true);
-		if (!toxicity)	
-			return false;		
 		
-		if( index < 0 )
-			drainVal = (-1 * toxicity * Options().GetToxicityResidualDegen()) - 0.1f;
-		else
-		if( (duration / origDuration) < Options().GetFastToxicityDegenThreshold() )
-			drainVal = -1 * GetToxicityDegen(Options().GetStandardToxicityDegen(), Options().GetFastToxicityDegen());
-		else			
-			drainVal = -1 * GetToxicityDegen( Options().GetStandardToxicityDegen() );
-		
-		
-		if( Options().GetSlowToxicityCombatDegen() )
-		{
-			if( target.IsInCombat() && index > -1 )
-				drainVal = -1 * GetToxicityDegen( Options().GetToxicityCombatDegen() );
-		}
-		
-		if( isUnsafe )
-		{
-			if( witcher.GetSkillLevel(S_Alchemy_s15) )
+		if (toxicity)
+		{		
+			drainVal = 0;
+			
+			if ( index < 0 || residualTox > 0 )
 			{
-				drainVal -= (witcher.GetSkillLevel(S_Alchemy_s15) * 0.1);
-				witcher.GetAdrenalineEffect().AddAdrenaline(AbsF(drainVal) / 100.f);
+				if( index < 0 )
+					drainVal = (-1 * toxicity * Options().GetToxicityResidualDegen()) - 0.1f;
+				else
+					drainVal = (-1 * residualTox * Options().GetToxicityResidualDegen() / 5.0f ) - 0.02f;
+				
+				if (residualTox > 0)
+					residualTox += drainVal;
+			}			
+			
+			if (index >= 0)
+			{			
+				if( Options().GetSlowToxicityCombatDegen() && target.IsInCombat() )
+				{
+					drainVal -= CalcToxicityDegen( Options().GetToxicityCombatDegen() );
+				}
+				else if( lowestDurationRatio < Options().GetFastToxicityDegenThreshold() )
+					drainVal -= CalcToxicityDegen( Options().GetStandardToxicityDegen(), Options().GetFastToxicityDegen());
+				else			
+					drainVal -= CalcToxicityDegen( Options().GetStandardToxicityDegen() );
 			}
+			
+			if( isUnsafe )
+				drainVal -= FastClearDegen();
 		}
+		
+		UpdateEffectsTimeAndRemove();
+		
+		if (!toxicity)	
+			return false;
 		
 		effectManager.CacheStatUpdate(BCS_Toxicity, drainVal);
 	}
 	
-	private var effectToxicity : array<float>;
-	private var effectDuration : array<float>;
-	private var effectDurationOrig : array<float>;
 	public function SetEffectTime( toxicity, duration : float ) : void
 	{
-		effectToxicity.PushBack(toxicity);
-		effectDuration.PushBack(duration);
-		effectDurationOrig.PushBack(duration);
+		var potionTox : SEffectToxicity;
+		
+		if (duration <= 0)
+		{
+			if (toxicity > 0)
+				residualTox += toxicity;
+		}
+		else if (toxicity > 0)
+		{
+			potionTox.effectToxicityOrig = toxicity;
+			potionTox.effectToxicity = toxicity;
+			potionTox.effectDurationOrig = duration;
+			potionTox.effectDuration = duration;
+			effectsToxicity.PushBack(potionTox);
+		}
 	}
 	
 	public function GetEnzymaticToxReduction() : float
 	{
 		if (thePlayer.CanUseSkill(S_Alchemy_s03))
 		{
-			return effectDuration.Size() * (1.0f + (thePlayer.GetSkillLevel(S_Alchemy_s03) - 1) * 0.5f);
-			
+			return (effectsToxicity.Size() + effectsRevoked.Size()) * (1.0f + (thePlayer.GetSkillLevel(S_Alchemy_s03) - 1) * 0.5f);			
 		}
 		else
 			return 0;
 	}
 	
-	private function UpdateEffectsTime() : void
+	public function ClearAllEffects()
+	{
+		var skillAbilityName : name;
+		
+		residualTox = 0;
+		effectsToxicity.Clear();
+		effectsRevoked.Clear();
+		
+		skillAbilityName = SkillEnumToName(S_Alchemy_s17);
+		while(thePlayer.HasAbility(skillAbilityName))
+			thePlayer.RemoveAbility(skillAbilityName);
+	}
+
+	private function UpdateEffectsTimeAndRemove() : void
 	{
 		var i : int;
-		for(i=0; i<effectDuration.Size(); i+=1)
-			effectDuration[i] -= updateInterval;
+		
+		for(i=effectsRevoked.Size() - 1; i >= 0 ; i-=1)
+		{
+			effectsRevoked[i] -= updateInterval;
+			if (effectsRevoked[i] <= 0 )
+				effectsRevoked.Erase(i);		
+		}
+		
+		for(i=effectsToxicity.Size() - 1; i >= 0 ; i-=1)
+		{
+			effectsToxicity[i].effectDuration -= updateInterval;			
+			if (effectsToxicity[i].effectDuration <= 0 || effectsToxicity[i].effectToxicity <= 0 )
+			{
+				if (effectsToxicity[i].effectToxicity > 0)
+					residualTox += effectsToxicity[i].effectToxicity;
+					
+				if (effectsToxicity[i].effectDuration > 0)
+					effectsRevoked.PushBack(effectsToxicity[i].effectDuration);
+			
+				effectsToxicity.Erase(i);				
+			}
+		}
+			
+		updateInterval = 0;
 	}
 	
-	private function ClearEffects( index : int ) : void
+	private function FastClearDegen() : float
 	{
-		effectToxicity.Erase(index);
-		effectDuration.Erase(index);
-		effectDurationOrig.Erase(index);
+		var drainVal : float;
+		
+		if( !witcher.CanUseSkill(S_Alchemy_s15) )
+			return 0.0f;
+		
+		drainVal = witcher.GetSkillLevel(S_Alchemy_s15) * 0.1f;
+		witcher.GetAdrenalineEffect().AddAdrenaline(drainVal / 100.f);
+		FastClearUpdate(drainVal);		
+		
+		return drainVal;			
 	}
+
 	
-	private function GetToxicityDegen( multiplierStandard : float, optional multiplierFast : float) : float
+	private function FastClearUpdate(drainVal : float)
+	{
+		var i			: int;
+		var unitDegen 	: float;
+		
+		unitDegen = drainVal;
+		if (residualTox > 0)
+		{
+			unitDegen /= (effectsToxicity.Size() + 1);
+			residualTox -= unitDegen;
+			if (residualTox < 0)
+				residualTox = 0;
+		}
+		else
+			unitDegen /= effectsToxicity.Size();
+			
+		for( i = 0; i < effectsToxicity.Size(); i += 1 )
+		{
+			effectsToxicity[i].effectToxicity -= unitDegen;
+		}	
+	}
+
+
+	private function CalcToxicityDegen( multiplierStandard : float, optional multiplierFast : float) : float
 	{
 		var index : int;
-		var degenValue : float;
+		var degenValue, unitValue : float;
 		
-		for(index=0; index<effectToxicity.Size(); index+=1)
+		for(index=0; index < effectsToxicity.Size(); index+=1 )		
 		{
-			if( multiplierFast && (effectDuration[index] / effectDurationOrig[index]) < Options().GetFastToxicityDegenThreshold() )
-				degenValue += (effectToxicity[index] / effectDurationOrig[index]) * multiplierFast;
+			if( multiplierFast && (effectsToxicity[index].effectDuration / effectsToxicity[index].effectDurationOrig) < Options().GetFastToxicityDegenThreshold() )
+			{
+				unitValue = (effectsToxicity[index].effectToxicityOrig / effectsToxicity[index].effectDurationOrig) * multiplierFast;
+			}
 			else
-				degenValue += (effectToxicity[index] / effectDurationOrig[index]) * multiplierStandard;
+				unitValue = (effectsToxicity[index].effectToxicityOrig / effectsToxicity[index].effectDurationOrig) * multiplierStandard;
+				
+			unitValue *= MinF(updateInterval, effectsToxicity[index].effectDuration);
+			
+			unitValue = MinF(unitValue, effectsToxicity[index].effectToxicity);				
+			effectsToxicity[index].effectToxicity -= unitValue;
+				
+			degenValue += unitValue;
 		}
 		
 		return degenValue;
@@ -319,8 +437,7 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 		*/
 		// W3EE - End
 		
-		
-		
+		ClearAllEffects();		
 		
 		PlayHeadEffect( 'toxic_000_025', true );
 		PlayHeadEffect( 'toxic_025_050', true );

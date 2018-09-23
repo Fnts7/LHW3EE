@@ -2399,7 +2399,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(5 * skillLevel);
 				argsInt.PushBack(20 * skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_SunderingBlowsSkill", argsInt);
-				baseString += "<br>Heavy attacks have " + NoTrailZeros(RoundTo(skillLevel * 1.5f, 1)) + "% damage through blocks and dodges.";
+				baseString += "<br>Heavy attacks have " + NoTrailZeros(RoundTo(skillLevel * 1.5f, 1)) + "% damage through blocks and dodges. Heavy bash second swing has extra " + skillLevel + "% chance to break shield.";
 				// W3EE - End
 				break;
 			case S_Sword_s07:

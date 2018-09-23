@@ -2462,7 +2462,7 @@ class W3DamageManagerProcessor extends CObject
 			GCameraShake( 0.5, true, actorAttacker.GetWorldPosition(), 10 );
 		
 		
-		if( attackAction && npcVictim && npcVictim.IsShielded( actorAttacker ) && attackAction.IsParried() && attackAction.GetAttackName() == 'attack_heavy' &&  npcVictim.GetStaminaPercents() <= 0.1 )
+		if( attackAction && npcVictim && npcVictim.IsShielded( actorAttacker ) && attackAction.IsParried() && actorAttacker.IsHeavyAttack(attackAction.GetAttackName()) && npcVictim.GetStaminaPercents() <= 0.1 )
 		{
 			npcVictim.ProcessShieldDestruction();
 		}

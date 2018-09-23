@@ -1,4 +1,31 @@
-﻿Version 31
+﻿Version 32
+
+Boosted a bit heavy bash attack against shields (small balance after changes in previous version).
+Second stage of heavy bash has now 40% chance to deal damage (the attack is unpariable, with exception
+of shield that has 60% parry chance instead). Injuring shielded enemies (unless lowered guard) is only
+possible with sundering blows skill. Also Sundering blows skill give now small increase of shield break chance.
+Heavy bash can now also break shield when enemy has very low stamina, as normal heavy attack.
+
+Cyclop is a bit slower and deals a bit less damage. Also raised physical res to 30%, other reses less, but
+lowered HP by about 20%.
+
+Improved toxicity degeneration logic. Residual toxicity degeneration now also can happen when the effects
+of potions are present, but at much lower tempo (/5 of normal residual regen). Normal residual regen tempo
+occurs when you have no potion effects (decoctions can be present). Residual toxicity comes from two sources:
+1) When effect of potion wears off and some toxicity still remains, it is transfered to residual. The tempo
+of non residual toxicity degen (active potions) has other settings for control, so it can happen that there
+will be no residual toxicity at all for example. Also because of fast metabolism skill.
+2) Enemies can have toxicity venom in their attacks. Such toxicity gained is counted as residual from start.
+Example. You drink two potions each has toxicity 30 and duration 6 min. In that moment your tox is 60,
+residual 0. After 6 min suppose 2/3 tox is degenerated. So at that point you have 20 tox, 20 residual. Some
+short time passes 5 residual toxicity is gone and you apply another potion with toxicity 50. Now you have
+65 toxicity, 15 residual. Then almost immediately you get hit with toxicity venom of value 5. 70 toxicity,
+20 residual. Degeneration progresses with one potion effect and some residual toxicity.
+
+IMPORTANT! With this update it is recommended to lower Residual Toxicity Degeneration in settings to at least 0.05.
+Values even lower like 0.03-0.04 won't hurt much either.
+
+Version 31
 
 Improved the Sundering blows skill against shields efficiency. The problem was that shielded enemies by default
 have 100% raise guard chance. So right after successful roll of sundering blows after hit, the guard was raised.

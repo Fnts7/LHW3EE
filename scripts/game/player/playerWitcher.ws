@@ -7449,7 +7449,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		else
 		{
 			//finalPotionToxicity = CeilF(finalPotionToxicity * (1.f + (GetNumMutagensActive() / 2.f)));
-			finalPotionToxicity -= ((W3Effect_Toxicity)GetBuff(EET_Toxicity)).GetEnzymaticToxReduction();
+			if (HasBuff(EET_Toxicity))
+				finalPotionToxicity -= ((W3Effect_Toxicity)GetBuff(EET_Toxicity)).GetEnzymaticToxReduction();
 			
 		}
 		

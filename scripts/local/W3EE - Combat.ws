@@ -1706,7 +1706,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 	
 	public function SpecialAttackHeavy( action : W3Action_Attack )
 	{
-		var repelType : EPlayerRepelType = PRT_RepelToFinisher;
+		//var repelType : EPlayerRepelType = PRT_RepelToFinisher;
 		var witcher : W3PlayerWitcher;
 		var npcTarget : CNewNPC;
 		var shieldBreakChance : int;
@@ -1751,6 +1751,9 @@ class W3EECombatHandler extends W3EEOptionHandler
 						shieldBreakChance = 15;
 					else
 						shieldBreakChance = 25;
+						
+					if (witcher.CanUseSkill(S_Sword_s06))
+						shieldBreakChance += witcher.GetSkillLevel(S_Sword_s06);
 					
 					if (RandRange(100, 0) <= shieldBreakChance)
 					{
@@ -1759,7 +1762,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 					}
 				}
 				
-				if( action.DealsAnyDamage() )
+				if( action.DealsAnyDamage() && !npcTarget.IsShielded(witcher) )
 				{
 					if (firstHitHeavyBashSuccess)
 					{
@@ -1804,7 +1807,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		disarmChance = actorAttacker.GetAttributeValue('disarm_chance');
 		npcTarget = (CNewNPC)attackAction.victim;
 		if( attackAction && attackAction.IsActionMelee() && !attackAction.IsCountered()
-			&& ( attackAction.IsParried() || (attackAction.GetAttackName() == 'geralt_heavy_special2' && npcTarget.IsShielded(attackAction.attacker)) ) )
+			&& ( attackAction.IsParried() || (attackAction.GetAttackName() == 'geralt_heavy_special2' && npcTarget.IsShielded(attackAction.attacker) && (!firstHitHeavyBash || RandRange(100, 0) <= 60 ) ) ) )
 		{
 			if( npcTarget && (npcTarget.HasTwoHandedWeapon() || npcTarget.IsShielded(attackAction.attacker)) )
 			{
