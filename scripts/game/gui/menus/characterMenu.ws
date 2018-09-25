@@ -3114,7 +3114,8 @@ class CR4CharacterMenu extends CR4MenuBase
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_01, 'vitalityRegen_tooltip', false, true);
 				argsInt.PushBack(RoundMath(CalculateAttributeValue(ability)));
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_01, 'staminaRegen_tooltip', false, true);
-				argsInt.PushBack(RoundMath(ability.valueMultiplicative * GetWitcherPlayer().GetStatMax(BCS_Stamina)));
+				//argsInt.PushBack(RoundMath(ability.valueMultiplicative * GetWitcherPlayer().GetStatMax(BCS_Stamina)));
+				argsInt.PushBack(RoundMath(ability.valueAdditive));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				break;
 			case S_Perk_02:
@@ -3198,7 +3199,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsString.PushBack( FloatToString( ability.valueAdditive ) );*/
 				argsInt.PushBack(25);
 				baseString = GetLocStringByKeyExtWithParams( locKey, argsInt/* , , argsString */);
-				baseString += "<br>Increases food instant healing by 25% and over time healing by 40%.";
+				baseString += "<br>Increases food instant healing by 25% and over time healing by 50%.";
 				// W3EE - End
 				break;
 			case S_Perk_18:

@@ -354,6 +354,10 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 			itemDesc += "<br>Gives also 70% resistance against toxicity venom.";
 		else if (StrContains(NameToString(craftedItemName), "Golden Oriole 3"))
 			itemDesc += "<br>Gives also 85% resistance against toxicity venom.";
+		else if (StrContains(NameToString(craftedItemName), "Maribor Forest 2"))
+			itemDesc += "<br>Restores 1 vigor point.";
+		else if (StrContains(NameToString(craftedItemName), "Maribor Forest 3"))
+			itemDesc += "<br>Restores 2 vigor points and grants also -10% vigor regen delay.";
 		
 		rarityId = minQuality;
 		rarity = GetItemRarityDescriptionFromInt(minQuality);

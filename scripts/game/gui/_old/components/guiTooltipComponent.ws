@@ -637,6 +637,11 @@ class W3TooltipComponent
 				uniqueDescription += "<br>Gives also 70% resistance against toxicity venom.";
 			else if (StrContains(NameToString(itemName), "Golden Oriole 3"))
 				uniqueDescription += "<br>Gives also 85% resistance against toxicity venom.";
+			else if (StrContains(NameToString(itemName), "Maribor Forest 2"))
+				uniqueDescription += "<br>Restores 1 vigor point.";
+			else if (StrContains(NameToString(itemName), "Maribor Forest 3"))
+				uniqueDescription += "<br>Restores 2 vigor points and grants also -10% vigor regen delay.";
+			
 				
 		}
 		if ( theGame.GetGuiManager().GetShowItemNames() )

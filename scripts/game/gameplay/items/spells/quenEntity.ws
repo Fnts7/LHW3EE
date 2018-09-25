@@ -1184,6 +1184,10 @@ state QuenChanneled in W3QuenEntity extends Channeling
 		}
 		
 		Experience().AwardSignXP(parent.GetSignType(), 0.25f);
+		
+		if (RandF() < 0.5f)
+			parent.HandleMutagen22();
+		
 		parent.SetBlockedAllDamage(true);
 		if( !drainAllVigor )
 		{

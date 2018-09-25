@@ -211,7 +211,7 @@ class W3SignOwnerPlayer extends W3SignOwner
 			ret = false;
 		}		
 		//else if ( theInput.GetActionValue( 'CastSignHold' ) > 0.f )
-		else if ( GetWitcherPlayer().GetIsAlternateCast() )
+		else if ( GetWitcherPlayer().GetIsAlternateCast() || signEntity.inputlessAlternate)
 		// W3EE - End
 		{
 			if ( !player.IsCombatMusicEnabled() && !player.CanAttackWhenNotInCombat( EBAT_CastSign, true, newTarget ) )

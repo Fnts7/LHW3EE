@@ -91,7 +91,7 @@ class W3EEExperienceHandler
 				pathEntry.progressID = "AardProgress";
 				pathEntry.maxPoints = 16;
 				// W3EE orig value: 125
-				pathEntry.expValue = RoundMath(90 * Options().GetSkillRateAard());
+				pathEntry.expValue = RoundMath(85 * Options().GetSkillRateAard());
 			break;
 			
 			case ESSP_Signs_Igni:
@@ -100,7 +100,7 @@ class W3EEExperienceHandler
 				pathEntry.progressID = "IgniProgress";
 				pathEntry.maxPoints = 18;
 				// W3EE orig value: 128
-				pathEntry.expValue = RoundMath(80 * Options().GetSkillRateIgni());
+				pathEntry.expValue = RoundMath(75 * Options().GetSkillRateIgni());
 			break;
 			
 			case ESSP_Signs_Yrden:
@@ -109,7 +109,7 @@ class W3EEExperienceHandler
 				pathEntry.progressID = "YrdenProgress";
 				pathEntry.maxPoints = 15;
 				// W3EE orig value: 161
-				pathEntry.expValue = RoundMath(160 * Options().GetSkillRateYrden());
+				pathEntry.expValue = RoundMath(150 * Options().GetSkillRateYrden());
 			break;
 			
 			case ESSP_Signs_Quen:
@@ -118,7 +118,7 @@ class W3EEExperienceHandler
 				pathEntry.progressID = "QuenProgress";
 				pathEntry.maxPoints = 16;
 				// W3EE orig value: 128
-				pathEntry.expValue = RoundMath(125 * Options().GetSkillRateQuen());
+				pathEntry.expValue = RoundMath(120 * Options().GetSkillRateQuen());
 			break;
 			
 			case ESSP_Signs_Axi:
@@ -127,7 +127,7 @@ class W3EEExperienceHandler
 				pathEntry.progressID = "AxiiProgress";
 				pathEntry.maxPoints = 14;
 				// W3EE orig value: 181
-				pathEntry.expValue = RoundMath(125 * Options().GetSkillRateAxii());
+				pathEntry.expValue = RoundMath(115 * Options().GetSkillRateAxii());
 			break;
 			
 			case ESSP_Alchemy_Potions:

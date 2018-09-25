@@ -87,15 +87,14 @@
 			<!-- MARIBOR FOREST -->
 			<ability name="MariborForestEffect_Level1">
 				<tags>passive</tags>
-				<vigor_regen type="mult" min="0.05"	/>
 			</ability>
 			<ability name="MariborForestEffect_Level2">
 				<tags>passive</tags>
-				<vigor_regen type="mult" min="0.15"	/>
+				<vigor_regen type="mult" min="0.1" />
 			</ability>
 			<ability name="MariborForestEffect_Level3">
 				<tags>passive</tags>
-				<vigor_regen type="mult" min="0.25"	/>
+				<vigor_regen type="mult" min="0.2" />
 				<!--<focus_on_drink type="add" min="1" />-->
 			</ability>
 			

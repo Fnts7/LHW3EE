@@ -18,10 +18,8 @@ class W3Potion_MariborForest extends CBaseGameplayEffect
 		
 		target.abilityManager.SetStatPointMax(BCS_Focus, Options().MaxFocus() + 1);
 		
-		if(GetBuffLevel() == 3)
-		{
-			target.GainStat(BCS_Focus, 2);
-		}
+		target.GainStat(BCS_Focus, GetBuffLevel() - 1);
+
 		// W3EE - End
 	}
 	

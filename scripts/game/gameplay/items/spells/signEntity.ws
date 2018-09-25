@@ -19,6 +19,7 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 	
 	// W3EE - Begin
 	public var isFOACast : bool;
+	public var inputlessAlternate : bool; default inputlessAlternate = false;
 	protected var isFreeCast : bool;
 	//protected var isMutagen17Consumed : bool;
 	protected var signIntensity : SAbilityAttributeValue;
@@ -235,6 +236,50 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		theGame.MutationHUDFeedback( MFT_PlayRepeat );
 	}
 	
+	protected function HandleMutagen22()
+	{
+		var witcher : W3PlayerWitcher;
+		var abilityName : name;
+		var abilityCount, maxStack : float;
+		var addAbility : bool;
+		var min, max : SAbilityAttributeValue;
+		
+		if (isFreeCast)
+			return;
+		
+		witcher = (W3PlayerWitcher)owner.GetActor();
+	
+		if(witcher && witcher.HasBuff(EET_Mutagen22) && witcher.IsInCombat())
+		{
+			abilityName = witcher.GetBuff(EET_Mutagen22).GetAbilityName();
+			abilityCount = witcher.GetAbilityCount(abilityName);
+			
+			if(abilityCount == 0)
+			{
+				addAbility = true;
+			}
+			else
+			{
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue(abilityName, 'mutagen22_max_stack', min, max);
+				maxStack = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+				
+				if(maxStack >= 0)
+				{
+					addAbility = (abilityCount < maxStack);
+				}
+				else
+				{
+					addAbility = true;
+				}
+			}
+			
+			if(addAbility)
+			{
+				witcher.AddAbility(abilityName, true);
+			}
+		}
+	}
+	
 	
 	event OnStarted()
 	{
@@ -254,16 +299,17 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 	event OnThrowing()
 	{
 		// W3EE - Begin
-		var witcher : W3PlayerWitcher;
-		var abilityName : name;
+
 		
-		witcher = (W3PlayerWitcher)owner.GetActor();
-		
-		if(witcher && witcher.HasBuff(EET_Mutagen22) && witcher.IsInCombat())
+		/*if(witcher && witcher.HasBuff(EET_Mutagen22) && witcher.IsInCombat())
 		{
 			abilityName = witcher.GetBuff(EET_Mutagen22).GetAbilityName();
 			witcher.AddAbility(abilityName, true);
-		}
+		}*/
+		
+		if (skillEnum != S_Magic_s04)
+			HandleMutagen22();
+		
 		// W3EE - End
 	}
 	
@@ -271,11 +317,11 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 	event OnEnded(optional isEnd : bool)
 	{
 		var witcher : W3PlayerWitcher;
-		var abilityName : name;
-		var abilityCount, maxStack : float;
-		var min, max : SAbilityAttributeValue;
-		var addAbility : bool;
-		var mutagen17 : W3Mutagen17_Effect;
+		//var abilityName : name;
+		//var abilityCount, maxStack : float;
+		//var min, max : SAbilityAttributeValue;
+		//var addAbility : bool;
+		//var mutagen17 : W3Mutagen17_Effect;
 
 		var camHeading : float;
 		

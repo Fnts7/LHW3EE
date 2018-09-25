@@ -175,7 +175,7 @@
       </ability>
       <ability name="MariborForest_2">
         <toxicity min="45" max="45" type="add" />
-        <duration min="90" max="90" type="add" />
+        <duration min="100" max="100" type="add" />
         <ammo type="add" min="4" />
         <MariborForestEffect_Level2 is_ability="true" />
         <MariborForest_3 is_ability="true" />
@@ -184,7 +184,7 @@
       </ability>
       <ability name="MariborForest_3">
         <toxicity min="55" max="55" type="add" />
-        <duration min="150" max="150" type="add" />
+        <duration min="135" max="135" type="add" />
         <ammo type="add" min="5" />
         <MariborForestEffect_Level3 is_ability="true" />
         <MariborForest_2 is_ability="true" />

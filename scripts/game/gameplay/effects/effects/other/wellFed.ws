@@ -56,10 +56,10 @@ class W3Effect_WellFed extends W3RegenEffect
 			{
 				dm = theGame.GetDefinitionsManager();
 				dm.GetAbilityAttributeValue(abilityName, 'vitalityRegen', min, max);
-				perk15Value = CalculateAttributeValue(GetAttributeRandomizedValue(min, max)) * 0.4f;
+				perk15Value = CalculateAttributeValue(GetAttributeRandomizedValue(min, max)) * 0.5f;
 				
 				dm.GetAbilityAttributeValue(abilityName, 'vitalityCombatRegen', min, max);			
-				perk15ValueCombat = CalculateAttributeValue(GetAttributeRandomizedValue(min, max)) * 0.4f;
+				perk15ValueCombat = CalculateAttributeValue(GetAttributeRandomizedValue(min, max)) * 0.5f;
 				
 				cachedValue = true;
 			}

@@ -1,4 +1,26 @@
-﻿Version 32
+﻿Version 33
+
+Fixed a bug that Aard circle cast from whirl with runeword severance III had no effect apart from visual.
+Works now properly - aard circle. If you have no aard circle skill, standard aard will be cast just as from
+Rend with severance runeword III Aard infusion.
+
+Nerfed a little lvl2, lvl3 Maribor Forest (balance after my prev changes). So now:
+lvl1: gives 1 extra vigor point, duratiom minimized
+lvl2: great duration gain, +10% vigor regen, fills 1 vigor point when applied
+lvl3: another small duration gain, +20% vigor regen, -10% vigor regen delay, fills 2 vigor pts when applied
+
+Boosted Ancient Leshen Mutagen to +5% vigor regen per cast and -2.5% vigor regen delay, but has max stack limit
+is 8, so +40%/-20% vigor regen gain from that mutagen max. When using quen alternate the mutagen stack is not
+triggered on cast, instead when you get hit with 50% chance.
+
+Sun and Stars perk values boosted, so that this perk is reasonable. 7 vitality regen or 2.5 extra stamina regen
+per sec.
+
+Gorurment perk over time food healing bonus boosted to +50%.
+
+Lowered a little bit experience gain of all signs.
+
+Version 32
 
 Boosted a bit heavy bash attack against shields (small balance after changes in previous version).
 Second stage of heavy bash has now 40% chance to deal damage (the attack is unpariable, with exception

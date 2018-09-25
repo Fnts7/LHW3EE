@@ -3360,14 +3360,17 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function StartRegenTimer()
 	{
 		var regen_time : float;
-		var maribor_level : int;
 		
 		regen_time = Options().AdrGenDelay;
 		
-		if (HasBuff(EET_MariborForest))
+		if (HasBuff(EET_MariborForest) && GetBuff(EET_MariborForest).GetBuffLevel() > 2)
 		{
-			maribor_level = GetBuff(EET_MariborForest).GetBuffLevel();
-			regen_time *= 1.0f - (0.05f + (maribor_level - 1) * 0.1f);
+			regen_time *= 0.9f;
+		}
+		
+		if (HasBuff(EET_Mutagen22))
+		{
+			regen_time *= 1.0f - 0.025f * GetAbilityCount(GetBuff(EET_Mutagen22).GetAbilityName());
 		}
 	
 		((W3Effect_AdrenalineDrain)GetBuff(EET_AdrenalineDrain)).StopRegen();
@@ -7190,9 +7193,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var signEntity : W3SignEntity;
 		
 		signEntity = (W3SignEntity)theGame.CreateEntity(signs[signType].template, spawnPos, rotation);
-		signEntity.Init(signOwner, signs[signType].entity, true, false, freeCast);
+		
+		if (!signEntity.Init(signOwner, signs[signType].entity, true, false, freeCast))
+			return;
+			
 		if( alternateCast )
-			signEntity.SetAlternateCast(SignEnumToSkillEnum(signType));
+			signEntity.inputlessAlternate = true;
+			//signEntity.SetAlternateCast(SignEnumToSkillEnum(signType));
+			
 		signEntity.OnStarted();
 		signEntity.OnThrowing();
 		signEntity.OnEnded();

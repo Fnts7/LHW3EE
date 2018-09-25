@@ -608,16 +608,16 @@
 			<tags>perk_1</tags>
 			<perk_1_day_ability is_ability="true" />
 			<perk_1_night_ability is_ability="true" />
-			<vitalityRegen_tooltip type="add" min="2.5" />
-			<staminaRegen_tooltip type="mult" min="0.01" />
+			<vitalityRegen_tooltip type="add" min="7" />
+			<staminaRegen_tooltip type="add" min="2.5" />
 		</ability>
 		<ability name="perk_1_day_ability">
 			<tags>perk_1, Day, GlobalPassiveBonus</tags>
-			<vitalityRegen type="add" min="2.5" />
+			<vitalityRegen type="add" min="7" />
 		</ability>
 		<ability name="perk_1_night_ability">
 			<tags>perk_1, Night, GlobalPassiveBonus</tags>
-			<staminaRegen type="mult" min="0.01" />
+			<staminaRegen type="add" min="2.5" />
 		</ability>
 		
 		<ability name="perk_2">

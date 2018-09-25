@@ -141,9 +141,9 @@
 			
 			<!-- Ancient Leshen -->
 			<ability name="Mutagen22Effect">
-				<vigor_regen type="mult" min="0.02"/>
+				<vigor_regen type="mult" min="0.05"/>
 				
-				<mutagen22_max_stack type="add" min="-1"/>
+				<mutagen22_max_stack type="add" min="8"/>
 			</ability>
 			
 			<!-- Werewolf -->
