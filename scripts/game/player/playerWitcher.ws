@@ -881,7 +881,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		for(i=0; i<buffs.Size(); i+=1)
 		{
 			mutagen = (W3Mutagen_Effect)buffs[i];
-			if(mutagen)
+			if(mutagen && mutagen.GetSourceName() != "Mutation12" )
 			{
 				offset += mutagen.GetToxicityOffset();
 				mutagenCount += 1;
@@ -4113,7 +4113,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		decoctions = inv.GetItemsByTag( 'Mutagen' );
+		/*decoctions = inv.GetItemsByTag( 'Mutagen' );
 		
 		
 		for( i=decoctions.Size()-1; i>=0; i-=1 )
@@ -4125,19 +4125,18 @@ statemachine class W3PlayerWitcher extends CR4Player
 				continue;
 			}
 			buffs.PushBack( effectType );
-		}
+		}*/
 		
 		
-		if( buffs.Size() == 0 )
-		{
-			for( i=EET_Mutagen01; i<=EET_Mutagen28; i+=1 )
+		//if( buffs.Size() == 0 )
+			for( i=EET_Mutagen01; i<=EET_Mutagen27; i+=1 )
 			{
 				if( !HasBuff( i ) )
 				{
 					buffs.PushBack( i );
 				}
 			}
-		}
+		//}
 		
 		
 		//buffs.Remove( EET_Mutagen16 );
@@ -4148,7 +4147,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		buffs.Remove( EET_Mutagen06 ); // nightwraith
 		buffs.Remove( EET_Mutagen09 ); // fogling
 		buffs.Remove( EET_Mutagen23 ); // basilisk
-		buffs.Remove( EET_Mutagen28 ); // lagodziciel
+		//buffs.Remove( EET_Mutagen28 ); // lagodziciel
 		
 		if( buffs.Size() == 0 )
 		{
@@ -7238,6 +7237,16 @@ statemachine class W3PlayerWitcher extends CR4Player
 		return effectManager.GetDrunkMutagens( sourceName );
 	}
 	
+	public final function GetDrunkMutagenCount() : int
+	{
+		var mutagens, mutagensMutation12 : array<CBaseGameplayEffect>;
+		
+		mutagens = GetDrunkMutagens();
+		mutagensMutation12 = GetDrunkMutagens("Mutation12");
+		
+		return mutagens.Size() - mutagensMutation12.Size();
+	}	
+	
 	public final function GetPotionBuffs() : array<CBaseGameplayEffect>
 	{
 		return effectManager.GetPotionBuffs();
@@ -7434,6 +7443,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var i : int;
 		var maxTox, toxicityOffset, adrenaline : float;
 		var costReduction : SAbilityAttributeValue;
+		var potionName : name;
 		
 		
 		if( effectType == EET_WhiteHoney )
@@ -7450,7 +7460,15 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( inv.ItemHasTag(item, 'Mutagen') )
 		{
 			if(CanUseSkill(S_Alchemy_s14))
-				toxicityOffset -= 3 * GetSkillLevel(S_Alchemy_s14);
+			{
+				potionName = inv.GetItemName(item);
+				if (potionName == 'Mutagen 9')
+					toxicityOffset -= 2.5f * GetSkillLevel(S_Alchemy_s14);
+				else if (potionName == 'Mutagen 23')
+					toxicityOffset -= 2 * GetSkillLevel(S_Alchemy_s14);
+				else
+					toxicityOffset -= 3 * GetSkillLevel(S_Alchemy_s14);
+			}
 				
 			//toxicityOffset = CeilF(toxicityOffset * (1.f + (GetNumMutagensActive() / 2.f))) + CeilF(GetStat(BCS_Toxicity, true) * ((GetNumMutagensActive() + 1) / 2.f)); 
 		}
@@ -7553,7 +7571,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			// W3EE - Begin
 			if( CanUseSkill(S_Alchemy_s14) )
-				mutagenParams.toxicityOffset -= 3 * GetSkillLevel(S_Alchemy_s14);
+			{
+				if (potionName == 'Mutagen 9')
+					mutagenParams.toxicityOffset -= 2.5f * GetSkillLevel(S_Alchemy_s14);
+				else if  (potionName == 'Mutagen 23')
+					mutagenParams.toxicityOffset -= 2 * GetSkillLevel(S_Alchemy_s14);
+				else
+					mutagenParams.toxicityOffset -= 3 * GetSkillLevel(S_Alchemy_s14);
+			}
 				
 			//mutagenParams.toxicityOffset = CeilF(mutagenParams.toxicityOffset * (1.f + (GetNumMutagensActive() / 2.f))) + CeilF(GetStat(BCS_Toxicity, true) * ((GetNumMutagensActive() + 1) / 2.f)); 
 			// W3EE - End
@@ -11563,10 +11588,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 			arrString.PushBack( FloatToString( min.valueMultiplicative * 100 ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
 			break;
+		case EISB_RedWolf_1:
+			finalString = "Grants 70% chance to prepare an extra bomb. This cumulates with efficiency skill.";
+			break;
 		case EISB_RedWolf_2:
 			dm.GetAbilityAttributeValue( 'setBonusAbilityRedWolf_2', 'amount', min, max );
 			arrString.PushBack( FloatToString( min.valueAdditive ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
+			finalString += "<br>Grants extra 0.5 cluster if cluster bombs skill is available, otherwise adds extra 200 impact damage to every bomb.";
 			break;
 		/*case EISB_Vampire:
 			dm.GetAbilityAttributeValue( 'setBonusAbilityVampire', 'life_percent', min, max );

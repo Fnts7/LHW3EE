@@ -2516,7 +2516,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var recipe : SAlchemyRecipe;
 		var uiState : W3TutorialManagerUIHandlerStateCharacterDevelopment;
 		var battleTrance : W3Effect_BattleTrance;
-		var mutagens : array<CBaseGameplayEffect>;
+		var mutagens : int;
 		var trophy : SItemUniqueId;
 		var horseManager : W3HorseManager;
 		var weapon, armor : W3RepairObjectEnhancement;
@@ -2605,10 +2605,10 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			}
 			else if(skill == S_Alchemy_s13)
 			{
-				mutagens = GetWitcherPlayer().GetDrunkMutagens();
-				if(mutagens.Size() > 0)	
+				mutagens = GetWitcherPlayer().GetDrunkMutagenCount();
+				if(mutagens > 0)	
 				{
-					charStats.AddAbilityMultiple( GetSkillAbilityName( skill ), (GetSkillLevel( skill ) * mutagens.Size() ));
+					charStats.AddAbilityMultiple( GetSkillAbilityName( skill ), GetSkillLevel( skill ) * mutagens );
 				}
 			}		
 			else if(skill == S_Alchemy_s06)
@@ -2767,7 +2767,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var isPassive : bool;
 		var petard : W3Petard;
 		var ents : array<CGameplayEntity>;
-		var mutagens : array<CBaseGameplayEffect>;
+		var mutagens : int;
 		var tox : W3Effect_Toxicity;
 		var names, abs : array<name>;
 		var skillName : name;
@@ -2866,11 +2866,11 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			
 			else if(skill == S_Alchemy_s13)
 			{
-				mutagens = GetWitcherPlayer().GetDrunkMutagens();
+				mutagens = GetWitcherPlayer().GetDrunkMutagenCount();
 				
-				if(mutagens.Size() > 0)
+				if(mutagens > 0)
 				{
-					charStats.RemoveAbilityMultiple( GetSkillAbilityName( S_Alchemy_s13 ), ( GetSkillLevel( skill ) * mutagens.Size() ));
+					charStats.RemoveAbilityMultiple( GetSkillAbilityName( S_Alchemy_s13 ), ( GetSkillLevel( skill ) * mutagens ));
 				}
 			}
 			else if(skill == S_Alchemy_s06)
@@ -3101,7 +3101,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var cnt, i : int;
 		var names : array<name>;
 		var skillAbilityName : name;
-		var mutagens : array<CBaseGameplayEffect>;
+		var mutagens : int;
 		var recipe : SAlchemyRecipe;
 		var m_alchemyManager : W3AlchemyManager;
 		var ignorePain : W3Effect_IgnorePain;
@@ -3144,13 +3144,16 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		else if(skill == S_Alchemy_s13)
 		{
-			mutagens = GetWitcherPlayer().GetDrunkMutagens();
+			mutagens = GetWitcherPlayer().GetDrunkMutagenCount();
 			skillAbilityName = GetSkillAbilityName(S_Alchemy_s13);			
 			
-			if(mutagens.Size() > 0)
-				charStats.AddAbilityMultiple(skillAbilityName, GetSkillLevel(skill));
-			else
-				charStats.RemoveAbilityMultiple(skillAbilityName, GetSkillLevel(skill));						
+			if(mutagens > 0)
+			{
+				if (currLevel > prevLevel)
+					charStats.AddAbilityMultiple(skillAbilityName, (currLevel - prevLevel) * mutagens);
+				else
+					charStats.RemoveAbilityMultiple(skillAbilityName, (prevLevel - currLevel) * mutagens);
+			}
 		}
 		else if(skill == S_Alchemy_s19)
 		{

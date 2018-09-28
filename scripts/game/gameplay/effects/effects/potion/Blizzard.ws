@@ -11,16 +11,17 @@ class W3Potion_Blizzard extends CBaseGameplayEffect
 	private saved var slowdownCauserIds : array<int>;		
 	private var slowdownFactor : float;
 	private var currentSlowMoDuration : float;
+	private var currentMaxDuration : float;
 	private const var SLOW_MO_DURATION : float;
 	private const var SLOW_MO_DURATION_HIGH : float;
 	private const var SLOW_MO_DURATION_EXT : float;
 
 	default effectType = EET_Blizzard;
 	default attributeName = 'slow_motion';
-	default SLOW_MO_DURATION = 4.f;
+	default SLOW_MO_DURATION = 4.0f;
 	// W3EE - Begin
-	default SLOW_MO_DURATION_HIGH = 5.f;
-	default SLOW_MO_DURATION_EXT = 6.f;
+	default SLOW_MO_DURATION_HIGH = 1.f;
+	default SLOW_MO_DURATION_EXT = 1.f;
 	// W3EE - End
 	
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
@@ -28,8 +29,11 @@ class W3Potion_Blizzard extends CBaseGameplayEffect
 		super.OnEffectAdded(customParams);	
 		
 		// W3EE - Begin
-		slowdownFactor = CalculateAttributeValue(effectValue) * 0.8f;
+		slowdownFactor = CalculateAttributeValue(effectValue);
 		// W3EE - End
+		
+		currentMaxDuration = 0.0f;
+		currentSlowMoDuration = 0.0f;
 	}
 	
 	public final function IsSlowMoActive() : bool
@@ -39,13 +43,47 @@ class W3Potion_Blizzard extends CBaseGameplayEffect
 	
 	public function KilledEnemy()
 	{
-		if(slowdownCauserIds.Size() == 0)
+		SlowMotionActivate(false);
+	}
+	
+	public function Countered()
+	{
+		SlowMotionActivate(true);
+	}
+	
+	private function SlowMotionActivate(countered : bool)
+	{
+		var newDuration : float;
+		
+		if (countered)
 		{
-			theGame.SetTimeScale( slowdownFactor, theGame.GetTimescaleSource(ETS_PotionBlizzard), theGame.GetTimescalePriority(ETS_PotionBlizzard) );
-			slowdownCauserIds.PushBack(target.SetAnimationSpeedMultiplier( 1 / slowdownFactor ));			
+			newDuration = SLOW_MO_DURATION / 2.0f;
+			if (GetBuffLevel() == 3)
+				newDuration += SLOW_MO_DURATION_HIGH;
+		}
+		else
+		{
+			if (GetBuffLevel() == 3)
+			{
+				newDuration = SLOW_MO_DURATION + SLOW_MO_DURATION_HIGH;
+				if (IsOnPlayer() && thePlayer.GetStat(BCS_Focus) >= thePlayer.GetStatMax(BCS_Focus))
+					newDuration += SLOW_MO_DURATION_EXT;
+			}
+			else
+				newDuration = SLOW_MO_DURATION;
 		}
 		
-		currentSlowMoDuration = 0.f;
+		if (slowdownCauserIds.Size() == 0 || (currentMaxDuration - currentSlowMoDuration  < newDuration))
+		{
+			if (slowdownCauserIds.Size() != 0)
+				RemoveSlowMo();
+				
+			theGame.SetTimeScale( slowdownFactor, theGame.GetTimescaleSource(ETS_PotionBlizzard), theGame.GetTimescalePriority(ETS_PotionBlizzard) );
+			slowdownCauserIds.PushBack(target.SetAnimationSpeedMultiplier( 1 / slowdownFactor ));	
+			
+			currentSlowMoDuration = 0.f;
+			currentMaxDuration = newDuration;
+		}
 	}
 	
 	public function OnLoad(t : CActor, eff : W3EffectManager)
@@ -56,6 +94,7 @@ class W3Potion_Blizzard extends CBaseGameplayEffect
 	
 	public function OnTimeUpdated(dt : float)
 	{
+		var slowMotion : float;
 		if(slowdownCauserIds.Size() > 0)
 		{
 			// W3EE - Begin
@@ -63,7 +102,10 @@ class W3Potion_Blizzard extends CBaseGameplayEffect
 			
 			currentSlowMoDuration += dt / slowdownFactor;
 			
-			if( Combat().BlizzardDoubleDur() )
+			if(currentSlowMoDuration > currentMaxDuration)
+				RemoveSlowMo();			
+			
+			/*if( Combat().BlizzardDoubleDur() )
 			{
 				if(currentSlowMoDuration > SLOW_MO_DURATION_EXT)
 					RemoveSlowMo();
@@ -72,7 +114,7 @@ class W3Potion_Blizzard extends CBaseGameplayEffect
 			{
 				if( (GetBuffLevel() == 3 && currentSlowMoDuration > SLOW_MO_DURATION_HIGH) || currentSlowMoDuration > SLOW_MO_DURATION)
 					RemoveSlowMo();
-			}
+			}*/
 			// W3EE - End
 		}
 		else
@@ -98,9 +140,12 @@ class W3Potion_Blizzard extends CBaseGameplayEffect
 		}
 		
 		// W3EE - Begin
-		FactsRemove("BlizzardCounter");
+		//FactsRemove("BlizzardCounter");
 		theGame.RemoveTimeScale(theGame.GetTimescaleSource(ETS_PotionBlizzard));
 		// W3EE - End
+		
+		currentMaxDuration = 0.0f;
+		currentSlowMoDuration = 0.0f;
 		
 		slowdownCauserIds.Clear();
 	}

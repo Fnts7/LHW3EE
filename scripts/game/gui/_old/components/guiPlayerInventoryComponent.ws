@@ -340,6 +340,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 			itemDesc = "Boosts your adrenaline gain. Your adrenaline gives also attack power bonus and poise increase - both values at rate: (current adrenaline percentage) / 4.";
 		else if (craftedItemName == 'Mutagen 20')
 			itemDesc = "Reduces knockdown effect to stagger. Makes you much more resistant to any stagger (including breaking you from whirling). NOTE: Poise and whirl skill level still matter.";
+		else if (StrContains(NameToString(craftedItemName), "Blizzard 3"))
+			itemDesc = "Slows down time when you kill an enemy or (shorter slowdown duration) counter with at least 1 vigor point. Slowdown times are 1 sec longer then in case of lower Blizzards. Also when you have max vigor on kill, slowdown is even 1 sec longer. Extended duration.";
 		else if (craftedItemName == 'Mutagen 16')
 			itemDesc += "<br>Every melee attack has 30% chance to apply random buff: burning, blindness, frost slowdown, bleeding, poison, long stagger, knockdown.";
 		else if (craftedItemName == 'Mutagen 24')
@@ -358,6 +360,8 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 			itemDesc += "<br>Restores 1 vigor point.";
 		else if (StrContains(NameToString(craftedItemName), "Maribor Forest 3"))
 			itemDesc += "<br>Restores 2 vigor points and grants also -10% vigor regen delay.";
+		else if (StrContains(NameToString(craftedItemName), "Blizzard 1") || StrContains(NameToString(craftedItemName), "Blizzard 2"))
+			itemDesc += "<br>Twice shorter slowdown will be also activated on counter if vigor is at least 2 points.";
 		
 		rarityId = minQuality;
 		rarity = GetItemRarityDescriptionFromInt(minQuality);

@@ -48,14 +48,16 @@ class W3EECombatHandler extends W3EEOptionHandler
 			return false;
 	}
 		
-	public final function BlizzardDoubleDur() : bool
-	{
-		return thePlayer.GetStat(BCS_Focus) >= thePlayer.GetStatMax(BCS_Focus) && GetWitcherPlayer().GetPotionBuffLevel( EET_Blizzard ) == 3 && !FactsQuerySum("BlizzardCounter");
-	}
-	
 	public final function BlizzardCounter() : bool
 	{
-		return thePlayer.HasBuff( EET_Blizzard ) && GetWitcherPlayer().GetPotionBuffLevel( EET_Blizzard ) == 3 && thePlayer.GetStat(BCS_Focus) >= thePlayer.GetStatMax(BCS_Focus);
+		var blizzLevel : int;
+		
+		if (!thePlayer.HasBuff( EET_Blizzard ))
+			return false;
+		
+		blizzLevel = GetWitcherPlayer().GetPotionBuffLevel( EET_Blizzard );
+		
+		return (blizzLevel <= 2 && thePlayer.GetStat(BCS_Focus) >= 2) || (blizzLevel == 3 && thePlayer.GetStat(BCS_Focus) >= 1);
 	}
 	
 	public final function DismemberAdrenalineGain()
@@ -1013,11 +1015,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		
 		if( BlizzardCounter() )
 		{
-			if((W3Potion_Blizzard)witcher.GetBuff(EET_Blizzard))
-			{
-				FactsAdd("BlizzardCounter");
-				((W3Potion_Blizzard)witcher.GetBuff(EET_Blizzard)).KilledEnemy();
-			}
+			((W3Potion_Blizzard)witcher.GetBuff(EET_Blizzard)).Countered();
 		}
 		
 		if( witcher.IsSuperHeavyAttack(parryInfo.attackActionName) )

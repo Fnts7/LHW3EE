@@ -62,6 +62,7 @@ assetFile[39]="/gameplay/items/def_item_boots.xml"
 assetFile[40]="/gameplay/items/def_item_gloves.xml"
 assetFile[41]="/gameplay/items/def_item_pants.xml"
 assetFile[42]="/gameplay/items/def_item_crafting_recipes_bolts.xml"
+assetFile[43]="/gameplay/items/def_item_alchemy_mutagens.xml"
 
 
 # ASSET FILES END

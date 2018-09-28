@@ -15,13 +15,13 @@
 			
 			<!-- BLIZZARD -->
 			<ability name="BlizzardEffect_Level1">
-				<slow_motion min="0.75" type="add"/>
+				<slow_motion min="0.7" type="add"/>
 			</ability>
 			<ability name="BlizzardEffect_Level2">
-				<slow_motion min="0.67" type="add"/>
+				<slow_motion min="0.6" type="add"/>
 			</ability>
 			<ability name="BlizzardEffect_Level3">
-				<slow_motion min="0.67" type="add"/>
+				<slow_motion min="0.6" type="add"/>
 			</ability>
 			
 			<!-- CAT -->

@@ -512,7 +512,7 @@ class W3EEExperienceHandler
 		if( isDecoction )
 		{
 			ModPathProgress(ESSP_Alchemy_Potions, quantity);
-			ModPathProgress(ESSP_Alchemy_Mutagens, quantity * 3.5f);
+			ModPathProgress(ESSP_Alchemy_Mutagens, quantity * 3.8f);
 		}
 		else
 		if( isPotion )

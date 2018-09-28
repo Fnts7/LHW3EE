@@ -2933,7 +2933,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s04, 'apply_chance', false, false)) * skillLevel;
 				argsInt.PushBack(RoundMath(arg*100));
 				*/
-				argsInt.PushBack(10*skillLevel);
+				argsInt.PushBack(15*skillLevel);
 				baseString = GetLocStringByKeyExtWithParams("primer_descr_sideEffect", argsInt);
 				// W3EE - End
 				break;
@@ -3210,6 +3210,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				baseString = GetLocStringByKeyExtWithParams(locKey, , argsFloat);*/
 				argsInt.PushBack(1);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_AdvPyroSkill", argsInt);
+				baseString += " If cluster bombs is not available, grants +10% bomb radius.";
 				baseString += "<br>" + GetLocStringByKeyExt("skill_desc_perk_16");
 				// W3EE - End
 				break;

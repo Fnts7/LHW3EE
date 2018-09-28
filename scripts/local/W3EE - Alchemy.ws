@@ -142,7 +142,7 @@ class W3EEAlchemyExtender
 	{
 		var min, max : SAbilityAttributeValue;
 		var dm : CDefinitionsManagerAccessor;
-		var i, quantity : int;
+		var i, quantity, bombCalc : int;
 		var quantityYield : float;
 		
 		dm = theGame.GetDefinitionsManager();
@@ -158,16 +158,26 @@ class W3EEAlchemyExtender
 			else
 				quantity = recipe.cookedItemQuantity;
 				
-			if( recipe.cookedItemType == EACIT_Bomb && playerWitcher.GetSkillLevel(S_Alchemy_s08) )
+			if( recipe.cookedItemType == EACIT_Bomb && ( playerWitcher.GetSkillLevel(S_Alchemy_s08) || playerWitcher.IsSetBonusActive( EISB_RedWolf_1 )) )
 			{
-				if( playerWitcher.GetSkillLevel(S_Alchemy_s08) == 1 && RandRange(100, 1) <= 50 )
+				bombCalc = playerWitcher.GetSkillLevel(S_Alchemy_s08) * 50;
+					
+				if ( playerWitcher.IsSetBonusActive( EISB_RedWolf_1 ) )
+					bombCalc += 70;
+					
+				quantity += bombCalc / 100;
+				
+				if ( RandRange(100, 1) <= (bombCalc % 100) )
+					quantity += 1;
+			
+				/*if( playerWitcher.GetSkillLevel(S_Alchemy_s08) == 1 && RandRange(100, 1) <= 50 )
 					quantity += 1;
 				else
 				if( playerWitcher.GetSkillLevel(S_Alchemy_s08) >= 2 )
 					quantity += 1;
 					
 				if( playerWitcher.GetSkillLevel(S_Alchemy_s08) == 3 && RandRange(100, 1) <= 50 )
-					quantity += 1;
+					quantity += 1;*/
 			}
 			else
 			if( isDistilling )
@@ -202,9 +212,9 @@ class W3EEAlchemyExtender
 		var mutIndex : int;
 		if( isDistilling && GetIsItemTypeModified(recipe) )
 		{
-			if( playerWitcher.GetSkillLevel(S_Alchemy_s04) && CalculateSideEffectsChance(playerWitcher.GetSkillLevel(S_Alchemy_s04)) )
+			if( playerWitcher.CanUseSkill(S_Alchemy_s04) && CalculateSideEffectsChance(playerWitcher.GetSkillLevel(S_Alchemy_s04)) )
 			{
-				mutIndex = RandRange(mutagens.Size() + 1, 0);
+				mutIndex = RandRange(mutagens.Size(), 0);
 				return mutagens[mutIndex];
 			}
 		}
@@ -410,7 +420,7 @@ class W3EEAlchemyExtender
 		var results : int;
 		
 		results = RandRange(100, 1);
-		if( results <= 10 * chance )
+		if( results < 15 * chance )
 			return true;
 		return false;
 	}

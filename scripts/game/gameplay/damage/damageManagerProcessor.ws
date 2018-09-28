@@ -801,17 +801,17 @@ class W3DamageManagerProcessor extends CObject
 		// W3EE - Begin
 		var critChance, critDamageBonus, rendLoad : float;
 		// W3EE - End
-		var	canLog, meleeOrRanged, redWolfSet, isLightAttack, isHeavyAttack, mutation2 : bool;
+		var	canLog, meleeOrRanged, isLightAttack, isHeavyAttack, mutation2 : bool;
 		var arrStr : array<string>;
 		var samum : CBaseGameplayEffect;
 		var signPower, min, max : SAbilityAttributeValue;
 		var aerondight : W3Effect_Aerondight;
 		
 		meleeOrRanged = playerAttacker && attackAction && ( attackAction.IsActionMelee() || attackAction.IsActionRanged() );
-		redWolfSet = ( W3Petard )action.causer && ( W3PlayerWitcher )actorAttacker && GetWitcherPlayer().IsSetBonusActive( EISB_RedWolf_1 );
+		//redWolfSet = ( W3Petard )action.causer && ( W3PlayerWitcher )actorAttacker && GetWitcherPlayer().IsSetBonusActive( EISB_RedWolf_1 );
 		mutation2 = ( W3PlayerWitcher )actorAttacker && GetWitcherPlayer().IsMutationActive(EPMT_Mutation2) && action.IsActionWitcherSign();
 		
-		if( meleeOrRanged || redWolfSet || mutation2 )
+		if( meleeOrRanged /*|| redWolfSet */ || mutation2 )
 		{
 			canLog = theGame.CanLog();
 		
@@ -898,11 +898,11 @@ class W3DamageManagerProcessor extends CObject
 				if(samum)
 				{
 					if (samum.GetBuffLevel() == 3)
-						critChance += 0.5f;
+						critChance += 1.0f;
 					else if (samum.GetBuffLevel() == 2)
-						critChance += 0.3f;
+						critChance += 0.4f;
 					else
-						critChance += 0.15f;
+						critChance += 0.2f;
 						
 				}
 			}

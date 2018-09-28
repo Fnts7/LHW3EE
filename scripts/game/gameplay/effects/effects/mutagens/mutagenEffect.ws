@@ -37,7 +37,7 @@ abstract class W3Mutagen_Effect extends CBaseGameplayEffect
 		toxicityOffset = mutParams.toxicityOffset;
 		witcher.AddToxicityOffset(toxicityOffset);
 		
-		if(witcher.CanUseSkill(S_Alchemy_s13))
+		if(witcher.CanUseSkill(S_Alchemy_s13) && sourceName != "Mutation12" )
 		{
 			witcher.AddAbilityMultiple(witcher.GetSkillAbilityName(S_Alchemy_s13), witcher.GetSkillLevel(S_Alchemy_s13));
 		}
@@ -59,7 +59,7 @@ abstract class W3Mutagen_Effect extends CBaseGameplayEffect
 		witcher = GetWitcherPlayer();
 		witcher.RemoveToxicityOffset(toxicityOffset);
 		
-		if(witcher.CanUseSkill(S_Alchemy_s13))
+		if(witcher.CanUseSkill(S_Alchemy_s13) && sourceName != "Mutation12")
 		{
 			witcher.RemoveAbilityMultiple(witcher.GetSkillAbilityName(S_Alchemy_s13), witcher.GetSkillLevel(S_Alchemy_s13));
 		}

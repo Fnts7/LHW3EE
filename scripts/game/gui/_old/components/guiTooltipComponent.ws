@@ -620,6 +620,8 @@ class W3TooltipComponent
 				uniqueDescription = "Boosts your adrenaline gain. Your adrenaline gives also attack power bonus and poise increase - both values at rate: (current adrenaline percentage) / 4.";
 			else if (itemName == 'Mutagen 20')
 				uniqueDescription = "Reduces knockdown effect to stagger. Makes you much more resistant to any stagger (including breaking you from whirling). NOTE: Poise and whirl skill level still matter.";
+			else if (StrContains(NameToString(itemName), "Blizzard 3"))
+				uniqueDescription = "Slows down time when you kill an enemy or (shorter slowdown duration) counter with at least 1 vigor point. Slowdown times are 1 sec longer then in case of lower Blizzards. Also when you have max vigor on kill, slowdown is even 1 sec longer. Extended duration.";
 			else
 				uniqueDescription += GetLocStringByKeyExt( itemInvComponent.GetItemLocalizedDescriptionByUniqueID(item) );
 				
@@ -641,6 +643,8 @@ class W3TooltipComponent
 				uniqueDescription += "<br>Restores 1 vigor point.";
 			else if (StrContains(NameToString(itemName), "Maribor Forest 3"))
 				uniqueDescription += "<br>Restores 2 vigor points and grants also -10% vigor regen delay.";
+			else if (StrContains(NameToString(itemName), "Blizzard 1") || StrContains(NameToString(itemName), "Blizzard 2"))
+				uniqueDescription += "<br>Twice shorter slowdown will be also activated on counter if vigor is at least 2 points.";
 			
 				
 		}

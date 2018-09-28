@@ -624,9 +624,13 @@ class W3Petard extends CThrowable
 		}
 		
 		extraRadius = 1;
-		if ((W3PlayerWitcher)GetOwner() && thePlayer.CanUseSkill(S_Alchemy_s09))
+		if ((W3PlayerWitcher)GetOwner())
 		{
-			extraRadius += 0.05f * thePlayer.GetSkillLevel(S_Alchemy_s09);
+			if (thePlayer.CanUseSkill(S_Alchemy_s09))
+				extraRadius += 0.05f * thePlayer.GetSkillLevel(S_Alchemy_s09);
+				
+			if (thePlayer.CanUseSkill(S_Perk_18) && !thePlayer.CanUseSkill(S_Alchemy_s11))
+				extraRadius += 0.1f;
 		}
 		
 		explosionPosition = explosionPosition + Vector( 0.0f, 0.0f, 0.1f );
@@ -1048,7 +1052,7 @@ class W3Petard extends CThrowable
 		var dm : CDefinitionsManagerAccessor;
 		var actorTarget : CActor;
 		var surface	: CGameplayFXSurfacePost;		
-		var successfullBlock, canUsePerk20 : bool;
+		var successfullBlock, canUsePerk20, redWolfSet2 : bool;
 		var hitType : EHitReactionType;
 		var npc : CNewNPC;
 		var DoTBuff : W3BuffDoTParams;
@@ -1100,11 +1104,11 @@ class W3Petard extends CThrowable
 		if(isImpact)
 		{
 			
-			
+			redWolfSet2 = GetWitcherPlayer().IsSetBonusActive(EISB_RedWolf_2) && !thePlayer.CanUseSkill(S_Alchemy_s11);
 		
 			
 			// W3EE - Begin
-			if( !ignoreBombSkills && (W3PlayerWitcher)GetOwner() && GetWitcherPlayer().CanUseSkill(S_Alchemy_s10) && !HasTag('Snowball'))
+			if( !ignoreBombSkills && (W3PlayerWitcher)GetOwner() && (GetWitcherPlayer().CanUseSkill(S_Alchemy_s10) || redWolfSet2) && !HasTag('Snowball'))
 			{
 				if( params.damages.Size() )
 				{
@@ -1119,6 +1123,8 @@ class W3Petard extends CThrowable
 								if( steelBonusAdded )
 									continue;
 								params.damages[j].dmgVal += 150.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
+								if (redWolfSet2)
+									params.damages[j].dmgVal += 200.0f;
 								steelBonusAdded = true;
 							}
 							else
@@ -1127,6 +1133,8 @@ class W3Petard extends CThrowable
 								if( silverBonusAdded )
 									continue;
 								params.damages[j].dmgVal += 150.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
+								if (redWolfSet2)
+									params.damages[j].dmgVal += 200.0f;
 								silverBonusAdded = true;
 							}
 							else
@@ -1135,6 +1143,8 @@ class W3Petard extends CThrowable
 								if( steelBonusAdded || silverBonusAdded )
 									continue;
 								params.damages[j].dmgVal += 150.f * thePlayer.GetSkillLevel(S_Alchemy_s10);
+								if (redWolfSet2)
+									params.damages[j].dmgVal += 200.0f;
 								steelBonusAdded = true;
 								silverBonusAdded = true;
 							}
@@ -1376,6 +1386,9 @@ class W3Petard extends CThrowable
 		
 		// W3EE - Begin
 		clusterCalc = 3.0f + (thePlayer.GetSkillLevel(S_Alchemy_s11) - 1) * 0.5f + RandF();
+		if (GetOwner() == thePlayer && GetWitcherPlayer().IsSetBonusActive(EISB_RedWolf_2))
+			clusterCalc += 0.5f;
+		
 		clusterNbr = FloorF(clusterCalc);			
 			
 		if( thePlayer.CanUseSkill(S_Perk_18) )

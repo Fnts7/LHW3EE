@@ -44,16 +44,16 @@
 	  
       <!-- Slo-Mo-->
       <ability name="Blizzard_1">
-        <toxicity min="30" max="30" type="add" />
-        <duration min="18" type="add" />
+        <toxicity min="35" max="35" type="add" />
+        <duration min="15" type="add" />
         <ammo type="add" min="2" />
         <BlizzardEffect_Level1 is_ability="true" />	
 		    <quality type="add" min="2" max="2"/>
 		    <level type="add" min="1" />
       </ability>
       <ability name="Blizzard_2">
-        <toxicity min="45" max="45" type="add" />
-        <duration min="35" type="add" />
+        <toxicity min="47" max="47" type="add" />
+        <duration min="45" type="add" />
         <ammo type="add" min="3" />
         <BlizzardEffect_Level2 is_ability="true" />
         <Blizzard_3 is_ability="true" />
@@ -62,7 +62,7 @@
       </ability>
       <ability name="Blizzard_3">
         <toxicity min="60" max="60" type="add" />
-        <duration min="35" type="add" />
+        <duration min="60" type="add" />
         <ammo type="add" min="4" />
         <BlizzardEffect_Level3 is_ability="true" />
         <Blizzard_2 is_ability="true" />

@@ -464,7 +464,7 @@ class CR4AlchemyMenu extends CR4ListBaseMenu
 		// W3EE - End
 		
 		//---=== modFriendlyHUD ===---
-		var playerItems, horseItems  : int;
+		var playerItems, horseItems, bombCalc  : int;
 		var alchYield : float;
 		//---=== modFriendlyHUD ===---
 		
@@ -682,16 +682,25 @@ class CR4AlchemyMenu extends CR4ListBaseMenu
 						horseItems += 1;
 				}
 				
-				if( recipe.cookedItemType == EACIT_Bomb && thePlayer.GetSkillLevel(S_Alchemy_s08) )
+				if( recipe.cookedItemType == EACIT_Bomb && (thePlayer.CanUseSkill(S_Alchemy_s08) || GetWitcherPlayer().IsSetBonusActive( EISB_RedWolf_1 )) )
 				{
-					if( thePlayer.GetSkillLevel(S_Alchemy_s08) == 1 )
+					bombCalc = thePlayer.GetSkillLevel(S_Alchemy_s08) * 5;
+					
+					if ( GetWitcherPlayer().IsSetBonusActive( EISB_RedWolf_1 ) )
+						bombCalc += 7;
+					
+					playerItems += bombCalc / 10;
+					if ( (bombCalc % 10) != 0 )
+						horseItems += 1;
+				
+					/*if( thePlayer.GetSkillLevel(S_Alchemy_s08) == 1 )
 						horseItems += 1;
 					else
 					if( thePlayer.GetSkillLevel(S_Alchemy_s08) >= 2 )
 						playerItems += 1;
 					
 					if( thePlayer.GetSkillLevel(S_Alchemy_s08) == 3 )
-						horseItems += 1;
+						horseItems += 1;*/
 				}
 				
 				if( playerItems + horseItems > 1 )

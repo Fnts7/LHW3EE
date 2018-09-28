@@ -152,7 +152,7 @@
 			
 			<!-- Nekker Warrior -->
 			<ability name="Mutagen25Effect">
-				<attack_power type="mult" min="0.5"/>
+				<attack_power type="mult" min="0.4"/>
 			</ability>
 			
 			<!-- Leshen -->

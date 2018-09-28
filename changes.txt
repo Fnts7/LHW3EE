@@ -1,4 +1,40 @@
-﻿Version 33
+﻿Version 34
+
+Balanced and improved Blizzard potion logic. Now lvl1, lvl2 allow also shorter slowdown on counter providing
+that you have at least 2 vigor points. Reflex boost ratio was lowered (tooltip will anyway still bigger, now accurate
+value, because I removed some magic number in scripts). Reflex boost is both time slowdown and increase in Geralt's
+animation speed by same ratio.
+Lvl1: 30% reflex boost, 4 sec / 2 sec time kill/counter
+Lvl2: 40% reflex boost, longer duration
+Lvl3: 5 / 3 sec time kill/counter, enough to have 1 vigor for counter boost. On full vigor duration after kill 1 s longer.
+
+Nekker Warrior decoction nerfed to +40% attack power bonus.
+Fogling decoction toxicity lowered to 60.
+Mutant skill decoction toxicity lowering is now modified for Fogling decoction (2.5 per level) and Basilisk, which
+has 40 tox, 2 lowered per level.
+
+Adjusted mutagens drop rates. Specialized get a bit lower drop chances, so increased mutation exp gain when
+brewing decoction a bit.
+
+Side effect skill boosted to 15% chance per level.
+
+Tissue Transmutation skill no longer applies to Metamorphosis mutation decoction. That was ultra OP.
+
+Metamorphosis random decoction selection changed, so that it simply always randmizes between available in game
+decoctions excluding 4 of them that are either too specialized or cannot give proper gain in short 2-3 min duration.
+
+Advanced pyrotechnics skill gives now +10% bomb radius if cluster bombs skill is not available.
+
+Manticore set bonus 1 changed totally. No more bomb crits, because that doesn't fit to W3EE, no room to boost
+bomb damage more. Instead this set bonus gives now 70% chance to create additional bomb. Cumulates with efficiency
+skill. So e.g. with efficiency lvl3, you will have 2 sure, 50% chance extra and another 70% chance extra. That will
+cumulate and it will be 3 sure and 20% chance for 4th.
+Manticore set bonus 2 enhanced - gives either 0.5 extra cluster or if cluster bomb skill is not used, extra
+200 damage for all bombs.
+
+Samum lvl3 has 100% crit chance again. Also boosted crit chance gain lvl1 to +20%, lvl2 to +40%.
+
+Version 33
 
 Fixed a bug that Aard circle cast from whirl with runeword severance III had no effect apart from visual.
 Works now properly - aard circle. If you have no aard circle skill, standard aard will be cast just as from
