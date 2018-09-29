@@ -1,4 +1,32 @@
-﻿Version 34
+﻿Version 35
+
+Manticore armor parts have now some adrenaline gain bonus.
+
+Reworked Cat and Manticore school swords, so that better match the style and are more consistent.
+Manticore steel sword: Lower attack power, but speed bonus, crit chance gain and has effects of poison and confusion
+Manticore silver sword: instead of effects, boost to crit chance and crit damage and bonuses to adrenaline gain and vigor regen
+
+Cat steel sword: with gear tier progression, suffers an effect of strong style being closer to fast style. Minus to
+strong attack power and armor piercing, bonus to speed. So this is main con of this sword. As plus has bleeding
+effect, injury chance, aard spell power bonus, small fast style armor piercing bonus.
+Cat silver sword - instead of bleeding and injury has fast style speed, vigor regen and stamina cost bonuses.
+
+Added new magical sword roll set - 'dirty': injury chance, poise damage, damage through blocks and dodges at cost
+of increased stamina usage.
+
+Added another adrenaline loss protection. When attack against Geralt ends quen and deals partial damage, such
+hit will always have another 50% adrenaline loss reduction. That can stack e.g. with dodging loss reduction or
+intoxication 50% reduction in any failed or non-clean parry.
+
+Player's heavy attack has now a constant multiplicative bonus to any effect power applied from attack action.
+This is a compensation because of one of logic changes in even first version of LHW3EE. So now heavy attack
+doesn't give any constant additive attack power bonus, but instead gives multiplicative +20% damage and effect
+power boost.
+
+In similar manner, because whirl damage is typically lower (customizable in options), the same reduction is
+now applied to the power of effect applied with hits when whirling.
+
+Version 34
 
 Balanced and improved Blizzard potion logic. Now lvl1, lvl2 allow also shorter slowdown on counter providing
 that you have at least 2 vigor points. Reflex boost ratio was lowered (tooltip will anyway still bigger, now accurate

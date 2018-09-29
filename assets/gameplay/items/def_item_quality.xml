@@ -339,7 +339,7 @@
             <ability name="Magical_Celerity">
                 <attack_speed                   type="mult"             min="0.08"      max="0.12"      />
                 <parry_stamina_cost_bonus       type="mult"             min="-0.21"     max="-0.15"     />
-                <attack_stamina_cost_bonus      type="mult"             min="-0.20"     max="-0.12"     />
+                <attack_stamina_cost_bonus      type="mult"             min="-0.18"     max="-0.12"     />
             </ability>
            
             <ability name="Magical_CleanSlice">
@@ -384,6 +384,14 @@
                 <damage_through_blocks          type="mult"             min="0.06"      max="0.08"    />
 				<poise_damage                   type="add"              min="4"         max="6"        />
 				<attack_speed                   type="mult"           	min="-0.06"     max="-0.04"    />
+            </ability>
+			
+			<ability name="Magical_Dirty">
+                <damage_through_blocks          type="mult"             min="0.05"      max="0.07"  	/>
+				<injury_chance			 		type="mult"				min="0.16"		max="0.2"		/>
+				<poise_damage                   type="add"              min="5"         max="7"        	/>
+                <parry_stamina_cost_bonus       type="mult"             min="-0.12"     max="-0.09"    	/>
+				<attack_stamina_cost_bonus      type="mult"             min="-0.15"     max="-0.12"     />
             </ability>
 			
 			<ability name="Magical_StrongOrFast">

@@ -70,6 +70,7 @@
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
 				<piercing_resistance_perc		type="base"	min="0.05"				/>
 				<rending_resistance_perc		type="base"	min="0.06"				/>
+				<focus_gain 					type="mult" min="0.02"				/>
 				<injury_resist			 		type="mult"	min="0.025"				/>
 				<bleeding_resistance_perc 		type="base" min="0.025"				/>
 				<toxicity 						type="base" min="3" 				/>

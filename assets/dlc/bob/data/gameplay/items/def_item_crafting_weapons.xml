@@ -13,15 +13,15 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="372"				/>
 				<SilverDamage 					type="base"	min="1"					/>	
-				<desc_bleedingchance_mult		type="add"	min="0.125"				/>
-				<buff_apply_chance				type="add"	min="0.125"				/>
+				<desc_bleedingchance_mult		type="add"	min="0.2"				/>
+				<buff_apply_chance				type="add"	min="0.2"				/>
 				<BleedingEffect					is_ability="true"					/>
-				<desc_poinsonchance_mult		type="add"	min="0.125"				/>
-				<buff_apply_chance				type="add"	min="0.125"				/>
-				<PoisonEffect					is_ability="true"					/>
 				<injury_chance			 		type="mult"	min="0.2"				/>
-				<attack_speed_heavy_style 		type="mult"	min="-0.1"				/>
-				<armor_reduction_heavy_style 	type="mult"	min="-0.15"				/>
+				<armor_reduction_fast_style     type="mult" min="0.05"  			/>
+				<attack_speed_heavy_style 		type="mult"	min="0.08"				/>
+				<attack_power_heavy_style       type="mult" min="-0.15"				/>
+				<armor_reduction_heavy_style 	type="mult"	min="-0.1"				/>
+				<spell_power_aard 				type="mult" min="0.125"				/>
 			</ability>
 
 		<!-- STEEL SWORD WITCHER GRYPHON -->
@@ -69,12 +69,14 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="372"				/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<focus_gain		 				type="mult"	min="0.15"				/>
 				<attack_power					type="mult"	min="-0.2"				/>
-				<attack_speed					type="mult"	min="0.1"				/>
+				<attack_speed					type="mult"	min="0.07"				/>
+				<critical_hit_chance			type="add"	min="0.08"				/>
+				<desc_confusionchance_mult 		type="add"  min="0.15" 				/>				
+				<buff_apply_chance 				type="add"  min="0.15"		 		/>
+				<ConfusionEffect 				is_ability="true" 					/>
+				<desc_poinsonchance_mult		type="add"	min="0.15"				/>
 				<PoisonEffect					is_ability="true"					/>
-				<buff_apply_chance				type="add"	min="0.2"				/>
-				<desc_poinsonchance_mult		type="add"	min="0.2"				/>
 			</ability>	
 
 			<ability name="Red Wolf School steel sword 2 _Stats">
@@ -201,11 +203,14 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="524"				/>
-				<armor_reduction				type="mult" min="0.15" 				/>
-				<attack_power 					type="mult" min="-0.2" 				/>
-				<counter_damage_bonus 			type="mult" min="0.1" 				/>
-				<injury_chance 					type="mult" min="0.1" 				/>
-				<spell_power_aard 				type="mult" min="0.1" 				/>
+				<attack_speed_fast_style        type="mult" min="0.04"   			/>
+				<attack_stamina_cost_bonus		type="mult" min="0.075"				/>
+				<vigor_regen 					type="mult" min="0.05"	 			/>
+				<armor_reduction_fast_style     type="mult" min="0.05"  			/>
+				<attack_speed_heavy_style 		type="mult"	min="0.08"				/>
+				<attack_power_heavy_style       type="mult" min="-0.15"				/>
+				<armor_reduction_heavy_style 	type="mult"	min="-0.1"				/>
+				<spell_power_aard 				type="mult" min="0.125"				/>
 			</ability>
 
 		<!-- SILVER SWORD WITCHER GRYPHON -->
@@ -254,10 +259,12 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="524"				/>
-				<focus_gain		 				type="mult"	min="0.2"				/>
-				<attack_power					type="mult"	min="-0.25"				/>
-				<critical_hit_chance			type="add"	min="0.15"				/>
-				<critical_hit_damage_bonus		type="add"	min="0.2"				/>
+				<focus_gain		 				type="mult"	min="0.125"				/>
+				<vigor_regen 					type="mult" min="0.075"	 			/>
+				<attack_power					type="mult"	min="-0.2"				/>
+				<attack_speed					type="mult"	min="0.06"				/>
+				<critical_hit_chance			type="add"	min="0.12"				/>
+				<critical_hit_damage_bonus		type="add"	min="0.125"				/>
 			</ability>	
 	
 			<ability name="Red Wolf School silver sword 2 _Stats">

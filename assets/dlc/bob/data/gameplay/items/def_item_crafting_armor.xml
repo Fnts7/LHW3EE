@@ -72,6 +72,7 @@
 		<bludgeoning_resistance_perc	type="base"	min="0.16"				/>
 		<rending_resistance_perc		type="base"	min="0.20"				/>
 		<toxicity 						type="base" min="9" 				/>
+		<focus_gain 					type="mult" min="0.06"				/>
 		<injury_resist			 		type="mult"	min="0.1"				/>
 		<bleeding_resistance_perc 		type="base" min="0.1"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.10"				/>

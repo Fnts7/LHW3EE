@@ -526,15 +526,15 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="180"				/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<desc_bleedingchance_mult		type="add"	min="0.05"				/>
-		<buff_apply_chance				type="add"	min="0.05"				/>
+		<desc_bleedingchance_mult		type="add"	min="0.04"				/>
+		<buff_apply_chance				type="add"	min="0.04"				/>
 		<BleedingEffect					is_ability="true"					/>
-		<desc_poinsonchance_mult		type="add"	min="0.05"				/>
-		<buff_apply_chance				type="add"	min="0.05"				/>
-		<PoisonEffect					is_ability="true"					/>
-		<injury_chance			 		type="mult"	min="0.1"				/>
-		<attack_speed_heavy_style 		type="mult"	min="-0.02"				/>
-		<armor_reduction_heavy_style 	type="mult"	min="-0.05"				/>
+		<injury_chance			 		type="mult"	min="0.04"				/>
+		<armor_reduction_fast_style     type="mult" min="0.01"  			/>
+		<attack_speed_heavy_style 		type="mult"	min="0.02"				/>
+		<attack_power_heavy_style       type="mult" min="-0.03"				/>
+		<armor_reduction_heavy_style 	type="mult"	min="-0.02"				/>
+		<spell_power_aard 				type="mult" min="0.025"				/>
 	</ability>
 
 	<ability name="Lynx School steel sword 1 _Stats">
@@ -542,15 +542,15 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="228"				/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<desc_bleedingchance_mult		type="add"	min="0.075"				/>
-		<buff_apply_chance				type="add"	min="0.075"				/>
+		<desc_bleedingchance_mult		type="add"	min="0.08"				/>
+		<buff_apply_chance				type="add"	min="0.08"				/>
 		<BleedingEffect					is_ability="true"					/>
-		<desc_poinsonchance_mult		type="add"	min="0.075"				/>
-		<buff_apply_chance				type="add"	min="0.075"				/>
-		<PoisonEffect					is_ability="true"					/>
-		<injury_chance			 		type="mult"	min="0.125"				/>
-		<attack_speed_heavy_style 		type="mult"	min="-0.04"				/>
-		<armor_reduction_heavy_style 	type="mult"	min="-0.075"			/>
+		<injury_chance			 		type="mult"	min="0.08"				/>
+		<armor_reduction_fast_style     type="mult" min="0.02"  			/>
+		<attack_speed_heavy_style 		type="mult"	min="0.03"				/>
+		<attack_power_heavy_style       type="mult" min="-0.06"				/>
+		<armor_reduction_heavy_style 	type="mult"	min="-0.04"				/>
+		<spell_power_aard 				type="mult" min="0.05"				/>
 	</ability>
 	
 	<ability name="Lynx School steel sword 2 _Stats">
@@ -558,15 +558,15 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="276"				/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<desc_bleedingchance_mult		type="add"	min="0.075"				/>
-		<buff_apply_chance				type="add"	min="0.075"				/>
+		<desc_bleedingchance_mult		type="add"	min="0.12"				/>
+		<buff_apply_chance				type="add"	min="0.12"				/>
 		<BleedingEffect					is_ability="true"					/>
-		<desc_poinsonchance_mult		type="add"	min="0.075"				/>
-		<buff_apply_chance				type="add"	min="0.075"				/>
-		<PoisonEffect					is_ability="true"					/>
-		<injury_chance			 		type="mult"	min="0.15"				/>
-		<attack_speed_heavy_style 		type="mult"	min="-0.06"				/>
-		<armor_reduction_heavy_style 	type="mult"	min="-0.1"				/>
+		<injury_chance			 		type="mult"	min="0.12"				/>
+		<armor_reduction_fast_style     type="mult" min="0.03"  			/>
+		<attack_speed_heavy_style 		type="mult"	min="0.05"				/>
+		<attack_power_heavy_style       type="mult" min="-0.09"				/>
+		<armor_reduction_heavy_style 	type="mult"	min="-0.06"				/>
+		<spell_power_aard 				type="mult" min="0.075"				/>
 	</ability>
 	
 	<ability name="Lynx School steel sword 3 _Stats">
@@ -574,15 +574,15 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="316"				/>
 		<SilverDamage 					type="base"	min="1"					/>	
-		<desc_bleedingchance_mult		type="add"	min="0.1"				/>
-		<buff_apply_chance				type="add"	min="0.1"				/>
+		<desc_bleedingchance_mult		type="add"	min="0.16"				/>
+		<buff_apply_chance				type="add"	min="0.16"				/>
 		<BleedingEffect					is_ability="true"					/>
-		<desc_poinsonchance_mult		type="add"	min="0.1"				/>
-		<buff_apply_chance				type="add"	min="0.10"				/>
-		<PoisonEffect					is_ability="true"					/>
-		<injury_chance			 		type="mult"	min="0.175"				/>
-		<attack_speed_heavy_style 		type="mult"	min="-0.08"				/>
-		<armor_reduction_heavy_style 	type="mult"	min="-0.125"			/>
+		<injury_chance			 		type="mult"	min="0.16"				/>
+		<armor_reduction_fast_style     type="mult" min="0.04"  			/>
+		<attack_speed_heavy_style 		type="mult"	min="0.065"				/>
+		<attack_power_heavy_style       type="mult" min="-0.12"				/>
+		<armor_reduction_heavy_style 	type="mult"	min="-0.08"				/>
+		<spell_power_aard 				type="mult" min="0.1"				/>
 	</ability>
 
 	<ability name="Gryphon School steel sword _Stats">
@@ -987,10 +987,14 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="284"				/>
-		<armor_reduction				type="mult" min="0.05" 				/>
-		<attack_power 					type="mult" min="-0.04" 			/>
-		<counter_damage_bonus 			type="mult" min="0.02" 				/>
-		<injury_chance 					type="mult" min="0.02" 				/>
+		<attack_speed_fast_style        type="mult" min="0.01"   			/>
+		<attack_stamina_cost_bonus		type="mult" min="0.015"				/>
+		<vigor_regen 					type="mult" min="0.01"	 			/>
+		<armor_reduction_fast_style     type="mult" min="0.01"  			/>
+		<attack_speed_heavy_style 		type="mult"	min="0.02"				/>
+		<attack_power_heavy_style       type="mult" min="-0.03"				/>
+		<armor_reduction_heavy_style 	type="mult"	min="-0.02"				/>
+		<spell_power_aard 				type="mult" min="0.025"				/>
 	</ability>
 
 	<ability name="Lynx School silver sword 1 _Stats">
@@ -998,10 +1002,14 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="344"				/>
-		<armor_reduction				type="mult" min="0.075" 			/>
-		<attack_power 					type="mult" min="-0.08" 			/>
-		<counter_damage_bonus 			type="mult" min="0.04" 				/>
-		<injury_chance 					type="mult" min="0.04" 				/>
+		<attack_speed_fast_style        type="mult" min="0.015"   			/>
+		<attack_stamina_cost_bonus		type="mult" min="0.03"				/>
+		<vigor_regen 					type="mult" min="0.02"	 			/>
+		<armor_reduction_fast_style     type="mult" min="0.02"  			/>
+		<attack_speed_heavy_style 		type="mult"	min="0.03"				/>
+		<attack_power_heavy_style       type="mult" min="-0.06"				/>
+		<armor_reduction_heavy_style 	type="mult"	min="-0.04"				/>
+		<spell_power_aard 				type="mult" min="0.05"				/>
 	</ability>
 
 	<ability name="Lynx School silver sword 2 _Stats">
@@ -1009,11 +1017,14 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="404"				/>
-		<armor_reduction				type="mult" min="0.1" 				/>
-		<attack_power 					type="mult" min="-0.12" 			/>
-		<counter_damage_bonus 			type="mult" min="0.06" 				/>
-		<injury_chance 					type="mult" min="0.06" 				/>
-		<spell_power_aard 				type="mult" min="0.033" 			/>
+		<attack_speed_fast_style        type="mult" min="0.025"   			/>
+		<attack_stamina_cost_bonus		type="mult" min="0.045"				/>
+		<vigor_regen 					type="mult" min="0.03"	 			/>
+		<armor_reduction_fast_style     type="mult" min="0.03"  			/>
+		<attack_speed_heavy_style 		type="mult"	min="0.05"				/>
+		<attack_power_heavy_style       type="mult" min="-0.09"				/>
+		<armor_reduction_heavy_style 	type="mult"	min="-0.06"				/>
+		<spell_power_aard 				type="mult" min="0.075"				/>
 	</ability>
 
 	<ability name="Lynx School silver sword 3 _Stats">
@@ -1021,11 +1032,14 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="454"				/>
-		<armor_reduction				type="mult" min="0.125" 			/>
-		<attack_power 					type="mult" min="-0.16" 			/>
-		<counter_damage_bonus 			type="mult" min="0.08" 				/>
-		<injury_chance 					type="mult" min="0.08" 				/>
-		<spell_power_aard 				type="mult" min="0.067" 			/>
+		<attack_speed_fast_style        type="mult" min="0.035"   			/>
+		<attack_stamina_cost_bonus		type="mult" min="0.06"				/>
+		<vigor_regen 					type="mult" min="0.04"	 			/>
+		<armor_reduction_fast_style     type="mult" min="0.04"  			/>
+		<attack_speed_heavy_style 		type="mult"	min="0.06"				/>
+		<attack_power_heavy_style       type="mult" min="-0.12"				/>
+		<armor_reduction_heavy_style 	type="mult"	min="-0.08"				/>
+		<spell_power_aard 				type="mult" min="0.1"				/>
 	</ability>
 
 	<ability name="Gryphon School silver sword _Stats">

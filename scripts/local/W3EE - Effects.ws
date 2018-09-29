@@ -48,23 +48,23 @@
 				if( attackAction.GetDamageDealt() > 1.f && (attackAction.GetHitAnimationPlayType() != EAHA_ForceNo || attackAction.HasBuff(EET_Stagger) || attackAction.HasBuff(EET_LongStagger) || attackAction.HasBuff(EET_Knockdown) || attackAction.HasBuff(EET_HeavyKnockdown)) )
 				{
 					if ( ((W3Effect_Toxicity)playerWitcher.GetBuff(EET_Toxicity)).isUnsafe && RandRange(100, 1) <= (30 + 6 * playerWitcher.GetSkillLevel(S_Alchemy_s20)) )
-						currentAdrenaline *= 1.0f - (1.0f - SavedAdrenalineRoll(false)) * 0.5f;
+						currentAdrenaline *= 1.0f - (1.0f - SavedAdrenalineRoll(false, attackAction.EndsQuen())) * 0.5f;
 					else
-						currentAdrenaline *= SavedAdrenalineRoll(false);
+						currentAdrenaline *= SavedAdrenalineRoll(false, attackAction.EndsQuen());
 				}
 			}
 			else
 			if( attackAction.GetDamageDealt() > 1.f && (!((W3Effect_Toxicity)playerWitcher.GetBuff(EET_Toxicity)).isUnsafe || RandRange(100, 1) > (30 + 6 * playerWitcher.GetSkillLevel(S_Alchemy_s20)) ) )
 			{
-				currentAdrenaline *= SavedAdrenalineRoll(attackAction.WasPartiallyDodged());
+				currentAdrenaline *= SavedAdrenalineRoll(attackAction.WasPartiallyDodged(), attackAction.EndsQuen());
 			}
 		}
 	}
 	
-	private function SavedAdrenalineRoll( dodged : bool ) : float
+	private function SavedAdrenalineRoll( dodged : bool, endsQuen : bool ) : float
 	{
 		var armorPieces : array<SArmorCount>;
-		var savedAdrenaline : float;
+		var savedAdrenaline, lossPercent : float;
 		var witcher : W3PlayerWitcher = GetWitcherPlayer();
 				
 		armorPieces = witcher.GetArmorCountOrig();		
@@ -75,18 +75,21 @@
 			savedAdrenaline += MinF( 3.0f, FloorF(witcher.GetStat(BCS_Focus)) ) * 0.05f;
 		}
 		
-		if (savedAdrenaline < 0)
-		{
-			if (dodged)
-				return 0.7f;
-			else
-				return 0;
-		}
-
+		
 		if (dodged)
-			savedAdrenaline = 1.0f - ((1.0f - savedAdrenaline) * 0.3f);
+			lossPercent = 0.3f;
+		else
+			lossPercent = 1.0f;
 			
-		return savedAdrenaline;		
+		if (endsQuen)
+			lossPercent *= 0.5f;
+		
+		if (savedAdrenaline <= 0)
+		{
+			return 1.0f - lossPercent;
+		}
+		else
+			return 1.0f - ((1.0f - savedAdrenaline) * lossPercent);
 	}
 	
 	public function AddAdrenaline( value : float )
