@@ -1864,7 +1864,7 @@ class W3DamageManagerProcessor extends CObject
 	// W3EE - Begin
 	private function CalculateDamage(dmgInfo : SRawDamage, powerMod : SAbilityAttributeValue) : float
 	{
-		var finalDamage, armorPiercing, tempDamage : float;
+		var finalDamage, armorPiercing : float;
 		var resistPoints, resistPercents : float;
 		var ptsString, percString : string;
 		var mutagen : CBaseGameplayEffect;
@@ -2034,20 +2034,26 @@ class W3DamageManagerProcessor extends CObject
 			else
 				resistPercents = MaxF(0.f, resistPercents - armorPiercing);			
 		}
-			
-		if (playerAttacker && attackAction && playerAttacker.IsHeavyAttack(attackAction.GetAttackName()))
-			finalDamage *= 1.2f;
-			
-		tempDamage = MaxF(finalDamage - resistPoints, finalDamage * armorPiercing) * (1 - resistPercents);
-		if( DamageHitsEssence(  dmgInfo.dmgType ) )		action.originalDamageArmor.essenceDamage  += tempDamage;
-		if( DamageHitsVitality( dmgInfo.dmgType ) )		action.originalDamageArmor.vitalityDamage += tempDamage;
-		if( DamageHitsMorale(   dmgInfo.dmgType ) )		action.originalDamageArmor.moraleDamage   += tempDamage;
-		if( DamageHitsStamina(  dmgInfo.dmgType ) )		action.originalDamageArmor.staminaDamage  += tempDamage;
 		
+		if (playerAttacker && attackAction && action.IsActionMelee())
+		{
+			if (resistPercents >= 1.0f && IsDamageTypeAnyPhysicalType(dmgInfo.dmgType))
+				resistPercents = 0.99f;
+			
+			if (playerAttacker.IsHeavyAttack(attackAction.GetAttackName()))
+				finalDamage *= 1.2f;
+		}
+			
+		finalDamage = MaxF(finalDamage - resistPoints, finalDamage * armorPiercing) * (1 - resistPercents);
+		
+		if (finalDamage > 0)
+		{
+			if( DamageHitsEssence(  dmgInfo.dmgType ) )		action.originalDamageArmor.essenceDamage  += finalDamage;
+			if( DamageHitsVitality( dmgInfo.dmgType ) )		action.originalDamageArmor.vitalityDamage += finalDamage;
+			if( DamageHitsMorale(   dmgInfo.dmgType ) )		action.originalDamageArmor.moraleDamage   += finalDamage;
+			if( DamageHitsStamina(  dmgInfo.dmgType ) )		action.originalDamageArmor.staminaDamage  += finalDamage;
+		}		
 	
-		finalDamage = tempDamage;
-		// resistPoints = resistPoints * (1.f + resistPercents - armorPiercing);
-		// finalDamage = finalDamage - resistPoints;
 		
 		/*
 		if(finalDamage > 0.f)

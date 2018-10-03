@@ -2545,7 +2545,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				/*argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) + "<br>" + GetLocStringByKeyExt("focus_gain") + ": +" + RoundF((arg_focus * 100) * skillLevel) + "%";
 				*/
-				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
+				argsInt.PushBack(RoundMath(20.0f + ability.valueMultiplicative*100));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_FloodAngerSkill", argsInt);
 				// W3EE - End
 				break;
@@ -2614,6 +2614,9 @@ class CR4CharacterMenu extends CR4MenuBase
 			
 				argsInt.PushBack(RoundMath(arg*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
+				
+				if (skillLevel > 1)
+					baseString += "<br>If reflex sweep skill is at least level 3, reduces cost of aard sweep by: " + NoTrailZeros(RoundTo(0.25f * (skillLevel - 1), 2)) + " vigor points.";
 				break;
 			// W3EE - End
 			case S_Magic_s02:
@@ -2735,22 +2738,22 @@ class CR4CharacterMenu extends CR4MenuBase
 				if( skillLevel == 1 )
 				{
 					argsFloat.PushBack(30);
-					argsFloat.PushBack(1);
+					argsFloat.PushBack(1.25);
 					baseString = GetLocStringByKeyExtWithParams("W3EE_ReflexBlast1",,argsFloat);
 				}
 				else
 				if( skillLevel == 2 )
 				{
-					argsFloat.PushBack(50);
-					argsFloat.PushBack(1.5);
+					argsFloat.PushBack(40);
+					argsFloat.PushBack(1.75);
 					baseString = GetLocStringByKeyExtWithParams("W3EE_ReflexBlast2",,argsFloat);
 				}
 				else
 				if( skillLevel == 3 )
 				{
 					argsFloat.PushBack(70);
-					argsFloat.PushBack(3);
-					argsFloat.PushBack(15);
+					argsFloat.PushBack(3.5);
+					argsFloat.PushBack(25);
 					argsFloat.PushBack(50);
 					baseString = GetLocStringByKeyExtWithParams("W3EE_ReflexBlast3",,argsFloat);
 				}
@@ -2767,9 +2770,11 @@ class CR4CharacterMenu extends CR4MenuBase
 				if( skillLevel == 5 )
 				{
 					argsFloat.PushBack(90);
-					argsFloat.PushBack(4);
+					argsFloat.PushBack(4.3);
+					argsFloat.PushBack(5);
 					argsFloat.PushBack(50);
-					baseString = GetLocStringByKeyExtWithParams("W3EE_ReflexBlast4",,argsFloat);
+					//baseString = GetLocStringByKeyExtWithParams("W3EE_ReflexBlast4",,argsFloat);
+					baseString = GetLocStringByKeyExtWithParams("W3EE_ReflexBlast3",,argsFloat);
 				}
 				// W3EE - End
 				break;
@@ -2781,8 +2786,8 @@ class CR4CharacterMenu extends CR4MenuBase
 			case S_Magic_s14:
 				// W3EE - Begin
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s14, 'discharge_percent', false, false)) * skillLevel;
-				argsInt.PushBack(RoundMath(3 * skillLevel));
-				argsInt.PushBack(RoundMath(8 * skillLevel));
+				argsInt.PushBack(RoundMath(10 * skillLevel));
+				argsInt.PushBack(RoundMath(15 * skillLevel));
 				baseString = GetLocStringByKeyExtWithParams("W3EEDischargeSkill", argsInt); //(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
 				// W3EE - End
 				break;
@@ -2792,7 +2797,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				ability.valueMultiplicative = 1 + ClampF(ability.valueMultiplicative - 1, 0, 1) / 2 + ClampF(ability.valueMultiplicative - 2, 0, 1) / 3 + ClampF(ability.valueMultiplicative - 3, 0, 1) / 4;
 				if( GetWitcherPlayer().IsSetBonusActive(EISB_Bear_2) )
 					theGame.GetDefinitionsManager().GetAbilityAttributeValue(GetSetBonusAbility(EISB_Bear_2), 'quen_dmg_boost', min, max);
-				argsInt.PushBack(RoundMath(155.f * skillLevel * ability.valueMultiplicative * (1 + min.valueMultiplicative)));
+				argsInt.PushBack(RoundMath(120.f * skillLevel * ability.valueMultiplicative * (1 + min.valueMultiplicative)));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_QuenJoltSkill", argsInt);
 				argsInt.Clear();
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s15, 'spell_power_quen', false, false);

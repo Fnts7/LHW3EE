@@ -20,7 +20,7 @@
 				<armor_reduction_fast_style     type="mult" min="0.05"  			/>
 				<attack_speed_heavy_style 		type="mult"	min="0.08"				/>
 				<attack_power_heavy_style       type="mult" min="-0.15"				/>
-				<armor_reduction_heavy_style 	type="mult"	min="-0.1"				/>
+				<armor_reduction_heavy_style 	type="mult"	min="-0.125"			/>
 				<spell_power_aard 				type="mult" min="0.125"				/>
 			</ability>
 
@@ -203,12 +203,12 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="524"				/>
-				<attack_speed_fast_style        type="mult" min="0.04"   			/>
+				<attack_speed_fast_style        type="mult" min="0.05"   			/>
 				<attack_stamina_cost_bonus		type="mult" min="0.075"				/>
 				<vigor_regen 					type="mult" min="0.05"	 			/>
 				<armor_reduction_fast_style     type="mult" min="0.05"  			/>
 				<attack_speed_heavy_style 		type="mult"	min="0.08"				/>
-				<attack_power_heavy_style       type="mult" min="-0.15"				/>
+				<attack_power_heavy_style       type="mult" min="-0.175"			/>
 				<armor_reduction_heavy_style 	type="mult"	min="-0.1"				/>
 				<spell_power_aard 				type="mult" min="0.125"				/>
 			</ability>

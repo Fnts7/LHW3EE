@@ -11,11 +11,13 @@
 		<SlashingDamage 				type="base"	min="350"				/>
 		<SilverDamage 					type="base"	min="1"					/>	
 		<armor_reduction				type="mult"	min="-0.2"				/>
-		<damage_through_blocks			type="mult"	min="0.15"				/>
+		<damage_through_blocks			type="mult"	min="0.1"				/>
 		<counter_damage_bonus			type="mult"	min="-0.1"				/>
 		<attack_power					type="mult"	min="0.1"				/>
-		<injury_chance					type="mult"	min="0.2"				/>
-		<poise_damage					type="add"	min="15"				/>
+		<injury_chance					type="mult"	min="0.25"				/>
+		<poise_damage					type="add"	min="12"				/>
+		<critical_hit_chance			type="add"	min="0.05"				/>
+		<critical_hit_damage_bonus      type="add"  min="0.1"	  			/>
 	</ability>
 	
 	<ability name="Crafted Burning Rose Sword _Stats"> 

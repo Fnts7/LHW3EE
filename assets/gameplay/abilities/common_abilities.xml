@@ -191,8 +191,8 @@
       </ability>
       <ability name="difficulty_CommonHard">
         <tags>DifficultyModeAbility, Hard</tags>
-        <health_final_multiplier type="add" min="-0.2" />
-        <damage_final_multiplier type="add" min="-0.1" />
+        <health_final_multiplier type="add" min="-0.15" />
+        <damage_final_multiplier type="add" min="-0.15" />
         <staminaRegen type="mult" always_random="false" min="0.2" max="0.2" />
 		<root_ground_damage_area type="base" always_random="false" min="0" max="0" />
         <root_ground_damage_area type="mult" always_random="false" min="0" />

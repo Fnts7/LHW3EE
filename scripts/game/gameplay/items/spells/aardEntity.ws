@@ -55,6 +55,8 @@ statemachine class W3AardEntity extends W3SignEntity
 	
 	var projectileCollision 		: array< name >;
 	
+	protected var strongReflexBlastActive : bool; default strongReflexBlastActive = false;
+	
 	default skillEnum = S_Magic_1;
 	default waterTestOffsetZ = -2;
 	default waterTestDistancePerc = 0.5;
@@ -66,11 +68,22 @@ statemachine class W3AardEntity extends W3SignEntity
 	{
 		return ST_Aard;
 	}
+	
+	public function IsStrongReflexBlast() : bool
+	{
+		return strongReflexBlastActive;
+	}
+	
+	public function SetStrongReflexBlast()
+	{
+		strongReflexBlastActive = true;
+	}
 		
 	event OnStarted()
 	{
 		// W3EE - Begin
 		var reflexBlastEffect : SCustomEffectParams;
+		var reflexRealLevel : int;
 		
 		if(IsAlternateCast())
 		{
@@ -78,7 +91,8 @@ statemachine class W3AardEntity extends W3SignEntity
 			
 			if((CPlayer)owner.GetActor())
 			{
-				if( !isFreeCast && owner.CanUseSkill(S_Magic_s12, this) )
+				if( !isFreeCast && owner.CanUseSkill(S_Magic_s12, this) &&
+					( owner.GetSkillLevel(S_Magic_s12) <= 2 || owner.GetSkillLevel(S_Magic_s12) > 2 && strongReflexBlastActive) )
 				{
 					if( !owner.GetPlayer().HasBuff(EET_ReflexBlast) )
 					{
@@ -86,7 +100,17 @@ statemachine class W3AardEntity extends W3SignEntity
 						reflexBlastEffect.creator = this;
 						reflexBlastEffect.sourceName = "AardReflexBlast";
 						reflexBlastEffect.customPowerStatValue = GetTotalSignIntensity();
-						reflexBlastEffect.customPowerStatValue.valueBase = owner.GetSkillLevel(S_Magic_s12, this);
+						if (isFOACast)
+						{
+							if (owner.GetSkillLevel(S_Magic_s12) <= 2)
+								reflexRealLevel = 2;
+							else
+								reflexRealLevel = 5;
+						}						
+						else
+							reflexRealLevel = owner.GetSkillLevel(S_Magic_s12);
+						
+						reflexBlastEffect.customPowerStatValue.valueBase = reflexRealLevel;
 						reflexBlastEffect.isSignEffect = true;
 						reflexBlastEffect.duration = -1;
 						owner.GetPlayer().AddEffectCustom(reflexBlastEffect);
@@ -711,8 +735,13 @@ state AardCircleCast in W3AardEntity extends NormalCast
 						Experience().AwardFloodOfAnger();
 					}
 					
-					if( parent.GetActualOwner().GetSkillLevel(S_Magic_s12, parent) > 2 )
+					if( parent.GetActualOwner().GetSkillLevel(S_Magic_s12) > 2 && parent.strongReflexBlastActive && !parent.isFOACast)
+					{
 						cost += 1.f;
+						
+						if (player.GetSkillLevel(S_Magic_s01) > 1)
+							cost -= (player.GetSkillLevel(S_Magic_s01) - 1) * 0.25f;
+					}
 					
 					if ( player.CanUseSkill(S_Perk_09) )
 						if( player.GetStat(BCS_Focus) >= 1 )

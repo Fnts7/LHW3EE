@@ -191,13 +191,6 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		var ownerActor : CActor;
 		var actor : CActor;
 		
-		/*
-		if(owner.CanUseSkill(S_Magic_s19))
-			projCount = 2;
-		else
-			projCount = 1;
-		*/
-		
 		if( owner.CanUseSkill(S_Magic_s19, this) ) {
 			projCount = owner.GetSkillLevel(S_Magic_s19, this) + 1;
 		}
@@ -369,19 +362,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 			durationAnimal.valueMultiplicative = 1.0f;
 			duration.valueMultiplicative = 1.0f;
 			
-			
-			
-			
-			// W3EE - Begin
-			/*if( owner.CanUseSkill(S_Magic_s19, this) && targets.Size() > 1 )
-			{
-				/*reductionLevel = (3 - owner.GetSkillLevel(S_Magic_s19, this)) * targets.Size() / (owner.GetSkillLevel(S_Magic_s19, this) + 1);
-				duration -= owner.GetSkillAttributeValue(S_Magic_s19, 'duration', false, true) * reductionLevel;
-				durationAnimal -= owner.GetSkillAttributeValue(S_Magic_s19, 'duration', false, true) * reductionLevel;
-			}*/
-			// W3EE - End
-			
-			
+	
 			dur = CalculateAttributeValue(duration);
 			durAnimals = CalculateAttributeValue(durationAnimal);
 			

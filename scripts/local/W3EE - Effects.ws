@@ -166,21 +166,24 @@ class W3Effect_ReflexBlast extends CBaseGameplayEffect
 		
 		switch(skillLevel)
 		{
-			case 1:	timeScale = 0.7f;	effectDur = 1.0f;	break;
-			case 2:	timeScale = 0.5f;	effectDur = 1.5f;	break;
-			case 3:	timeScale = 0.3f;	effectDur = 3.0f;	break;
+			case 1:	timeScale = 0.7f;	effectDur = 1.25f;	break;
+			case 2:	timeScale = 0.6f;	effectDur = 1.75f;	break;
+			case 3:	timeScale = 0.3f;	effectDur = 3.5f;	break;
 			case 4:	timeScale = 0.2f;	effectDur = 4.0f;	break;
-			case 5:	timeScale = 0.1f;	effectDur = 4.0f;	break;
+			case 5:	timeScale = 0.1f;	effectDur = 4.3f;	break;
 		}
 		
 		speedDiff = 1 / timeScale;
 		theGame.SetTimeScale(timeScale, theGame.GetTimescaleSource(ETS_ReflexBlast), theGame.GetTimescalePriority(ETS_ReflexBlast), false, true);
 		if( skillLevel > 2 )
 		{
-			if( skillLevel < 5 )
-			{
+			if (skillLevel == 5)
+				speedDiff *= 0.95f;
+			else if (skillLevel == 4)
+				speedDiff *= 0.85f;
+			else
 				speedDiff *= 0.75f;
-			}
+
 			reflexMultID = playerWitcher.SetAnimationSpeedMultiplier(speedDiff, reflexMultID, true);
 		}
 		super.OnEffectAdded(customParams);
@@ -188,7 +191,7 @@ class W3Effect_ReflexBlast extends CBaseGameplayEffect
 	
 	event OnUpdate( dt : float )
 	{
-		timePassed += dt * speedDiff;
+		timePassed += dt / timeScale;
 		if( timePassed >= effectDur )
 		{
 			playerWitcher.RemoveBuff(EET_ReflexBlast, false, "AardReflexBlast");

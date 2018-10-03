@@ -42,6 +42,15 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			FactsAdd("mutagen_17_sign", 1);
 		}
 	}
+	
+	public function IsStrongReflexBlast() : bool
+	{
+		return false;
+	}
+	
+	public function SetStrongReflexBlast()
+	{
+	}
 
 	public function GetTotalSignIntensity() : SAbilityAttributeValue
 	{
@@ -112,7 +121,7 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		if( witcher && witcher.CanUseSkill(S_Sword_s19) && witcher.GetStat(BCS_Focus) >= witcher.GetStatMax(BCS_Focus) )
 		{
 			isFOACast = true;
-			signIntensity.valueMultiplicative += 0.25f;
+			signIntensity.valueMultiplicative += 0.2f;
 		}
 		else
 			isFOACast = false;
@@ -584,7 +593,7 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		var i : int;
 		
 		for(i=0; i<actionBuffs.Size(); i+=1)
-			act.AddEffectInfo(actionBuffs[i].effectType, , , actionBuffs[i].effectAbilityName);
+			act.AddEffectInfo(actionBuffs[i].effectType, , , actionBuffs[i].effectAbilityName, actionBuffs[i].effectCustomParam);
 	}
 	
 	protected function CacheActionBuffsFromSkill()
@@ -594,6 +603,7 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		var signAbilityName : name;
 		var dm : CDefinitionsManagerAccessor;
 		var buff : SEffectInfo;
+		var applicatorParams : KnockdownApplicatorParams;
 		
 		actionBuffs.Clear();
 		dm = theGame.GetDefinitionsManager();
@@ -606,6 +616,14 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			if( IsEffectNameValid(attrs[i]) )
 			{
 				EffectNameToType(attrs[i], buff.effectType, buff.effectAbilityName);
+				
+				if (buff.effectType == EET_KnockdownTypeApplicator)
+				{
+					applicatorParams = new KnockdownApplicatorParams in this;
+					applicatorParams.signEntity = this;
+					buff.effectCustomParam = applicatorParams;
+				}
+				
 				actionBuffs.PushBack(buff);
 			}		
 		}
@@ -918,7 +936,7 @@ state Channeling in W3SignEntity extends BaseCast
 					if( !GetWitcherPlayer().GetIsAlternateCast() )
 					// W3EE - End
 					{
-						if( player.CanUseSkill(S_Sword_s19) && player.GetStat(BCS_Focus) >= 3 )
+						if( player.CanUseSkill(S_Sword_s19) && player.GetStat(BCS_Focus) >= player.GetStatMax(BCS_Focus) )
 						{
 							player.DrainFocus(2.0f);
 							Experience().AwardFloodOfAnger();

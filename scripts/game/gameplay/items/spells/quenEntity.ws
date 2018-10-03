@@ -478,6 +478,9 @@ state ShieldActive in W3QuenEntity extends Active
 {
 	// W3EE - Begin
 	var cachedEffect : name;
+	
+	private var shieldDamageReduction : float; default shieldDamageReduction = 0.35f;
+	
 	private function UpdateQuenShieldFx()
 	{
 		var currHP, maxHP, div : float;
@@ -565,6 +568,25 @@ state ShieldActive in W3QuenEntity extends Active
 		var params 			: SCustomEffectParams;
 		
 		super.OnEnterState( prevStateName );
+		
+		switch ( theGame.GetDifficultyMode() )
+		{
+		case EDM_Easy:
+			shieldDamageReduction = 0.4f;
+			break;
+		case EDM_Medium:
+			shieldDamageReduction = 0.35f;
+			break;
+		case EDM_Hard:
+			shieldDamageReduction = 0.32f;
+			break;
+		case EDM_Hardcore:
+			shieldDamageReduction = 0.28f;
+			break;
+		default:
+			break;
+		}
+		
 		
 		witcher = (W3PlayerWitcher)caster.GetActor();
 		
@@ -707,13 +729,18 @@ state ShieldActive in W3QuenEntity extends Active
 		}
 		
 		
-		
-		damageDifference = damageData.GetDamageDealt() / damageData.GetOriginalDamageDealtWithArmor();
 		//shieldDamage = MaxF(damageData.GetOriginalDamageDealt() - 2440.f, damageData.GetOriginalDamageDealt() * 0.07f) * damageDifference / PowF(parent.GetTotalSignIntensityFloat(), 2);
-		shieldDamage = damageData.GetOriginalDamageDealt() * 0.35f * damageDifference / parent.GetTotalSignIntensityFloat();
 		
+		if (damageData.GetOriginalDamageDealtWithArmor() > 0)
+			damageDifference = damageData.GetDamageDealt() / damageData.GetOriginalDamageDealtWithArmor();
+		else
+			damageDifference = 1.0f;
+			
+		reflectedDamage = damageData.GetOriginalDamageDealt() * shieldDamageReduction * damageDifference;
+		shieldDamage = reflectedDamage / parent.GetTotalSignIntensityFloat();		
 		reducedDamage = parent.shieldHealth * parent.GetTotalSignIntensityFloat();
-		reflectedDamage = parent.shieldHealth * parent.GetTotalSignIntensityFloat();
+		
+		reflectedDamage = MinF(reducedDamage, reflectedDamage);
 		
 		if(!damageData.IsDoTDamage())
 		{
@@ -739,7 +766,7 @@ state ShieldActive in W3QuenEntity extends Active
 			
 			if( caster.CanUseSkill(S_Magic_s14, parent) )
 			{			
-				parent.dischargePercent = 0.03f * caster.GetSkillLevel(S_Magic_s14, parent);
+				parent.dischargePercent = 0.1f * caster.GetSkillLevel(S_Magic_s14, parent);
 				if( caster.GetPlayer().IsSetBonusActive( EISB_Bear_2 ) )
 				{
 					theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Bear_2 ), 'quen_dmg_boost', min, max );
@@ -755,15 +782,16 @@ state ShieldActive in W3QuenEntity extends Active
 				staggerParams.sourceName = "quen";
 				staggerParams.effectType = EET_Stagger;
 				((CActor)damageData.attacker).AddEffectCustom(staggerParams);
-				parent.dischargePercent += 0.10f;
+				parent.dischargePercent += 0.2f;
 			}
 			
 			if (reflectedDamage > 0 && !damageData.IsDoTDamage() && casterActor == thePlayer && damageData.attacker != casterActor && ( parent.owner.CanUseSkill(S_Magic_s14, parent) || damageData.attacker.HasTag('WeakToQuen') ) && parent.dischargePercent > 0 && !damageData.IsActionRanged() && VecDistanceSquared( casterActor.GetWorldPosition(), damageData.attacker.GetWorldPosition() ) <= 13 ) //~3.5^2
 			{
 				action = new W3DamageAction in theGame.damageMgr;
 				action.Initialize( casterActor, damageData.attacker, parent, 'quen', EHRT_Light, CPS_SpellPower, false, false, true, false, 'hit_shock' );
-				parent.InitSignDataForDamageAction( action );		
-				action.AddDamage( theGame.params.DAMAGE_NAME_DIRECT, parent.dischargePercent * reflectedDamage );
+				parent.InitSignDataForDamageAction( action );
+				action.SetSignSkill(S_Magic_s14);
+				action.AddDamage( theGame.params.DAMAGE_NAME_SHOCK, parent.dischargePercent * reflectedDamage );
 				action.SetCanPlayHitParticle(true);
 				action.SetHitEffect('hit_electric_quen');
 				action.SetHitEffect('hit_electric_quen', true);
@@ -844,7 +872,9 @@ state QuenShield in W3QuenEntity extends NormalCast
 state QuenChanneled in W3QuenEntity extends Channeling
 {
 	private const var STAMINA_FACTOR : float;		
-	private const var HEALING_FACTOR : float;		
+	private const var HEALING_FACTOR : float;
+	private var drainedVigorTotal : float;
+	private var heavyDamageThreshold : float;
 	
 		// W3EE - Begin
 		default STAMINA_FACTOR = 0.05f;
@@ -855,6 +885,8 @@ state QuenChanneled in W3QuenEntity extends Channeling
 	{
 		var casterActor : CActor;
 		var witcher : W3PlayerWitcher;
+		var min, max : SAbilityAttributeValue;
+		var dm : CDefinitionsManagerAccessor;
 		
 		super.OnEnterState( prevStateName );
 	
@@ -875,6 +907,26 @@ state QuenChanneled in W3QuenEntity extends Channeling
 		parent.AddBuffImmunities(true);	
 		// W3EE - End
 		
+		dm = theGame.GetDefinitionsManager();
+		min.valueAdditive = 0;
+									
+		switch ( theGame.GetDifficultyMode() )
+		{
+		case EDM_Easy:
+			dm.GetAbilityAttributeValue('difficulty_CommonEasy', 'damage_final_multiplier', min, max);
+			break;
+		case EDM_Medium:
+			dm.GetAbilityAttributeValue('difficulty_CommonMedium', 'damage_final_multiplier', min, max);
+			break;
+		case EDM_Hard:
+			dm.GetAbilityAttributeValue('difficulty_CommonHard', 'damage_final_multiplier', min, max);
+			break;
+		case EDM_Hardcore:
+		default:
+			break;
+		}
+		
+		heavyDamageThreshold = 2400.0f * (1.0f + min.valueAdditive / 2.0f) * RandRangeF(1.1f, 0.9f);
 		
 		witcher.CriticalEffectAnimationInterrupted("quen channeled");
 		
@@ -888,6 +940,7 @@ state QuenChanneled in W3QuenEntity extends Channeling
 			// W3EE - Begin
 			parent.CheckForMutagen17Boost();
 			// W3EE - End
+			drainedVigorTotal = 0;			
 			ChannelQuen();
 		}
 	}
@@ -924,7 +977,12 @@ state QuenChanneled in W3QuenEntity extends Channeling
 		parent.RemoveHitDoTEntities();
 		
 		if(isEnd && caster.CanUseSkill(S_Magic_s13, (W3SignEntity)parent))
-			caster.GetPlayer().QuenImpulse( true, parent, "quen_impulse" );
+		{
+			if (drainedVigorTotal >= 1.5f)
+				caster.GetPlayer().QuenImpulse( true, parent, "quen_impulse");
+			else
+				caster.GetPlayer().QuenImpulse( true, parent, "quen_impulse", 1 );
+		}
 	}
 	
 	event OnSignAborted( optional force : bool )
@@ -1099,7 +1157,7 @@ state QuenChanneled in W3QuenEntity extends Channeling
 		
 		if( caster.CanUseSkill(S_Magic_s14, parent) )
 		{			
-			parent.dischargePercent = 0.08f * caster.GetSkillLevel(S_Magic_s14, parent);
+			parent.dischargePercent = 0.15f * caster.GetSkillLevel(S_Magic_s14, parent);
 			if( caster.GetPlayer().IsSetBonusActive( EISB_Bear_2 ) )
 			{
 				theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Bear_2 ), 'quen_dmg_boost', min, max );
@@ -1115,7 +1173,7 @@ state QuenChanneled in W3QuenEntity extends Channeling
 			staggerParams.sourceName = "quen";
 			staggerParams.effectType = EET_Stagger;
 			((CActor)damageData.attacker).AddEffectCustom(staggerParams);
-			parent.dischargePercent += 0.15f;
+			parent.dischargePercent += 0.25f;
 		}
 		
 		if( casterActor.HasBuff( EET_Mutation11Buff ) )
@@ -1126,13 +1184,20 @@ state QuenChanneled in W3QuenEntity extends Channeling
 		else
 		{
 			if( player )
-				parent.shieldHealth = 1000.f * sp;
+				parent.shieldHealth = 1000.f * sp * (player.GetStatMax(BCS_Focus) / 3.0f);
 			else
 				parent.shieldHealth = 10000.f;
 		}
 		
-		shieldDamage = damageData.GetDamageDealt() / damageData.GetOriginalDamageDealtWithArmor();
-		shieldDamage = MaxF(damageData.GetOriginalDamageDealt() - 2225.f, damageData.GetOriginalDamageDealt() * 0.09f) * shieldDamage;
+
+		if (damageData.GetOriginalDamageDealt() > heavyDamageThreshold)
+			shieldDamage = 0.1f * heavyDamageThreshold + (damageData.GetOriginalDamageDealt() - heavyDamageThreshold) * 0.8f;
+		else
+			shieldDamage = 0.1f * damageData.GetOriginalDamageDealt();
+		if (damageData.GetOriginalDamageDealtWithArmor() > 0)
+			shieldDamage *= damageData.GetDamageDealt() / damageData.GetOriginalDamageDealtWithArmor();
+		
+		//shieldDamage = MaxF(damageData.GetOriginalDamageDealt() - 2225.f, damageData.GetOriginalDamageDealt() * 0.09f) * shieldDamage;
 		
 		if( caster.GetActor().HasAbility('Glyphword 16 _Stats', true) ) 
 			shieldDamage *= 0.36f;
@@ -1140,10 +1205,12 @@ state QuenChanneled in W3QuenEntity extends Channeling
 		if( shieldDamage >= parent.shieldHealth )
 		{
 			drainAllVigor = true;
-			drainedVigor = Options().MaxFocus() * (shieldDamage / parent.shieldHealth);
+			drainedVigor = player.GetStatMax(BCS_Focus) * (shieldDamage / parent.shieldHealth);
 		}
 		else
-			drainedVigor = Options().MaxFocus() * (shieldDamage / parent.shieldHealth);
+			drainedVigor = player.GetStatMax(BCS_Focus) * (shieldDamage / parent.shieldHealth);
+			
+		drainedVigorTotal += drainedVigor;
 		
 		if( !damageData.IsDoTDamage() )
 			GCameraShake( parent.effects[parent.fireMode].cameraShakeStranth, true, parent.GetWorldPosition(), 30.0f );
@@ -1156,13 +1223,20 @@ state QuenChanneled in W3QuenEntity extends Channeling
 			damageData.ClearEffects();
 		}
 		
-		returnDamage = MinF(1.f, player.GetStat(BCS_Focus) / drainedVigor);
+		returnDamage = shieldDamage;
+		if ( drainedVigor > player.GetStat(BCS_Focus) )
+			returnDamage *= player.GetStat(BCS_Focus) / drainedVigor;
+			
+		if( caster.GetActor().HasAbility('Glyphword 16 _Stats', true) )
+			returnDamage *= 1.5f;
+		
 		if( casterActor == thePlayer && parent.dischargePercent > 0 && !damageData.IsActionRanged() && IsRequiredAttitudeBetween( thePlayer, damageData.attacker, true) && parent.owner.CanUseSkill(S_Magic_s14, parent) && VecDistanceSquared( casterActor.GetWorldPosition(), damageData.attacker.GetWorldPosition() ) <= 13 ) 
 		{
 			action = new W3DamageAction in theGame.damageMgr;
 			action.Initialize( casterActor, damageData.attacker, parent, 'quen', EHRT_Light, CPS_SpellPower, false, false, true, false, 'hit_shock' );
-			parent.InitSignDataForDamageAction( action );		
-			action.AddDamage( theGame.params.DAMAGE_NAME_SHOCK, parent.dischargePercent * damageData.GetOriginalDamageDealt() * returnDamage / 4.f );
+			parent.InitSignDataForDamageAction( action );
+			action.SetSignSkill(S_Magic_s14);
+			action.AddDamage( theGame.params.DAMAGE_NAME_SHOCK, parent.dischargePercent * returnDamage);
 			action.SetCanPlayHitParticle(true);
 			action.SetHitEffect('hit_electric_quen');
 			action.SetHitEffect('hit_electric_quen', true);
@@ -1197,7 +1271,7 @@ state QuenChanneled in W3QuenEntity extends Channeling
 					player.GainStat(BCS_Stamina, shieldDamage * STAMINA_FACTOR * sp);
 				
 				if( player.GetStat(BCS_Focus) < drainedVigor )
-					player.StartCustomVigorTimer(Options().AdrGenDelay * (3.f + drainedVigor - player.GetStat(BCS_Focus)));
+					player.StartCustomVigorTimer(Options().AdrGenDelay * (1.5f + drainedVigor - player.GetStat(BCS_Focus)));
 				
 				player.DrainFocus(MinF(drainedVigor, player.GetStat(BCS_Focus)));
 				player.GetAdrenalineEffect().AddAdrenaline(drainedVigor / 15.f);
@@ -1214,7 +1288,7 @@ state QuenChanneled in W3QuenEntity extends Channeling
 			{
 				player.AddTimer('StunPlayer', 0.3f, false);
 				player.DrainFocus(player.GetStatMax(BCS_Focus));
-				player.StartCustomVigorTimer(Options().AdrGenDelay * player.GetStatMax(BCS_Focus) * 2.f);
+				player.StartCustomVigorTimer(Options().AdrGenDelay * 2.f);
 			}
 			else
 			{
@@ -1228,7 +1302,7 @@ state QuenChanneled in W3QuenEntity extends Channeling
 			caster.GetActor().Heal(shieldDamage * HEALING_FACTOR);
 		}
 		
-		if( ( caster.GetPlayer() && caster.GetPlayer().GetStat(BCS_Focus) <= 0 ) || ( !caster.GetPlayer() && casterActor.GetStat( BCS_Stamina ) <= 0 ) && !casterActor.HasBuff( EET_Mutation11Buff ) )
+		if( (( caster.GetPlayer() && caster.GetPlayer().GetStat(BCS_Focus) <= 0 ) || ( !caster.GetPlayer() && casterActor.GetStat( BCS_Stamina ) <= 0 )) && !casterActor.HasBuff( EET_Mutation11Buff ) )
 		{
 			if ( caster.CanUseSkill(S_Magic_s13, (W3SignEntity)parent) )
 			{

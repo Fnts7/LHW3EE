@@ -1614,49 +1614,65 @@ class W3EffectManager
 		{
 			return true;
 		}
-		if(signType == ST_Quen && effectType == EET_KnockdownTypeApplicator && owner.HasAbility('WeakToAard'))
+		
+		if(signType == ST_Quen)
 		{
-			return true;
-		}
-		
-		sp = powerStatValue.valueMultiplicative;
-		
-		if( owner == thePlayer )
-			owner.GetResistValue(theGame.effectMgr.GetBuffResistStat(effectType), resPt, res);
-		else
-			res = ((CNewNPC)owner).GetNPCCustomStat(((CNewNPC)owner).ResistStatToName(theGame.effectMgr.GetBuffResistStat(effectType)));
-		
-		rawChance = 0.35f * sp;
-		if( signType == ST_Igni && witcher )
-		{
-			if(witcher.GetSignOwner().CanUseSkill(S_Magic_s09, witcher.GetSignEntity(ST_Igni)))
-			{
-				// chanceBonus = witcher.GetSkillAttributeValue(S_Magic_s09, 'chance_bonus', false, true);
-				bonusChance = 0.06f * witcher.GetSignOwner().GetSkillLevel(S_Magic_s09, witcher.GetSignEntity(ST_Igni));
-			}
+			if (effectType == EET_Stagger)
+				return true;
+				
+			chance = 0.35f;				
 			
-			/*
-			if(witcher.CanUseSkill(S_Perk_03))
-				bonusChance = CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Perk_03, 'burning_chance', false, true));
-			*/
-		}
-		
-		if( signType == ST_Igni && !isAlternate )
-		{
-			chance = MaxF(0, rawChance + bonusChance - resPt/100) * (1 - res) * (1 - (owner.GetBurnCounter() * 0.3f));
+			if (witcher && witcher.IsSetBonusActive( EISB_Bear_2 ))
+				chance += 0.15f;	
+			
+			if (owner.HasAbility('WeakToQuen'))
+				chance += 0.2f;
+			else if (owner.HasAbility('WeakToAard'))
+				chance += 0.1f;
 		}
 		else
-		if( signType == ST_Igni && isAlternate && witcher.HasAbility('Glyphword 8 _Stats', true) )
-			chance = MaxF(0, (rawChance + CalculateAttributeValue(witcher.GetAttributeValue('glyphword8_chance')) - resPt/100)) * (1 - res);
-		else
-			chance = MaxF(0, (rawChance - resPt/100)) * (1 - res);
+		{		
+			sp = powerStatValue.valueMultiplicative;
+			
+			if( owner == thePlayer )
+				owner.GetResistValue(theGame.effectMgr.GetBuffResistStat(effectType), resPt, res);
+			else
+				res = ((CNewNPC)owner).GetNPCCustomStat(((CNewNPC)owner).ResistStatToName(theGame.effectMgr.GetBuffResistStat(effectType)));
+			
+			if (signType == ST_Igni)
+			{			
+				rawChance = 0.35f * sp;
+				if( witcher )
+				{
+					if(witcher.GetSignOwner().CanUseSkill(S_Magic_s09, witcher.GetSignEntity(ST_Igni)))
+					{
+						// chanceBonus = witcher.GetSkillAttributeValue(S_Magic_s09, 'chance_bonus', false, true);
+						bonusChance = 0.06f * witcher.GetSignOwner().GetSkillLevel(S_Magic_s09, witcher.GetSignEntity(ST_Igni));
+					}
+					
+					/*
+					if(witcher.CanUseSkill(S_Perk_03))
+						bonusChance = CalculateAttributeValue(witcher.GetSkillAttributeValue(S_Perk_03, 'burning_chance', false, true));
+					*/
+				}
+				
+				if( !isAlternate )
+				{
+					chance = MaxF(0, rawChance + bonusChance - resPt/100) * (1 - res) * (1 - (owner.GetBurnCounter() * 0.2f));
+				}
+				else
+				if( isAlternate && witcher.HasAbility('Glyphword 8 _Stats', true) )
+					chance = MaxF(0, (rawChance + CalculateAttributeValue(witcher.GetAttributeValue('glyphword8_chance')) - resPt/100)) * (1 - res);
+				else
+					chance = MaxF(0, (rawChance - resPt/100)) * (1 - res);					
+			}
+			else
+				chance = MaxF(0, (rawChance - resPt/100)) * (1 - res);
+		}
 		
 		if(witcher && witcher.GetPotionBuffLevel(EET_PetriPhiltre) == 3 && res < 1)
 		{
-			if( signType == ST_Igni )
-				chance = 1 - (owner.GetBurnCounter() * 0.2f);
-			else
-				chance = 1;
+			chance += 0.3f;
 		}
 		
 

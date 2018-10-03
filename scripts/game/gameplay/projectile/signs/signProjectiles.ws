@@ -64,22 +64,22 @@ class W3AardProjectile extends W3SignProjectile
 				
 				if( signEntity.IsAlternateCast() ) {
 				
-					if( owner.GetSkillLevel(S_Magic_s12, GetSignEntity()) > 2 )
-						dmgVal *= 1.5f;
+					if( GetSignEntity().IsStrongReflexBlast()  )
+						dmgVal /= 2.0f;
 				
 					if ( (W3PlayerWitcher) owner.GetPlayer() )
-						altLevel = owner.GetSkillLevel(S_Magic_s01);
+						altLevel = owner.GetSkillLevel(S_Magic_s01, GetSignEntity());
 					else
 						altLevel = 0;
 						
 					if (altLevel == 3)
-						dmgVal /= 3;
+						dmgVal *= 0.8f;
 					else if (altLevel == 2)
-						dmgVal /= 4;
+						dmgVal *= 0.65f;
 					else if (altLevel == 1)
-						dmgVal /= 6;
+						dmgVal *= 0.5f;
 					else
-						dmgVal /= 5;
+						dmgVal *= 0.6f;
 				}
 				action.AddDamage( theGame.params.DAMAGE_NAME_FORCE, dmgVal );
 			}
@@ -184,28 +184,34 @@ class W3AardProjectile extends W3SignProjectile
 				
 				if( signEntity.IsAlternateCast() )
 				{
-					if( owner.GetSkillLevel(S_Magic_s12, GetSignEntity()) > 2 )
-						dmgVal *= 1.5f;
+					if( GetSignEntity().IsStrongReflexBlast() )
+						dmgVal /= 2.0f;
 					
 					if ( (W3PlayerWitcher) owner.GetPlayer() )
-						altLevel = owner.GetSkillLevel(S_Magic_s01);
+						altLevel = owner.GetSkillLevel(S_Magic_s01, GetSignEntity());
 					else
 						altLevel = 0;
 						
 					if (altLevel == 3)
-						dmgVal /= 3;
+						dmgVal *= 0.8f;
 					else if (altLevel == 2)
-						dmgVal /= 4;
+						dmgVal *= 0.65f;
 					else if (altLevel == 1)
-						dmgVal /= 6;
+						dmgVal *= 0.5f;
 					else
-						dmgVal /= 5;
+						dmgVal *= 0.6f;
 				}
 				action.AddDamage( theGame.params.DAMAGE_NAME_FORCE, dmgVal );
 			}
 			
 			// theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation6', 'ForceDamage', min, max );
-			dmgVal = 350.f * sp.valueMultiplicative; // CalculateAttributeValue( min );
+			dmgVal = 400.f * sp.valueMultiplicative; // CalculateAttributeValue( min );
+			
+			if( signEntity.IsAlternateCast() )
+			{
+				dmgVal *= 0.75f;
+			}
+			
 			action.AddDamage( theGame.params.DAMAGE_NAME_FROST, dmgVal );
 			// W3EE - End
 			

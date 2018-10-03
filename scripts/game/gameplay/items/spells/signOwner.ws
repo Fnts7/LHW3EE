@@ -222,17 +222,18 @@ class W3SignOwnerPlayer extends W3SignOwner
 			{
 				ret = false;
 			}
-			// W3EE - Begin
-			else
-			if( signEntity.GetSignType() == ST_Aard && GetSkillLevel(S_Magic_s12, signEntity) > 2 && player.GetStat(BCS_Focus) < 2 )
-			{
-				ret = false;
-			}
-			// W3EE - End
 			else
 			{
 				signEntity.SetAlternateCast( newSkill );
 				player.SetBehaviorVariable( 'alternateSignCast', 1 );
+				
+				if( signEntity.GetSignType() == ST_Aard && GetSkillLevel(S_Magic_s12) > 2 &&
+					(GetSkillLevel(S_Magic_s01, signEntity) < 2 && player.GetStat(BCS_Focus) >= 2 ||
+					GetSkillLevel(S_Magic_s01, signEntity) >= 2 && player.GetStat(BCS_Focus) >= 2.0f - (GetSkillLevel(S_Magic_s01, signEntity) - 1) * 0.25f) )
+				{
+					signEntity.SetStrongReflexBlast();
+				}
+				
 				ret = true;
 			}
 		}
@@ -250,7 +251,7 @@ class W3SignOwnerPlayer extends W3SignOwner
 	// W3EE - Begin
 	public function GetSkillLevel( skill : ESkill, optional signEntity : W3SignEntity ) : int
 	{
-		if( signEntity.isFOACast )
+		if( signEntity && signEntity.isFOACast )
 			return player.GetSkillMaxLevel(skill);
 		else
 			return player.GetSkillLevel(skill);

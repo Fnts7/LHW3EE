@@ -1,4 +1,44 @@
-﻿Version 35
+﻿Version 36
+
+Many improvements in quen sign logic:
+- Reworked quen impulse knockdown applicator logic ((first quen skill level 3), shares again common logic with aard now,
+like it was in vanilla. But that logic was previously improved by me in early versions of this mod
+- Bear second set bonus is nerfed to +60% damage, improves quen impulse knockdown applicator chance - that was added to description
+- Quen Impulse from channeled quen will be cast with full skill power in case of breaking by damage or stopping by player after
+at least 1.5 vigor was drained. Otherwise quen impulse will be limited to lvl1 always, which is staggering effect only.
+- Nerfed Quen Jolt and Quen Impulse damages. The latter was changed to force damage type
+- Boosted Quen Discharge damages and made their base more consistent - amount of quen shield damage
+- Normalized quen shield damage factors through difficulty levels.
+- Channeled quen now is affected by vigor increase with Maribor Forest (stronger shield, because of more vigor)
+
+Many improvements and bug fixes in aard sign logic:
+- Relfex sweep skill small adjustment in power gain through levels
+- Reflex sweep lvl >= 3 now decreases aard sweep damage instead of rising it
+- If there is not enough vigor to cast strong reflex sweep, normal alt mode aard sweep will be cast. Previously cone aard would be cast.
+- aard sweep skill damage reduction lowered to 50%, 35%, 20% accordingly
+- aard sweep skill now reduces cost of sweep if reflex sweep is at least level 3 (which then raises cost)
+- petri's philter will now also raise aard sweep power when reflex sweep is at least level 3
+- Freezing aard mutation base damage raised to 400, but in aard sweep mode it has 25% penalty
+
+Flood of anger small power adjustment and fixed description. Flood of anger in case of aard reflex sweep skill
+will now work the following way: if the skill has level <= 2 (so not paradigm changing) the level will be raised
+to 2. Otherwise it will be raised to 5.
+
+Adjustments in Ofir sabres params, so they are better consistent. We have now light, medium, heavy sabres
+available from merchant or schematics.
+
+Small correction in Cat school swords mods regarding strong attack.
+
+Injury chance attribute is now taken into account in heavy bash attack. This was a bug, because previously in pure W3EE
+the injury chance was 100% or none, so there was no point in applying the modifier.
+
+Runeword Bereavement level 3, now really deals its damage totally bypassing armor, as it is in description, making
+this runeword very useful on swords that have armor piercing reduction. It is 5% of base sword damage.
+
+Weakened dracolizards a bit - lower damage, lowered physical resistance, but raised vitality a bit. Fire resistance lowered
+from 100% (immunity) to 80%.
+
+Version 35
 
 Manticore armor parts have now some adrenaline gain bonus.
 

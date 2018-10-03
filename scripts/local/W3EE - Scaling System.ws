@@ -3801,27 +3801,27 @@ class W3EEScalingHandler extends W3EEOptionHandler
 				case MC_Draconide :
 					if( NPC.HasAbility('mon_draco_base') )
 					{
-						opponentStats.damageValue = 3085;
-						opponentStats.healthValue = 28770;
+						opponentStats.damageValue = 2700;
+						opponentStats.healthValue = 31000;
 						opponentStats.healthType = BCS_Vitality;
 						
 						opponentStats.isHuge			= true;
 						opponentStats.dangerLevel		= 100;
 						opponentStats.canGetCrippled 	= true;
 						opponentStats.poiseValue 		= 0.3f;
-						opponentStats.physicalResist	= 0.6f;
-						opponentStats.forceResist 		= -0.2f;
+						opponentStats.physicalResist	= 0.45f;
+						opponentStats.forceResist 		= -0.1f;
 						opponentStats.frostResist 		= -0.3f;
-						opponentStats.fireResist 		= 1.f;
+						opponentStats.fireResist 		= 0.8f;
 						opponentStats.shockResist 		= 0.f;
 						opponentStats.elementalResist 	= 0.f;
 						opponentStats.slowResist 		= 0.2f;
 						opponentStats.confusionResist 	= 0.2f;
-						opponentStats.bleedingResist 	= 0.f;
+						opponentStats.bleedingResist 	= 0.15f;
 						opponentStats.poisonResist 		= 1.f;
 						opponentStats.stunResist 		= 0.f;
 						opponentStats.injuryResist 		= 0.15f;
-						opponentStats.armorPiercing 	= 0.65f;
+						opponentStats.armorPiercing 	= 0.5f;
 						NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_POISON);
 						NPC.AddDamageImmunity(theGame.params.DAMAGE_NAME_FORCE);
 					}

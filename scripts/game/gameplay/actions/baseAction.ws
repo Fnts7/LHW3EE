@@ -235,7 +235,7 @@ class W3DamageAction extends CDamageData
 		{
 			return ST_Yrden;
 		}
-		else if( signSkill == S_Magic_4 || signSkill == S_Magic_s04 || signSkill == S_Magic_s13)
+		else if( signSkill == S_Magic_4 || signSkill == S_Magic_s04 || signSkill == S_Magic_s13 || signSkill == S_Magic_s14)
 		{
 			return ST_Quen;
 		}	
@@ -661,6 +661,14 @@ class W3DamageAction extends CDamageData
 		if(signEntity)
 		{
 			result = signEntity.GetTotalSignIntensity(); //actor.GetTotalSignSpellPower(signEntity.GetSkill());
+			
+			if (signSkill == S_Magic_s14)
+			{
+				if (result.valueMultiplicative >= 1.0f)
+					result.valueMultiplicative = 1.0f + (result.valueMultiplicative - 1.0f) / 2.0f;
+				else
+					result.valueMultiplicative = 1.0f - (1.0f - result.valueMultiplicative) / 2.0f;
+			}
 		}
 		else
 		{

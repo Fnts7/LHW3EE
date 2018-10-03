@@ -6,6 +6,11 @@
 
 
 
+class KnockdownApplicatorParams extends W3BuffCustomParams
+{
+	var signEntity : W3SignEntity;
+}
+
 
 class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 {
@@ -24,7 +29,7 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 		var tags : array<name>;
 		var i : int;
 		var appliedType : EEffectType;
-		var null : SAbilityAttributeValue;
+		//var null : SAbilityAttributeValue;
 		var npc : CNewNPC;
 		var params : SCustomEffectParams;
 		var min, max : SAbilityAttributeValue;
@@ -34,7 +39,8 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 		//var effectArray : array<EEffectType>;
 		var witcher : W3PlayerWitcher;
 		var penaltyLevel : int; 
-		var refBlastMod : bool;
+		var refBlastMod, petri : bool;
+		var signEntity : W3SignEntity;
 		// W3EE - End
 		
 		if(isOnPlayer)
@@ -49,24 +55,26 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 			sp = effectValue;
 		else
 		{
-			if( isSignEffect && GetCreator() == witcher )
+			/*if( isSignEffect && GetCreator() == witcher )
 				sp = witcher.GetSignEntity(ST_Aard).GetTotalSignIntensity();
-			else
+			else*/
 				sp = creatorPowerStat;
 		}
 		
+		if ( (KnockdownApplicatorParams)customParams )
+			signEntity = ((KnockdownApplicatorParams)customParams).signEntity;
+		
 		refBlastMod = false;
-		if (witcher.GetSignEntity(ST_Aard).IsAlternateCast())
+		if ( signEntity && signEntity.GetOwner() == witcher && signEntity.GetSignType() == ST_Aard && signEntity.IsAlternateCast())
 		{
-			penaltyLevel = 3 - witcher.GetSignOwner().GetSkillLevel(S_Magic_s01);				
+			penaltyLevel = 3 - signEntity.GetActualOwner().GetSkillLevel(S_Magic_s01, signEntity);
 			if(penaltyLevel > 0)
 			{
 				if (penaltyLevel > 2) penaltyLevel = 2;							
 				sp.valueMultiplicative -= 0.15f * penaltyLevel;
 			}
 			
-			if( witcher.GetSignOwner().GetSkillLevel(S_Magic_s12, witcher.GetSignEntity(ST_Aard)) > 2 )
-				refBlastMod = true;			
+			refBlastMod = signEntity.IsStrongReflexBlast();		
 		}
 		
 		if (sp.valueMultiplicative >= 1.0f)
@@ -78,16 +86,27 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 			aardPower = MaxF(0.0f, 0.4f - 0.4f * (1.0f - sp.valueMultiplicative));
 		}
 		
-		if( isSignEffect && GetCreator() == witcher && witcher.GetPotionBuffLevel(EET_PetriPhiltre) == 3 )
+		if( isSignEffect && GetCreator() == witcher && signEntity && signEntity.GetSignType() == ST_Aard && witcher.GetPotionBuffLevel(EET_PetriPhiltre) == 3 )
 		{
+			petri = true;
 			aardPower += 0.2f;
 		}
+		else
+			petri = false;
+			
+		if (signEntity && signEntity.GetSignType() == ST_Quen && target.HasTag('WeakToQuen'))
+			aardPower += 0.1f;
 		
 		npc = (CNewNPC)target;
 		aardPower *= (1 - npc.GetNPCCustomStat(theGame.params.DAMAGE_NAME_FORCE));
 		
 		if (refBlastMod)
-			aardPower = MinF(0.31f, aardPower);		
+		{
+			if (petri)
+				aardPower = MinF(0.4f, aardPower);
+			else
+				aardPower = MinF(0.25f, aardPower);		
+		}
 
 
 		if(npc && npc.HasShieldedAbility() )
@@ -120,7 +139,7 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 					appliedType = effectArray[i];
 			}*/
 		}
-		else if ( target.HasAbility( 'mon_type_huge' ) )
+		else if ( target.IsHuge() )
 		{
 			aardPower = MinF(1.1f, aardPower);
 			aardPower += RandF();
@@ -147,7 +166,7 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 			}*/
 		}
 		else
-		if ( target.HasAbility( 'WeakToAard' ) )
+		if ( signEntity && signEntity.GetSignType() == ST_Aard && target.HasTag( 'WeakToAard' ) )
 		{
 			aardPower = MinF(0.8f, aardPower);
 			aardPower += RandF();

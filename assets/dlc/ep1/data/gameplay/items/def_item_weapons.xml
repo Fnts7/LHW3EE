@@ -72,27 +72,27 @@
 		<SilverDamage 					min="1" 	max="1"					/>	
 		<quality 						type="add" 	min="4" 	max="4"		/>
 		<armor_reduction				type="mult"	min="-0.2"				/>
-		<counter_damage_bonus			type="mult"	min="-0.1"				/>
-		<critical_hit_chance			type="add"	min="0.10"				/>
-		<attack_speed					type="mult"	min="0.1"				/>
+		<counter_damage_bonus			type="mult"	min="-0.125"			/>
+		<critical_hit_chance			type="add"	min="0.08"				/>
+		<attack_speed					type="mult"	min="0.075"				/>
 		<attack_power					type="mult"	min="0.1"				/>
-		<injury_chance					type="mult"	min="0.15"				/>
+		<injury_chance					type="mult"	min="0.18"				/>
 		<attack_stamina_cost_bonus		type="mult"	min="0.15"				/>
-		<poise_damage					type="add"	min="10"				/>
+		<poise_damage					type="add"	min="7"					/>
 		<weight 						type="base"	min="4.05"				/>
 	</ability>
 	
 	<ability name="Ofir Sabre 2 _Stats">
 		<SlashingDamage 				min="308" 	max="308"				/>
 		<SilverDamage 					min="1" 	max="1"					/>						
-		<critical_hit_chance			type="add"	min="0.10"				/>
+		<critical_hit_chance			type="add"	min="0.08"				/>
 		<armor_reduction				type="mult"	min="-0.2"				/>
-		<counter_damage_bonus			type="mult"	min="-0.1"				/>
+		<counter_damage_bonus			type="mult"	min="-0.125"			/>
 		<attack_speed					type="mult"	min="0.1"				/>
-		<attack_power_fast_style		type="mult"	min="0.1"				/>
-		<injury_chance					type="mult"	min="0.1"				/>
-		<attack_stamina_cost_bonus		type="mult"	min="0.15"				/>
-		<poise_damage					type="add"	min="5"					/>
+		<attack_power					type="mult"	min="0.05"				/>
+		<injury_chance					type="mult"	min="0.12"				/>
+		<attack_stamina_cost_bonus		type="mult"	min="0.2"				/>
+		<poise_damage					type="add"	min="4"					/>
 		<quality 						type="add" 	min="3" 	max="3"		/>
 		<weight 						type="base"	min="4.05"				/>
 	</ability>

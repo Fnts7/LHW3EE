@@ -1708,6 +1708,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var witcher : W3PlayerWitcher;
 		var npcTarget : CNewNPC;
 		var shieldBreakChance : int;
+		var injuryChanceMult : SAbilityAttributeValue;
 		
 		witcher = (W3PlayerWitcher)action.attacker;
 		
@@ -1753,7 +1754,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 					if (witcher.CanUseSkill(S_Sword_s06))
 						shieldBreakChance += witcher.GetSkillLevel(S_Sword_s06);
 					
-					if (RandRange(100, 0) <= shieldBreakChance)
+					if (RandRange(100, 0) < shieldBreakChance)
 					{
 						npcTarget.ProcessShieldDestruction();
 						action.AddEffectInfo(EET_Stagger);
@@ -1762,14 +1763,17 @@ class W3EECombatHandler extends W3EEOptionHandler
 				
 				if( action.DealsAnyDamage() && !npcTarget.IsShielded(witcher) )
 				{
+					injuryChanceMult = witcher.GetAttributeValue('injury_chance');
+				
 					if (firstHitHeavyBashSuccess)
 					{
-						if ( action.IsCriticalHit() || RandRange(100, 0) <= 50 )
+						if ( action.IsCriticalHit() || RandF() < 0.5f * (1.0f + injuryChanceMult.valueMultiplicative) )
 							action.SetForceInjury(true);
 					}
 					else
 					{
-						if ( (action.IsCriticalHit() && RandRange(100, 0) <= 50) || (!action.IsCriticalHit() && RandRange(100, 0) <= 25 ) )
+						if ( (action.IsCriticalHit() && RandF() < 0.5f * (1.0f + injuryChanceMult.valueMultiplicative))
+							|| (!action.IsCriticalHit() && RandF() < 0.25f * (1.0f + injuryChanceMult.valueMultiplicative) ) )
 							action.SetForceInjury(true);
 					}
 				}
@@ -2382,7 +2386,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 			
 			skillLevel = witcher.GetSignOwner().GetSkillLevel(S_Magic_s15, (W3SignEntity)quen);
 			sp = ((W3SignEntity)quen).GetTotalSignIntensity();
-			damage = 155.f * skillLevel * sp.valueMultiplicative;
+			damage = 120.f * skillLevel * sp.valueMultiplicative;
 			if( witcher.IsSetBonusActive(EISB_Bear_2) )
 			{
 				theGame.GetDefinitionsManager().GetAbilityAttributeValue(GetSetBonusAbility(EISB_Bear_2), 'quen_dmg_boost', min, max);
@@ -2874,16 +2878,17 @@ class W3EECombatHandler extends W3EEOptionHandler
 		var shockEffect : W3DamageAction;
 		var position : Vector;
 		var totalDmg : float;
-		var npc : CNewNPC;
 		var weaponEntity, sparks, fx : CEntity;
 		
 		witcher = (W3PlayerWitcher)attackAction.attacker;
-		if( witcher.HasAbility('Runeword 11 _Stats', true) )
+		if( witcher && attackAction && witcher.HasAbility('Runeword 11 _Stats', true) )
 		{
 			if( attackAction.IsActionMelee() )
-			{
-				npc = (CNewNPC)attackAction.victim;
-				totalDmg = attackAction.GetDamageDealt() * 0.055f;
+			{	
+				if (attackAction.GetOriginalDamageDealtWithArmor() > 0)
+					totalDmg = attackAction.GetDamageDealt() * 0.05f * (attackAction.GetOriginalDamageDealt() / attackAction.GetOriginalDamageDealtWithArmor());
+				else
+					totalDmg = 10.0f;
 				
 				shockEffect = new W3DamageAction in theGame;
 				shockEffect.Initialize(attackAction.attacker, attackAction.victim, attackAction.causer, attackAction.GetBuffSourceName(), EHRT_None, CPS_Undefined, attackAction.IsActionMelee(), attackAction.IsActionRanged(), attackAction.IsActionWitcherSign(), attackAction.IsActionEnvironment());

@@ -4555,7 +4555,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 				// W3EE - Begin
 				// theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'Mutation6', 'ForceDamage', min, max );
 				sp = GetTotalSignSpellPower( S_Magic_1 );
-				val = 350.f * sp.valueMultiplicative; // sp.valueAdditive + sp.valueMultiplicative * ( sp.valueBase + min.valueAdditive );
+				val = 400.f * sp.valueMultiplicative; // sp.valueAdditive + sp.valueMultiplicative * ( sp.valueBase + min.valueAdditive );
 				arrStr.PushBack( NoTrailZeros( RoundMath( val ) ) );	
 				// W3EE - End
 				
@@ -9200,17 +9200,18 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function QuenImpulse( isAlternate : bool, signEntity : W3QuenEntity, source : string, optional forceSkillLevel : int )
 	{
 		var level, i, j : int;
-		var atts, damages : array<name>;
+		//var atts, damages : array<name>;
 		// W3EE - Begin
 		var ents : array<CActor>;
 		var action : W3DamageAction;
 		var dm : CDefinitionsManagerAccessor;
-		var skillAbilityName : name;
+		//var skillAbilityName : name;
 		var dmg : float;
 		var min, max, sp : SAbilityAttributeValue;
 		var pos : Vector;
-		var impulsePower : float;
+		//var impulsePower : float;
 		var fx : CEntity;
+		var applicatorParams : KnockdownApplicatorParams;
 		
 		if( forceSkillLevel > 0 )
 		{
@@ -9222,9 +9223,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		dm = theGame.GetDefinitionsManager();
-		skillAbilityName = GetSkillAbilityName(S_Magic_s13);
+		//skillAbilityName = GetSkillAbilityName(S_Magic_s13);
 		
-		if(level >= 2)
+		/*if(level >= 2)
 		{
 			
 			dm.GetAbilityAttributes(skillAbilityName, atts);
@@ -9235,7 +9236,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 					damages.PushBack(atts[i]);
 				}
 			}
-		}
+		}*/
 		
 		sp = signEntity.GetTotalSignIntensity();
 		pos = signEntity.GetWorldPosition();
@@ -9268,32 +9269,46 @@ statemachine class W3PlayerWitcher extends CR4Player
 			
 			if(level >= 1)
 			{
-				if( isAlternate )
+				if ( ((CActor)ents[i]) && ((CActor)ents[i]).HasTag('WeakToQuen') && RandF() < 0.5f)
+					action.AddEffectInfo(EET_LongStagger);
+				else if( isAlternate )
 					action.SetHitAnimationPlayType(EAHA_ForceYes);
 				else
 					action.AddEffectInfo(EET_Stagger);
 			}
+	
 			if(level >= 2)
 			{
-				for(j=0; j<damages.Size(); j+=1)
+				/*for(j=0; j<damages.Size(); j+=1)
 				{
 					dm.GetAbilityAttributeValue(skillAbilityName, damages[j], min, max);
-					// dmg = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
+					dmg = CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
 					if(isAlternate)
-						dmg = 50 * (level - 1) * sp.valueMultiplicative;
+						dmg = 100 * sp.valueMultiplicative;
 					else
-						dmg = 350 * (level - 1) * sp.valueMultiplicative;
+					
+					dmg = 400.0f * sp.valueMultiplicative;
 					if( IsSetBonusActive( EISB_Bear_2 ) )
 					{
 						dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Bear_2 ), 'quen_dmg_boost', min, max );
 						dmg *= 1 + min.valueMultiplicative;						
 					}					
 					action.AddDamage(damages[j], dmg);
-				}
+				}*/
+				
+				dmg = 333.0f;				
+				if( IsSetBonusActive( EISB_Bear_2 ) )
+				{
+					dm.GetAbilityAttributeValue( GetSetBonusAbility( EISB_Bear_2 ), 'quen_dmg_boost', min, max );
+					dmg *= 1 + min.valueMultiplicative;						
+				}					
+				action.AddDamage(theGame.params.DAMAGE_NAME_FORCE, dmg);				
+				
 			}
+
 			if(level == 3)
 			{
-				if(isAlternate)
+				/*if(isAlternate)
 				{
 					impulsePower = 0.05f * sp.valueMultiplicative;
 					if( RandF() <= impulsePower )
@@ -9324,8 +9339,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 						action.AddEffectInfo(EET_LongStagger);
 					else
 						action.AddEffectInfo(EET_Stagger);
-				}
-				// action.AddEffectInfo(EET_KnockdownTypeApplicator);
+				}*/
+				
+				applicatorParams = new KnockdownApplicatorParams in this;
+				applicatorParams.signEntity = signEntity;
+				
+				action.AddEffectInfo(EET_KnockdownTypeApplicator, , , , applicatorParams);
 			}
 			
 			theGame.damageMgr.ProcessAction( action );
@@ -11587,6 +11606,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			dm.GetAbilityAttributeValue( 'setBonusAbilityBear_2', 'quen_dmg_boost', min, max );
 			arrString.PushBack( FloatToString( min.valueMultiplicative * 100 ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
+			finalString += "<br>Increases also exploded quen knockdown applicator chance by 15%.";
 			break;
 		case EISB_RedWolf_1:
 			finalString = "Grants 70% chance to prepare an extra bomb. This cumulates with efficiency skill.";
