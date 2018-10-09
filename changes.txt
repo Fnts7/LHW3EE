@@ -1,4 +1,50 @@
-﻿Version 36
+﻿Version 37
+
+Bloodbath mutation reworked to have a proper power. Works similar to wyvern decoction now. Every hit that deals
+damage increases attack power - depends on attack type how much. Every hit received that deals any damage,
+decreases the bonus by about 35% of current value. Max cap was raised to +35% attack power. The mutation now
+increases dismember chance and finisher chance by constant values (20%, 15%) accordingly. W3EE default values
+have anyway 100% dismember chance (you might lower it and raise dismember stamina gain from 0 to e.g. 10). This
+way with this mutation the gain would be more clear. Also 100% dismember chance doesn't mean that with every killing 
+heavy attack this will happen. Seems like internal game engine conditions also must be met.
+In comparison to wyvern decoction blood bath mutation has faster gain rate, but also more harsh penalty when hit.
+
+Deadly Counter mutation small adjustment - finish threshold lowered to 30% hp, but the mutation also now gives
+universal +5% melee crit chance bonus.
+
+Raised stamina action costs penalty for medium and heavy armor by 20% for movement actions and by 33% for sword actions.
+This better matches the original W3EE values for movement actions. Increased cost for sword actions is a good balance change.
+
+Fixed a bug that runeword 'Levity' (lightness) would actually promote heavy armor too much, by giving its stamina
+regen as it would be light armor. I have rebalanced that runeword, so that when it comes to stamina costs it fully
+reduces armor heaviness type by 1, but when it comes to stamina regen it reduces the penalty in limited way.
+
+Small adjustments in bear school steel swords, higher dmg through blocks, slightly lower crit dmg bonus and armor piercing.
+
+General set bonuses (light, medium, heavy) are now fully divisible. Which means that even with 1 armor piece equipped
+of the given type, you will receive 25% of full bonus. Medium armor set, which was the strongest one was nerfed.
+It still gives +10% stamina cost reduction, but only for stationary (short distance) attacks and counters.
+
+Wyvern decoction has now max cap of 50% attack power bonus.
+
+Fast metabolism skill nerfed by half (toxicity degen tempo). But the skill has now 4 points max and adrenaline gain
+is now 2.5 times consumed toxicity.
+
+Bear school perk small nerf to stamina regen gain - 2.5% per heavy armor piece.
+
+Cluster bomb skill now gives also small penalty to cluster/bomb radius increased a bit with number of clusters.
+Small change to damage reduction based on number of clusters.
+
+Base cast (passive) quen has now also damage reduction normalized for difficulty levels. Base cast damage
+reduction is like point armor depends on remaining shield hp influenced by spellpower and now having also difficulty
+level factor - with higher difficulty levels has some power increase as the damages received are higher. However
+the gain doesn't meet the average damage increase, it is lower.
+
+Adjusted how passive quen saves from adrenaline loss. If a hit ends quen, the reduction is as it was 50%. Added
+great reduction when a hit penetrates passive quen, but still doesn't end it (probably very rare case) - 70% loss
+reduction.
+
+Version 36
 
 Many improvements in quen sign logic:
 - Reworked quen impulse knockdown applicator logic ((first quen skill level 3), shares again common logic with aard now,

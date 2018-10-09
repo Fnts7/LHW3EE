@@ -568,7 +568,7 @@ state Armed in W3ToxicCloud
 				
 				if ( ((W3PlayerWitcher)parent.GetBombOwner()) && parent.IsFromClusterBomb() )
 				{
-					dmgVal *= 0.5f - (thePlayer.GetSkillLevel(S_Alchemy_s11) - 1) * 0.025f;
+					dmgVal *= GetClusterDamageMult();
 				}
 				
 				damage.AddDamage( theGame.params.DAMAGE_NAME_FIRE, dmgVal);

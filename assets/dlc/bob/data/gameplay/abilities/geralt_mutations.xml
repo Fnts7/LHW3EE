@@ -17,7 +17,7 @@
 			<attack_power type="mult" min="0.01" />
 			
 			<!-- max amount of stacks -->
-			<maxcap type="add" min="30" />
+			<maxcap type="add" min="35" />
         </ability> 
 		
     	<ability name="Mutation5" >
@@ -42,7 +42,7 @@
 		
 		<ability name="Mutation8" >
     		<dmg_bonus type="mult" min="0.10" />
-			<hp_perc_trigger type="mult" min="0.35" />
+			<hp_perc_trigger type="mult" min="0.3" />
     	</ability>
 		
 		<ability name="Mutation9">

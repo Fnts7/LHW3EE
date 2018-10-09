@@ -57,7 +57,7 @@
 			<ability name="Mutagen10Effect">
 				<attack_power type="mult" min="0.01" />
 				
-				<mutagen10_max_stack type="add" min="-1" />
+				<mutagen10_max_stack type="add" min="50" />
 			</ability>
 			
 			<!-- Doppler -->

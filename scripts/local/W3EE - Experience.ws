@@ -170,7 +170,7 @@ class W3EEExperienceHandler
 				pathEntry.totalID = "TrialPoints";
 				pathEntry.spentID = "TrialPointsSpent";
 				pathEntry.progressID = "TrialProgress";
-				pathEntry.maxPoints = 17;
+				pathEntry.maxPoints = 16;
 				pathEntry.expValue = RoundMath(300 * Options().GetSkillRateGrasses());
 			break;
 			
@@ -238,7 +238,7 @@ class W3EEExperienceHandler
 			xpFloat *= 1.0f - (0.45f * GetTotalPathPoints(skillPath) / skillPathEntries[id].maxPoints);
 			
 		// all skill points penalty
-		xpFloat *= 1.0f - (0.4f * GetTotalSkillPoints() / 256);
+		xpFloat *= 1.0f - (0.4f * GetTotalSkillPoints() / 255);
 		
 		xp = FactsQueryLatestValue(skillPathEntries[id].progressID) + FloorF(xpFloat);
 		if( xp < 10000 )

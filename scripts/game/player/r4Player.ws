@@ -9353,16 +9353,16 @@ statemachine abstract import class CR4Player extends CPlayer
 		{
 			case ADIST_Large: 
 				if( IsHeavyAttack(animData.attackName) )
-					Combat().StaminaLoss(ESAT_HeavyAttack, 1.1f);
+					Combat().StaminaLoss(ESAT_HeavyAttack, 1.1f, true);
 				else
-					Combat().StaminaLoss(ESAT_LightAttack, 1.20f);
+					Combat().StaminaLoss(ESAT_LightAttack, 1.20f, true);
 			break;
 			
 			case ADIST_Medium:	
 				if( IsHeavyAttack(animData.attackName) )
-					Combat().StaminaLoss(ESAT_HeavyAttack, 1.05f);
+					Combat().StaminaLoss(ESAT_HeavyAttack, 1.05f, true);
 				else
-					Combat().StaminaLoss(ESAT_LightAttack, 1.10f);
+					Combat().StaminaLoss(ESAT_LightAttack, 1.10f, true);
 			break;
 			
 			case ADIST_Small:	

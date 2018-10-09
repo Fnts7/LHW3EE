@@ -373,7 +373,7 @@
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="2"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="2"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tooth"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="2"	chance="2"		respawn_time="0"	/>
-		<loot_entry name="Fiend mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="70"		respawn_time="0"	/>
+		<loot_entry name="Fiend mutagen"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="65"		respawn_time="0"	/>
 	</loot>
 
 <!-- FOGLING -->
@@ -594,7 +594,7 @@
 		<loot_entry name="Monstrous liver"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous saliva"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
 		<loot_entry name="Monstrous tongue"							player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="3"		respawn_time="0"	/>
-		<loot_entry name="Water Hag mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="30"		respawn_time="0"	/>
+		<loot_entry name="Water Hag mutagen"						player_level_min="0"	player_level_max="0"	quantity_min="1"	quantity_max="1"	chance="25"		respawn_time="0"	/>
 	</loot>
 
 <!-- GRYPHON -->

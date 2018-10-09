@@ -48,20 +48,20 @@
 				if( attackAction.GetDamageDealt() > 1.f && (attackAction.GetHitAnimationPlayType() != EAHA_ForceNo || attackAction.HasBuff(EET_Stagger) || attackAction.HasBuff(EET_LongStagger) || attackAction.HasBuff(EET_Knockdown) || attackAction.HasBuff(EET_HeavyKnockdown)) )
 				{
 					if ( ((W3Effect_Toxicity)playerWitcher.GetBuff(EET_Toxicity)).isUnsafe && RandRange(100, 1) <= (30 + 6 * playerWitcher.GetSkillLevel(S_Alchemy_s20)) )
-						currentAdrenaline *= 1.0f - (1.0f - SavedAdrenalineRoll(false, attackAction.EndsQuen())) * 0.5f;
+						currentAdrenaline *= 1.0f - (1.0f - SavedAdrenalineRoll(false, playerWitcher.IsAnyQuenActive(), attackAction.EndsQuen())) * 0.5f;
 					else
-						currentAdrenaline *= SavedAdrenalineRoll(false, attackAction.EndsQuen());
+						currentAdrenaline *= SavedAdrenalineRoll(false, playerWitcher.IsAnyQuenActive(), attackAction.EndsQuen());
 				}
 			}
 			else
 			if( attackAction.GetDamageDealt() > 1.f && (!((W3Effect_Toxicity)playerWitcher.GetBuff(EET_Toxicity)).isUnsafe || RandRange(100, 1) > (30 + 6 * playerWitcher.GetSkillLevel(S_Alchemy_s20)) ) )
 			{
-				currentAdrenaline *= SavedAdrenalineRoll(attackAction.WasPartiallyDodged(), attackAction.EndsQuen());
+				currentAdrenaline *= SavedAdrenalineRoll(attackAction.WasPartiallyDodged(), playerWitcher.IsAnyQuenActive(), attackAction.EndsQuen());
 			}
 		}
 	}
 	
-	private function SavedAdrenalineRoll( dodged : bool, endsQuen : bool ) : float
+	private function SavedAdrenalineRoll( dodged : bool, dealtDamageWithQuen : bool, endsQuen : bool ) : float
 	{
 		var armorPieces : array<SArmorCount>;
 		var savedAdrenaline, lossPercent : float;
@@ -83,6 +83,8 @@
 			
 		if (endsQuen)
 			lossPercent *= 0.5f;
+		else if (dealtDamageWithQuen)
+			lossPercent *= 0.3f;
 		
 		if (savedAdrenaline <= 0)
 		{

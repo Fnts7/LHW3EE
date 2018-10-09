@@ -632,10 +632,10 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="204"				/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<armor_reduction 				type="mult"	min="0.025"				/>
+		<armor_reduction 				type="mult"	min="0.02"				/>
 		<counter_damage_bonus 			type="mult"	min="0.025"				/>
-		<damage_through_blocks 			type="mult"	min="0.01"				/>
-		<critical_hit_damage_bonus		type="add"	min="0.025"				/>
+		<damage_through_blocks 			type="mult"	min="0.015"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.02"				/>
 		<attack_speed_fast_style 		type="mult"	min="-0.02"				/>
 		<attack_speed_heavy_style 		type="mult"	min="-0.01"				/>
 	</ability>
@@ -645,10 +645,10 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="244"				/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<armor_reduction 				type="mult"	min="0.05"				/>
+		<armor_reduction 				type="mult"	min="0.04"				/>
 		<counter_damage_bonus 			type="mult"	min="0.05"				/>
-		<damage_through_blocks 			type="mult"	min="0.025"				/>
-		<critical_hit_damage_bonus		type="add"	min="0.05"				/>
+		<damage_through_blocks 			type="mult"	min="0.03"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.04"				/>
 		<attack_speed_fast_style 		type="mult"	min="-0.04"				/>
 		<attack_speed_heavy_style 		type="mult"	min="-0.02"				/>
 	</ability>
@@ -658,10 +658,10 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="284"				/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<armor_reduction 				type="mult"	min="0.075"				/>
+		<armor_reduction 				type="mult"	min="0.06"				/>
 		<counter_damage_bonus 			type="mult"	min="0.075"				/>
-		<damage_through_blocks 			type="mult"	min="0.035"				/>
-		<critical_hit_damage_bonus		type="add"	min="0.075"				/>
+		<damage_through_blocks 			type="mult"	min="0.045"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.06"				/>
 		<attack_speed_fast_style 		type="mult"	min="-0.06"				/>
 		<attack_speed_heavy_style 		type="mult"	min="-0.03"				/>
 	</ability>
@@ -671,10 +671,10 @@
 		<quality						type="add"	min="5"					/>
 		<SlashingDamage 				type="base"	min="316"				/>
 		<SilverDamage 					type="base"	min="1"					/>
-		<armor_reduction 				type="mult"	min="0.1"				/>
+		<armor_reduction 				type="mult"	min="0.08"				/>
 		<counter_damage_bonus 			type="mult"	min="0.1"				/>
-		<damage_through_blocks 			type="mult"	min="0.05"				/>
-		<critical_hit_damage_bonus		type="add"	min="0.1"				/>
+		<damage_through_blocks 			type="mult"	min="0.06"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.08"				/>
 		<attack_speed_fast_style 		type="mult"	min="-0.08"				/>
 		<attack_speed_heavy_style 		type="mult"	min="-0.04"				/>
 	</ability>
@@ -1090,10 +1090,10 @@
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="314" 				/>
 		<armor_reduction_heavy_style	type="mult"	min="0.02"				/>
-		<attack_power_fast_style		type="mult"	min="0.04"				/>
+		<attack_power_fast_style		type="mult"	min="0.03"				/>
 		<parry_stamina_cost_bonus		type="mult"	min="0.025"				/>
 		<critical_hit_damage_bonus		type="add"	min="0.02"				/>
-		<attack_speed_fast_style 		type="mult"	min="-0.02"				/>
+		<attack_speed_fast_style 		type="mult"	min="-0.015"			/>
 		<attack_speed_heavy_style 		type="mult"	min="-0.01"				/>
 	</ability>
 

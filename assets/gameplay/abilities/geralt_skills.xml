@@ -647,7 +647,7 @@
 		<ability name="perk_7">
 			<tags>perk_7</tags>
 			<encumbrance type="base" min="7.5" />
-			<staminaRegen type="mult" min="0.003" />
+			<staminaRegen type="mult" min="0.0025" />
 			<damage_through_blocks type="mult" min="0.02" />
 		</ability>
 		<ability name="perk_10">
@@ -887,7 +887,7 @@
 		<!-- Ignore Pain -->
         <skill skill_name="alchemy_s20" requiredPointsSpent="8" maxLevel="5" priority="37" guiPositionID="32" localisationName="skill_name_alchemy_s20" localisationDescription="skill_desc_alchemy_s20" localisationDescriptionLevel2="skill_desc_alchemy_s20" localisationDescriptionLevel3="skill_desc_alchemy_s20" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s20.png" linkVertical="green" linkLeft="green" linkRight="green" />
 		<!-- Fast Metabolism -->
-        <skill skill_name="alchemy_s15" requiredPointsSpent="20" maxLevel="3" priority="37" guiPositionID="27" localisationName="skill_name_alchemy_s15" localisationDescription="skill_desc_alchemy_s15" localisationDescriptionLevel2="skill_desc_alchemy_s15" localisationDescriptionLevel3="skill_desc_alchemy_s15" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s15.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s15" requiredPointsSpent="20" maxLevel="4" priority="37" guiPositionID="27" localisationName="skill_name_alchemy_s15" localisationDescription="skill_desc_alchemy_s15" localisationDescriptionLevel2="skill_desc_alchemy_s15" localisationDescriptionLevel3="skill_desc_alchemy_s15" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s15.png" linkVertical="green" linkLeft="green" linkRight="green" />
         <!-- Killing Spree -->
         <skill skill_name="alchemy_s17" requiredPointsSpent="28" maxLevel="4" priority="37" guiPositionID="28" localisationName="skill_name_alchemy_s17" localisationDescription="skill_desc_alchemy_s17" localisationDescriptionLevel2="skill_desc_alchemy_s17" localisationDescriptionLevel3="skill_desc_alchemy_s17" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s17.png" linkVertical="green" linkLeft="green" linkRight="green" />
 		

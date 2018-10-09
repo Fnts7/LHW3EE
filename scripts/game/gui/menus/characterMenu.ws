@@ -3012,7 +3012,17 @@ class CR4CharacterMenu extends CR4MenuBase
 				if (skillLevel == 4 || skillLevel == 2)
 					baseString += " - " + RoundMath(arg + 1);
 								
-				baseString += ".<br>Clusters deal " + RoundMath(50.0 - 2.5 * (skillLevel - 1)) + "% of original bomb impact damage.";
+				if( GetWitcherPlayer().CanUseSkill(S_Perk_18) )
+					arg = 52.0f;
+				else
+					arg = 56.0f;	
+				baseString += ".<br>Clusters deal " + RoundMath(arg - 4 * (skillLevel - 1)) + "% of original bomb impact damage";
+
+				if( GetWitcherPlayer().CanUseSkill(S_Perk_18) )
+					arg = 12.0f;
+				else
+					arg = 10.0f;
+				baseString += " and have " + RoundMath(arg + 2 * (skillLevel - 1)) + "% area of effect radius reduced.";
 				
 				break;
 			case S_Alchemy_s12:			
@@ -3040,11 +3050,13 @@ class CR4CharacterMenu extends CR4MenuBase
 				// W3EE - End
 				break;
 			case S_Alchemy_s15:
-				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s15, 'toxicityRegen', false, false)) * skillLevel;
+				/*arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s15, 'toxicityRegen', false, false)) * skillLevel;
 				// W3EE - Begin
 				if(arg < 0) arg = -arg;
 				argsInt.PushBack(RoundMath(arg));
-				baseString = GetLocStringByKeyExtWithParams("primer_descr_metabolism", argsInt);
+				baseString = GetLocStringByKeyExtWithParams("primer_descr_metabolism", argsInt);*/
+				
+				baseString = "Your metabolism clears extra " + NoTrailZeros(RoundTo(skillLevel * 0.05f, 2)) + " toxicity per second when it exceeds the safe threshold. Cleared toxicity is gained back as adrenaline when in combat.";
 				// W3EE - End
 				break;
 			// W3EE - Begin

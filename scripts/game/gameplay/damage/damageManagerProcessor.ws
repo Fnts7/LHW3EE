@@ -2691,7 +2691,7 @@ class W3DamageManagerProcessor extends CObject
 				{
 					if( thePlayer.inv.IsItemSteelSwordUsableByPlayer( weaponId ) || thePlayer.inv.IsItemSilverSwordUsableByPlayer( weaponId ) )
 					{
-						dismemberChance = 100;
+						dismemberChance += 20;
 					}
 				}
 				
@@ -2777,6 +2777,10 @@ class W3DamageManagerProcessor extends CObject
 			*/
 			
 			finisherChance = Options().FinishChance();
+			
+			if (GetWitcherPlayer().IsMutationActive(EPMT_Mutation3))
+				finisherChance += 15;
+			
 			// W3EE - End
 		}
 		else 

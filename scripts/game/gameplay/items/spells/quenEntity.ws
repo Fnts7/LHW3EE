@@ -479,7 +479,8 @@ state ShieldActive in W3QuenEntity extends Active
 	// W3EE - Begin
 	var cachedEffect : name;
 	
-	private var shieldDamageReduction : float; default shieldDamageReduction = 0.35f;
+	private var shieldDamageReduction : float; default shieldDamageReduction = 0.28f;
+	private var shieldArmorMult : float; default shieldArmorMult = 1.2f;
 	
 	private function UpdateQuenShieldFx()
 	{
@@ -572,15 +573,19 @@ state ShieldActive in W3QuenEntity extends Active
 		switch ( theGame.GetDifficultyMode() )
 		{
 		case EDM_Easy:
+			shieldArmorMult = 0.9f;
 			shieldDamageReduction = 0.4f;
 			break;
 		case EDM_Medium:
-			shieldDamageReduction = 0.35f;
+			shieldArmorMult = 1.02f;
+			shieldDamageReduction = 0.36f;
 			break;
 		case EDM_Hard:
+			shieldArmorMult = 1.11f;
 			shieldDamageReduction = 0.32f;
 			break;
 		case EDM_Hardcore:
+			shieldArmorMult = 1.2f;
 			shieldDamageReduction = 0.28f;
 			break;
 		default:
@@ -739,8 +744,8 @@ state ShieldActive in W3QuenEntity extends Active
 		reflectedDamage = damageData.GetOriginalDamageDealt() * shieldDamageReduction * damageDifference;
 		shieldDamage = reflectedDamage / parent.GetTotalSignIntensityFloat();		
 		reducedDamage = parent.shieldHealth * parent.GetTotalSignIntensityFloat();
-		
 		reflectedDamage = MinF(reducedDamage, reflectedDamage);
+		reducedDamage *= shieldArmorMult;
 		
 		if(!damageData.IsDoTDamage())
 		{
@@ -814,12 +819,7 @@ state ShieldActive in W3QuenEntity extends Active
 		}
 		UpdateQuenShieldFx();
 		
-		if(reflectedDamage >= incomingDamage && (!damageData.DealsAnyDamage() || (isBleeding && reflectedDamage >= directDamage)) )
-			parent.SetBlockedAllDamage(true);
-		else
-			parent.SetBlockedAllDamage(false);
-		
-		if(reflectedDamage > 0 && (!damageData.DealsAnyDamage() || (isBleeding && reflectedDamage >= directDamage)) )
+		if(reducedDamage >= incomingDamage && (!damageData.DealsAnyDamage() || isBleeding) )
 			parent.SetBlockedAllDamage(true);
 		else
 			parent.SetBlockedAllDamage(false);

@@ -2421,9 +2421,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 				remAbilityCount = 0.25f * abilityCount + 1.0f;
 				
 				if (action.WasPartiallyDodged())
-					remAbilityCount *= 0.5f;
+					remAbilityCount *= 0.4f;
 					
-				RemoveAbilityMultiple( GetBuff(EET_Mutagen10).GetAbilityName(), (int) RoundMath(remAbilityCount));
+				RemoveAbilityMultiple( GetBuff(EET_Mutagen10).GetAbilityName(), RoundMath(remAbilityCount));
 			}
 			
 			/*if(HasBuff(EET_Mutagen15))
@@ -2518,9 +2518,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 		}
 		
 		
-		if( !action.WasDodged() && action.DealtDamage() && !( (W3Effect_Toxicity) action.causer ) )
+		if( !action.WasDodged() && action.DealtDamage() && !action.IsDoTDamage() && !( (W3Effect_Toxicity) action.causer ) && HasBuff(EET_Mutation3))
 		{
-			RemoveBuff( EET_Mutation3 );
+			//RemoveBuff( EET_Mutation3 );			
+			((W3Effect_Mutation3)GetBuff(EET_Mutation3)).RemoveStacksOnHit(action.WasPartiallyDodged());
 		}
 		
 		// W3EE - Begin
@@ -2578,7 +2579,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		
 		
-		
+		if ( !isBolt && IsMutationActive( EPMT_Mutation8 ) )
+			ret += 0.05f;
 		
 		
 		
@@ -2676,7 +2678,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 	event OnProcessActionPost(action : W3DamageAction)
 	{
 		var attackAction : W3Action_Attack;
-		var rendLoad : float;
+		var mutation3Calc : float;
 		var value : SAbilityAttributeValue;
 		var actorVictim : CActor;
 		var weaponId : SItemUniqueId;
@@ -2731,9 +2733,29 @@ statemachine class W3PlayerWitcher extends CR4Player
 					}
 					
 					
-					if( IsMutationActive( EPMT_Mutation3 ) && IsRequiredAttitudeBetween( this, action.victim, true ) && !action.victim.HasTag( 'Mutation3InvalidTarget' ) && !attackAction.IsParried() && !attackAction.WasDodged() && !attackAction.IsCountered() && !inv.IsItemFists( attackAction.GetWeaponId() ) && !attackAction.WasDamageReturnedToAttacker() && attackAction.DealtDamage() )
+					if( IsMutationActive( EPMT_Mutation3 ) && attackAction.IsActionMelee() && IsRequiredAttitudeBetween( this, action.victim, true ) && !action.victim.HasTag( 'Mutation3InvalidTarget' ) && !attackAction.IsParried() && !attackAction.WasDodged() && !action.WasPartiallyDodged() && !attackAction.IsCountered() && !inv.IsItemFists( attackAction.GetWeaponId() ) && !attackAction.WasDamageReturnedToAttacker() && attackAction.DealtDamage() )
 					{
-						AddEffectDefault( EET_Mutation3, this, "", false );
+						if (!HasBuff(EET_Mutation3))
+							AddEffectDefault( EET_Mutation3, this, "", false );
+							
+						if (HasBuff(EET_Mutation3))												
+						{
+							if (!attackAction)
+								mutation3Calc = 1.0f;
+							else if (IsLightAttack(attackAction.GetAttackName()))
+							{
+								if ( IsInCombatAction() && GetCombatAction() == EBAT_SpecialAttack_Light )
+									mutation3Calc = 1.5f;
+								else
+									mutation3Calc = 2.5f;
+							}
+							else if (thePlayer.IsHeavyAttack(attackAction.GetAttackName()))
+								mutation3Calc = 4.0f;
+							else
+								mutation3Calc = 1.0f;
+					
+							((W3Effect_Mutation3)GetBuff(EET_Mutation3)).AddStacks(mutation3Calc);
+						}
 					}
 					
 					// W3EE - Begin
@@ -3509,14 +3531,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 		attackCostMult = GetAttributeValue('attack_stamina_cost_bonus');
 		mult = 1.0f - attackCostMult.valueMultiplicative;
 		
-		if( armorPiecesOriginal[2].exact > 3 )
-			mult -= 0.1f;
-		else if ( armorPiecesOriginal[2].exact == 3 )
-			mult -= 0.0667f;
-		else if ( armorPiecesOriginal[2].exact == 2 )
-			mult -= 0.0333f;
-			
-		mult -= armorPieces[2].weighted * 0.01f + armorPieces[1].weighted * 0.015f + armorPieces[0].weighted * 0.02f;
+		mult -= CategorySetBonusNumericValue(EIST_MediumArmor) / 1.5f;
+		
+		mult -= armorPieces[2].weighted * 0.015f + armorPieces[1].weighted * 0.025f + armorPieces[0].weighted * 0.035f;
 			
 		return MinF(1.0f, mult);
 	}
@@ -4501,11 +4518,12 @@ statemachine class W3PlayerWitcher extends CR4Player
 				
 				dm.GetAbilityAttributeValue( 'Mutation3', 'attack_power', min, max );
 				tmp = min.valueMultiplicative;
-				arrStr.PushBack( NoTrailZeros( RoundMath( 100 * tmp ) ) );
+				//arrStr.PushBack( NoTrailZeros( RoundMath( 100 * tmp ) ) );
 				
 				
 				dm.GetAbilityAttributeValue( 'Mutation3', 'maxcap', min, max );
-				arrStr.PushBack( NoTrailZeros( RoundMath( 100 * tmp * min.valueAdditive ) ) );
+				//arrStr.PushBack( NoTrailZeros( RoundMath( 100 * tmp * min.valueAdditive ) ) );
+				tmp = RoundMath( 100 * tmp * min.valueAdditive );
 				break;
 				
 			case EPMT_Mutation4 :
@@ -4668,6 +4686,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 			return GetLocStringByKeyExtWithParams( locKey, , , arrStr ) + " LHW3EE: decoction effects are applied automaticaly and switched over time.";
 		else if (mutationType == EPMT_Mutation5)
 			return GetLocStringByKeyExtWithParams( locKey, , , arrStr ) + "<br>Also increases your chance to keep more adrenaline when hit (per vigor point, cumulates with armor).";
+		else if (mutationType == EPMT_Mutation3)
+			return "Increases finisher and dismember chance. With every melee hit that deals damage, your attack power will increase up to maximum value of: " + NoTrailZeros(tmp) +"%. The amount increased depends on the attack type. If you get hit with any damage, the current bonus will be decreased by about 35% of current value (lowered greatly on graze damage). Resets on combat end.";
+		else if ( mutationType == EPMT_Mutation8)
+			return GetLocStringByKeyExtWithParams( locKey, , , arrStr ) + "<br>Also increases melee critical chance by 5%.";
 		else
 			return GetLocStringByKeyExtWithParams( locKey, , , arrStr );
 	}
@@ -8660,10 +8682,17 @@ statemachine class W3PlayerWitcher extends CR4Player
 		if( HasAbility('Glyphword 9 _Stats', true) )
 		{
 			staminaRegenVal = 0;
-			if( inv.GetItemEquippedOnSlot( EES_Armor, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.05;
-			if( inv.GetItemEquippedOnSlot( EES_Gloves, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.015;
-			if( inv.GetItemEquippedOnSlot( EES_Pants, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.035;
-			if( inv.GetItemEquippedOnSlot( EES_Boots, tempItem ) && inv.GetArmorType(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.02;
+			if( inv.GetItemEquippedOnSlot( EES_Armor, tempItem ) && inv.GetArmorTypeOriginal(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.0875;
+			else if (inv.GetArmorTypeOriginal(tempItem) == EAT_Medium )  staminaRegenVal -= 0.025;
+			
+			if( inv.GetItemEquippedOnSlot( EES_Gloves, tempItem ) && inv.GetArmorTypeOriginal(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.0263;
+			else if (inv.GetArmorTypeOriginal(tempItem) == EAT_Medium )  staminaRegenVal -= 0.0075;
+			
+			if( inv.GetItemEquippedOnSlot( EES_Pants, tempItem ) && inv.GetArmorTypeOriginal(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.0613;
+			else if (inv.GetArmorTypeOriginal(tempItem) == EAT_Medium )  staminaRegenVal -= 0.0175;
+			
+			if( inv.GetItemEquippedOnSlot( EES_Boots, tempItem ) && inv.GetArmorTypeOriginal(tempItem) == EAT_Heavy ) staminaRegenVal -= 0.035;
+			else if (inv.GetArmorTypeOriginal(tempItem) == EAT_Medium )  staminaRegenVal -= 0.01;
 		}
 		else
 		{
@@ -8746,6 +8775,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		
 		steelCritChance += CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_CHANCE));
 		silverCritChance += CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_CHANCE));
+		
+		if (IsMutationActive( EPMT_Mutation8 ))
+		{
+			steelCritChance += 0.05f;
+			silverCritChance += 0.05f;
+		}
+		
 		steelCritDmg += CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
 		silverCritDmg += CalculateAttributeValue(GetAttributeValue(theGame.params.CRITICAL_HIT_DAMAGE_BONUS));
 		attackPower += GetPowerStatValue(CPS_AttackPower);
@@ -10991,9 +11027,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 			case EISB_Dimeritium2:		return amountOfSetPiecesEquipped[ EIST_Dimeritium ] + IsHelmetEquipped(EIST_Dimeritium) >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
 			case EISB_Meteorite:		return amountOfSetPiecesEquipped[ EIST_Meteorite ] + IsHelmetEquipped(EIST_Meteorite) >= theGame.params.ITEMS_REQUIRED_FOR_MAJOR_SET_BONUS;
 			
-			case EISB_LightArmor:		return GetSetPartsEquipped(EIST_LightArmor) >= 2;
-			case EISB_MediumArmor:		return GetSetPartsEquipped(EIST_MediumArmor) >= 2;
-			case EISB_HeavyArmor:		return GetSetPartsEquipped(EIST_HeavyArmor) >= 2;
+			case EISB_LightArmor:		return GetSetPartsEquipped(EIST_LightArmor) >= 1;
+			case EISB_MediumArmor:		return GetSetPartsEquipped(EIST_MediumArmor) >= 1;
+			case EISB_HeavyArmor:		return GetSetPartsEquipped(EIST_HeavyArmor) >= 1;
 			// W3EE - End
 			default:					return false;
 		}
@@ -11017,21 +11053,23 @@ statemachine class W3PlayerWitcher extends CR4Player
 			return amountOfSetPiecesEquipped[ setType ] + amountOfSetPiecesEquipped[ GetSetTypeMinor(setType) ] + IsHelmetEquipped(setType);
 	}
 	
-	public function HeavySetStaggerProbability() : int
+	public function CategorySetBonusNumericValue(setType : EItemSetType) : float
 	{
 		var count : int;
 		
-		count = GetSetPartsEquipped(EIST_HeavyArmor);
+		count = GetSetPartsEquipped(setType);
 		
-		if (count >= 4)
-			return 24;
-		else if (count == 3)
-			return 16;
-		else if (count == 2)
-			return 8;
+		if( setType == EIST_LightArmor )
+			return 10.0f * (count / 4.0f);
 		else
-			return -1;
-	}
+		if( setType == EIST_MediumArmor )
+			return 0.1f * (count / 4.0f);
+		else
+		if( setType == EIST_HeavyArmor )
+			return 0.24f * (count / 4.0f);
+		else
+			return 0;
+	}	
 	
 	public function IsMinorSetType( setType : EItemSetType ) : bool
 	{
@@ -11463,7 +11501,11 @@ statemachine class W3PlayerWitcher extends CR4Player
 		isActive2 = IsSetBonusActive(ItemSetTypeToItemSetBonus(setType, 2));
 		
 		setBonus = ItemSetTypeToItemSetBonus(setType, 1);
-		desc1 = GetSetBonusTooltipDescription(setBonus);
+		
+		if (setType == EIST_LightArmor || setType == EIST_MediumArmor || setType == EIST_HeavyArmor)
+			desc1 = Equipment().GetGeneralArmorAbilityDescrByType(setBonus, setType);
+		else
+			desc1 = GetSetBonusTooltipDescription(setBonus);
 		
 		setBonus = ItemSetTypeToItemSetBonus(setType, 2);
 		desc2 = GetSetBonusTooltipDescription(setBonus);
@@ -11625,6 +11667,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 			break;*/
 		case EISB_Wolf_2:
 			finalString = "Negative influences on stamina regen (like low HP, toxicity) as well as negative influences of low stamina (action speed, attack power) are reduced proportionally to current adrenaline. Also low HP influence on vigor regen is reduced the same way.";
+			break;
+		case EISB_MediumArmor:
+			finalString = "Full medium armor set decreases stamina cost of all stationary (short distance) attacks and counters by 10%.";
 			break;
 		default:
 			finalString = GetLocStringByKeyExtWithParams( tempString );			

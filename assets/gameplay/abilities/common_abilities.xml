@@ -184,8 +184,8 @@
       </ability>-->
       <ability name="difficulty_CommonMedium">
         <tags>DifficultyModeAbility, Medium</tags>
-        <health_final_multiplier type="add" min="-0.35" />
-        <damage_final_multiplier type="add" min="-0.25" />
+        <health_final_multiplier type="add" min="-0.3" />
+        <damage_final_multiplier type="add" min="-0.3" />
 		<root_ground_damage_area type="base" always_random="false" min="0" max="0" />
         <root_ground_damage_area type="mult" always_random="false" min="0" />
       </ability>

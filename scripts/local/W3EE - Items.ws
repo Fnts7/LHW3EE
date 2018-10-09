@@ -749,7 +749,7 @@ class W3EEEquipmentHandler extends W3EEOptionHandler
 			else
 				return descr;
 		}
-		
+			
 		switch(setType)
 		{
 			case EIST_LightArmor:
@@ -779,29 +779,52 @@ class W3EEEquipmentHandler extends W3EEOptionHandler
 	public function GetGeneralArmorAbilityDescr( item : SItemUniqueId ) : string
 	{
 		if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Light )
-			return GetWitcherPlayer().GetSetBonusTooltipDescription(EISB_LightArmor);
+			return GetGeneralArmorAbilityDescrByType(EISB_LightArmor, EIST_LightArmor);
+		else if ( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Medium )
+			return GetGeneralArmorAbilityDescrByType(EISB_MediumArmor, EIST_MediumArmor);
+		else if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Heavy )
+			return GetGeneralArmorAbilityDescrByType(EISB_HeavyArmor, EIST_HeavyArmor);
 		else
-		if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Medium )
-			return GetWitcherPlayer().GetSetBonusTooltipDescription(EISB_MediumArmor);
-		else
-		if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Heavy )
-			return GetWitcherPlayer().GetSetBonusTooltipDescription(EISB_HeavyArmor);
-		else
-			return "";
+			return "";		
 	}
 	
 	public function GetGeneralArmorAbilityDescrByName( itemName : name ) : string
 	{
 		if( GetArmorTypeFromName(itemName) == EAT_Light )
-			return GetWitcherPlayer().GetSetBonusTooltipDescription(EISB_LightArmor);
+			return GetGeneralArmorAbilityDescrByType(EISB_LightArmor, EIST_LightArmor);
 		else
 		if( GetArmorTypeFromName(itemName) == EAT_Medium )
-			return GetWitcherPlayer().GetSetBonusTooltipDescription(EISB_MediumArmor);
+			return GetGeneralArmorAbilityDescrByType(EISB_MediumArmor, EIST_MediumArmor);
 		else
 		if( GetArmorTypeFromName(itemName) == EAT_Heavy )
-			return GetWitcherPlayer().GetSetBonusTooltipDescription(EISB_HeavyArmor);
+			return GetGeneralArmorAbilityDescrByType(EISB_HeavyArmor, EIST_HeavyArmor);
 		else
 			return "";
+	}
+	
+	public function GetGeneralArmorAbilityDescrByType(setBonusType : EItemSetBonus, setType : EItemSetType) : string
+	{
+		var curValueString : string;
+		var value : float;
+		
+		value = GetWitcherPlayer().CategorySetBonusNumericValue(setType);
+		if (value != 0)
+		{
+			curValueString = "<br>Current value: ";
+			if (setType != EIST_LightArmor)
+				value *= 100.0f;
+				
+			curValueString += NoTrailZeros(RoundTo(value, 1));
+			
+			if (setType != EIST_LightArmor)
+				curValueString += "%.";
+			else
+				curValueString += ".";
+		}
+		else
+			curValueString = "";
+			
+		return GetWitcherPlayer().GetSetBonusTooltipDescription(setBonusType) + curValueString;
 	}
 	
 	public function IsGeneralArmorAbilityActive( item : SItemUniqueId ) : bool
@@ -810,13 +833,13 @@ class W3EEEquipmentHandler extends W3EEOptionHandler
 		
 		armorCount = GetWitcherPlayer().GetArmorCountOrig();
 		if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Light )
-			return armorCount[0].exact + armorCount[1].exact > 1;
+			return armorCount[0].exact + armorCount[1].exact >= 1;
 		else
 		if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Medium )
-			return armorCount[2].exact > 1;
+			return armorCount[2].exact >= 1;
 		else
 		if( GetWitcherPlayer().inv.GetArmorTypeOriginal(item) == EAT_Heavy )
-			return armorCount[3].exact > 1;
+			return armorCount[3].exact >= 1;
 		else
 			return 0;
 	}
@@ -847,7 +870,7 @@ class W3EEEquipmentHandler extends W3EEOptionHandler
 			case EIST_LightArmor:
 			case EIST_MediumArmor:
 			case EIST_HeavyArmor:
-				return 4;
+				return 1;
 				
 			case EIST_MinorLynx:
 			case EIST_MinorGryphon:

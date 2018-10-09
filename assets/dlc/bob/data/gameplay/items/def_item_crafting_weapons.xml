@@ -42,10 +42,10 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="372"				/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<armor_reduction 				type="mult"	min="0.125"				/>
+				<armor_reduction 				type="mult"	min="0.1"				/>
 				<counter_damage_bonus 			type="mult"	min="0.125"				/>
-				<damage_through_blocks 			type="mult"	min="0.06"				/>
-				<critical_hit_damage_bonus		type="add"	min="0.13"				/>
+				<damage_through_blocks 			type="mult"	min="0.075"				/>
+				<critical_hit_damage_bonus		type="add"	min="0.1"				/>
 				<attack_speed_fast_style 		type="mult"	min="-0.1"				/>
 				<attack_speed_heavy_style 		type="mult"	min="-0.05"				/>
 			</ability>

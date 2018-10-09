@@ -112,6 +112,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				switch (skills[i].skillType)
 				{
 				case S_Alchemy_s01:
+				case S_Alchemy_s15:
 				case S_Alchemy_s17:
 				case S_Sword_s07:
 					// All from 3 to 4

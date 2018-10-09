@@ -1175,7 +1175,7 @@ class W3TooltipComponent
 				setAttributesList.PushBackFlashObject( setAttribute );
 				
 				setAttribute = flashDataObj.CreateFlashObject();
-				setAttribute.SetMemberFlashString( "value", Equipment().GetDescriptionColorByType(4, EIST_LightArmor, 1, currentCount, Equipment().IsGeneralArmorAbilityActive(itemId)) );
+				setAttribute.SetMemberFlashString( "value", Equipment().GetDescriptionColorByType(1, EIST_LightArmor, 1, currentCount, Equipment().IsGeneralArmorAbilityActive(itemId)) );
 				setAttribute.SetMemberFlashString( "name", Equipment().GetDescriptionColorByType(Equipment().GetGeneralArmorAbilityDescr(itemId), EIST_LightArmor, 1, currentCount, Equipment().IsGeneralArmorAbilityActive(itemId)) );
 				setAttribute.SetMemberFlashBool( "active", false );
 				setAttributesList.PushBackFlashObject( setAttribute );

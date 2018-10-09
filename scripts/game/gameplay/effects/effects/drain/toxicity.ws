@@ -317,8 +317,8 @@ class W3Effect_Toxicity extends CBaseGameplayEffect
 		if( !witcher.CanUseSkill(S_Alchemy_s15) )
 			return 0.0f;
 		
-		drainVal = witcher.GetSkillLevel(S_Alchemy_s15) * 0.1f;
-		witcher.GetAdrenalineEffect().AddAdrenaline(drainVal / 100.f);
+		drainVal = witcher.GetSkillLevel(S_Alchemy_s15) * 0.05f;
+		witcher.GetAdrenalineEffect().AddAdrenaline(drainVal / 40.f);
 		FastClearUpdate(drainVal);		
 		
 		return drainVal;			

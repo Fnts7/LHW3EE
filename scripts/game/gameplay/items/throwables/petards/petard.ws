@@ -4,7 +4,21 @@
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski.
 /***********************************************************************/
 
-
+	
+	function GetClusterDamageMult() : float
+	{
+		var damageMult : float;
+			
+		damageMult = 0.56f - (thePlayer.GetSkillLevel(S_Alchemy_s11) - 1) * 0.04f;
+		
+		if (thePlayer.CanUseSkill(S_Perk_18))
+			damageMult -= 0.04f;
+			
+		if (GetWitcherPlayer().IsSetBonusActive(EISB_RedWolf_2))
+			damageMult -= 0.02f;
+			
+		return damageMult;
+	}
 
 
 class W3Petard extends CThrowable
@@ -578,7 +592,7 @@ class W3Petard extends CThrowable
 		var targets, additionalTargets : array< CGameplayEntity >;
 		var i : int;
 		var victimTags, attackerTags : array<name>;
-		var dist, camShakeStr, camShakeStrFrac, extraRadius : float;
+		var dist, camShakeStr, camShakeStrFrac, radiusMult : float;
 		var temp, isPerk16Active : bool;
 		var phantom : CPhantomComponent;
 		var meshes : array<CComponent>;
@@ -623,29 +637,25 @@ class W3Petard extends CThrowable
 			explosionPosition = this.GetWorldPosition();
 		}
 		
-		extraRadius = 1;
 		if ((W3PlayerWitcher)GetOwner())
 		{
-			if (thePlayer.CanUseSkill(S_Alchemy_s09))
-				extraRadius += 0.05f * thePlayer.GetSkillLevel(S_Alchemy_s09);
-				
-			if (thePlayer.CanUseSkill(S_Perk_18) && !thePlayer.CanUseSkill(S_Alchemy_s11))
-				extraRadius += 0.1f;
+			radiusMult = GetRadiusMult();
 		}
+		else radiusMult = 1;
 		
 		explosionPosition = explosionPosition + Vector( 0.0f, 0.0f, 0.1f );
-		FindGameplayEntitiesInSphere(targets, explosionPosition, impactParams.range * extraRadius, 1000, '', FLAG_TestLineOfSight);	
+		FindGameplayEntitiesInSphere(targets, explosionPosition, impactParams.range * radiusMult, 1000, '', FLAG_TestLineOfSight);	
 		
 		if( targets.Size() == 0 )
 		{
 			explosionPosition = explosionPosition - Vector( 0.0f, 0.0f, 0.2f ); 
-			FindGameplayEntitiesInSphere(targets, explosionPosition, impactParams.range * extraRadius, 1000, '', FLAG_TestLineOfSight);	
+			FindGameplayEntitiesInSphere(targets, explosionPosition, impactParams.range * radiusMult, 1000, '', FLAG_TestLineOfSight);	
 		}
 		
 		
 		if ( itemName == 'Silver Dust Bomb 1' || itemName == 'Silver Dust Bomb 2' || itemName == 'Silver Dust Bomb 3' )
 		{
-			FindGameplayEntitiesInSphere(additionalTargets, explosionPosition, impactParams.range * 1.5 * extraRadius, 1000, 'vampire', FLAG_TestLineOfSight);	
+			FindGameplayEntitiesInSphere(additionalTargets, explosionPosition, impactParams.range * 1.5 * radiusMult, 1000, 'vampire', FLAG_TestLineOfSight);	
 		}
 		
 		if ( additionalTargets.Size() > 0 )
@@ -737,7 +747,7 @@ class W3Petard extends CThrowable
 				camShakeStr = cameraShakeStrMin + camShakeStrFrac * (cameraShakeStrMax - cameraShakeStrMin);
 				
 				
-				GCameraShake(camShakeStr, true, GetWorldPosition(), impactParams.range * 2);
+				GCameraShake(camShakeStr, true, GetWorldPosition(), impactParams.range * 2 * radiusMult);
 			}
 		}
 		
@@ -1205,7 +1215,7 @@ class W3Petard extends CThrowable
 		// W3EE - Begin
 		if( (W3PlayerWitcher)GetOwner() && isCluster )
 		{
-			damageMult = 0.5f - (thePlayer.GetSkillLevel(S_Alchemy_s11) - 1) * 0.025f;
+			damageMult = GetClusterDamageMult();
 		}
 			
 		/*
@@ -1365,6 +1375,50 @@ class W3Petard extends CThrowable
 		stopCollisions = false;
 	}
 	
+	private function GetRandomizedClusterCount() : int
+	{
+		var clusterCalc : float;
+		
+		clusterCalc = 3.0f + (thePlayer.GetSkillLevel(S_Alchemy_s11) - 1) * 0.5f + RandF();
+		
+		if (GetWitcherPlayer().IsSetBonusActive(EISB_RedWolf_2))
+			clusterCalc += 0.5f;
+		
+		if( thePlayer.CanUseSkill(S_Perk_18) )
+			return FloorF(clusterCalc) + 1;
+		else
+			return FloorF(clusterCalc);		
+	}
+	
+
+	private function GetRadiusMult() : float
+	{
+		var radiusMult, stackMult : float;
+		
+		if (thePlayer.CanUseSkill(S_Alchemy_s11))
+		{
+			radiusMult = 0.9f - (thePlayer.GetSkillLevel(S_Alchemy_s11) - 1) * 0.02f;
+			
+			if (thePlayer.CanUseSkill(S_Perk_18))
+				radiusMult -= 0.02f;
+			
+			if (GetWitcherPlayer().IsSetBonusActive(EISB_RedWolf_2))
+				radiusMult -= 0.01f;
+		}
+		else
+			radiusMult = 1.0f;
+		
+		stackMult = 1.0f;
+		if (thePlayer.CanUseSkill(S_Alchemy_s09))
+			stackMult += 0.05f * thePlayer.GetSkillLevel(S_Alchemy_s09);
+				
+		if (thePlayer.CanUseSkill(S_Perk_18) && !thePlayer.CanUseSkill(S_Alchemy_s11))
+			stackMult += 0.1f;
+			
+		radiusMult *= stackMult;
+		
+		return radiusMult;
+	}
 	
 	private function ProcessClusterBombs()
 	{
@@ -1372,7 +1426,7 @@ class W3Petard extends CThrowable
 		var i, clusterNbr : int;
 		var cluster : W3Petard;
 		var targetPosCluster, clusterInitPos : Vector;
-		var angle, velocity, distLen, clusterCalc : float;
+		var angle, velocity, distLen : float;
 		var clusterTemplate : CEntityTemplate;
 		var dmgRaw : SRawDamage;
 		var cachedDamages : array<SRawDamage>;
@@ -1385,14 +1439,7 @@ class W3Petard extends CThrowable
 		clusterInitPos.Z += radius + 0.15;
 		
 		// W3EE - Begin
-		clusterCalc = 3.0f + (thePlayer.GetSkillLevel(S_Alchemy_s11) - 1) * 0.5f + RandF();
-		if (GetOwner() == thePlayer && GetWitcherPlayer().IsSetBonusActive(EISB_RedWolf_2))
-			clusterCalc += 0.5f;
-		
-		clusterNbr = FloorF(clusterCalc);			
-			
-		if( thePlayer.CanUseSkill(S_Perk_18) )
-			clusterNbr += 1;
+		clusterNbr = GetRandomizedClusterCount();
 		// W3EE - End
 		
 		for(i=0; i<clusterNbr; i+=1)
@@ -1516,7 +1563,7 @@ class W3Petard extends CThrowable
 		return dismemberOnKill;
 	}
 	
-	public function GetImpactRange() : float			{return impactParams.range;}
+	public function GetImpactRange() : float			{return impactParams.range * GetRadiusMult();}
 	public function GetAoERange() : float				{return loopParams.range;}
 	public function IsStuck() : bool					{return isStuck;}
 	public function DisableProximity()					{isProximity = false;}
