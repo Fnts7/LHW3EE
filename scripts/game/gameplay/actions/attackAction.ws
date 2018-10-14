@@ -372,7 +372,7 @@ class W3Action_Attack extends W3DamageAction
 				result += witcherAttacker.GetAttributeValue('attack_power_heavy_style');
 				
 				if ( actorVictim && (actorVictim.HasBuff(EET_Confusion) || actorVictim.HasBuff(EET_AxiiGuardMe)) )
-					result += 0.2f;
+					result.valueMultiplicative += 0.15f;
 				
 			}
 			
