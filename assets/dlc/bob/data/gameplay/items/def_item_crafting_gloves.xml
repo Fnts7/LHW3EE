@@ -10,11 +10,11 @@
 				<weight							type="base"	min="1.7"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="87"				/>
-				<slashing_resistance_perc		type="base"	min="0.05"				/>
-				<piercing_resistance_perc		type="base"	min="0.05"				/>
-				<rending_resistance_perc		type="base"	min="0.05"				/>
-				<elemental_resistance_perc		type="base"	min="0.06"				/>
-				<focus_gain						type="mult"	min="0.1"				/>
+				<slashing_resistance_perc		type="base"	min="0.04"				/>
+				<piercing_resistance_perc		type="base"	min="0.04"				/>
+				<rending_resistance_perc		type="base"	min="0.04"				/>
+				<elemental_resistance_perc		type="base"	min="0.05"				/>
+				<focus_gain						type="mult"	min="0.09"				/>
 				<safe_dodge_angle_bonus 		type="add"	min="2"					/>
 				<graze_damage_reduction			type="mult" min="0.03" 				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.02"				/>
@@ -25,11 +25,11 @@
 				<weight							type="base"	min="3.0"				/>
 				<quality 						type="add"	min="5"					/>
 				<armor							type="base"	min="87"				/>
-				<slashing_resistance_perc		type="base"	min="0.06"				/>
+				<slashing_resistance_perc		type="base"	min="0.05"				/>
 				<piercing_resistance_perc		type="base"	min="0.05"				/>
-				<rending_resistance_perc		type="base"	min="0.06"				/>
-				<elemental_resistance_perc		type="base"	min="0.12"				/>
-				<spell_power 					type="mult"	min="0.10"				/>
+				<rending_resistance_perc		type="base"	min="0.05"				/>
+				<elemental_resistance_perc		type="base"	min="0.06"				/>
+				<spell_power 					type="mult"	min="0.05"				/>
 				<graze_damage_reduction			type="mult" min="0.05" 				/>
 			</ability>
 
@@ -39,12 +39,12 @@
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="87"				/>
 				<slashing_resistance_perc		type="base"	min="0.07"				/>
-				<piercing_resistance_perc		type="base"	min="0.07"				/>
+				<piercing_resistance_perc		type="base"	min="0.06"				/>
 				<rending_resistance_perc		type="base"	min="0.06"				/>
-				<elemental_resistance_perc		type="base"	min="0.07"				/>
-				<focus_gain 					type="mult" min="0.07"				/>
+				<elemental_resistance_perc		type="base"	min="0.05"				/>
+				<focus_gain 					type="mult" min="0.06"				/>
 				<injury_resist			 		type="mult"	min="0.05"				/>
-				<bleeding_resistance_perc 		type="base" min="0.05"				/>
+				<bleeding_resistance_perc 		type="base" min="0.035"				/>
 				<staminaRegen_armor_mod			type="mult"	min="-0.02"				/>
 			</ability>
 
@@ -55,11 +55,11 @@
 				<armor							type="base"	min="87"				/>
 				<slashing_resistance_perc		type="base"	min="0.06"				/>
 				<piercing_resistance_perc		type="base"	min="0.05"				/>
-				<rending_resistance_perc		type="base"	min="0.06"				/>
-				<elemental_resistance_perc		type="base"	min="0.12"				/>
-				<focus_gain 					type="mult" min="0.07"				/>
+				<rending_resistance_perc		type="base"	min="0.05"				/>
+				<elemental_resistance_perc		type="base"	min="0.04"				/>
+				<focus_gain 					type="mult" min="0.06"				/>
 				<injury_resist			 		type="mult"	min="0.05"				/>
-				<bleeding_resistance_perc 		type="base" min="0.05"				/>
+				<bleeding_resistance_perc 		type="base" min="0.035"				/>
 			</ability>
 
 		<!-- GLOVES WITCHER RED WOLF  -->
@@ -67,12 +67,12 @@
 				<weight							type="base"	min="1.2"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="87"				/>
-				<slashing_resistance_perc		type="base"	min="0.05"				/>
-				<piercing_resistance_perc		type="base"	min="0.05"				/>
-				<rending_resistance_perc		type="base"	min="0.05"				/>
+				<slashing_resistance_perc		type="base"	min="0.04"				/>
+				<piercing_resistance_perc		type="base"	min="0.04"				/>
+				<rending_resistance_perc		type="base"	min="0.04"				/>
 				<focus_gain 					type="mult" min="0.02"				/>
 				<injury_resist			 		type="mult"	min="0.025"				/>
-				<bleeding_resistance_perc 		type="base" min="0.025"				/>
+				<bleeding_resistance_perc 		type="base" min="0.02"				/>
 				<toxicity 						type="base" min="3" 				/>
 				<staminaRegen_armor_mod			type="mult"	min="0.02"				/>
 			</ability>

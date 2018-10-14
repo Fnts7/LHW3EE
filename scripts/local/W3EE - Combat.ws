@@ -190,8 +190,8 @@ class W3EECombatHandler extends W3EEOptionHandler
 			costMult = witcher.GetAttributeValue('attack_stamina_cost');
 			if( witcher.WasPlayerSpamming() )
 			{
-				delayReduction.valueMultiplicative -= 0.3f;
-				mult += 0.3f;
+				delayReduction.valueMultiplicative -= 0.2f;
+				mult += 0.2f;
 			}
 			mult += costMult.valueMultiplicative;
 			
@@ -205,8 +205,8 @@ class W3EECombatHandler extends W3EEOptionHandler
 			costMult = witcher.GetAttributeValue('attack_stamina_cost');
 			if( witcher.WasPlayerSpamming() )
 			{
-				delayReduction.valueMultiplicative -= 0.3f;
-				mult += 0.3f;
+				delayReduction.valueMultiplicative -= 0.2f;
+				mult += 0.2f;
 			}
 			mult += costMult.valueMultiplicative;
 			
@@ -244,8 +244,8 @@ class W3EECombatHandler extends W3EEOptionHandler
 			mult += costMult.valueMultiplicative - 1.f;
 			if( witcher.WasPlayerSpamming() )
 			{
-				delayReduction.valueMultiplicative -= 0.3f;
-				mult += 0.3f;
+				delayReduction.valueMultiplicative -= 0.2f;
+				mult += 0.2f;
 			}
 			
 			costMult = witcher.GetAttributeValue('parry_stamina_cost_bonus');
@@ -709,7 +709,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 			attackSpeedMult = witcher.GetAttributeValue('attack_speed');
 			baseSpeed += attackSpeedMult.valueMultiplicative;
 			if( witcher.WasPlayerSpamming() )
-				baseSpeed -= 0.15f;
+				baseSpeed -= 0.12f;
 		}
 		baseSpeed += actionSpeedMult.valueMultiplicative;
 		

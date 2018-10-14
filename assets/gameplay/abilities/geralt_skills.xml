@@ -125,9 +125,9 @@
       <!-- Whirl (ult) -->
       <ability name="sword_s1">
         <tags>sword_s1,attack_light</tags>
-        <stamina_cost_per_sec type="add" min="50" />
+        <stamina_cost_per_sec type="add" min="45" />
 		<focus_cost_per_sec_initial type="add" min="1" />
-		<cost_reduction type="mult" min="0.1" />
+		<cost_reduction type="mult" min="0.06" />
         <stamina_delay type="add" min="2" />
       </ability>
 	
@@ -922,18 +922,18 @@
       </definitions>
     </skills>
     <skill_slots>
-      <slot id="1" unlockedOnLevel="0" group="1" />
-      <slot id="2" unlockedOnLevel="10" group="1" />
-      <slot id="3" unlockedOnLevel="20" group="1" />
-      <slot id="4" unlockedOnLevel="30" group="2" />
-      <slot id="5" unlockedOnLevel="40" group="2" />
-      <slot id="6" unlockedOnLevel="50" group="2" />
-      <slot id="7" unlockedOnLevel="60" group="3" />
-      <slot id="8" unlockedOnLevel="70" group="3" />
-      <slot id="9" unlockedOnLevel="80" group="3" />
-      <slot id="10" unlockedOnLevel="90" group="4" />
-      <slot id="11" unlockedOnLevel="100" group="4" />
-      <slot id="12" unlockedOnLevel="110" group="4" />
+      <slot id="1" unlockedOnLevel="20" group="1" />
+      <slot id="2" unlockedOnLevel="25" group="1" />
+      <slot id="3" unlockedOnLevel="30" group="1" />
+      <slot id="4" unlockedOnLevel="40" group="2" />
+      <slot id="5" unlockedOnLevel="50" group="2" />
+      <slot id="6" unlockedOnLevel="60" group="2" />
+      <slot id="7" unlockedOnLevel="70" group="3" />
+      <slot id="8" unlockedOnLevel="80" group="3" />
+      <slot id="9" unlockedOnLevel="90" group="3" />
+      <slot id="10" unlockedOnLevel="100" group="4" />
+      <slot id="11" unlockedOnLevel="110" group="4" />
+      <slot id="12" unlockedOnLevel="120" group="4" />
 	  <slot id="13" unlockedOnLevel="999999" group="1" />
 	  <slot id="14" unlockedOnLevel="999999" group="2" />
 	  <slot id="15" unlockedOnLevel="999999" group="3" />
@@ -941,10 +941,10 @@
     </skill_slots>
     <!-- skill mutagen slots -->
     <mutagen_slots>
-      <mutagen skillGroup="1" unlockedAtLevel="15" />
-      <mutagen skillGroup="2" unlockedAtLevel="40" />
-      <mutagen skillGroup="3" unlockedAtLevel="70" />
-      <mutagen skillGroup="4" unlockedAtLevel="90" />
+      <mutagen skillGroup="1" unlockedAtLevel="10" />
+      <mutagen skillGroup="2" unlockedAtLevel="35" />
+      <mutagen skillGroup="3" unlockedAtLevel="65" />
+      <mutagen skillGroup="4" unlockedAtLevel="95" />
     </mutagen_slots>
   </custom>
 </redxml>

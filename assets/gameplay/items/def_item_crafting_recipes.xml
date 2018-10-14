@@ -5773,9 +5773,10 @@
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Starting Armor"					/>
 										<ingredient	quantity="2"	item_name="Hardened leather"				/>
-										<ingredient	quantity="2"	item_name="Draconide leather"			/>
-										<ingredient	quantity="4"	item_name="Wire"							/>
-										<ingredient	quantity="3"	item_name="Monstrous hide"				/>
+										<ingredient	quantity="2"	item_name="Linen"							/>
+										<ingredient	quantity="3"	item_name="Wire"							/>
+										<ingredient	quantity="2"	item_name="Monstrous hide"					/>
+										<ingredient	quantity="1"	item_name="Iron ingot"						/>
 		</ingredients>
 	</schematic>
 

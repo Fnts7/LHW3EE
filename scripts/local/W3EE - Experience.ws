@@ -786,3 +786,17 @@ exec function fucktest()
 	a = GetWitcherPlayer().GetWorldPosition();
 	a = GetWitcherPlayer().GetWorldPosition();
 }
+
+exec function UpdateMutagenSlots()
+{
+	var witcher : W3PlayerWitcher;
+	var abilityManager : W3PlayerAbilityManager;
+	
+	witcher = GetWitcherPlayer();
+	if (witcher)
+		abilityManager = (W3PlayerAbilityManager) witcher.GetAbilityManager();
+		
+	if (abilityManager)
+		abilityManager.UpdateSkillSlotsFromXML();
+	
+}

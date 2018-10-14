@@ -2715,24 +2715,25 @@ class W3DamageManagerProcessor extends CObject
 		var victimToPlayerVector, playerPos	: Vector;
 		var item 					: SItemUniqueId;
 		var moveTargets				: array<CActor>;
-		var b						: bool;
+		var b, aliveTarget			: bool;
 		var size					: int;
 		var npc						: CNewNPC;
 		
-		if ( (W3ReplacerCiri)thePlayer || playerVictim || thePlayer.isInFinisher )
+		if ( !playerAttacker || (W3ReplacerCiri)thePlayer || playerVictim || thePlayer.isInFinisher )
 			return false;
-		
-		if ( actorVictim.IsAlive() && !CanPerformFinisherOnAliveTarget(actorVictim) )
+			
+		// W3EE - Begin
+		if( Combat().GetShouldTargetExplode() || playerAttacker.IsHeavyAttack(attackAction.GetAttackName())
+			|| (playerAttacker.IsLightAttack(attackAction.GetAttackName()) && playerAttacker.IsInCombatAction() && playerAttacker.GetCombatAction() == EBAT_SpecialAttack_Light))
 			return false;
+		// W3EE - End
 		
+		aliveTarget = actorVictim.IsAlive();
+		if ( aliveTarget && !CanPerformFinisherOnAliveTarget(actorVictim) )
+			return false;
 		
 		if ( actorVictim.WillBeUnconscious() && !theGame.GetDLCManager().IsEP2Available() )
 			return false;
-		
-		// W3EE - Begin
-		if( Combat().GetShouldTargetExplode() || playerAttacker.IsHeavyAttack(attackAction.GetAttackName()) )
-			return false;
-		// W3EE - End
 		
 		moveTargets = thePlayer.GetMoveTargets();	
 		size = moveTargets.Size();
@@ -2776,7 +2777,10 @@ class W3DamageManagerProcessor extends CObject
 				finisherChance = theGame.params.FINISHER_ON_DEATH_CHANCE;
 			*/
 			
-			finisherChance = Options().FinishChance();
+			if (aliveTarget)
+				finisherChance = 100;
+			else
+				finisherChance = Options().FinishChance();
 			
 			if (GetWitcherPlayer().IsMutationActive(EPMT_Mutation3))
 				finisherChance += 15;
@@ -2849,10 +2853,10 @@ class W3DamageManagerProcessor extends CObject
 	private function CanPerformFinisherOnAliveTarget( actorVictim : CActor ) : bool
 	{
 		return actorVictim.IsHuman() 
-		&& ( actorVictim.HasBuff(EET_Confusion) || actorVictim.HasBuff(EET_AxiiGuardMe) )
 		&& actorVictim.IsVulnerable()
 		&& !actorVictim.HasAbility('DisableFinisher')
-		&& !actorVictim.HasAbility('InstantKillImmune');
+		&& !actorVictim.HasAbility('InstantKillImmune')
+		&& (actorVictim.HasBuff(EET_Confusion) || actorVictim.HasBuff(EET_AxiiGuardMe)) && attackAction && attackAction.IsCriticalHit() && RandF() < (0.75f - actorVictim.GetHealthPercents());		
 	}
 	
 	

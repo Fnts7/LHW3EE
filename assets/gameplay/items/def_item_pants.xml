@@ -11,11 +11,11 @@
 		<weight 						type="base" min="2" 				/>
 		<quality 						type="add" 	min="5" 	max="5"		/>
 		<armor 							type="base" min="1" 	max="1" 	/>
-		<slashing_resistance_perc 		type="base"	min="0.03"				/>
-		<piercing_resistance_perc 		type="base" min="0.0"				/>
-		<bludgeoning_resistance_perc	type="base" min="0.0"				/>
-		<rending_resistance_perc 		type="base" min="0.0"				/>
-		<elemental_resistance_perc 		type="base" min="0.04"				/>
+		<slashing_resistance_perc 		type="base"	min="0.04"				/>
+		<piercing_resistance_perc 		type="base" min="0.02"				/>
+		<bludgeoning_resistance_perc	type="base" min="0.02"				/>
+		<rending_resistance_perc 		type="base" min="0.04"				/>
+		<elemental_resistance_perc 		type="base" min="0.03"				/>
 	</ability>
 
 <!-- Human pants -->

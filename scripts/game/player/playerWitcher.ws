@@ -3478,11 +3478,18 @@ statemachine class W3PlayerWitcher extends CR4Player
 				delay = GetStaminaActionDelay(ESAT_Ability, GetSkillAbilityName(S_Sword_s01), dt);
 				skillLevel = GetSkillLevel(S_Sword_s01);
 				
-				if(skillLevel > 1)
+				if(skillLevel >= 1)
 				{
-					reduction = GetSkillAttributeValue(S_Sword_s01, 'cost_reduction', false, true) * (skillLevel - 1);
+					reduction = GetSkillAttributeValue(S_Sword_s01, 'cost_reduction', false, true) * skillLevel;
+					
+					reduction.valueMultiplicative += 0.01f;
+					if (skillLevel == 5)
+						reduction.valueMultiplicative += 0.01f;
+					
 					cost = MaxF(0, cost * (1 - reduction.valueMultiplicative) - reduction.valueAdditive);
 				}
+				
+				cost *= GetWhirlStaminaMod();
 				
 				//W3EE - Begin
 				DrainStamina(ESAT_FixedValue, cost * Options().WhirlCostStam(), delay, GetSkillAbilityName(S_Sword_s01));
@@ -3536,6 +3543,19 @@ statemachine class W3PlayerWitcher extends CR4Player
 		mult -= armorPieces[2].weighted * 0.015f + armorPieces[1].weighted * 0.025f + armorPieces[0].weighted * 0.035f;
 			
 		return MinF(1.0f, mult);
+	}
+	
+	private final function GetWhirlStaminaMod() : float
+	{
+		var mult : float;
+		var attackCostMult : SAbilityAttributeValue;
+		
+		attackCostMult = GetAttributeValue('attack_stamina_cost_bonus');
+		mult = 1.0f - attackCostMult.valueMultiplicative;
+		
+		mult += armorPieces[2].weighted * 0.01f + armorPieces[3].weighted * 0.03f;
+			
+		return mult;
 	}
 
 	public final timer function SpecialAttackHeavySustainCost(dt : float, id : int)
@@ -11624,6 +11644,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			dm.GetAbilityAttributeValue( 'GryphonSetBonusEffect', 'duration', min, max );
 			arrString.PushBack( FloatToString( min.valueAdditive ) );
 			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString ); 
+			finalString += "<br>LHW3EE Override: Costs 0.5 vigor, but if less available, still will be cast.";
 			break;		
 		case EISB_Gryphon_2:
 			dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'staminaRegen', min, max );
@@ -11631,10 +11652,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 			dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'trigger_scale', min, max );
 			arrString.PushBack( FloatToString( ( min.valueAdditive - 1 )* 100) );
 			/*dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'spell_power', min, max );
-			arrString.PushBack( FloatToString( min.valueMultiplicative * 100) );
-			dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'gryphon_set_bns_dmg_reduction', min, max );*/
-			arrString.PushBack( FloatToString( min.valueAdditive * 100) );
-			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString );
+			arrString.PushBack( FloatToString( min.valueMultiplicative * 100) );*/
+			dm.GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'gryphon_set_bns_dmg_reduction', min, max );
+			//arrString.PushBack( FloatToString( min.valueAdditive * 100) );
+			finalString = GetLocStringByKeyExtWithParams( tempString,,,arrString ) + "<br>Any damage taken inside Yrden is reduced by: " + FloatToString( min.valueAdditive * 100) + "%.";
 			break;
 		case EISB_Bear_1:
 			dm.GetAbilityAttributeValue( 'setBonusAbilityBear_1', 'quen_reapply_chance', min, max );

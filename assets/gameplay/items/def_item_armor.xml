@@ -21,11 +21,11 @@
 		<weight							type="base"	min="8"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="1"	max="1"	/>
-		<slashing_resistance_perc		type="base" min="0.10"				/>
-		<piercing_resistance_perc		type="base" min="0.0"				/>
+		<slashing_resistance_perc		type="base" min="0.12"				/>
+		<piercing_resistance_perc		type="base" min="0.06"				/>
 		<bludgeoning_resistance_perc	type="base" min="0.07"				/>
-		<rending_resistance_perc		type="base" min="0.10"				/>
-		<elemental_resistance_perc		type="base" min="0.10"				/>
+		<rending_resistance_perc		type="base" min="0.12"				/>
+		<elemental_resistance_perc		type="base" min="0.08"				/>
 	</ability>
 
 <!-- ARMOR LIGHT -->

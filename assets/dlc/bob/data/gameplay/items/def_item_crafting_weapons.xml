@@ -30,10 +30,12 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="372"				/>
 				<SilverDamage 					type="base"	min="1"					/>
-				<ElementalDamage				type="add"	min="75"				/>
-				<attack_power 					type="mult" min="0.1" 				/>
-				<armor_reduction 				type="mult"	min="-0.15"				/>
-				<focus_gain		 				type="mult"	min="0.15"				/>
+				<attack_power 					type="mult" min="-0.15" 			/>
+				<parry_stamina_cost_bonus		type="mult"	min="-0.075"			/>
+				<armor_reduction 				type="mult"	min="-0.05"				/>				
+				<critical_hit_chance			type="add"	min="0.1"				/>
+				<spell_power 					type="mult"	min="0.1"				/>
+				<vigor_regen 					type="mult" min="0.15"	 			/>
 			</ability>
 
 		<!-- STEEL SWORD WITCHER BEAR -->
@@ -219,10 +221,14 @@
 				<quality						type="add"	min="5"					/>
 				<SlashingDamage 				type="base"	min="1"					/>
 				<SilverDamage 					type="base"	min="524"				/>
-				<ElementalDamage				type="add"	min="110"				/>
-				<armor_reduction 				type="mult"	min="-0.15"				/>
-				<vigor_regen					type="mult"	min="0.1"				/>
-				<spell_power_yrden 				type="mult"	min="0.10"				/>
+				<ElementalDamage				type="add"	min="100"				/>				
+				<attack_power 					type="mult" min="-0.2" 				/>
+				<parry_stamina_cost_bonus		type="mult"	min="-0.075"			/>
+				<armor_reduction 				type="mult"	min="-0.1"				/>
+				<critical_hit_chance			type="add"	min="0.1"				/>
+				<spell_power 					type="mult"	min="0.05"				/>
+				<spell_power_yrden 				type="mult"	min="0.05"				/>
+				<vigor_regen 					type="mult" min="0.15"	 			/>
 			</ability>
 
 		<!-- SILVER SWORD WITCHER BEAR -->

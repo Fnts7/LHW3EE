@@ -218,7 +218,7 @@ class W3SignOwnerPlayer extends W3SignOwner
 			{
 				ret = false;
 			}
-			else if( player.HasBuff( EET_GryphonSetBonus ) && player.GetStatPercents( BCS_Stamina ) < 1.f )
+			else if( player.HasBuff( EET_GryphonSetBonus ) && player.GetStat( BCS_Focus ) < 1.f && ( !player.CanUseSkill( S_Perk_09 ) || player.GetStat(BCS_Stamina) < 50.0f ) )
 			{
 				ret = false;
 			}

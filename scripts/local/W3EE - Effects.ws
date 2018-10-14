@@ -264,7 +264,7 @@ class W3Effect_RubedoDominance extends CBaseGameplayEffect
 	{
 		var vitality: float;
 		
-		vitality = target.GetStatMax(BCS_Vitality) * 0.003f * dt;
+		vitality = target.GetStatMax(BCS_Vitality) * 0.0025f * dt;
 		effectManager.CacheStatUpdate(BCS_Vitality, vitality);
 		super.OnUpdate(dt);
 	}

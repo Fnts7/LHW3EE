@@ -8,52 +8,56 @@
 				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="105"				/>
-				<slashing_resistance_perc		type="base"	min="0.10"				/>
-				<piercing_resistance_perc		type="base"	min="0.05"				/>
-				<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
-				<rending_resistance_perc		type="base"	min="0.15"				/>
+				<slashing_resistance_perc		type="base"	min="0.16"				/>
+				<piercing_resistance_perc		type="base"	min="0.12"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.1"				/>
+				<rending_resistance_perc		type="base"	min="0.2"				/>
+				<elemental_resistance_perc 		type="base" min="0.08"				/>
 				<focus_gain 					type="mult" min="0.1"				/>
-				<injury_resist			 		type="mult"	min="0.05"				/>
-				<bleeding_resistance_perc 		type="base" min="0.05"				/>
+				<injury_resist			 		type="mult"	min="0.06"				/>
+				<bleeding_resistance_perc 		type="base" min="0.04"				/>
 			</ability>
 			
 			<ability name="Wolf Armor 1 _Stats">
 				<weight							type="base" min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="140"				/>
-				<slashing_resistance_perc		type="base"	min="0.14"				/>
-				<piercing_resistance_perc		type="base" min="0.08"				/>
-				<bludgeoning_resistance_perc	type="base" min="0.08"				/>
-				<rending_resistance_perc		type="base" min="0.20"				/>
-				<focus_gain 					type="mult" min="0.14"				/>
-				<injury_resist			 		type="mult"	min="0.075"				/>
-				<bleeding_resistance_perc 		type="base" min="0.075"				/>
+				<slashing_resistance_perc		type="base"	min="0.18"				/>
+				<piercing_resistance_perc		type="base" min="0.14"				/>
+				<bludgeoning_resistance_perc	type="base" min="0.13"				/>
+				<rending_resistance_perc		type="base" min="0.24"				/>
+				<elemental_resistance_perc 		type="base" min="0.09"				/>
+				<focus_gain 					type="mult" min="0.13"				/>
+				<injury_resist			 		type="mult"	min="0.08"				/>
+				<bleeding_resistance_perc 		type="base" min="0.06"				/>
 			</ability>
 			
 			<ability name="Wolf Armor 2 _Stats">
 				<weight							type="base"	min="10"				/>
 				<quality						type="add"	min="5"					/>
 				<armor 							type="base"	min="180"				/>
-				<slashing_resistance_perc		type="base"	min="0.18"				/>
-				<piercing_resistance_perc		type="base" min="0.12"				/>
-				<bludgeoning_resistance_perc	type="base" min="0.12"				/>
-				<rending_resistance_perc		type="base" min="0.25"				/>
-				<focus_gain 					type="mult" min="0.18"				/>
+				<slashing_resistance_perc		type="base"	min="0.21"				/>
+				<piercing_resistance_perc		type="base" min="0.16"				/>
+				<bludgeoning_resistance_perc	type="base" min="0.15"				/>
+				<rending_resistance_perc		type="base" min="0.27"				/>
+				<elemental_resistance_perc 		type="base" min="0.11"				/>
+				<focus_gain 					type="mult" min="0.17"				/>
 				<injury_resist			 		type="mult"	min="0.1"				/>
-				<bleeding_resistance_perc 		type="base" min="0.1"				/>
+				<bleeding_resistance_perc 		type="base" min="0.07"				/>
 			</ability>
 			
 			<ability name="Wolf Armor 3 _Stats">
 				<weight							type="base"	min="10" 				/>
 				<quality						type="add"	min="5" 				/>
 				<armor							type="base"	min="205"				/>
-				<slashing_resistance_perc		type="base"	min="0.22"				/>
-				<piercing_resistance_perc		type="base"	min="0.17"				/>
+				<slashing_resistance_perc		type="base"	min="0.24"				/>
+				<piercing_resistance_perc		type="base"	min="0.18"				/>
 				<bludgeoning_resistance_perc	type="base"	min="0.16"				/>
 				<rending_resistance_perc		type="base"	min="0.30"				/>
-				<focus_gain 					type="mult" min="0.21"				/>
-				<injury_resist			 		type="mult"	min="0.125"				/>
-				<bleeding_resistance_perc 		type="base" min="0.125"				/>
+				<elemental_resistance_perc 		type="base" min="0.12"				/>
+				<focus_gain 					type="mult" min="0.2"				/>
+				<injury_resist			 		type="mult"	min="0.12"				/>
+				<bleeding_resistance_perc 		type="base" min="0.08"				/>
 			</ability>	
 			
 		<!-- WITCHER WOLF BOOTS -->
@@ -61,25 +65,25 @@
 				<weight							type="base"	min="4"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="37"				/>
-				<slashing_resistance_perc		type="base"	min="0.02"				/>
-				<piercing_resistance_perc		type="base"	min="0.01"				/>
-				<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
-				<rending_resistance_perc		type="base"	min="0.02"				/>
-				<focus_gain 					type="mult" min="0.02"				/>
-				<injury_resist			 		type="mult"	min="0.01"				/>
-				<bleeding_resistance_perc 		type="base" min="0.01"				/>
+				<slashing_resistance_perc		type="base"	min="0.03"				/>
+				<piercing_resistance_perc		type="base"	min="0.03"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.025"				/>
+				<rending_resistance_perc		type="base"	min="0.03"				/>
+				<focus_gain 					type="mult" min="0.025"				/>
+				<injury_resist			 		type="mult"	min="0.02"				/>
+				<bleeding_resistance_perc 		type="base" min="0.015"				/>
 			</ability>
 
 			<ability name="Wolf Boots 2 _Stats">
 				<weight							type="base"	min="4"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="51"				/>
-				<slashing_resistance_perc		type="base"	min="0.03"				/>
-				<piercing_resistance_perc		type="base"	min="0.02"				/>
-				<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-				<rending_resistance_perc		type="base"	min="0.03"				/>
-				<focus_gain 					type="mult" min="0.03"				/>
-				<injury_resist			 		type="mult"	min="0.02"				/>
+				<slashing_resistance_perc		type="base"	min="0.04"				/>
+				<piercing_resistance_perc		type="base"	min="0.03"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
+				<rending_resistance_perc		type="base"	min="0.035"				/>
+				<focus_gain 					type="mult" min="0.035"				/>
+				<injury_resist			 		type="mult"	min="0.03"				/>
 				<bleeding_resistance_perc 		type="base" min="0.02"				/>
 			</ability>
 			
@@ -87,13 +91,13 @@
 				<weight							type="base"	min="4"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="67"				/>
-				<slashing_resistance_perc		type="base"	min="0.04"				/>
-				<piercing_resistance_perc		type="base"	min="0.03"				/>
-				<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
+				<slashing_resistance_perc		type="base"	min="0.045"				/>
+				<piercing_resistance_perc		type="base"	min="0.035"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.035"				/>
 				<rending_resistance_perc		type="base"	min="0.04"				/>
-				<focus_gain 					type="mult" min="0.05"				/>
-				<injury_resist			 		type="mult"	min="0.03"				/>
-				<bleeding_resistance_perc 		type="base" min="0.03"				/>
+				<focus_gain 					type="mult" min="0.045"				/>
+				<injury_resist			 		type="mult"	min="0.035"				/>
+				<bleeding_resistance_perc 		type="base" min="0.025"				/>
 			</ability>
 			
 			<ability name="Wolf Boots 4 _Stats">
@@ -104,9 +108,9 @@
 				<piercing_resistance_perc		type="base"	min="0.04"				/>
 				<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 				<rending_resistance_perc		type="base"	min="0.05"				/>
-				<focus_gain 					type="mult" min="0.06"				/>
+				<focus_gain 					type="mult" min="0.055"				/>
 				<injury_resist			 		type="mult"	min="0.04"				/>
-				<bleeding_resistance_perc 		type="base" min="0.04"				/>
+				<bleeding_resistance_perc 		type="base" min="0.03"				/>
 			</ability>
 				
 		<!-- WITCHER WOLF GLOVES -->
@@ -114,25 +118,25 @@
 				<weight							type="base"	min="3"				/>
 				<quality						type="add"	min="5"					/>
 				<armor							type="base"	min="33"				/>
-				<slashing_resistance_perc		type="base"	min="0.02"				/>
-				<piercing_resistance_perc		type="base"	min="0.01"				/>
-				<rending_resistance_perc		type="base"	min="0.02"				/>
-				<elemental_resistance_perc		type="base"	min="0.05"				/>
-				<focus_gain 					type="mult" min="0.02"				/>
-				<injury_resist			 		type="mult"	min="0.01"				/>
-				<bleeding_resistance_perc 		type="base" min="0.01"				/>
+				<slashing_resistance_perc		type="base"	min="0.03"				/>
+				<piercing_resistance_perc		type="base"	min="0.025"				/>
+				<rending_resistance_perc		type="base"	min="0.03"				/>
+				<elemental_resistance_perc		type="base"	min="0.02"				/>
+				<focus_gain 					type="mult" min="0.025"				/>
+				<injury_resist			 		type="mult"	min="0.02"				/>
+				<bleeding_resistance_perc 		type="base" min="0.015"				/>
 			</ability>
 
 			<ability name="Wolf Gloves 2 _Stats">
 				<weight							type="base"	min="3"				/>
 				<quality 						type="add"	min="5"					/>
 				<armor							type="base"	min="47"				/>
-				<slashing_resistance_perc		type="base"	min="0.03"				/>
-				<piercing_resistance_perc		type="base"	min="0.02"				/>
-				<rending_resistance_perc		type="base"	min="0.03"				/>
-				<elemental_resistance_perc		type="base"	min="0.06"				/>
-				<focus_gain 					type="mult" min="0.03"				/>
-				<injury_resist			 		type="mult"	min="0.02"				/>
+				<slashing_resistance_perc		type="base"	min="0.035"				/>
+				<piercing_resistance_perc		type="base"	min="0.03"				/>
+				<rending_resistance_perc		type="base"	min="0.04"				/>
+				<elemental_resistance_perc		type="base"	min="0.02"				/>
+				<focus_gain 					type="mult" min="0.035"				/>
+				<injury_resist			 		type="mult"	min="0.03"				/>
 				<bleeding_resistance_perc 		type="base" min="0.02"				/>
 			</ability>
 			
@@ -141,12 +145,12 @@
 				<quality 						type="add"	min="5"					/>
 				<armor							type="base"	min="63"				/>
 				<slashing_resistance_perc		type="base"	min="0.04"				/>
-				<piercing_resistance_perc		type="base"	min="0.03"				/>
-				<rending_resistance_perc		type="base"	min="0.04"				/>
-				<elemental_resistance_perc		type="base"	min="0.08"				/>
-				<focus_gain 					type="mult" min="0.05"				/>
-				<injury_resist			 		type="mult"	min="0.03"				/>
-				<bleeding_resistance_perc 		type="base" min="0.03"				/>
+				<piercing_resistance_perc		type="base"	min="0.035"				/>
+				<rending_resistance_perc		type="base"	min="0.045"				/>
+				<elemental_resistance_perc		type="base"	min="0.025"				/>
+				<focus_gain 					type="mult" min="0.045"				/>
+				<injury_resist			 		type="mult"	min="0.035"				/>
+				<bleeding_resistance_perc 		type="base" min="0.025"				/>
 			</ability>
 			
 			<ability name="Wolf Gloves 4 _Stats">
@@ -156,10 +160,10 @@
 				<slashing_resistance_perc		type="base"	min="0.05"				/>
 				<piercing_resistance_perc		type="base"	min="0.04"				/>
 				<rending_resistance_perc		type="base"	min="0.05"				/>
-				<elemental_resistance_perc		type="base"	min="0.10"				/>
-				<focus_gain 					type="mult" min="0.06"				/>
+				<elemental_resistance_perc		type="base"	min="0.03"				/>
+				<focus_gain 					type="mult" min="0.055"				/>
 				<injury_resist			 		type="mult"	min="0.04"				/>
-				<bleeding_resistance_perc 		type="base" min="0.04"				/>
+				<bleeding_resistance_perc 		type="base" min="0.03"				/>
 			</ability>
 			
 		<!-- WITCHER WOLF PANTS -->
@@ -167,51 +171,51 @@
 				<weight 						type="base" min="3" 				/>
 				<quality 						type="add" 	min="5" 			 	/>
 				<armor 							type="base" min="37" 			 	/>
-				<slashing_resistance_perc 		type="base" min="0.05"				/>
-				<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-				<rending_resistance_perc 		type="base" min="0.07"				/>
-				<elemental_resistance_perc 		type="base"	min="0.17"				/>
-				<focus_gain 					type="mult" min="0.03"				/>
-				<injury_resist			 		type="mult"	min="0.01"				/>
-				<bleeding_resistance_perc 		type="base" min="0.01"				/>
+				<slashing_resistance_perc 		type="base" min="0.07"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+				<rending_resistance_perc 		type="base" min="0.08"				/>
+				<elemental_resistance_perc 		type="base"	min="0.04"				/>
+				<focus_gain 					type="mult" min="0.04"				/>
+				<injury_resist			 		type="mult"	min="0.03"				/>
+				<bleeding_resistance_perc 		type="base" min="0.02"				/>
 			</ability>
 			
 			<ability name="Wolf Pants 2 _Stats">
 				<weight 						type="base"	min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base"	min="51" 				/>
-				<slashing_resistance_perc 		type="base" min="0.06"				/>
-				<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
-				<rending_resistance_perc 		type="base" min="0.07"				/>
-				<elemental_resistance_perc 		type="base" min="0.19"				/>
-				<focus_gain 					type="mult" min="0.05"				/>
-				<injury_resist			 		type="mult"	min="0.02"				/>
-				<bleeding_resistance_perc 		type="base" min="0.02"				/>
+				<slashing_resistance_perc 		type="base" min="0.08"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
+				<rending_resistance_perc 		type="base" min="0.09"				/>
+				<elemental_resistance_perc 		type="base" min="0.05"				/>
+				<focus_gain 					type="mult" min="0.06"				/>
+				<injury_resist			 		type="mult"	min="0.04"				/>
+				<bleeding_resistance_perc 		type="base" min="0.03"				/>
 			</ability>
 			
 			<ability name="Wolf Pants 3 _Stats">
 				<weight 						type="base"	min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base"	min="67" 				/>
-				<slashing_resistance_perc 		type="base" min="0.07"				/>
-				<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
-				<rending_resistance_perc 		type="base" min="0.10"				/>
-				<elemental_resistance_perc 		type="base" min="0.23"				/>
+				<slashing_resistance_perc 		type="base" min="0.09"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
+				<rending_resistance_perc 		type="base" min="0.11"				/>
+				<elemental_resistance_perc 		type="base" min="0.055"				/>
 				<focus_gain 					type="mult" min="0.07"				/>
-				<injury_resist			 		type="mult"	min="0.03"				/>
-				<bleeding_resistance_perc 		type="base" min="0.03"				/>
+				<injury_resist			 		type="mult"	min="0.05"				/>
+				<bleeding_resistance_perc 		type="base" min="0.035"				/>
 			</ability>
 			
 			<ability name="Wolf Pants 4 _Stats">
 				<weight 						type="base"	min="3" 				/>
 				<quality 						type="add" 	min="5" 				/>
 				<armor 							type="base"	min="77" 				/>
-				<slashing_resistance_perc 		type="base" min="0.08"				/>
-				<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
-				<rending_resistance_perc 		type="base" min="0.10"				/>
-				<elemental_resistance_perc 		type="base" min="0.30"				/>
-				<focus_gain 					type="mult" min="0.085"				/>
-				<injury_resist			 		type="mult"	min="0.04"				/>
+				<slashing_resistance_perc 		type="base" min="0.1"				/>
+				<bludgeoning_resistance_perc	type="base"	min="0.06"				/>
+				<rending_resistance_perc 		type="base" min="0.12"				/>
+				<elemental_resistance_perc 		type="base" min="0.06"				/>
+				<focus_gain 					type="mult" min="0.08"				/>
+				<injury_resist			 		type="mult"	min="0.06"				/>
 				<bleeding_resistance_perc 		type="base" min="0.04"				/>
 			</ability>
 			

@@ -80,10 +80,12 @@
 	<ability name="Long Steel Sword _Stats">
 		<weight							type="base"	min="3.45"				/>
 		<quality						type="add"	min="5"					/>
-		<SlashingDamage 				type="base"	min="1" 	max="1"	/>
+		<SlashingDamage 				type="base"	min="1" 	max="1"		/>
 		<SilverDamage					type="base"	min="1"					/>
-		<counter_damage_bonus			type="mult"	min="0.05"					/>
-		<parry_stamina_cost_bonus		type="mult"	min="-0.075"				/>
+		<counter_damage_bonus			type="mult"	min="-0.04"				/>
+		<armor_reduction                type="mult" min="-0.04"    			/>
+		<parry_stamina_cost_bonus		type="mult"	min="0.05"				/>
+		<attack_stamina_cost_bonus      type="mult" min="0.05"         		/>
 	</ability>
 	
 	<ability name="Rusty No Mans Land sword _Stats">
@@ -344,8 +346,8 @@
 		<quality						type="add"	min="5"		max="5"		/>
 		<SlashingDamage 				type="base"	min="1"					/>
 		<SilverDamage 					type="base"	min="1" 	max="1"	/>
-		<attack_speed 					type="mult"	min="0.025" 	max="0.025"	/>
-		<armor_reduction 				type="mult"	min="-0.05" 	max="-0.05"	/>
+		<attack_speed 					type="mult"	min="0.03" 				/>
+		<armor_reduction 				type="mult"	min="-0.05" 			/>
 	</ability>
 
 	<ability name="Silver sword 1 _Stats">

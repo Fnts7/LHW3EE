@@ -54,8 +54,9 @@
 		<quality						type="add"	min="4"		max="4"		/>
 		<slashing_resistance_perc		type="base"	min="0.35"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.30"				/>
-		<critical_hit_chance			type="add" 	min="0.05" 				/>
-		<critical_hit_damage_bonus		type="add" 	min="0.05" 				/>
+		<piercing_resistance_perc		type="base"	min="0.15"				/>
+		<critical_hit_chance			type="add" 	min="0.06" 				/>
+		<critical_hit_damage_bonus		type="add" 	min="0.04" 				/>
 		<item_level_min					type="add"	min="34"				/>
 		<item_level_max					type="add"	min="36"				/>
 	</ability>

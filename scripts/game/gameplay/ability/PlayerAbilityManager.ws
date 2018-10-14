@@ -4593,6 +4593,14 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	}
 	// W3EE - End
 	
+	public function UpdateSkillSlotsFromXML()
+	{
+		InitSkillSlots( false );
+		mutagenSlots.Clear();
+		LoadMutagenSlotsDataFromXML();			
+			
+		mutagenBonuses.Resize( GetSkillGroupsCount() + 1 );
+	}	
 }
 
 exec function dbgskillslots()

@@ -707,6 +707,8 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 				}
 				else l_cost += 1.f;
 			}
+			else
+				l_cost += 0.5f;
 			
 			if( ((W3Effect_SwordCritVigor)l_player.GetBuff(EET_SwordCritVigor)).GetReductionActive() )
 			{

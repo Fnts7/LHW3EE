@@ -99,10 +99,10 @@
 		<weight							type="base"	min="1.0"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="39"	max="39"	/>
-		<slashing_resistance_perc		type="base"	min="0.01"				/>
-		<piercing_resistance_perc		type="base"	min="0.01"				/>
-		<rending_resistance_perc		type="base"	min="0.01"				/>
-		<elemental_resistance_perc		type="base"	min="0.05"				/>
+		<slashing_resistance_perc		type="base"	min="0.015"				/>
+		<piercing_resistance_perc		type="base"	min="0.015"				/>
+		<rending_resistance_perc		type="base"	min="0.02"				/>
+		<elemental_resistance_perc		type="base"	min="0.025"				/>
 		<focus_gain 					type="mult" min="0.02"				/>
 		<graze_damage_reduction			type="mult" min="0.01"				/>
 		<staminaRegen_armor_mod			type="mult"	min="0.02"				/>
@@ -114,8 +114,8 @@
 		<armor							type="base"	min="51"	max="51"	/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
-		<rending_resistance_perc		type="base"	min="0.02"				/>
-		<elemental_resistance_perc		type="base"	min="0.05"				/>
+		<rending_resistance_perc		type="base"	min="0.025"				/>
+		<elemental_resistance_perc		type="base"	min="0.03"				/>
 		<focus_gain 					type="mult" min="0.04"				/>
 		<safe_dodge_angle_bonus 		type="add"	min="0.5"				/>
 		<graze_damage_reduction			type="mult" min="0.015"				/>
@@ -126,10 +126,10 @@
 		<weight							type="base"	min="1.2"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="63"	max="63"	/>
-		<slashing_resistance_perc		type="base"	min="0.03"				/>
-		<piercing_resistance_perc		type="base"	min="0.03"				/>
-		<rending_resistance_perc		type="base"	min="0.03"				/>
-		<elemental_resistance_perc		type="base"	min="0.05"				/>
+		<slashing_resistance_perc		type="base"	min="0.025"				/>
+		<piercing_resistance_perc		type="base"	min="0.025"				/>
+		<rending_resistance_perc		type="base"	min="0.035"				/>
+		<elemental_resistance_perc		type="base"	min="0.04"				/>
 		<focus_gain 					type="mult" min="0.06"				/>
 		<safe_dodge_angle_bonus 		type="add"	min="1"					/>
 		<graze_damage_reduction			type="mult" min="0.02"				/>
@@ -140,8 +140,8 @@
 		<weight							type="base"	min="1.7"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="73"	max="73"	/>
-		<slashing_resistance_perc		type="base"	min="0.04"				/>
-		<piercing_resistance_perc		type="base"	min="0.04"				/>
+		<slashing_resistance_perc		type="base"	min="0.03"				/>
+		<piercing_resistance_perc		type="base"	min="0.03"				/>
 		<rending_resistance_perc		type="base"	min="0.04"				/>
 		<elemental_resistance_perc		type="base"	min="0.05"				/>
 		<focus_gain 					type="mult" min="0.08"				/>
@@ -156,10 +156,10 @@
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="27"	max="27"	/>
 		<slashing_resistance_perc		type="base"	min="0.02"				/>
-		<piercing_resistance_perc		type="base"	min="0.01"				/>
-		<rending_resistance_perc		type="base"	min="0.02"				/>
-		<elemental_resistance_perc		type="base"	min="0.05"				/>
-		<spell_power					type="base" min="0.03"				/>
+		<piercing_resistance_perc		type="base"	min="0.02"				/>
+		<rending_resistance_perc		type="base"	min="0.025"				/>
+		<elemental_resistance_perc		type="base"	min="0.03"				/>
+		<spell_power					type="base" min="0.01"				/>
 		<graze_damage_reduction			type="mult" min="0.01" 				/>
 	</ability>
 
@@ -168,10 +168,10 @@
 		<quality 						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="41"	max="41"	/>
 		<slashing_resistance_perc		type="base"	min="0.03"				/>
-		<piercing_resistance_perc		type="base"	min="0.02"				/>
+		<piercing_resistance_perc		type="base"	min="0.025"				/>
 		<rending_resistance_perc		type="base"	min="0.03"				/>
-		<elemental_resistance_perc		type="base"	min="0.06"				/>
-		<spell_power 					type="mult"	min="0.05"				/>
+		<elemental_resistance_perc		type="base"	min="0.04"				/>
+		<spell_power 					type="mult"	min="0.02"				/>
 		<graze_damage_reduction			type="mult" min="0.02" 				/>
 	</ability>
 	
@@ -179,11 +179,11 @@
 		<weight							type="base"	min="1.7"				/>
 		<quality 						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="57"	max="57"	/>
-		<slashing_resistance_perc		type="base"	min="0.04"				/>
-		<piercing_resistance_perc		type="base"	min="0.03"				/>
+		<slashing_resistance_perc		type="base"	min="0.035"				/>
+		<piercing_resistance_perc		type="base"	min="0.035"				/>
 		<rending_resistance_perc		type="base"	min="0.04"				/>
-		<elemental_resistance_perc		type="base"	min="0.08"				/>
-		<spell_power 					type="mult"	min="0.08"				/>
+		<elemental_resistance_perc		type="base"	min="0.05"				/>
+		<spell_power 					type="mult"	min="0.03"				/>
 		<graze_damage_reduction			type="mult" min="0.03" 				/>
 	</ability>
 	
@@ -191,11 +191,11 @@
 		<weight							type="base"	min="2.5"				/>
 		<quality 						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="73"	max="73"	/>
-		<slashing_resistance_perc		type="base"	min="0.05"				/>
+		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<rending_resistance_perc		type="base"	min="0.05"				/>
-		<elemental_resistance_perc		type="base"	min="0.10"				/>
-		<spell_power 					type="mult"	min="0.10"				/>
+		<elemental_resistance_perc		type="base"	min="0.06"				/>
+		<spell_power 					type="mult"	min="0.04"				/>
 		<graze_damage_reduction			type="mult" min="0.04" 				/>
 	</ability>
 	
@@ -204,13 +204,13 @@
 		<weight							type="base" min="1.7"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="45"	max="45"	/>
-		<slashing_resistance_perc		type="base"	min="0.03"				/>
+		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
-		<rending_resistance_perc		type="base"	min="0.02"				/>
+		<rending_resistance_perc		type="base"	min="0.035"				/>
 		<elemental_resistance_perc		type="base"	min="0.03"				/>
-		<focus_gain 					type="mult" min="0.02"				/>
-		<injury_resist			 		type="mult"	min="0.01"				/>
-		<bleeding_resistance_perc 		type="base" min="0.01"				/>
+		<focus_gain 					type="mult" min="0.025"				/>
+		<injury_resist			 		type="mult"	min="0.02"				/>
+		<bleeding_resistance_perc 		type="base" min="0.015"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.02"				/>
 	</ability>
 
@@ -218,12 +218,12 @@
 		<weight							type="base"	min="1.7"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="55"	max="55"	/>
-		<slashing_resistance_perc		type="base"	min="0.04"				/>
+		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
-		<rending_resistance_perc		type="base"	min="0.03"				/>
+		<rending_resistance_perc		type="base"	min="0.04"				/>
 		<elemental_resistance_perc		type="base"	min="0.04"				/>
-		<focus_gain 					type="mult" min="0.03"				/>
-		<injury_resist			 		type="mult"	min="0.02"				/>
+		<focus_gain 					type="mult" min="0.035"				/>
+		<injury_resist			 		type="mult"	min="0.03"				/>
 		<bleeding_resistance_perc 		type="base" min="0.02"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.02"				/>
 	</ability>
@@ -232,13 +232,13 @@
 		<weight							type="base"	min="2.5"				/>
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="65"	max="65"	/>
-		<slashing_resistance_perc		type="base"	min="0.05"				/>
-		<piercing_resistance_perc		type="base"	min="0.05"				/>
-		<rending_resistance_perc		type="base"	min="0.04"				/>
-		<elemental_resistance_perc		type="base"	min="0.05"				/>
-		<focus_gain 					type="mult" min="0.05"				/>
-		<injury_resist			 		type="mult"	min="0.03"				/>
-		<bleeding_resistance_perc 		type="base" min="0.03"				/>
+		<slashing_resistance_perc		type="base"	min="0.055"				/>
+		<piercing_resistance_perc		type="base"	min="0.045"				/>
+		<rending_resistance_perc		type="base"	min="0.045"				/>
+		<elemental_resistance_perc		type="base"	min="0.045"				/>
+		<focus_gain 					type="mult" min="0.045"				/>
+		<injury_resist			 		type="mult"	min="0.035"				/>
+		<bleeding_resistance_perc 		type="base" min="0.025"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.02"				/>
 	</ability>
 	
@@ -247,12 +247,12 @@
 		<quality						type="add"	min="5"		max="5"		/>
 		<armor							type="base"	min="73"	max="73"	/>
 		<slashing_resistance_perc		type="base"	min="0.06"				/>
-		<piercing_resistance_perc		type="base"	min="0.06"				/>
+		<piercing_resistance_perc		type="base"	min="0.05"				/>
 		<rending_resistance_perc		type="base"	min="0.05"				/>
-		<elemental_resistance_perc		type="base"	min="0.06"				/>
-		<focus_gain 					type="mult" min="0.06"				/>
+		<elemental_resistance_perc		type="base"	min="0.05"				/>
+		<focus_gain 					type="mult" min="0.055"				/>
 		<injury_resist			 		type="mult"	min="0.04"				/>
-		<bleeding_resistance_perc 		type="base" min="0.04"				/>
+		<bleeding_resistance_perc 		type="base" min="0.03"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.02"				/>
 	</ability>
 

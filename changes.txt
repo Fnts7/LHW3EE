@@ -1,4 +1,48 @@
-﻿Version 37
+﻿Version 38
+
+Adjusted mutagen and skill slots unlocking, so that they are more logical - always now first a mutagen slot unlocks,
+then sequentially skill slots to enhance mutagen. 4th mutagen slot is now opened 5 skill points later, and last
+skill slot 10 skill points later. 1st mutagen is open from start.
+IMPORTANT! this will not apply in saved games automatically. In order to reset your mutagen and skill slots in
+existing game you need to:
+1) Remove all mutagens and equipped skills.
+2) Type and enter in console: 'UpdateMutagenSlots()'.
+3) Save game and reload to get rid of missing color on skill trees (nothing should be wrong)
+
+Gryphon set bonuses nerfed. First one lowered yrden radius increase to 20%, but also restored damage reduction
+within Yrden trap to 15%. Second one will use 0.5 vigor points for extra cast, but still it will be allowed
+when having less vigor.
+
+Fixed a bug that with second gryphon set, alternate cast could be allowed with insufficient vigor.
+
+Adjusted all witcher gear armor, including starting armor, so that the parameters and resistances are more
+balanced, consistent and have proper progression. Starting armor upgrade ingredients changed to less demanding.
+
+Reworked gryphon school swords. Steel sword is a "spellslinger" with bonuses to spell power and vigor regen and
+penalties to some "physical" stats. But has bonus to crit chance also. Silver sword has elemental damage as it
+was, but more penalties.
+
+Adjusted starting swords, steel mostly, so that it is more like easier starting game weapon with stamina cost
+reduction and penalty of armor piercing and less important at start counter damage.
+
+Adjusted Thief's relic armor parts, so that they have also piercing resistances.
+
+Whirl skill balances and more improvement. Armor has also influence on stamina cost. Also attack stamina bonus
+attribute now applies to whirl to. Base stamina cost of whirl lowered a bit, but also lowered stamina cost
+reduction with skill level progression.
+
+Finisher on confused or puppet and alive enemy is not that easy anymore. Requires a critical hit from light
+attack (back critical hit chance is very high anyway) and also the chance is zero when HP > 75% then progresses
+as an enemy has lower HP.
+
+Heavy attacks against confused or blinded enemies have now +20% attack power.
+
+Reduced penalites for attack spamming (happens when pressing attack when in the middle of existing attack).
+This is good idea to force player keep the right attack tempo, but the penalties were too harsh.
+
+Rubedo effect strength reduced by 1/6, to 0.25% healing ration.
+
+Version 37
 
 Bloodbath mutation reworked to have a proper power. Works similar to wyvern decoction now. Every hit that deals
 damage increases attack power - depends on attack type how much. Every hit received that deals any damage,

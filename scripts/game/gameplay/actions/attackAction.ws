@@ -370,6 +370,10 @@ class W3Action_Attack extends W3DamageAction
 			if(witcherAttacker.IsHeavyAttack(attackTypeName))
 			{
 				result += witcherAttacker.GetAttributeValue('attack_power_heavy_style');
+				
+				if ( actorVictim && (actorVictim.HasBuff(EET_Confusion) || actorVictim.HasBuff(EET_AxiiGuardMe)) )
+					result += 0.2f;
+				
 			}
 			
 			if (IsActionMelee() && (witcherAttacker.HasBuff(EET_Mutagen15) || Damage().GetPerk10State()))

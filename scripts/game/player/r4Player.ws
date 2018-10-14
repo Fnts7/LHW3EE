@@ -12565,7 +12565,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		if( IsPlayerSpamming() )
 		{
 			SetWasPlayerSpamming(true);
-			AddTimer('ResetPlayerSpamming', 3.5f, false, , , , true);
+			AddTimer('ResetPlayerSpamming', 2.5f, false, , , , true);
 		}
 		SetPlayerSpamming(false);
 		SetPlayerAttacking(false);

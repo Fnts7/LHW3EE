@@ -2298,8 +2298,11 @@ class CR4CharacterMenu extends CR4MenuBase
 				
 			case S_Sword_s01:				
 				// W3EE - Begin
-				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s01, 'cost_reduction', false, false);				
-				argsInt.PushBack( RoundMath(ability.valueMultiplicative * 100 * skillLevel) );
+				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s01, 'cost_reduction', false, false);
+				arg = ability.valueMultiplicative * 100 * skillLevel + 1.0f;
+				if (skillLevel == 5)
+					arg += 1.0f;				
+				argsInt.PushBack( RoundMath(arg) );
 				/*if( skillLevel >= 4 ) {
 					baseString = GetLocStringByKeyExtWithParams("W3EE_WhirlLvl1", argsInt) + GetLocStringByKeyExt("W3EE_WhirlLvl2") + GetLocStringByKeyExt("W3EE_WhirlLvl3");
 				}
@@ -2326,7 +2329,7 @@ class CR4CharacterMenu extends CR4MenuBase
 					}				
 				}
 				else
-					baseString += "<br>You are more vulnerable to stagger on hit when whirling.";
+					baseString += "<br>You are vulnerable to stagger on hit when whirling, but not that much as with no skill points.";
 	
 				// W3EE - End
 				break;
