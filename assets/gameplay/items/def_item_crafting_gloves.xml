@@ -53,9 +53,9 @@
 		<weight							type="base"	min="5"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor							type="base"	min="34"	max="34"	/>
-		<slashing_resistance_perc		type="base"	min="0.02"				/>
-		<piercing_resistance_perc		type="base"	min="0.02"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
+		<slashing_resistance_perc		type="base"	min="0.05"				/>
+		<piercing_resistance_perc		type="base"	min="0.04"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.02"				/>
 	</ability>
 	
@@ -75,9 +75,11 @@
 		<weight							type="base"	min="5"				/>
 		<quality						type="add"	min="3"		max="3"		/>
 		<armor 							type="base"	min="55"	max="55"	/>
-		<slashing_resistance_perc		type="base"	min="0.05"				/>
+		<slashing_resistance_perc		type="base"	min="0.06"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+		<rending_resistance_perc		type="base"	min="0.03"				/>
+		<elemental_resistance_perc		type="base"	min="0.02"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.02"				/>
 	</ability>
 
@@ -87,10 +89,10 @@
 		<quality						type="add"	min="4"		max="4"		/>
 		<armor 							type="base"	min="65"	max="65"	/>
 		<slashing_resistance_perc		type="base"	min="0.05"				/>
-		<piercing_resistance_perc		type="base"	min="0.05"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
-		<rending_resistance_perc		type="base"	min="0.05"				/>
-		<critical_hit_damage_bonus		type="add"	min="0.05"				/>
+		<piercing_resistance_perc		type="base"	min="0.03"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+		<rending_resistance_perc		type="base"	min="0.04"				/>
+		<critical_hit_damage_bonus		type="add"	min="0.06"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.02"				/>
 	</ability>
 	
@@ -367,7 +369,7 @@
 	<item
 		name							="Gloves 04_crafted"
 		category						="gloves"
-		price							="84"
+		price							="120"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -389,6 +391,8 @@
 										<parts count="2">Leather</parts>
 										<parts count="2">Thread</parts>
 										<parts count="2">Cotton</parts>
+										<parts count="1">Infused dust</parts>
+										
 		</recycling_parts>
 		<variants>						<variant equip_template="g_01a_mg__common_light_lvl4">
 											<item>Geralt Shirt</item>         <!-- this item uses slim version -->
@@ -402,7 +406,7 @@
 	<item
 		name							="Heavy gloves 01_crafted"
 		category						="gloves"
-		price							="80"
+		price							="110"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -436,7 +440,7 @@
 	<item
 		name							="Heavy gloves 02_crafted"
 		category						="gloves"
-		price							="107"
+		price							="140"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -471,10 +475,10 @@
 	<item
 		name							="Heavy gloves 03_crafted"
 		category						="gloves"
-		price							="134"
+		price							="160"
 		initial_durability				="100"
 		max_durability					="100"
-		enhancement_slots				="2"
+		enhancement_slots				="1"
 		stackable						="1"
 		grid_size						="2"
 		ability_mode					="OnMount"
@@ -506,7 +510,7 @@
 	<item
 		name							="Heavy gloves 04_crafted"
 		category						="gloves"
-		price							="144"
+		price							="150"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"

@@ -5967,9 +5967,10 @@
 		price							="736"
 	>
 		<ingredients>					<ingredient	quantity="4"	item_name="Leather"							/>
-										<ingredient	quantity="2"	item_name="Draconide leather"				/>
+										<ingredient	quantity="1"	item_name="Draconide leather"				/>
 										<ingredient	quantity="5"	item_name="Leather straps"					/>
-										<ingredient	quantity="5"	item_name="Wire"							/>
+										<ingredient	quantity="4"	item_name="Wire"							/>
+										<ingredient	quantity="1"	item_name="Meteorite ore"					/>
 										<ingredient	quantity="2"	item_name="Dark steel plate"				/>
 		</ingredients>
 	</schematic>
@@ -6831,6 +6832,7 @@
 		<ingredients>					<ingredient	quantity="4"	item_name="Leather squares"					/>
 										<ingredient	quantity="1"	item_name="Hardened leather"				/>
 										<ingredient	quantity="3"	item_name="Thread"							/>
+										<ingredient quantity="1" 	item_name="Infused dust"					/>
 		</ingredients>
 	</schematic>
 
@@ -6940,10 +6942,11 @@
 		craftsmanType_name				="Armorer"
 		price							="80"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Linen"							/>
+		<ingredients>					<ingredient	quantity="2"	item_name="Silk"							/>
 										<ingredient	quantity="1"	item_name="Leather"							/>
 										<ingredient	quantity="4"	item_name="Leather straps"					/>
 										<ingredient	quantity="1"	item_name="String"							/>
+										<ingredient	quantity="2"	item_name="Monstrous blood"					/>
 		</ingredients>
 	</schematic>
 
@@ -6970,6 +6973,7 @@
 		price							="136"
 	>
 		<ingredients>					<ingredient	quantity="2"	item_name="Linen"							/>
+										<ingredient	quantity="1"	item_name="Steel plate"						/>
 										<ingredient	quantity="2"	item_name="Dark iron ingot"					/>
 										<ingredient	quantity="2"	item_name="Leather straps"					/>
 		</ingredients>
@@ -6982,7 +6986,9 @@
 		craftsmanType_name				="Armorer"
 		price							="176"
 	>
-		<ingredients>					<ingredient	quantity="2"	item_name="Linen"							/>
+		<ingredients>					<ingredient	quantity="1"	item_name="Silk"							/>
+										<ingredient	quantity="1"	item_name="Hardened leather"				/>
+										<ingredient	quantity="1"	item_name="Steel plate"						/>
 										<ingredient	quantity="3"	item_name="Dark iron ingot"					/>
 										<ingredient	quantity="3"	item_name="Leather straps"					/>
 		</ingredients>
@@ -6996,7 +7002,7 @@
 		price							="198"
 	>
 		<ingredients>					<ingredient	quantity="3"	item_name="Linen"							/>
-										<ingredient	quantity="1"	item_name="Hardened leather"				/>
+										<ingredient	quantity="2"	item_name="Hardened leather"				/>
 										<ingredient	quantity="1"	item_name="Dark steel plate"				/>
 										<ingredient	quantity="3"	item_name="Leather straps"					/>
 		</ingredients>
@@ -7052,9 +7058,11 @@
 		price							="92"
 	>
 		<ingredients>					<ingredient	quantity="1"	item_name="Leather"							/>
-										<ingredient	quantity="4"	item_name="Leather squares"					/>
+										<ingredient	quantity="3"	item_name="Leather squares"					/>
 										<ingredient	quantity="3"	item_name="Thread"							/>
 										<ingredient	quantity="2"	item_name="String"							/>
+										<ingredient	quantity="1"	item_name="Resin"							/>
+										<ingredient	quantity="1"	item_name="Oil"								/>
 		</ingredients>
 	</schematic>
 

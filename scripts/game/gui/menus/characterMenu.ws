@@ -2387,12 +2387,14 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(RoundMath(arg));
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s05, 'duration', false, false));
 				argsInt.PushBack(RoundMath(arg));*/
-				argsInt.PushBack(14*skillLevel);
-				argsFloat.PushBack(0.03 * skillLevel * 100);
-				argsFloat.PushBack(0.005 * skillLevel * 100);
-				argsInt.PushBack(Max(FloorF(skillLevel * 0.66f), 1));
-				argsInt.PushBack(Max(skillLevel, 2));
+				
+				argsInt.PushBack(25 + 8 * skillLevel);
+				argsFloat.PushBack(4.0f * skillLevel);
+				argsFloat.PushBack(1.0f + 0.35f * (skillLevel - 1));
+				argsInt.PushBack(RoundF(0.5f + skillLevel * 0.5f));
+				argsInt.PushBack(RoundF(2.5f + skillLevel * 0.5f));
 				baseString = GetLocStringByKeyExtWithParams("W3EE_CripplStrikeSkill", argsInt, argsFloat);
+				baseString += "<br>Critical hit always applies slowdown.";
 				// W3EE - End
 				break;
 			case S_Sword_s06:
@@ -2692,6 +2694,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s08, 'max_armor_reduction', false, false)) * skillLevel;
 				argsInt.PushBack(RoundMath(arg*100));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt) /* + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second")*/;
+				baseString += "<br>For any target not having an equipped armor, increases igni hit fire damage by: " + (5 * skillLevel) + "%."; 
 				break;	
 			case S_Magic_s09:
 			// W3EE - Begin
@@ -2951,6 +2954,7 @@ class CR4CharacterMenu extends CR4MenuBase
 				argsInt.PushBack(RoundMath(arg * 100));
 				//baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				baseString = GetLocStringByKeyExtWithParams("W3EE_ProtectiveCoating", argsInt);
+				baseString += "<br>If not applied during meditation, the bonus resistance value will be reduced by 40%. The bonus from this skill stacks multiplicatively with the resistances from armor.";
 				// W3EE - End
 				break;
 			case S_Alchemy_s06:

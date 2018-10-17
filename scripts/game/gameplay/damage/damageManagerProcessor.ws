@@ -1498,7 +1498,7 @@ class W3DamageManagerProcessor extends CObject
 		returnedAction.Initialize( action.victim, action.attacker, bb, "BlackBlood", EHRT_None, CPS_Undefined, true, false, false, false );		
 		returnedAction.SetCannotReturnDamage( true );
 		returnedAction.SetPointResistIgnored( true );		
-		returnVal = bb.GetReturnDamageValue();
+		returnVal = bb.GetReturnDamageValue(attackerMonsterCategory);
 		
 		if(potionLevel == 1)
 		{
@@ -1510,7 +1510,7 @@ class W3DamageManagerProcessor extends CObject
 			returnedAction.SetHitReactionType(EHRT_Reflect);
 		}
 		
-		returnedDamage = returnVal.valueAdditive;
+		returnedDamage = returnVal.valueMultiplicative * action.processedDmg.vitalityDamage;
 		returnedAction.AddDamage(theGame.params.DAMAGE_NAME_DIRECT, returnedDamage);
 		
 		theGame.damageMgr.ProcessAction(returnedAction);
@@ -1774,7 +1774,7 @@ class W3DamageManagerProcessor extends CObject
 			{
 				GetOilProtectionAgainstMonster(dmgType, bonusResist, bonusReduct);
 				
-				resistPerc += bonusResist * playerVictim.GetSkillLevel(S_Alchemy_s05);
+				resistPerc += (1.0f - resistPerc) * bonusResist;
 			}
 			
 			// W3EE - Begin
@@ -3425,11 +3425,14 @@ class W3DamageManagerProcessor extends CObject
 			}
 		}
 		
-		if( !currentOil || !currentOil.WasMeditationApplied() )
+		if( !currentOil )
 			return;
 		// W3EE - End
 		
-		resist = CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Alchemy_s05, 'defence_bonus', false, true ) );		
+		resist = CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Alchemy_s05, 'defence_bonus', false, true ) ) * thePlayer.GetSkillLevel(S_Alchemy_s05);
+		
+		if ( !currentOil.WasMeditationApplied() )
+			resist *= 0.6f;
 	}
 	
 	

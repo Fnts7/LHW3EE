@@ -42,6 +42,9 @@ class W3Effect_Oil extends CBaseGameplayEffect
 			oilAbility = oilParams.oilAbilityName;
 			oilItemName = oilParams.oilItemName;
 			meditationApplied = GetWitcherPlayer().IsMeditating();
+			if (meditationApplied)
+				Experience().ModPathProgress(ESSP_Alchemy_Oils, 0.5f);
+				
 		}
 		
 		super.OnEffectAdded(customParams);
@@ -149,6 +152,8 @@ class W3Effect_Oil extends CBaseGameplayEffect
 		maxCount = newMax;
 		currCount = newMax;
 		meditationApplied = GetWitcherPlayer().IsMeditating();
+		if (meditationApplied)
+			Experience().ModPathProgress(ESSP_Alchemy_Oils, 0.5f);
 		
 		queueTimer = 0;
 		UpdateOilsQueue();

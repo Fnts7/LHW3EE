@@ -57,21 +57,21 @@
 		<weight 						type="base"	min="1.5"				/>
 		<quality 						type="add" 	min="1" 	max="3"		/>
 		<slashing_resistance_perc 		type="base"	min="0.09"				/>
-		<piercing_resistance_perc		type="base"	min="0.04"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
+		<piercing_resistance_perc		type="base"	min="0.05"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
 		<rending_resistance_perc 		type="base"	min="0.0"				/>
-		<elemental_resistance_perc 		type="base" min="0.0"				/>
+		<elemental_resistance_perc 		type="base" min="0.02"				/>
 	</ability>
 
 <!-- Relic -->
 	<ability name="Pants 04 _Stats">
 		<weight 						type="base"	min="2" 				/>
 		<quality 						type="add"	min="4"		max="4"		/>
-		<slashing_resistance_perc 		type="base"	min="0.1"				/>
+		<slashing_resistance_perc 		type="base"	min="0.08"				/>
 		<piercing_resistance_perc 		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc 	type="base" min="0.05"				/>
 		<rending_resistance_perc		type="base" min="0.0"				/>
-		<elemental_resistance_perc 		type="base" min="0.12"				/>
+		<elemental_resistance_perc 		type="base" min="0.11"				/>
 		<vitality 						type="base" min="250" max="350"		/>
 		<staminaRegen_armor_mod 		type="mult"	min="0.10"				/>
 	</ability>
@@ -80,7 +80,7 @@
 	<ability name="Heavy pants 01 _Stats">
 		<weight							type="base" min="5" 				/>
 		<quality 						type="add"	min="1"		max="2"		/>
-		<slashing_resistance_perc 		type="base"	min="0.06"				/>
+		<slashing_resistance_perc 		type="base"	min="0.07"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 		<rending_resistance_perc 		type="base"	min="0.0"				/>
@@ -95,18 +95,20 @@
 		<slashing_resistance_perc 		type="base"	min="0.07"				/>
 		<piercing_resistance_perc 		type="base"	min="0.05"				/>
 		<bludgeoning_resistance_perc 	type="base"	min="0.05"				/>
-		<rending_resistance_perc 		type="base"	min="0.0"				/>
-		<elemental_resistance_perc		type="base"	min="0.0"				/>
+		<rending_resistance_perc 		type="base" min="0.03"				/>
+		<elemental_resistance_perc		type="base"	min="0.02"				/>
 	</ability>
 	
 	<ability name="Heavy pants 03 _Stats">
 		<weight 						type="base"	min="5" 				/>
-		<quality 						type="add"	min="1"		max="3"		/>
-		<slashing_resistance_perc		type="base"	min="0.10"				/>
-		<piercing_resistance_perc		type="base"	min="0.08"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.08"				/>
+		<quality 						type="add"	min="2"		max="3"		/>
+		<slashing_resistance_perc		type="base"	min="0.09"				/>
+		<piercing_resistance_perc		type="base"	min="0.07"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.07"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
+		<counter_damage_bonus           type="mult" min="0.02"				/>
+        <parry_stamina_cost_bonus       type="mult" min="0.04"				/>
 		<staminaRegen_armor_mod 		type="mult"	min="-0.10"				/>
 	</ability>
 	
@@ -114,12 +116,11 @@
 	<ability name="Heavy pants 04 _Stats">
 		<weight							type="base"	min="5" 				/>
 		<quality						type="add"	min="4"		max="4"		/>
-		<slashing_resistance_perc 		type="base"	min="0.15"				/>
-		<piercing_resistance_perc 		type="base"	min="0.10"				/>
-		<bludgeoning_resistance_perc 	type="base"	min="0.10"				/>
-		<rending_resistance_perc 		type="base"	min="0.0"				/>
-		<elemental_resistance_perc 		type="base"	min="0.0"				/>
-		<vitality 						type="base" min="150" max="400"/>
+		<slashing_resistance_perc 		type="base"	min="0.13"				/>
+		<piercing_resistance_perc 		type="base"	min="0.09"				/>
+		<bludgeoning_resistance_perc 	type="base"	min="0.09"				/>
+		<rending_resistance_perc 		type="base" min="0.04"				/>
+		<vitality 						type="base" min="100" max="200"  	/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.10"				/>
 	</ability>
 
@@ -364,7 +365,7 @@
 	<item
 		name							="Pants 04"
 		category						="pants"
-		price							="78"
+		price							="90"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="2"
@@ -381,10 +382,10 @@
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Pants 04 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="1">Linen</parts>
-										<parts count="4">Leather squares</parts>
-										<parts count="3">Leather straps</parts>
-										<parts count="3">String</parts>
+		<recycling_parts>				<parts count="1">Silk</parts>
+										<parts count="3">Leather squares</parts>
+										<parts count="4">Leather straps</parts>
+										<parts count="1">String</parts>
 		</recycling_parts>
 		<collapse>						<category_cond name="armor" collapse="true"/>
 											<item_cond name="Body torso wet" collapse="false"/>
@@ -439,7 +440,7 @@
 	<item
 		name							="Heavy pants 02"
 		category						="pants"
-		price							="111"
+		price							="170"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -448,16 +449,17 @@
 		ability_mode					="OnMount"
 		equip_template					="l_01_mg__common_heavy_lvl2"
 		localisation_key_name			="item_name_heavy_pants_02"
-		localisation_key_description	="item_category_medium_armor_description"
+		localisation_key_description	="item_category_heavy_armor_description"
 		icon_path						="icons/inventory/armors/common_heavy_pants_lvl1_64x128.png"
 	>
-		<tags>							Autogen, Armor, MediumArmor, mod_armor
+		<tags>							Autogen, Armor, HeavyArmor, mod_armor
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Heavy pants 02 _Stats</a>
 		</base_abilities>
 		<recycling_parts>				<parts count="1">Linen</parts>
 										<parts count="3">Dark iron ore</parts>
+										<parts count="1">Steel ingot</parts>
 										<parts count="1">Leather straps</parts>
 										<parts count="3">String</parts>
 		</recycling_parts>
@@ -476,7 +478,7 @@
 	<item
 		name							="Heavy pants 03"
 		category						="pants"
-		price							="140"
+		price							="200"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -494,10 +496,10 @@
 										<a>Heavy pants 03 _Stats</a>
 		</base_abilities>
 		<recycling_parts>				<parts count="1">Linen</parts>
-										<parts count="4">Thread</parts>
-										<parts count="2">Steel ingot</parts>
-										<parts count="4">Dark iron ore</parts>
-										<parts count="2">Leather straps</parts>
+										<parts count="1">Steel ingot</parts>
+										<parts count="1">Leather</parts>
+										<parts count="2">Dark iron ingot</parts>
+										<parts count="3">Leather straps</parts>
 		</recycling_parts>
 		<collapse>						<category_cond name="armor" collapse="true"/>
 											<item_cond name="Body torso wet" collapse="false"/>
@@ -514,7 +516,7 @@
 	<item
 		name							="Heavy pants 04"
 		category						="pants"
-		price							="182"
+		price							="200"
 		initial_durability				="200"
 		max_durability					="200"
 		enhancement_slots				="2"
@@ -531,10 +533,10 @@
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Heavy pants 04 _Stats</a>
 		</base_abilities>
-		<recycling_parts>				<parts count="2">Linen</parts>
-										<parts count="2">Leather</parts>
-										<parts count="4">Dark iron ore</parts>
-										<parts count="2">Steel ingot</parts>
+		<recycling_parts>				<parts count="3">Linen</parts>
+										<parts count="3">Leather</parts>
+										<parts count="1">Steel ingot</parts>
+										<parts count="3">Dark iron ore</parts>
 										<parts count="3">Leather straps</parts>
 		</recycling_parts>
 		<collapse>						<category_cond name="armor" collapse="true"/>

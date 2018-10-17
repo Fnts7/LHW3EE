@@ -44,13 +44,13 @@
 
 	<ability name="Boots 04_crafted _Stats">
 		<weight 						type="base" min="3"				/>
-		<quality 						type="add"	min="3"					/>
+		<quality 						type="add"	min="4"					/>
 		<armor 							type="base" min="26"				/>
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
 		<safe_dodge_angle_bonus 		type="add"	min="4"					/>
-		<graze_damage_reduction			type="mult" min="0.02"				/>
+		<graze_damage_reduction			type="mult" min="0.03"				/>
 		<elemental_resistance_perc		type="base"	min="0.02"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.03"				/>
 	</ability>
@@ -76,9 +76,9 @@
 		<weight 						type="base" min="4.5"				/>
 		<quality 						type="add"	min="3"					/>
 		<armor 							type="base"	min="42"				/>
-		<slashing_resistance_perc		type="base"	min="0.02"				/>
-		<piercing_resistance_perc		type="base"	min="0.02"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
+		<slashing_resistance_perc		type="base"	min="0.06"				/>
+		<piercing_resistance_perc		type="base"	min="0.04"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.03"				/>
@@ -88,9 +88,9 @@
 		<weight							type="base" min="4.5"				/>
 		<quality 						type="add"	min="3"					/>
 		<armor 							type="base"	min="47"				/>
-		<slashing_resistance_perc		type="base"	min="0.04"				/>
-		<piercing_resistance_perc		type="base"	min="0.02"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
+		<slashing_resistance_perc		type="base"	min="0.06"				/>
+		<piercing_resistance_perc		type="base"	min="0.04"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 		<rending_resistance_perc		type="base"	min="0.03"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.03"				/>
@@ -101,9 +101,9 @@
 		<weight							type="base" min="4.5"				/>
 		<quality 						type="add"	min="3"					/>
 		<armor 							type="base"	min="50"				/>
-		<slashing_resistance_perc		type="base"	min="0.07"				/>
-		<piercing_resistance_perc		type="base"	min="0.05"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
+		<slashing_resistance_perc		type="base"	min="0.06"				/>
+		<piercing_resistance_perc		type="base"	min="0.04"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 	</ability>
@@ -129,7 +129,7 @@
 		<slashing_resistance_perc		type="base"	min="0.04"				/>
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
-		<graze_damage_reduction			type="mult" min="0.04"				/>
+		<graze_damage_reduction			type="mult" min="0.05"				/>
 		<parry_stamina_cost_bonus       type="mult" min="0.04"				/>
 	</ability>
 
@@ -405,7 +405,7 @@
 	<item
 		name							="Boots 04_crafted"
 		category						="boots"
-		price							="92"
+		price							="100"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -423,9 +423,11 @@
 										<a>Boots 04_crafted _Stats</a>
 		</base_abilities>
 		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="4">Leather squares</parts>
+										<parts count="3">Leather squares</parts>
 										<parts count="3">Thread</parts>
 										<parts count="2">String</parts>
+										<parts count="1">Resin</parts>
+										<parts count="1">Oil</parts>
 		</recycling_parts>
 	</item>
 
@@ -462,7 +464,7 @@
 	<item
 		name							="Heavy boots 01_crafted"
 		category						="boots"
-		price							="106"
+		price							="130"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -490,10 +492,10 @@
 	<item
 		name							="Heavy boots 02_crafted"
 		category						="boots"
-		price							="86"
+		price							="180"
 		initial_durability				="100"
 		max_durability					="100"
-		enhancement_slots				="0"
+		enhancement_slots				="1"
 		stackable						="1"
 		grid_size						="2"
 		ability_mode					="OnMount"
@@ -518,7 +520,7 @@
 	<item
 		name							="Heavy boots 03_crafted"
 		category						="boots"
-		price							="90"
+		price							="120"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -546,7 +548,7 @@
 	<item
 		name							="Heavy boots 04_crafted"
 		category						="boots"
-		price							="150"
+		price							="200"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"

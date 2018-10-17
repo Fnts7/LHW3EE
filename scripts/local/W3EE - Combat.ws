@@ -1388,7 +1388,7 @@ class W3EECombatHandler extends W3EEOptionHandler
 	
 	public final function CrippleEnemy( playerAttacker : CPlayer, enemy : CNewNPC, action : W3DamageAction )
 	{
-		var initialSlowdown : float;
+		var initialSlowdown, value : float;
 		var skillLevel : int;
 		
 		skillLevel = thePlayer.GetSkillLevel(S_Sword_s05);
@@ -1398,19 +1398,28 @@ class W3EECombatHandler extends W3EEOptionHandler
 		
 		if( thePlayer.CanUseSkill(S_Sword_s05) && playerAttacker && enemy && action.IsActionMelee() && action.DealsAnyDamage() && playerAttacker.GetBehaviorVariable( 'playerAttackType' ) == (int)PAT_Light )
 		{
-			if( RandF() < ( 0.14f * skillLevel) )
+			if( action.IsCriticalHit() || RandF() < 0.25f + 0.08f * skillLevel )
 			{
 				initialSlowdown = enemy.GetSlowdownFactor();
 				
 				if( initialSlowdown < 1 )
-					enemy.SetSlowdownFactor( MinF( initialSlowdown + 0.005 * skillLevel, 0.03 * skillLevel ) );
+				{	
+					value = 0.01f + 0.0035f * (skillLevel - 1);
+					if ( ((W3Action_Attack)action).IsParried() || action.WasPartiallyDodged() )
+						value *= 0.5f;
+					enemy.SetSlowdownFactor( MinF( initialSlowdown + value, 0.04f * skillLevel ) );
+				}
 				
 				enemy.npcStats.spdMultID2 = enemy.SetAnimationSpeedMultiplier(1 - enemy.GetSlowdownFactor(), enemy.npcStats.spdMultID2);
 				enemy.SetCrippled(true);
 			}
 			
-			enemy.DrainStamina(ESAT_FixedValue, 0, Max(FloorF(skillLevel * 0.66f), 1));
-			enemy.AddTimer('RemoveCripplingInjury', Max(skillLevel, 2), false,,,,true);
+			value = 0.5f + skillLevel * 0.5f;
+			if ( ((W3Action_Attack)action).IsParried() || action.WasPartiallyDodged() )
+				value *= 0.5f;			
+			
+			enemy.DrainStamina(ESAT_FixedValue, 0, value);
+			enemy.AddTimer('RemoveCripplingInjury', 2.5f + skillLevel * 0.5f, false,,,,true);
 		}		
 	}
 	

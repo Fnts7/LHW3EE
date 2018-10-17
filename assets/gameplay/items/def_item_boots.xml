@@ -64,11 +64,12 @@
 	<ability name="Boots 04 _Stats">
 		<weight							type="base"	min="3"				/>
 		<quality						type="add"	min="4"		max="4"		/>
-		<slashing_resistance_perc		type="base"	min="0.06"				/>
+		<slashing_resistance_perc		type="base"	min="0.03"				/>
 		<piercing_resistance_perc		type="base"	min="0.02"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
-		<rending_resistance_perc		type="base"	min="0.0"				/>
-		<elemental_resistance_perc		type="base"	min="0.0"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.01"				/>
+		<safe_dodge_angle_bonus 		type="add"	min="3"					/>
+		<graze_damage_reduction			type="mult" min="0.02"				/>
+		<elemental_resistance_perc		type="base"	min="0.01"				/>
 		<staminaRegen_armor_mod			type="mult" min="0.03"				/>
 	</ability>
 
@@ -151,9 +152,9 @@
 	<ability name="Heavy boots 01 _Stats">
 		<weight							type="base"	min="4"				/>
 		<quality						type="add"	min="1"		max="3"		/>
-		<slashing_resistance_perc		type="base"	min="0.02"				/>
-		<piercing_resistance_perc		type="base"	min="0.02"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
+		<slashing_resistance_perc		type="base"	min="0.05"				/>
+		<piercing_resistance_perc		type="base"	min="0.03"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.03"				/>
@@ -162,10 +163,10 @@
 	<ability name="Heavy boots 02 _Stats">
 		<weight							type="base"	min="4"				/>
 		<quality						type="add"	min="1"		max="3"		/>
-		<slashing_resistance_perc		type="base"	min="0.04"				/>
+		<slashing_resistance_perc		type="base"	min="0.05"				/>
 		<piercing_resistance_perc		type="base"	min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
-		<rending_resistance_perc		type="base"	min="0.0"				/>
+		<rending_resistance_perc		type="base"	min="0.02"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.03"				/>
 	</ability>
@@ -175,9 +176,9 @@
 		<tags></tags>		
 		<weight							type="base"	min="4.5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
-		<slashing_resistance_perc		type="base"	min="0.07"				/>
-		<piercing_resistance_perc		type="base"	min="0.05"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
+		<slashing_resistance_perc		type="base"	min="0.05"				/>
+		<piercing_resistance_perc		type="base"	min="0.03"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 	</ability>
@@ -185,12 +186,12 @@
 	<ability name="Heavy boots 04 _Stats">
 		<weight							type="base"	min="5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
-		<slashing_resistance_perc		type="base"	min="0.06"				/>
-		<piercing_resistance_perc		type="base"	min="0.05"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.05"				/>
+		<slashing_resistance_perc		type="base"	min="0.05"				/>
+		<piercing_resistance_perc		type="base"	min="0.04"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.04"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
-		<poise_damage                   type="add"  min="6"			        />
+		<poise_damage                   type="add"  min="5"			        />
 		<staminaRegen_armor_mod			type="mult"	min="-0.03"				/>
 	</ability>
 
@@ -198,9 +199,9 @@
 	<ability name="Heavy boots 05 _Stats">
 		<weight							type="base"	min="5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
-		<slashing_resistance_perc		type="base"	min="0.02"				/>
-		<piercing_resistance_perc		type="base"	min="0.02"				/>
-		<bludgeoning_resistance_perc	type="base"	min="0.02"				/>
+		<slashing_resistance_perc		type="base"	min="0.05"				/>
+		<piercing_resistance_perc		type="base"	min="0.03"				/>
+		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 		<rending_resistance_perc		type="base"	min="0.0"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.03"				/>
@@ -210,10 +211,10 @@
 	<ability name="Heavy boots 06 _Stats">
 		<weight							type="base"	min="5"				/>
 		<quality						type="add"	min="1"		max="3"		/>
-		<slashing_resistance_perc		type="base"	min="0.04"				/>
-		<piercing_resistance_perc		type="base"	min="0.02"				/>
+		<slashing_resistance_perc		type="base"	min="0.05"				/>
+		<piercing_resistance_perc		type="base"	min="0.03"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
-		<rending_resistance_perc		type="base"	min="0.0"				/>
+		<rending_resistance_perc		type="base"	min="0.02"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
 		<staminaRegen_armor_mod			type="mult" min="-0.03"				/>
 	</ability>
@@ -226,7 +227,7 @@
 		<piercing_resistance_perc		type="base"	min="0.04"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.03"				/>
 		<graze_damage_reduction			type="mult" min="0.04"				/>
-		<parry_stamina_cost_bonus       type="mult" min="0.04"				/>
+		<parry_stamina_cost_bonus       type="mult" min="0.03"				/>
 	</ability>
 
 <!-- Relic -->
@@ -499,7 +500,7 @@
 	<item
 		name							="Boots 04"
 		category						="boots"
-		price							="80"
+		price							="100"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -517,7 +518,7 @@
 										<a>Boots 04 _Stats</a>
 		</base_abilities>
 		<recycling_parts>				<parts count="1">Leather</parts>
-										<parts count="3">Leather squares</parts>
+										<parts count="2">Leather squares</parts>
 										<parts count="2">Thread</parts>
 										<parts count="2">String</parts>
 		</recycling_parts>
@@ -612,7 +613,7 @@
 	<item
 		name							="Heavy boots 01"
 		category						="boots"
-		price							="104"
+		price							="100"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -639,7 +640,7 @@
 	<item
 		name							="Heavy boots 02"
 		category						="boots"
-		price							="80"
+		price							="150"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="0"
@@ -694,7 +695,7 @@
 	<item
 		name							="Heavy boots 04"
 		category						="boots"
-		price							="115"
+		price							="160"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -728,7 +729,7 @@
 	<item
 		name							="Heavy boots 05"
 		category						="boots"
-		price							="124"
+		price							="100"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -754,7 +755,7 @@
 	<item
 		name							="Heavy boots 06"
 		category						="boots"
-		price							="156"
+		price							="150"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="1"
@@ -780,7 +781,7 @@
 	<item
 		name							="Heavy boots 07"
 		category						="boots"
-		price							="158"
+		price							="120"
 		initial_durability				="100"
 		max_durability					="100"
 		enhancement_slots				="2"

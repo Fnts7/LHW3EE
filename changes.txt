@@ -1,4 +1,43 @@
-﻿Version 38
+﻿Version 39
+
+Adjusted distinguished crossbows stats, so that they are usable. Crossbow damage is scaled, so that the decent
+crossbows start from attack power bonus +200%. Now all of: Nilfgaard, Elven, Skellige, Touissant crossbows have
+proper stats.
+
+Adjusted many of heavy armor stats, so that they are better. This way it is possible to assemble decent heavy
+armor in early game - buying, crafting, finding etc. Adjusted also Skellige Armor stats.
+
+Assasin boosts, gloves, pants have now more demanding ingredients and are more expensive. Assasin's boosts promoted
+to relic quality.
+
+Starting armor has more monster dmg resistance, lower slashing one. Improved starting armor has now 1 glyph slot.
+
+Most of the adjusted equipment is more expensive and/or requires more demanding crafting ingredients. That includes
+adjustment of prices of Temerian, Nilfgard and Skellige armors.
+
+Zirael relic heavy armor was nerfed, because it was ultra op and can be found in early game - west Velen in one
+bandit stronghold. Despite lowering bleeding res of that to 50%, wearing it Geralt will have overall 75% bleed res.
+So the nerf is really from 100% to 75%.
+
+Balanced several magic/rare sword roll sets, like light, ultra light, heavy, ultra heavy.
+
+Black Blood potion is now usable (wow didn't notice until now that in W3EE 3.30 it is pure crap). The returned damage
+values are now based upon damage dealt to Geralt live vanilla again. They were a bit boosted. Damage against vampires
+is now 25% weaker as fights with vampires are usually 1on1 (excluding Touissant final chapter).
+
+Improved logic of crippling strikes skill. It has now better params at lvl1 and progresses more slowly. Critical
+hit will always apply single slowdown. Attacks that are dodged or parried, but deal damage will have skill effect value
+halved with that hit.
+
+Protective Coating skill reworked, so that it has decent effect even when having low reses armor. The bonus resistance
+is now applied multiplivatively and the value is boosted to 35% on skill level 5. If NOT applied during meditation
+the skill will still work, but with a penalty. Applying oils during meditation will now give some oil experience.
+
+Igni Melt Armor skill has now better progress of armor reduction with single hit value over skill level. The skill
+now gives pure hit damage bonus for all targers that do not wear an equipped armor. So that are most enemies except
+humanoids for which armor reduction effect works.
+
+Version 38
 
 Adjusted mutagen and skill slots unlocking, so that they are more logical - always now first a mutagen slot unlocks,
 then sequentially skill slots to enhance mutagen. 4th mutagen slot is now opened 5 skill points later, and last

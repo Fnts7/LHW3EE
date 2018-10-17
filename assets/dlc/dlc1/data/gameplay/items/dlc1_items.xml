@@ -127,7 +127,7 @@
 			<!-- ######################## Geralt DLC1 armor definitions ######################## -->
 			<!-- DLC 1 armor -->
 			<item name="DLC1 Temerian Armor" category="armor" stackable="1" enhancement_slots="0" equip_template="t_01_mg__temerian" ability_mode="OnMount" grid_size = "2"
-				icon_path="icons/inventory/armors/temerian-jacket-64x128.png" localisation_key_name = "item_name_temerian_armour_dlc" localisation_key_description = "item_category_light_armor_description" price="238"
+				icon_path="icons/inventory/armors/temerian-jacket-64x128.png" localisation_key_name = "item_name_temerian_armour_dlc" localisation_key_description = "item_category_light_armor_description" price="225"
 				initial_durability="100" max_durability="100" >
 				<tags>Armor,LightArmor, mod_armor</tags>
 				<bound_items>
@@ -149,7 +149,7 @@
 			
 			<!-- DLC 1 boots -->
 			<item name="DLC1 Temerian Boots" category="boots" stackable="1" upgrade_list_name="list6" enhancement_slots="0" equip_template="s_01_mg__temerian" ability_mode="OnMount" grid_size="2" 
-				icon_path="icons/inventory/armors/temerian_boots_64x128.png" localisation_key_name="item_name_temerian_boots_dlc" localisation_key_description="item_category_light_armor_description" price="102" 
+				icon_path="icons/inventory/armors/temerian_boots_64x128.png" localisation_key_name="item_name_temerian_boots_dlc" localisation_key_description="item_category_light_armor_description" price="80" 
 				initial_durability="100" max_durability="100" >
 				<tags>Armor,LightArmor, mod_armor</tags>
 				<base_abilities>
@@ -165,7 +165,7 @@
 			
 			<!-- DLC 1 gloves -->
 			<item name="DLC1 Temerian Gloves" category="gloves" stackable="1" enhancement_slots="0" equip_template="g_01a_mg__temerian" ability_mode="OnMount" grid_size = "2"
-				icon_path="icons/inventory/armors/temerian_gloves_64x128.png" localisation_key_name = "item_name_temerian_gloves_dlc" localisation_key_description = "item_category_light_armor_description" price="104"
+				icon_path="icons/inventory/armors/temerian_gloves_64x128.png" localisation_key_name = "item_name_temerian_gloves_dlc" localisation_key_description = "item_category_light_armor_description" price="80"
 				initial_durability="100" max_durability="100" >
 				<tags>Armor,LightArmor, mod_armor</tags>
 				<base_abilities>
@@ -188,7 +188,7 @@
 			
 			<!-- DLC 1 pants -->
 			<item name="DLC1 Temerian Pants" category="pants" stackable="1" enhancement_slots="0" equip_template="l_01_mg__temerian" ability_mode="OnMount" grid_size = "2"
-				icon_path="icons/inventory/armors/temerian_pants_64x128.png" localisation_key_name = "item_name_temerian_pants_dlc" localisation_key_description = "item_category_light_armor_description" price = "78"
+				icon_path="icons/inventory/armors/temerian_pants_64x128.png" localisation_key_name = "item_name_temerian_pants_dlc" localisation_key_description = "item_category_light_armor_description" price = "110"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,LightArmor, mod_armor</tags>

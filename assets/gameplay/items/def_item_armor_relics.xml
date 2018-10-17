@@ -61,12 +61,12 @@
 	<ability name="Zireael armor _Stats">
 		<weight							type="base"	min="20"				/>
 		<quality						type="add"	min="4"		max="4"		/>
-		<slashing_resistance_perc		type="base"	min="0.4"				/>
-		<piercing_resistance_perc		type="base"	min="0.4"				/>
+		<slashing_resistance_perc		type="base"	min="0.35"				/>
+		<piercing_resistance_perc		type="base"	min="0.3"				/>
 		<bludgeoning_resistance_perc	type="base"	min="0.3"				/>
-		<rending_resistance_perc		type="base"	min="0.25"				/>
+		<rending_resistance_perc		type="base"	min="0.2"				/>
 		<elemental_resistance_perc		type="base"	min="0.0"				/>
-		<bleeding_resistance_perc 		type="base" min="1"					/>
+		<bleeding_resistance_perc 		type="base" min="0.5"				/>
 		<staminaRegen_armor_mod			type="mult"	min="-0.10"				/>
 	</ability>
 
@@ -477,7 +477,7 @@
 	<item
 		name							="Zireael armor"
 		category						="armor"
-		price							="1368"
+		price							="1200"
 		initial_durability				="200"
 		max_durability					="200" 
 		enhancement_slots				="3"

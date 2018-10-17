@@ -43,8 +43,8 @@
 			<tags></tags>
 				<armor type="base" always_random="false" min="27" max="27"/>
 				<slashing_resistance_perc type="base" always_random="false" min="0.1" max="0.1"/>
-				<piercing_resistance_perc type="base" always_random="false" min="0.1" max="0.1"/>
-				<bludgeoning_resistance_perc type="base" always_random="false" min="0.1" max="0.1"/>
+				<piercing_resistance_perc type="base" always_random="false" min="0.08" max="0.08"/>
+				<bludgeoning_resistance_perc type="base" always_random="false" min="0.08" max="0.08"/>
 				<rending_resistance_perc type="base" always_random="false" min="0.03" max="0.03"/>
 				<elemental_resistance_perc type="base" always_random="false" min="0.03" max="0.03"/>
 				<quality type="add" min="4" max="4"/>
@@ -129,7 +129,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_armor_64x64.png"
 				localisation_key_name = "item_name_nilfgaardian_armour_dlc"
 				localisation_key_description = "item_category_medium_armor_description"
-				price="100"
+				price="150"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -156,7 +156,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_boots_64x128.png"
 				localisation_key_name="item_name_nilfgaardian_boots_dlc"
 				localisation_key_description="item_category_medium_armor_description"
-				price="15" 
+				price="40" 
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -177,7 +177,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_gloves_64x128.png"
 				localisation_key_name = "item_name_nilfgaardian_gloves_dlc"
 				localisation_key_description = "item_category_medium_armor_description"
-				price="25"
+				price="40"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>
@@ -197,7 +197,7 @@
 				icon_path="icons/inventory/armor/nilfgaardian_legs_64x128.png"
 				localisation_key_name = "item_name_nilfgaardian_pants_dlc"
 				localisation_key_description = "item_category_medium_armor_description"
-				price = "50"
+				price = "75"
 				initial_durability="100"
 				max_durability="100" >
 				<tags>Armor,MediumArmor, mod_armor</tags>

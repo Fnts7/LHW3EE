@@ -13,9 +13,13 @@ class W3Potion_BlackBlood extends W3Effect_Aura
 	default attributeName = 'return_damage';
 	
 	// W3EE - Begin
-	public function GetReturnDamageValue() : SAbilityAttributeValue
+	public function GetReturnDamageValue(category : EMonsterCategory) : SAbilityAttributeValue
 	{
-		effectValue.valueAdditive = thePlayer.GetStatMax(BCS_Vitality) * 0.03 * GetBuffLevel();
+		//effectValue.valueAdditive = thePlayer.GetStatMax(BCS_Vitality) * 0.03 * GetBuffLevel();
+		
+		if (category == MC_Vampire)
+			effectValue.valueMultiplicative *= 0.75f;
+			
 		return effectValue;
 	}
 	// W3EE - End

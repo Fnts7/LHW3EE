@@ -361,7 +361,7 @@ class W3IgniProjectile extends W3SignProjectile
 		var signPower, channelDmg : SAbilityAttributeValue;
 		var burnChance : float;					
 		var maxArmorReduction : float;			
-		var applyNbr : int;						
+		var applyNbr, meltArmorSkillLevel : int;						
 		var i : int;
 		var npc : CNewNPC;
 		var armorRedAblName : name;
@@ -390,6 +390,7 @@ class W3IgniProjectile extends W3SignProjectile
 		ownerActor = owner.GetActor();
 		actorVictim = ( CActor ) action.victim;
 		npc = (CNewNPC)collider;
+		meltArmorSkillLevel = GetSignEntity().GetActualOwner().GetSkillLevel(S_Magic_s08, GetSignEntity());
 		
 		signPower = signEntity.GetTotalSignIntensity();
 		if(signEntity.IsAlternateCast())		
@@ -417,6 +418,12 @@ class W3IgniProjectile extends W3SignProjectile
 				// W3EE - Begin
 				// channelDmg = owner.GetSkillAttributeValue(signSkill, 'channeling_damage', false, true);
 				dmg = 630.f * signPower.valueMultiplicative;
+				
+				if ( meltArmorSkillLevel > 1 && npc && !npc.IsProtectedByArmor() )
+				{
+					dmg *= 1.0f + meltArmorSkillLevel * 0.05f;
+				}
+				
 				// W3EE - End
 				dmg *= dt;
 				action.AddDamage(theGame.params.DAMAGE_NAME_FIRE, dmg);
@@ -434,6 +441,10 @@ class W3IgniProjectile extends W3SignProjectile
 			{
 				action.ClearEffects();
 			}
+		}
+		else if (meltArmorSkillLevel > 1 && npc && !npc.IsProtectedByArmor())
+		{
+			action.AddDamage(theGame.params.DAMAGE_NAME_FIRE, 750.f * signPower.valueMultiplicative * 0.05f * meltArmorSkillLevel);
 		}
 		
 		
@@ -479,12 +490,11 @@ class W3IgniProjectile extends W3SignProjectile
 		
 		
 		// W3EE - Begin
-		if ( owner.CanUseSkill(S_Magic_s08, GetSignEntity()) && npc && npc.IsProtectedByArmor() )
+		if ( meltArmorSkillLevel > 0 && npc && npc.IsProtectedByArmor() )
 		{	
 			prc = npc.GetNPCCustomStat(theGame.params.DAMAGE_NAME_FIRE);
-			
-			maxArmorReduction = CalculateAttributeValue(owner.GetSkillAttributeValue(S_Magic_s08, 'max_armor_reduction', false, true)) * GetSignEntity().GetActualOwner().GetSkillLevel(S_Magic_s08, GetSignEntity());
-			maxReductionFactor = 0.05f * signPower.valueMultiplicative;
+			maxArmorReduction = CalculateAttributeValue(owner.GetSkillAttributeValue(S_Magic_s08, 'max_armor_reduction', false, true)) * meltArmorSkillLevel;
+			maxReductionFactor = 0.05f * signPower.valueMultiplicative * (0.6f + meltArmorSkillLevel * 0.4f);
 			reductionFactor = MinF(1, maxReductionFactor * MaxF(0.25f, 1 - prc));
 			if( signEntity.IsAlternateCast() )
 			{

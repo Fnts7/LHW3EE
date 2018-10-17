@@ -34,7 +34,7 @@
       </ability>
       <ability name="BlackBlood_3">
         <toxicity min="50" max="50" type="add" />
-        <duration min="60" max="60" type="add" />
+        <duration min="80" max="80" type="add" />
         <ammo type="add" min="5" />
         <BlackBloodEffect_Level3 is_ability="true" />
         <BlackBlood_2 is_ability="true" />
